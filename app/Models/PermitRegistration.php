@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class PermitRegistration extends Model
+{
+    function appname(){
+        return $this->belongsTo(Formsale::class, 'formID', 'id');
+    }
+}
