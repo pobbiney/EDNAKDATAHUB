@@ -13,7 +13,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftp.index-com.com
-        username: epa@gnfs.index-com.com
-        password: P(h=kDg-wk6T
+        username: epa@index-com.com
+        password: J2yB1[w*HWxg
 
         
