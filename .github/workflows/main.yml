@@ -1,0 +1,19 @@
+name: EPA Deployment
+
+on: 'push'
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v4
+
+    - name: Sync files to server
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp.index-com.com
+        username: epa@gnfs.index-com.com
+        password: 5oP0m=&t8xpd
+
+        
