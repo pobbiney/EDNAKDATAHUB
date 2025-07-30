@@ -495,4 +495,7 @@ Route::post('registration/edit-permit-registration-form-infrastructure-process/{
 
 Route::get('registration/edit-permit-registration-form-declaration/{id}',[RegistrationController::class,'openEditPermitDeclarationView'])->name('registration.edit-permit-registration-form-declaration');
 Route::post('registration/edit-permit-registration-form-declaration-process/{id}',[RegistrationController::class,'editDeclaration'])->name('registration.edit-permit-registration-form-declaration-process');
+
+Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
+
 /* End Registration Form */

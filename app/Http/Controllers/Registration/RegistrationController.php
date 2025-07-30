@@ -552,4 +552,10 @@ public function editDeclaration(Request $request,$id)
  
    return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
 }
+
+public function getAttachedDocView(){
+    $listApp = PermitRegistration::where('registration_step', 'completed')->get();
+    return view('registration.DocumentAttachment',['listApp'=>$listApp]);
+
+}
 }
