@@ -468,12 +468,10 @@ Route::get('incident-reg-details-report/{id}',[ReportsController::class,'getInci
 Route::get('search-form',[RegistrationController::class,'getRegistrationFormView'])->name('search-form');
 Route::post('registration-forms-search-process',[RegistrationController::class,'searchFomrsProcess'])->name('registration-forms-search-process');
 Route::get('registration-open-permit-forms/{id}',[RegistrationController::class,'openPermitForm'])->name('registration-open-permit-forms');
-
 Route::post('registration/add-permit-registration-form-application-process',[RegistrationController::class,'addPermitApplication'])->name('registration.add-permit-registration-form-application-process');
 Route::get('registration/permit-registration-form-project',[RegistrationController::class,'openPermitProjectView'])->name('permit-registration-form-project');
 Route::post('registration/add-permit-registration-form-project-process',[RegistrationController::class,'addPermitProject'])->name('registration.add-permit-registration-form-project-process');
 Route::get('registration/permit-registration-form-infrastructure',[RegistrationController::class,'openPermitInfrastructureView'])->name('registration.permit-registration-form-infrastructure');
-
 Route::get('registration/permit-registration-form-application/{id}',[RegistrationController::class,'openPermitApplicationView'])->name('registration.permit-registration-form-application');
 Route::get('registration/permit-registration-form-project',[RegistrationController::class,'getStep2Back'])->name('registration.permit-registration-form-project');
 Route::get('registration/permit-registration-form-app',[RegistrationController::class,'getStep1Back'])->name('registration.permit-registration-form-app');
@@ -484,18 +482,13 @@ Route::get('registration/permit-registration-form-infrastructure',[RegistrationC
 Route::post('registration/add-permit-registration-form-declaration-process',[RegistrationController::class,'addDeclaration'])->name('registration.add-permit-registration-form-declaration-process');
 Route::get('registration/MyApplication',[RegistrationController::class,'getApplicationView'])->name('MyApplication');
 Route::get('registration/resume/{id}',[RegistrationController::class,'Resume'])->name('registration.resume');
-
 Route::get('registration/edit-permit-registration-form-application/{id}',[RegistrationController::class,'openEditPermitApplicationView'])->name('registration.edit-permit-registration-form-application');
 Route::post('registration/edit-permit-registration-form-application-process/{id}',[RegistrationController::class,'editPermitApplication'])->name('registration.edit-permit-registration-form-application-process');
 Route::get('registration/edit-permit-registration-form-project/{id}',[RegistrationController::class,'openEditPermitProjectView'])->name('registration.edit-permit-registration-form-project');
 Route::post('registration/edit-permit-registration-form-project-process/{id}',[RegistrationController::class,'editPermitProject'])->name('registration.edit-permit-registration-form-project-process');
-
 Route::get('registration/edit-permit-registration-form-infrastructure/{id}',[RegistrationController::class,'openEditPermitInfrastructureView'])->name('registration.edit-permit-registration-form-infrastructure');
 Route::post('registration/edit-permit-registration-form-infrastructure-process/{id}',[RegistrationController::class,'editInfrastructure'])->name('registration.edit-permit-registration-form-infrastructure-process');
-
 Route::get('registration/edit-permit-registration-form-declaration/{id}',[RegistrationController::class,'openEditPermitDeclarationView'])->name('registration.edit-permit-registration-form-declaration');
 Route::post('registration/edit-permit-registration-form-declaration-process/{id}',[RegistrationController::class,'editDeclaration'])->name('registration.edit-permit-registration-form-declaration-process');
-
 Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
-
 /* End Registration Form */
