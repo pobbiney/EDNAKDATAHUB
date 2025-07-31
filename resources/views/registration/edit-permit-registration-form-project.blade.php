@@ -108,6 +108,56 @@ $subpageName = "my_application";
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                           <div class="row">
+                                                            <div class="col-xl-4">
+                                                                <div class="mb-3">
+                                                                    <label  >Sector</label>
+                                                                        <select class="form-control changesector" name="sector">
+                                                                        <option value="" selected disabled  >--SELECT SECTOR--</option>
+                                                                        @foreach($sec as $sec)
+                                                                        <option @if ($datas->sector_id==$sec->id) selected @endif value="{{$sec->id}}"  >{{$sec->name}}</option>
+                                                                        @endforeach
+
+                                                                        </select>
+                                                                        @error('sector') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="mb-3">
+                                                                    <label  >Category</label>
+                                                                    
+                                                                    <select class="form-control catname" name="category">
+                                                                        <option value="" selected disabled>--SELECT CATEGORY--</option>
+                                                                         <option value="" selected disabled  >--SELECT SECTOR--</option>
+                                                                        @foreach($catlist as $catlist)
+                                                                        <option @if ($datas->cat_id==$catlist->id) selected @endif value="{{$catlist->id}}"  >{{$catlist->name}}</option>
+                                                                        @endforeach
+
+                                                                       
+                                                                        
+                                                                    </select>
+                                                                        @error('category') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="mb-3">
+                                                                    <label  >Type</label>
+                                                                    
+                                                                    <select class="form-control typename" name="type">
+                                                                        <option value="" selected disabled>--SELECT TYPE--</option>
+                                                                         <option value="" selected disabled  >--SELECT SECTOR--</option>
+                                                                        @foreach($typelist as $typelist)
+                                                                        <option @if ($datas->type_id==$typelist->id) selected @endif value="{{$typelist->id}}" >{{$typelist->name}}</option>
+                                                                        @endforeach
+
+                                                                        
+                                                                    </select>
+                                                                        @error('type') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mb-3">
@@ -251,6 +301,95 @@ $(document).ready(function() {
                 // ✅ 5. Proper error handling
                 console.error("AJAX Error:", error);
                 $typeSelect.html('<option value="0" selected disabled>Error loading Districts</option>')
+                           .prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
+ <script>
+$(document).ready(function() {
+    $(document).on('change', '.changesector', function() {
+        var cat_id = $(this).val();
+        
+        // ✅ 1. Validate input (prevent unnecessary AJAX calls)
+        if (!cat_id || cat_id <= 0) {
+            $(".catname").html('<option value="0" selected disabled>--Choose Category--</option>');
+            return;
+        }
+
+        // ✅ 2. Show loading state (better UX)
+        var $typeSelect = $(".catname");
+        $typeSelect.prop('disabled', true).html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: 'GET',
+            url: '{!! URL::to('findCategoryData') !!}',
+            data: { 'id': cat_id },
+            dataType: 'json', // ✅ 3. Explicitly expect JSON
+            success: function(data) {
+                var op = '<option value="0" selected disabled>--Choose Category--</option>';
+                
+                // ✅ 4. Check if data exists and is an array
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(type) {
+                        op += `<option value="${type.id}">${type.name}</option>`;
+                    });
+                } else {
+                    op = '<option value="0" selected disabled>No Category available</option>';
+                }
+                
+                $typeSelect.html(op).prop('disabled', false);
+            },
+            error: function(xhr, status, error) {
+                // ✅ 5. Proper error handling
+                console.error("AJAX Error:", error);
+                $typeSelect.html('<option value="0" selected disabled>Error loading Category</option>')
+                           .prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
+
+ <script>
+$(document).ready(function() {
+    $(document).on('change', '.catname', function() {
+        var cat_id = $(this).val();
+        
+        // ✅ 1. Validate input (prevent unnecessary AJAX calls)
+        if (!cat_id || cat_id <= 0) {
+            $(".typename").html('<option value="0" selected disabled>--Choose Type--</option>');
+            return;
+        }
+
+        // ✅ 2. Show loading state (better UX)
+        var $typeSelect = $(".typename");
+        $typeSelect.prop('disabled', true).html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: 'GET',
+            url: '{!! URL::to('findProjectTypeyData') !!}',
+            data: { 'id': cat_id },
+            dataType: 'json', // ✅ 3. Explicitly expect JSON
+            success: function(data) {
+                var op = '<option value="0" selected disabled>--Choose Type--</option>';
+                
+                // ✅ 4. Check if data exists and is an array
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(type) {
+                        op += `<option value="${type.id}">${type.name}</option>`;
+                    });
+                } else {
+                    op = '<option value="0" selected disabled>No Type available</option>';
+                }
+                
+                $typeSelect.html(op).prop('disabled', false);
+            },
+            error: function(xhr, status, error) {
+                // ✅ 5. Proper error handling
+                console.error("AJAX Error:", error);
+                $typeSelect.html('<option value="0" selected disabled>Error loading Type</option>')
                            .prop('disabled', false);
             }
         });

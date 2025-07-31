@@ -507,7 +507,7 @@ class ApplicationManagerController extends Controller implements HasMiddleware
 
             $insertDrawings = new Drawingupload();
             $insertDrawings->path = $baseUrl.$docsName;
-            $insertDrawings->uploadType = 'certificateApplication';
+            $insertDrawings->uploadType = 'permitApplication';
             $insertDrawings->drawingType = $keyTwo->id;
             $insertDrawings->createdOn =  Carbon::now();
             $insertDrawings->createdBy = Auth::User()->id;

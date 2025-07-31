@@ -26396,6 +26396,7 @@ namespace App\Models {
     /**
      * App\Models\PermitRegistration
      *
+     * @property string|null $updated_by
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string $status
@@ -26432,6 +26433,8 @@ namespace App\Models {
      * @property string $proponent_name
      * @property int $id
      * @property-read \App\Models\Formsale $appname
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Task> $tasks
+     * @property-read int|null $tasks_count
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereProponentName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereContactPerson($value)
@@ -26467,6 +26470,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereUpdatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration whereUpdatedBy($value)
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<PermitRegistration>|PermitRegistration query()
@@ -28979,18 +28983,21 @@ namespace App\Models {
     /**
      * App\Models\ProjectCategory
      *
+     * @property string $sector_id
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string $status
      * @property string|null $description
      * @property string $name
      * @property int $id
+     * @property-read \App\Models\ProjectSector $sectorname
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereDescription($value)
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereUpdatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory whereSectorId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<ProjectCategory>|ProjectCategory query()
@@ -36706,7 +36713,7 @@ namespace App\Models {
      * @property int $id
      * @property-read \App\Models\Staff $taskname
      * @property-read \App\Models\CertificateApp $certificateApp
-     * @property-read \App\Models\PermitApp $permitapp
+     * @property-read \App\Models\PermitRegistration $permitapp
      * @property-read \App\Models\Staff $assignees
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AppBill> $bills
      * @property-read int|null $bills_count

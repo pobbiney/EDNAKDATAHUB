@@ -91,6 +91,8 @@ Route::post('add-project-type-process',[MainSetupController::class,'addType'])->
 Route::get('edit-type/{id}',[MainSetupController::class,'edittypeView'])->name('edit-type');
 Route::post('edit-project-type-process/{id}',[MainSetupController::class,'editType'])->name('edit-project-type-process');
 
+Route::get('findCategoryData',[MainSetupController::class,'findCategoryData'])->name('findCategoryData');
+
 
 Route::get('equipment-setup',[EquipmentControoller::class,'index'])->name('equipment-setup');
 Route::post('equipment-inser-alarm-system',[EquipmentControoller::class,'alarmSystemInsert'])->name('equipment-inser-alarm-system');
@@ -175,6 +177,8 @@ Route::get('finance-setup-setup',[FinanceController::class,'index'])->name('fina
 Route::post('finance-setup-insert-type-process',[FinanceController::class,'insertBillTypeProcess'])->name('finance-setup-insert-type-process');
 Route::get('finance-setup-edit-type-view/{id}',[FinanceController::class,'editBillTypeView'])->name('finance-setup-edit-type-view');
 Route::post('finance-setup-edit-type-process/{id}',[FinanceController::class,'updateBillTypeProcess'])->name('finance-setup-edit-type-process');
+
+Route::post('finance-setup-project-type-drop',[FinanceController::class,'getProjectType'])->name('finance-setup-project-type-drop');
 
 
 Route::post('finance-setup-insert-bill',[FinanceController::class,'insertBillProcess'])->name('finance-setup-insert-bill');
@@ -462,18 +466,17 @@ Route::get('incident-details-report/{id}',[ReportsController::class,'getIncident
 Route::get('view-details-incident-report/{id}', [ReportsController::class, 'getIncidentReportId'])->name('view-details-incident-report');
 Route::get('incident-type-details-report/{id}',[ReportsController::class,'getIncidentReportTypeDetailsView'])->name('incident-type-details-report');
 Route::get('incident-reg-details-report/{id}',[ReportsController::class,'getIncidentReportRegionDetailsView'])->name('incident-reg-details-report');
+
 /* End Incident Manaer */
 
 /* Registration Form */
 Route::get('search-form',[RegistrationController::class,'getRegistrationFormView'])->name('search-form');
 Route::post('registration-forms-search-process',[RegistrationController::class,'searchFomrsProcess'])->name('registration-forms-search-process');
 Route::get('registration-open-permit-forms/{id}',[RegistrationController::class,'openPermitForm'])->name('registration-open-permit-forms');
-
 Route::post('registration/add-permit-registration-form-application-process',[RegistrationController::class,'addPermitApplication'])->name('registration.add-permit-registration-form-application-process');
 Route::get('registration/permit-registration-form-project',[RegistrationController::class,'openPermitProjectView'])->name('permit-registration-form-project');
 Route::post('registration/add-permit-registration-form-project-process',[RegistrationController::class,'addPermitProject'])->name('registration.add-permit-registration-form-project-process');
 Route::get('registration/permit-registration-form-infrastructure',[RegistrationController::class,'openPermitInfrastructureView'])->name('registration.permit-registration-form-infrastructure');
-
 Route::get('registration/permit-registration-form-application/{id}',[RegistrationController::class,'openPermitApplicationView'])->name('registration.permit-registration-form-application');
 Route::get('registration/permit-registration-form-project',[RegistrationController::class,'getStep2Back'])->name('registration.permit-registration-form-project');
 Route::get('registration/permit-registration-form-app',[RegistrationController::class,'getStep1Back'])->name('registration.permit-registration-form-app');
@@ -485,15 +488,14 @@ Route::post('registration/add-permit-registration-form-declaration-process',[Reg
 Route::get('registration/MyApplication',[RegistrationController::class,'getApplicationView'])->name('MyApplication');
 Route::get('registration/view-application/{id}',[RegistrationController::class,'viewApplication'])->name('registration.view-application');
 Route::get('registration/resume/{id}',[RegistrationController::class,'Resume'])->name('registration.resume');
-
 Route::get('registration/edit-permit-registration-form-application/{id}',[RegistrationController::class,'openEditPermitApplicationView'])->name('registration.edit-permit-registration-form-application');
 Route::post('registration/edit-permit-registration-form-application-process/{id}',[RegistrationController::class,'editPermitApplication'])->name('registration.edit-permit-registration-form-application-process');
 Route::get('registration/edit-permit-registration-form-project/{id}',[RegistrationController::class,'openEditPermitProjectView'])->name('registration.edit-permit-registration-form-project');
 Route::post('registration/edit-permit-registration-form-project-process/{id}',[RegistrationController::class,'editPermitProject'])->name('registration.edit-permit-registration-form-project-process');
-
 Route::get('registration/edit-permit-registration-form-infrastructure/{id}',[RegistrationController::class,'openEditPermitInfrastructureView'])->name('registration.edit-permit-registration-form-infrastructure');
 Route::post('registration/edit-permit-registration-form-infrastructure-process/{id}',[RegistrationController::class,'editInfrastructure'])->name('registration.edit-permit-registration-form-infrastructure-process');
-
 Route::get('registration/edit-permit-registration-form-declaration/{id}',[RegistrationController::class,'openEditPermitDeclarationView'])->name('registration.edit-permit-registration-form-declaration');
 Route::post('registration/edit-permit-registration-form-declaration-process/{id}',[RegistrationController::class,'editDeclaration'])->name('registration.edit-permit-registration-form-declaration-process');
+Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
+Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTypeyData'])->name('findProjectTypeyData');
 /* End Registration Form */

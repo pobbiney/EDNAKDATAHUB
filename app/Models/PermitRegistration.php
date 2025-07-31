@@ -10,6 +10,11 @@ class PermitRegistration extends Model
         return $this->belongsTo(Formsale::class, 'formID', 'id');
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'taskId', 'id'); // Adjust if your FK is different
+    }
+
     public function getRegion(){
         return $this->belongsTo(Region::class, 'region', 'id');
     }

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
+use App\Models\ProjectCategory;
+use App\Models\ProjectSector;
+use App\Models\ProjectType;
 use App\Models\Region;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -156,10 +159,14 @@ public function openPermitProjectView()
 
         $regionsList = Region::orderBy('name','ASC')->get();
         $data = District::orderBy('name','ASC')->get();
+        $sec = ProjectSector::all();
+        $catlist = ProjectCategory::all();
+        $typelist = ProjectType::all();
+        
         return view('registration.permit-registration-form-project',[
             
             'regionsList' => $regionsList,
-            'data' => $data,
+            'data' => $data,'sec'=>$sec,'catlist'=>$catlist,'typelist'=>$typelist
            
         ]);
 }
@@ -193,6 +200,9 @@ public function openPermitApplicationView($id)
         'region' => 'required',
         'district' => 'required',
         'site_description' => 'required',
+        'sector' => 'required',
+        'type' => 'required',
+        'category' => 'required',
     ]);
 
     
@@ -210,6 +220,9 @@ public function openPermitApplicationView($id)
     $insertApp->landmark = $request->landmark;
     $insertApp->land_uses = $request->land_uses;
     $insertApp->site_description = $request->site_description;
+    $insertApp->sector_id = $request->sector;
+    $insertApp->cat_id = $request->category;
+    $insertApp->type_id = $request->type;
     $insertApp->registration_step = "Step2";
     $insertApp->save();
 
@@ -261,9 +274,13 @@ public function getStep2Back()
         $user = PermitRegistration::find(Session::get('incomplete_user_id'));
           $regionsList = Region::orderBy('name','ASC')->get();
         $data = District::orderBy('name','ASC')->get();
+        $sec = ProjectSector::all();
+        $catlist = ProjectCategory::all();
+        $typelist = ProjectType::all();
+        
     }
 
-    return view('registration.permit-registration-form-project', compact('user','regionsList','data'));
+    return view('registration.permit-registration-form-project', compact('user','regionsList','data','sec','catlist','typelist'));
 }
 
 public function getStep3Back()
@@ -444,8 +461,12 @@ public function openEditPermitProjectView($id){
     $datas = PermitRegistration::find($decodeID);
     $regionsList  = Region::all();
     $data  = District::all();
+    $sec = ProjectSector::all();
+    $catlist = ProjectCategory::all();
+    $typelist = ProjectType::all();
+    
     return view('registration.edit-permit-registration-form-project',
-    ['datas'=>$datas,'id'=>$id,'regionsList'=>$regionsList,'data'=>$data]);
+    ['datas'=>$datas,'id'=>$id,'regionsList'=>$regionsList,'data'=>$data,'sec'=>$sec,'catlist'=>$catlist,'typelist'=>$typelist]);
 }
 
 public function editPermitProject(Request $request, $id){
@@ -462,6 +483,9 @@ public function editPermitProject(Request $request, $id){
         'region' => 'required',
         'district' => 'required',
         'site_description' => 'required',
+        'type' => 'required',
+        'sector' => 'required',
+        'category' => 'required',
     ]);
 
     
@@ -479,6 +503,9 @@ public function editPermitProject(Request $request, $id){
     $insertApp->landmark = $request->landmark;
     $insertApp->land_uses = $request->land_uses;
     $insertApp->site_description = $request->site_description;
+    $insertApp->sector_id = $request->sector;
+    $insertApp->cat_id = $request->category;
+    $insertApp->type_id = $request->type;
   
     $insertApp->save();
 
@@ -553,13 +580,16 @@ public function editDeclaration(Request $request,$id)
    return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
 }
 
-public function viewApplication($id){
-      $decodeID = Crypt::decrypt($id);
-     
-        $project = PermitRegistration::find($decodeID);
-    
-        return view('registration.view-application',
-        ['project' => $project]
-        );
-    }
+public function getAttachedDocView(){
+    $listApp = PermitRegistration::where('registration_step', 'completed')->get();
+    return view('registration.DocumentAttachment',['listApp'=>$listApp]);
+
+}
+
+     /*Get All Categories base on selected sector*/
+    public function findProjectTypeyData(Request $request){
+  
+        $data=ProjectType::select('name','id')->where('category_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+	}
 }

@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Sms\SmsController;
 use App\Models\Formsale;
+use App\Models\PermitRegistration;
 use App\Models\Region;
 use Illuminate\Support\Facades\DB;
 
@@ -24,15 +25,15 @@ class TaskMangerController extends Controller
 {
     public function getNewJobView()
     {
-        $list = CertificateApp::where(function($query) {
+        $list = PermitRegistration::where(function($query) {
             $query->where('status', 'Pending')
              
                   ->orWhere('status', 'pendingProcessing');
         })
-         ->where('formType', 1) // Add this condition for formType = 1
+       
         ->where('region', Auth::user()->region_id)
         ->with(['tasks' => function($query) {
-            $query->where('taskType', 'certificate');
+            $query->where('taskType', 'permit');
         }])
         ->get();
     
@@ -45,7 +46,7 @@ class TaskMangerController extends Controller
 
     public function getCertificateModalView($id)
   {
-      $data = CertificateApp::find($id);
+      $data = PermitRegistration::find($id);
       return response()->json($data);
   
   }

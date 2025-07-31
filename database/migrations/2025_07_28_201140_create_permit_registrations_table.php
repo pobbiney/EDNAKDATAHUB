@@ -44,7 +44,7 @@ return new class extends Migration
             $table->string('applied_by')->nullable();
             $table->string('declaration')->nullable();
             $table->string('created_by')->nullable();
-            $table->string('status')->default('Active');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

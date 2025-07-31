@@ -84,7 +84,7 @@ $subpageName = "application_forms";
                                 <div class="mb-3">
                                     <label class="col-lg-3 col-form-label">Bill Type</label>
                                     <div class="col-lg-9">
-                                        <select id="form_type" name="form_type" class="form-control" data-allow-clear="true">
+                                        <select id="form_type" name="form_type" class="form-select" data-allow-clear="true">
                                             <option value="">-- SELECT --</option>
                                             <option value="New">New</option>
                                             <option value="Renew">Renew</option>

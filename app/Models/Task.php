@@ -65,7 +65,7 @@ class Task extends Model
 	}
 
 	public function permitapp() {
-		return $this->belongsTo(PermitApp::class, 'taskId', 'id'); // If taskId is your FK
+		return $this->belongsTo(PermitRegistration::class, 'taskId', 'id'); // If taskId is your FK
 		// or more conventionally:
 		// return $this->belongsTo(PemitAPp::class, 'certificate_app_id');
 	}
