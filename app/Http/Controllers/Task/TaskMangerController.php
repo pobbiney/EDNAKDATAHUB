@@ -19,6 +19,7 @@ use App\Http\Controllers\Sms\SmsController;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
 use App\Models\Region;
+use App\Models\ScreenDecision;
 use Illuminate\Support\Facades\DB;
 
 class TaskMangerController extends Controller
@@ -537,9 +538,33 @@ Thank you' ;
        public function getApplicationScreeningView($id){
           $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::find($decodeID);
+         $list = ScreenDecision::all();
         return view('task.application-screening',[
-            'project' => $project
+            'project' => $project,'list'=>$list
         ]);
            
        } 
+
+       public function addScreening(Request $request){
+        $request->validate([
+        'evaluation' => 'required',
+        'severity' => 'required',
+        'recommendation' => 'required',
+       
+        
+    ]);
+
+    $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
+    $insertApp->applied_by = $request->applied_by;
+    $insertApp->declaration = "assigned";
+    $insertApp->created_by = Auth::user()->id; 
+     
+    
+    $insertApp->registration_step = "completed";
+    $insertApp->save();
+
+  
+   return $insertApp? back()->with('message_success','Application  Completed Successfully'): back()->with('message_error','Something went wrong, please try again.');
+
+       }
 }

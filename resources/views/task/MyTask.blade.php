@@ -67,11 +67,11 @@ $subpageName = "mytask";
                                   @foreach($tasks as $list)
                                    <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $list->permitApp->proponent_name }}</td>
-                                    <td>{{ $list->permitApp->project_title }}</td>
-                                    <td>{{ $list->permitApp->contact_number }}</td>
+                                    <td>{{ $list->permitApp->proponent_name ?? 'N/A' }}</td>
+                                    <td>{{ $list->permitApp->project_title ?? 'N/A' }}</td>
+                                    <td>{{ $list->permitApp->contact_number ??  'N/A'}}</td>
                                     <td>{{ $list->permitApp->town }}</td>
-                                    <td>  {{ $list->taskname->firstname.' '.$list->taskname->surname}}</td>
+                                    <td>  {{ $list->taskname->firstname.' '.$list->taskname->surname }}</td>
                                     <td>
                                        
                                     <a   href="{{ route('application-screening',Crypt::encrypt($list->id)) }}" target="_"    class="btn btn-success" style="color: white">  Screen</a>

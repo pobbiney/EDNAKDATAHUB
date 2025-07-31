@@ -10,6 +10,7 @@ use App\Models\ProjectCategory;
 use App\Models\ProjectSector;
 use App\Models\ProjectType;
 use App\Models\Region;
+use App\Models\ScreenDecision;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -369,7 +370,7 @@ public function openPermitDeclarationView(){
 
 public function addDeclaration(Request $request){
     $request->validate([
-        'structures' => 'applied_by',
+        'structures' => 'required',
        
         
     ]);
@@ -598,6 +599,7 @@ public function getAttachedDocView(){
     public function viewApplication($id){
         $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::find($decodeID);
+       
         return view('registration.view-application',[
             'project' => $project
         ]);
