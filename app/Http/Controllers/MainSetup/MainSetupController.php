@@ -417,7 +417,8 @@ public function phaseView(){
     public function projectcategoryview()
    {
     $listsector = ProjectCategory::all();
-    return view('main-setup.Project-Category',['listsector'=>$listsector]);
+    $sectorlist = ProjectSector::all();
+    return view('main-setup.Project-Category',['listsector'=>$listsector,'sectorlist'=>$sectorlist]);
    }
 
     public function addCategory(Request $request){
@@ -425,12 +426,14 @@ public function phaseView(){
          $request->validate([
             'name' => 'required',
             'status' => 'required',
+            'sector'=> 'required'
              
         ]);
 
             $insertCat = new ProjectCategory();
             $insertCat->name = trim($request->name);
-            $insertCat->description = $request->description; 
+            $insertCat->description = $request->description;
+            $insertCat->sector_id = $request->sector;  
             $insertCat->status = $request->status;  
             $status = $insertCat->save();
 
@@ -442,8 +445,9 @@ public function phaseView(){
      $decodeID = Crypt::decrypt($id);
      
     $data = ProjectCategory::find($decodeID);
+    $sectorlist = ProjectSector::all();
     $listsector = ProjectCategory::all();
-    return view ('main-setup.edit-category',['listsector'=>$listsector,'data'=>$data,'id'=>$id]);
+    return view ('main-setup.edit-category',['listsector'=>$listsector,'data'=>$data,'id'=>$id,'sectorlist'=>$sectorlist]);
    }
 
     public function editCategory(Request $request, $id)
@@ -452,12 +456,14 @@ public function phaseView(){
          $request->validate([
             'name' => 'required',
             'status' => 'required',
+            'sector' => 'required'
              
         ]);
 
             $insertCat = ProjectCategory::find($decodeID);
             $insertCat->name = trim($request->name);
             $insertCat->description = $request->description; 
+            $insertCat->sector_id = $request->sector; 
             $insertCat->status = $request->status;  
             $status = $insertCat->save();
 
@@ -525,4 +531,11 @@ public function phaseView(){
             return $status ? back()->with('message_success','Type updated successfully') : back()->with('message_error','Something went wrong, please try again.');
 
     }
+
+      /*Get All Categories base on selected sector*/
+    public function findCategoryData(Request $request){
+  
+        $data=ProjectCategory::select('name','id')->where('sector_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+	}
 }

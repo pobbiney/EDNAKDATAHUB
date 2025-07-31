@@ -91,6 +91,8 @@ Route::post('add-project-type-process',[MainSetupController::class,'addType'])->
 Route::get('edit-type/{id}',[MainSetupController::class,'edittypeView'])->name('edit-type');
 Route::post('edit-project-type-process/{id}',[MainSetupController::class,'editType'])->name('edit-project-type-process');
 
+Route::get('findCategoryData',[MainSetupController::class,'findCategoryData'])->name('findCategoryData');
+
 
 Route::get('equipment-setup',[EquipmentControoller::class,'index'])->name('equipment-setup');
 Route::post('equipment-inser-alarm-system',[EquipmentControoller::class,'alarmSystemInsert'])->name('equipment-inser-alarm-system');
@@ -464,6 +466,7 @@ Route::get('incident-details-report/{id}',[ReportsController::class,'getIncident
 Route::get('view-details-incident-report/{id}', [ReportsController::class, 'getIncidentReportId'])->name('view-details-incident-report');
 Route::get('incident-type-details-report/{id}',[ReportsController::class,'getIncidentReportTypeDetailsView'])->name('incident-type-details-report');
 Route::get('incident-reg-details-report/{id}',[ReportsController::class,'getIncidentReportRegionDetailsView'])->name('incident-reg-details-report');
+
 /* End Incident Manaer */
 
 /* Registration Form */
@@ -493,4 +496,5 @@ Route::post('registration/edit-permit-registration-form-infrastructure-process/{
 Route::get('registration/edit-permit-registration-form-declaration/{id}',[RegistrationController::class,'openEditPermitDeclarationView'])->name('registration.edit-permit-registration-form-declaration');
 Route::post('registration/edit-permit-registration-form-declaration-process/{id}',[RegistrationController::class,'editDeclaration'])->name('registration.edit-permit-registration-form-declaration-process');
 Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
+Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTypeyData'])->name('findProjectTypeyData');
 /* End Registration Form */

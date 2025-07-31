@@ -87,37 +87,30 @@ $subpageName = "sector";
                         <div class="row" style="margin-top:10px">
                             <div class="col-xl-6">
                                 <div class="mb-3">
-                                    <label  >Category</label>
-                                    
-                                       <select class="form-control" name="category">
-                                        <option value="" selected disabled>--SELECT CATEGORY--</option>
-                                        @foreach($cat as $cat)
-                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                        @endforeach
-
-                                       </select>
-                                        @error('category') <small style="color:red"> {{ $message}}</small> @enderror
-                                     
-                                </div>
-                            
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="mb-3">
-                                    <label  >Status</label>
-                                    
-                                        <select class="form-control" name="sector">
-                                        <option value="" selected disabled>--SELECT CATEGORY--</option>
+                                    <label  >Sector</label>
+                                        <select class="form-control changesector" name="sector">
+                                        <option value="" selected disabled>--SELECT SECTOR--</option>
                                         @foreach($sec as $sec)
                                         <option value="{{$sec->id}}">{{$sec->name}}</option>
                                         @endforeach
 
                                        </select>
                                         @error('sector') <small style="color:red"> {{ $message}}</small> @enderror
-                                       
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="mb-3">
+                                    <label  >Category</label>
+                                    
+                                       <select class="form-control catname" name="category">
+                                        <option value="" selected disabled>--SELECT CATEGORY--</option>
+                                        
+                                       </select>
+                                        @error('category') <small style="color:red"> {{ $message}}</small> @enderror
                                      
                                 </div>
-                                
                             </div>
+                           
                         </div>
                         
                         <br/>
@@ -153,8 +146,8 @@ $subpageName = "sector";
                                                 <tr>
                                                     <td>{{$i}}</td>
                                                     <td>{{$list->name}}</td>
-                                                    <td>{{$list->catname->name}}</td>
-                                                    <td>{{$list->secname->name}}</td>
+                                                    <td>{{$list->catname->name ?? 'N/A'}}</td>
+                                                    <td>{{$list->secname->name ?? 'N/A'}}</td>
                                                     <td>{{$list->status}}</td>
                                                     <td><a style="color:white;" href="{{ route('edit-type', Crypt::encrypt($list->id)) }}" class="btn btn-success"><i class="fa fa-edit"></i></a></td>
                                                 </tr>
@@ -179,5 +172,48 @@ $subpageName = "sector";
 @endsection
 
 @section('scripts')
- 
+  <script>
+$(document).ready(function() {
+    $(document).on('change', '.changesector', function() {
+        var cat_id = $(this).val();
+        
+        // ✅ 1. Validate input (prevent unnecessary AJAX calls)
+        if (!cat_id || cat_id <= 0) {
+            $(".catname").html('<option value="0" selected disabled>--Choose Category--</option>');
+            return;
+        }
+
+        // ✅ 2. Show loading state (better UX)
+        var $typeSelect = $(".catname");
+        $typeSelect.prop('disabled', true).html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: 'GET',
+            url: '{!! URL::to('findCategoryData') !!}',
+            data: { 'id': cat_id },
+            dataType: 'json', // ✅ 3. Explicitly expect JSON
+            success: function(data) {
+                var op = '<option value="0" selected disabled>--Choose Category--</option>';
+                
+                // ✅ 4. Check if data exists and is an array
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(type) {
+                        op += `<option value="${type.id}">${type.name}</option>`;
+                    });
+                } else {
+                    op = '<option value="0" selected disabled>No Category available</option>';
+                }
+                
+                $typeSelect.html(op).prop('disabled', false);
+            },
+            error: function(xhr, status, error) {
+                // ✅ 5. Proper error handling
+                console.error("AJAX Error:", error);
+                $typeSelect.html('<option value="0" selected disabled>Error loading Category</option>')
+                           .prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
 @endsection
