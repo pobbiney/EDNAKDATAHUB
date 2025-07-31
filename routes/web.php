@@ -178,6 +178,8 @@ Route::post('finance-setup-insert-type-process',[FinanceController::class,'inser
 Route::get('finance-setup-edit-type-view/{id}',[FinanceController::class,'editBillTypeView'])->name('finance-setup-edit-type-view');
 Route::post('finance-setup-edit-type-process/{id}',[FinanceController::class,'updateBillTypeProcess'])->name('finance-setup-edit-type-process');
 
+Route::post('finance-setup-project-type-drop',[FinanceController::class,'getProjectType'])->name('finance-setup-project-type-drop');
+
 
 Route::post('finance-setup-insert-bill',[FinanceController::class,'insertBillProcess'])->name('finance-setup-insert-bill');
 Route::get('finance-setup-edit-bill-view/{id}',[FinanceController::class,'editBillView'])->name('finance-setup-edit-bill-view');
@@ -484,6 +486,7 @@ Route::get('registration/permit-registration-form-declaration',[RegistrationCont
 Route::get('registration/permit-registration-form-infrastructure',[RegistrationController::class,'getStep3Back'])->name('registration.permit-registration-form-infrastructure');
 Route::post('registration/add-permit-registration-form-declaration-process',[RegistrationController::class,'addDeclaration'])->name('registration.add-permit-registration-form-declaration-process');
 Route::get('registration/MyApplication',[RegistrationController::class,'getApplicationView'])->name('MyApplication');
+Route::get('registration/view-application/{id}',[RegistrationController::class,'viewApplication'])->name('registration.view-application');
 Route::get('registration/resume/{id}',[RegistrationController::class,'Resume'])->name('registration.resume');
 Route::get('registration/edit-permit-registration-form-application/{id}',[RegistrationController::class,'openEditPermitApplicationView'])->name('registration.edit-permit-registration-form-application');
 Route::post('registration/edit-permit-registration-form-application-process/{id}',[RegistrationController::class,'editPermitApplication'])->name('registration.edit-permit-registration-form-application-process');
@@ -496,3 +499,7 @@ Route::post('registration/edit-permit-registration-form-declaration-process/{id}
 Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
 Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTypeyData'])->name('findProjectTypeyData');
 /* End Registration Form */
+
+/* Screening */
+Route::get('application-screening/{id}',[TaskMangerController::class,'getApplicationScreeningView'])->name('application-screening');
+/* End of Screening */

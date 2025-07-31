@@ -74,7 +74,7 @@ $subpageName = "mytask";
                                     <td>  {{ $list->taskname->firstname.' '.$list->taskname->surname}}</td>
                                     <td>
                                        
-                                    <a   href="#" target="_"    class="btn btn-success" style="color: white">  Screen</a>
+                                    <a   href="{{ route('application-screening',Crypt::encrypt($list->id)) }}" target="_"    class="btn btn-success" style="color: white">  Screen</a>
                                     
                                     </td>
                                    </tr>

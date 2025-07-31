@@ -13,6 +13,9 @@ use App\Models\Currency;
 use App\Models\Formsale;
 use App\Models\Payment;
 use App\Models\PermitBill;
+use App\Models\ProjectCategory;
+use App\Models\ProjectSector;
+use App\Models\ProjectType;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -34,10 +37,15 @@ class FinanceController extends Controller implements HasMiddleware
 
         $listBill = BillItem::orderBy('name','ASC')->get();
 
+        $listSetor = ProjectSector::get();
+        $listProjectCatefory = ProjectCategory::orderBy('name','ASC')->get();
+
         return view ('finance-setup.setup',[
             'listType' => $listType,
             'currencyList' => $currencyList,
-            'listBill' => $listBill
+            'listBill' => $listBill,
+            'listSetor' => $listSetor,
+            'listProjectCatefory' => $listProjectCatefory
         ]);
     }
 
@@ -129,6 +137,9 @@ class FinanceController extends Controller implements HasMiddleware
             $insertBill->createdBy =  Auth::User()->id;
             $insertBill->amount =  $request->amount;
             $insertBill->billType = $request->bill_type;
+            $insertBill->sector = $request->sector;
+            $insertBill->category = $request->category;
+            $insertBill->type = $request->types;
             $insertBill->updatedOn = Carbon::now();
             $status = $insertBill->save();
 
@@ -149,11 +160,18 @@ class FinanceController extends Controller implements HasMiddleware
         $listType = BillType::get();
         $currencyList = Currency::orderBy('name','ASC')->get();
 
+        $listSetor = ProjectSector::get();
+        $listProjectCatefory = ProjectCategory::orderBy('name','ASC')->get();
+        $listProjectType = ProjectType::orderBy('name','ASC')->get();
+
         return view ('finance-setup.edit-bill',[
             'data' => $data,
             'id' => $id,
             'listType' => $listType,
-            'currencyList' => $currencyList
+            'currencyList' => $currencyList,
+            'listSetor' => $listSetor,
+            'listProjectCatefory' => $listProjectCatefory,
+            'listProjectType' => $listProjectType
         ]);
 
     }
@@ -178,6 +196,9 @@ class FinanceController extends Controller implements HasMiddleware
         $insertBill->amount =  $request->amount;
         $insertBill->updatedBy =  Auth::User()->id;
         $insertBill->billType = $request->bill_type;
+        $insertBill->sector = $request->sector;
+        $insertBill->category = $request->category;
+        $insertBill->type = $request->types;
         $status = $insertBill->update();
 
         return $status ? back()->with('message_success','Record updated successfully') : back()->with('message_error','Something went wrong, please try again.');
@@ -187,13 +208,10 @@ class FinanceController extends Controller implements HasMiddleware
 
     public function applicationFormView (){
 
-
         
         $currencyList = Currency::orderBy('name','ASC')->get();
 
         $listForms = Applicationform::orderBy('formName','ASC')->get();
-
-  
 
         return view ('finance-setup.application-form',[
             
@@ -683,6 +701,24 @@ class FinanceController extends Controller implements HasMiddleware
             $status= $insertCat->update();
 
             return $status ? back()->with('message_success','Application form Type updated successfully') : back()->with('message_error','Something went wrong, please try again.');
+
+    }
+
+    public function getProjectType (Request $request){
+
+        $result = "";
+
+        $data = ProjectType::where([['category_id',$request->category_id]])->orderBy('name')->get();
+
+        $result .= "<option value=''>-- Select Option --</option>";
+
+        foreach ($data as $dataIteam) {
+            
+            $result .= "<option value='".$dataIteam->id."'>".$dataIteam->name."</option>";  
+        }
+
+        return $result;
+
 
     }
 

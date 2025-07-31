@@ -533,4 +533,13 @@ Thank you' ;
                 'results' => $datas->trackers
             ]);
        }
+
+       public function getApplicationScreeningView($id){
+          $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::find($decodeID);
+        return view('task.application-screening',[
+            'project' => $project
+        ]);
+           
+       } 
 }
