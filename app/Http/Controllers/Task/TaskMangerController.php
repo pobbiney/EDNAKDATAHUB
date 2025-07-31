@@ -27,8 +27,8 @@ class TaskMangerController extends Controller
     {
         $list = PermitRegistration::where(function($query) {
             $query->where('status', 'Pending')
-             
-                  ->orWhere('status', 'pendingProcessing');
+            ->where('registration_step', 'completed')
+             ->orWhere('status', 'pendingProcessing');
         })
        
         ->where('region', Auth::user()->region_id)
@@ -70,6 +70,7 @@ class TaskMangerController extends Controller
     {
       $request->validate([
           'staff' => 'required',
+          'description' => 'required',
           
    
       ]);
@@ -83,18 +84,20 @@ class TaskMangerController extends Controller
         return back()->with('message_error', 'Payment of processing fee is required before assigning a task.');
     }
 
-        $data = new task();
-        $data->description = $request->description;
-        $data->assignee = $request->staff;
-        $data->taskId = $request->certID;
-        $data->taskType = "certificate";
-        $data->createdOn = Carbon::now();
-        $data->region_id= $request->regionID;
-        $data->status = "Active";
-        $data->createdBy = Auth::user()->id; 
-        $data->save();
+       // Create the task
+    $task = Task::create([
+        'description' => $request->description,
+        'assignee' => $request->staff,
+        'taskId' => $request->certID,
+        'taskType' => "permit",
+        'createdOn' => Carbon::now(),
+        'region_id' => $request->regionID,
+        'status' => "Active",
+        'createdBy' => Auth::user()->id,
+    ]);
 
-        $cert =  CertificateApp::find($request->certID);
+
+        $cert =  PermitRegistration::find($request->certID);
         $cert->status="Pending";
         $cert->save();
 
@@ -108,7 +111,7 @@ class TaskMangerController extends Controller
         $track->save();
 
 
-        return $data? back()->with('message','Task assigned Successfully'): back()->with('message_error','Something went wrong, please try again.');
+        return $task? back()->with('message_success','Task assigned Successfully'): back()->with('message_error','Something went wrong, please try again.');
     
     }
 
@@ -117,19 +120,16 @@ class TaskMangerController extends Controller
      {
        $request->validate([
            'staff' => 'required',
-           
     
        ]);
+     
        
         $data =  Task::find($request->task_id);
         $data->description = $request->description;
         $data->assignee = $request->staff;
         $data->updateOn =Carbon::now();
-        
         $data->updateBy = Auth::user()->id; 
         $data->save();
-
-       
 
         $track = new Tracker();
         $track->formID = $request->CertID;
@@ -140,7 +140,7 @@ class TaskMangerController extends Controller
         $track->regionId= $request->region_id;
         $track->save();
 
-         return $data? back()->with('message','Task assigned  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
+         return $data? back()->with('message_success','Task assigned  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
          
      }
 
