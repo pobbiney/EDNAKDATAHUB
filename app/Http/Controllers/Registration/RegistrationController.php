@@ -592,4 +592,12 @@ public function getAttachedDocView(){
         $data=ProjectType::select('name','id')->where('category_id',$request->id)->get();
         return response()->json($data);//then sent this data to ajax success
 	}
+
+    public function viewApplication($id){
+        $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::find($decodeID);
+        return view('registration.view-application',[
+            'project' => $project
+        ]);
+    }
 }

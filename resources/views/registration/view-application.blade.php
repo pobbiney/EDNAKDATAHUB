@@ -108,7 +108,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Region: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" value="" class="form-control"
+                                            <input type="text" value="{{$project->getRegion->name ?? ''}}" class="form-control" 
                                                 disabled>
                                         </div>
                                     </div>
