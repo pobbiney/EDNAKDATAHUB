@@ -211,7 +211,7 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 // ✅ 5. Proper error handling
                 console.error("AJAX Error:", error);
-                $typeSelect.html('<option value="0" selected disabled>Error loading Districts</option>')
+                $typeSelect.html('<option value="0" selected disabled>Error loading Category</option>')
                            .prop('disabled', false);
             }
         });

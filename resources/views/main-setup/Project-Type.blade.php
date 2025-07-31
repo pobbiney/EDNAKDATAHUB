@@ -85,10 +85,9 @@ $subpageName = "sector";
                             </div>
                         </div>
                         <div class="row" style="margin-top:10px">
-                             <div class="col-xl-6">
+                            <div class="col-xl-6">
                                 <div class="mb-3">
                                     <label  >Sector</label>
-                                    
                                         <select class="form-control changesector" name="sector">
                                         <option value="" selected disabled>--SELECT SECTOR--</option>
                                         @foreach($sec as $sec)
@@ -210,7 +209,7 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 // ✅ 5. Proper error handling
                 console.error("AJAX Error:", error);
-                $typeSelect.html('<option value="0" selected disabled>Error loading Districts</option>')
+                $typeSelect.html('<option value="0" selected disabled>Error loading Category</option>')
                            .prop('disabled', false);
             }
         });
