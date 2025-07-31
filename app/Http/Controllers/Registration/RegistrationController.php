@@ -552,4 +552,14 @@ public function editDeclaration(Request $request,$id)
  
    return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
 }
+
+public function viewApplication($id){
+      $decodeID = Crypt::decrypt($id);
+     
+        $project = PermitRegistration::find($decodeID);
+    
+        return view('registration.view-application',
+        ['project' => $project]
+        );
+    }
 }

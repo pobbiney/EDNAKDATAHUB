@@ -483,6 +483,7 @@ Route::get('registration/permit-registration-form-declaration',[RegistrationCont
 Route::get('registration/permit-registration-form-infrastructure',[RegistrationController::class,'getStep3Back'])->name('registration.permit-registration-form-infrastructure');
 Route::post('registration/add-permit-registration-form-declaration-process',[RegistrationController::class,'addDeclaration'])->name('registration.add-permit-registration-form-declaration-process');
 Route::get('registration/MyApplication',[RegistrationController::class,'getApplicationView'])->name('MyApplication');
+Route::get('registration/view-application/{id}',[RegistrationController::class,'viewApplication'])->name('registration.view-application');
 Route::get('registration/resume/{id}',[RegistrationController::class,'Resume'])->name('registration.resume');
 
 Route::get('registration/edit-permit-registration-form-application/{id}',[RegistrationController::class,'openEditPermitApplicationView'])->name('registration.edit-permit-registration-form-application');

@@ -9,4 +9,12 @@ class PermitRegistration extends Model
     function appname(){
         return $this->belongsTo(Formsale::class, 'formID', 'id');
     }
+
+    public function getRegion(){
+        return $this->belongsTo(Region::class, 'region', 'id');
+    }
+
+     public function getDistrict(){
+        return $this->belongsTo(District::class, 'district', 'id');
+    }
 }
