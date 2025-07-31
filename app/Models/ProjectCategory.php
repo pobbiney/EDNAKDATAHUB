@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectCategory extends Model
 {
-    //
+    public function sectorname() {
+        return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
+    }
 }

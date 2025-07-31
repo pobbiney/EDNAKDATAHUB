@@ -220,7 +220,7 @@ $(document).ready(function() {
         
         // ✅ 1. Validate input (prevent unnecessary AJAX calls)
         if (!cat_id || cat_id <= 0) {
-            $(".districtname").html('<option value="0" selected disabled>--Choose Type--</option>');
+            $(".districtname").html('<option value="0" selected disabled>--Choose District--</option>');
             return;
         }
 

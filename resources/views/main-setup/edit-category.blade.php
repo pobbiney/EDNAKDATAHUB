@@ -51,7 +51,7 @@ $subpageName = "sector";
                     <form action="{{ route('edit-project-category-process',$id) }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-4">
                                 <div class="mb-3">
                                     <label  >Name</label>
                                     
@@ -61,7 +61,19 @@ $subpageName = "sector";
                                 </div>
                             
                             </div>
-                            <div class="col-xl-6">
+                               <div class="col-xl-4">
+                                <div class="mb-3">
+                                    <label  >Sector</label>
+                                    <select class="form-control" name="sector">
+                                        <option value="" selected disabled>--SELECT SECTOR--</option>
+                                        @foreach ($sectorlist as $list )
+                                        <option @if ($list->id==$data->sector_id) selected @endif value="{{ $list->id }}">{{ $list->name }}</option>
+                                        @endforeach
+                                    </select>
+                                     @error('sector') <small style="color:red"> {{ $message}}</small> @enderror
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
                                 <div class="mb-3">
                                     <label  >Status</label>
                                     
@@ -101,7 +113,8 @@ $subpageName = "sector";
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Sector Name </th>
+                                                    <th>Category Name </th>
+                                                    <th>Sector</th>
                                                     <th>Status</th>
                                                      
                                                     <th>Action</th>
@@ -118,6 +131,7 @@ $subpageName = "sector";
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{$list->name}}</td>
+                                                     <td>{{$list->sectorname->name}}</td>
                                                     <td>{{$list->status}}</td>
                                                     <td><a style="color:white;" href="{{ route('edit-category', Crypt::encrypt($list->id)) }}" class="btn btn-success"><i class="fa fa-edit"></i></a></td>
                                                 </tr>
