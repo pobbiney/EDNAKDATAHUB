@@ -130,7 +130,7 @@ $subpageName = "sector";
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td>{{$list->name}}</td>
-                                                    <td>{{$list->sectorname->name}}</td>
+                                                    <td>{{$list->sectorname->name ?? 'N/A'}}</td>
                                                     <td>{{$list->status}}</td>
                                                     <td><a style="color:white;" href="{{ route('edit-category', Crypt::encrypt($list->id)) }}" class="btn btn-success"><i class="fa fa-edit"></i></a></td>
                                                 </tr>

@@ -146,8 +146,8 @@ $subpageName = "sector";
                                                 <tr>
                                                     <td>{{$i}}</td>
                                                     <td>{{$list->name}}</td>
-                                                    <td>{{$list->catname->name}}</td>
-                                                    <td>{{$list->secname->name}}</td>
+                                                    <td>{{$list->catname->name ?? 'N/A'}}</td>
+                                                    <td>{{$list->secname->name ?? 'N/A'}}</td>
                                                     <td>{{$list->status}}</td>
                                                     <td><a style="color:white;" href="{{ route('edit-type', Crypt::encrypt($list->id)) }}" class="btn btn-success"><i class="fa fa-edit"></i></a></td>
                                                 </tr>
