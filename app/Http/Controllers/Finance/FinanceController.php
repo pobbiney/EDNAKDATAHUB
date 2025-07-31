@@ -208,13 +208,10 @@ class FinanceController extends Controller implements HasMiddleware
 
     public function applicationFormView (){
 
-
         
         $currencyList = Currency::orderBy('name','ASC')->get();
 
         $listForms = Applicationform::orderBy('formName','ASC')->get();
-
-  
 
         return view ('finance-setup.application-form',[
             
