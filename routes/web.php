@@ -176,6 +176,8 @@ Route::post('finance-setup-insert-type-process',[FinanceController::class,'inser
 Route::get('finance-setup-edit-type-view/{id}',[FinanceController::class,'editBillTypeView'])->name('finance-setup-edit-type-view');
 Route::post('finance-setup-edit-type-process/{id}',[FinanceController::class,'updateBillTypeProcess'])->name('finance-setup-edit-type-process');
 
+Route::post('finance-setup-project-type-drop',[FinanceController::class,'getProjectType'])->name('finance-setup-project-type-drop');
+
 
 Route::post('finance-setup-insert-bill',[FinanceController::class,'insertBillProcess'])->name('finance-setup-insert-bill');
 Route::get('finance-setup-edit-bill-view/{id}',[FinanceController::class,'editBillView'])->name('finance-setup-edit-bill-view');
