@@ -31,7 +31,7 @@
                         </div>
                        
                         <input type="hidden" name="certID" id="certID"/>
-                        <input type="text" name="regionID" id="regionID"/>  
+                        <input type="hidden" name="regionID" id="regionID"/>  
                     
                  
                     <div class="modal-footer">
