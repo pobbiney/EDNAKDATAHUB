@@ -34,8 +34,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Applicant: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" value="{{$project->contact_person ?? ''}}"
-                                                class="form-control" disabled>
+                                            <h5 class="mt-2">{{$project->contact_person ?? ''}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -43,8 +42,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Project Name: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" value="{{$project->proponent_name ?? ''}}"
-                                                class="form-control" disabled>
+                                            <h5 class="mt-2">{{$project->proponent_name ?? ''}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -52,8 +50,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Address: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" value="{{$project->address ?? ''}}"
-                                                class="form-control" disabled>
+                                            <h5 class="mt-2">{{$project->address ?? ''}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +60,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Telephone:</label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" value="{{$project->contact_number}}" disabled>
+                                             <h5 class="mt-2">{{$project->contact_number}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +68,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Email: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" value="{{$project->email}}" disabled>
+                                            <h5 class="mt-2">{{$project->email}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +76,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Position/Role: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" value="{{$project->position}}" disabled>
+                                             <h5 class="mt-2">{{$project->position}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -90,8 +87,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Town: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" value="{{$project->town}}"
-                                                disabled>
+                                            <h5 class="mt-2">{{$project->town}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -99,8 +95,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">District: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" value="" class="form-control"
-                                                disabled>
+                                            <h5 class="mt-2">{{$project->getDistrict->name ?? ''}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -108,8 +103,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Region: </label>
                                         <div class="col-lg-8">
-                                            <input type="text" value="{{$project->getRegion->name ?? ''}}" class="form-control" 
-                                                disabled>
+                                            <h5 class="mt-2">{{$project->getRegion->name ?? ''}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -189,8 +183,7 @@
                                                             <label class="col-lg-4 col-form-label">Title of the Project:
                                                             </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" value="{{$project->project_title ?? ''}}"
-                                                                    class="form-control" disabled>
+                                                                <h5 class="mt-2">{{$project->project_title ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -198,7 +191,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Sector Project: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" disabled>
+                                                                <h5 class="mt-2">{{$project->sector->name ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,7 +201,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Project Category:</label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" disabled>
+                                                                <h5 class="mt-2">{{$project->category->name ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -216,26 +209,22 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Type of Project: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" disabled>
+                                                                <h5 class="mt-2">{{$project->type->name ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label">Description of the proposed
                                                             Project:</label>
-                                                        <textarea class="form-control" rows="3"
-                                                            disabled>{{$project->project_description}}</textarea>
+                                                            <h5 class="mt-2">{{$project->project_description}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label">Scope of the proposed Project:</label>
-                                                        <textarea class="form-control" rows="3"
-                                                            disabled>{{$project->scope}}</textarea>
+                                                        <h5 class="mt-2">{{$project->scope}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -243,8 +232,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Plot/House No: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{$project->plot_number}}" disabled>
+                                                                <h5 class="mt-2">{{$project->plot_number}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -252,8 +240,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Street Name: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" value="{{$project->street_name ?? ''}}"
-                                                                    class="form-control" disabled>
+                                                                <h5 class="mt-2">{{$project->street_name ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -263,8 +250,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">GPS Address: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{$project->gps ?? ''}}" disabled>
+                                                                <h5 class="mt-2">{{$project->gps ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -272,8 +258,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Town: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{$project->town ?? ''}}" disabled>
+                                                                <h5 class="mt-2">{{$project->town ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -283,8 +268,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Region: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{$project->getRegion->name ?? ''}}" disabled>
+                                                                <h5 class="mt-2">{{$project->getRegion->name ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -292,8 +276,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">District:</label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control"
-                                                                    value="{{$project->getDistrict->name ?? ''}}" disabled>
+                                                                <h5 class="mt-2">{{$project->getDistrict->name ?? ''}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -301,23 +284,20 @@
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label">Major Landmark(If any)</label>
-                                                        <input type="text" rows="3" class="form-control"
-                                                            value="{{$project->landmark ?? ''}}" disabled>
+                                                        <h5 class="mt-2">{{$project->landmark ?? ''}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label">Adjacent Land Uses(Existing)</label>
-                                                        <textarea rows="3" class="form-control"
-                                                            disabled> {{$project->land_uses ?? ''}}</textarea>
+                                                        <h5 class="mt-2">{{$project->land_uses ?? ''}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label">Site description (immediate activities and
                                                             adjacent)</label>
-                                                        <textarea rows="3" class="form-control"
-                                                            disabled>{{$project->site_description ?? ''}} </textarea>
+                                                            <h5 class="mt-2">{{$project->site_description ?? ''}}</h5>
                                                     </div>
                                                 </div>
                                             </form>
@@ -336,34 +316,34 @@
                                         <div class="card-body">
                                                 <div class="mb-3">
                                                     <label class="form-label">Structures on the site</label>
-                                                    <input type="text" class="form-control" value="{{$project->structures ?? ''}}" disabled>
+                                                    <h5 class="mt-2">{{$project->structures ?? ''}}</h5>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Access to water (source, quantity)</label>
-                                                    <input type="text" class="form-control" value="{{$project->water ?? ''}}" disabled>
+                                                    <h5 class="mt-2">{{$project->water ?? ''}}</h5>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Access to power (type, source,
                                                         quantity)</label>
-                                                    <input type="email" class="form-control" value="{{$project->power ?? ''}}" disabled>
+                                                        <h5 class="mt-2">{{$project->power ?? ''}}</h5>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Drainage provision in the project area
                                                     </label>
-                                                    <input type="text" class="form-control" value="{{$project->drainage ?? ''}}" disabled>
+                                                    <h5 class="mt-2">{{$project->drainage ?? ''}}</h5>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Nearness to water body</label>
-                                                    <input type="text" class="form-control" value="{{$project->water_body ?? ''}}" disabled>
+                                                    <h5 class="mt-2">{{$project->water_body ?? ''}}</h5>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Access to road to project site </label>
-                                                    <input type="text" class="form-control" value="{{$project->road_access ?? ''}}" disabled>
+                                                    <h5 class="mt-2">{{$project->road_access ?? ''}}</h5>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Other major utilities proposed or existing on
                                                         site </label>
-                                                    <input type="text" class="form-control" value="{{$project->other ?? ''}}" disabled>
+                                                        <h5 class="mt-2">{{$project->other ?? ''}}</h5>
                                                 </div>
                                         </div>
                                     </div>
@@ -386,22 +366,22 @@
                                                         <h6>Construction Phase</h6>
                                                           <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="text" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="text" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="password" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="password" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -409,22 +389,22 @@
                                                         <h6>Operational Phase</h6>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="text" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="text" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="password" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <div class="col-lg-9">
-                                                                <input type="password" class="form-control">
+                                                                <h5 class="mt-2"></h5>
                                                             </div>
                                                         </div>
                                                     </div>

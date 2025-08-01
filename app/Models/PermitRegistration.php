@@ -23,6 +23,7 @@ class PermitRegistration extends Model
      public function getDistrict(){
         return $this->belongsTo(District::class, 'district', 'id');
     }
+<<<<<<< HEAD
       public function gettyepename(){
         return $this->belongsTo(ProjectType::class, 'type_id', 'id');
     }
@@ -32,5 +33,19 @@ class PermitRegistration extends Model
       public function getcatname(){
         return $this->belongsTo(ProjectCategory::class, 'cat_id', 'id');
     }
+=======
+
+    public function type(){
+        return $this->belongsTo(ProjectType::class, 'type_id', 'id');
+    }
+
+    public function category(){
+        return $this->belongsTo(ProjectCategory::class, 'cat_id', 'id');
+    }
+
+    public function sector(){
+        return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
+    }
+>>>>>>> 74df582f4ef4fb37be9b58a2f9af0b610be44980
  
 }
