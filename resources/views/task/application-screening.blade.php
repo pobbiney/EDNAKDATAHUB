@@ -21,7 +21,14 @@
 @section('content')
 
     <div class="content">
-        
+           <!-- /product list -->
+        @if (session('message_success'))
+        <p class="alert alert-success" align="center" style="color:green">{{session('message_success')}}</p>
+        @endif
+
+        @if (session('message_error'))
+        <p class="alert alert-danger" align="center" style="color: red">{{session('message_error')}}</p>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -198,7 +205,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Sector Project: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" disabled>
+                                                                <input type="text" class="form-control" value="{{ $project->getsectorname->name }}" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,7 +215,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Project Category:</label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" disabled>
+                                                                <input type="text" class="form-control" value="{{ $project->getcatname->name }}" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -216,7 +223,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label">Type of Project: </label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="form-control" disabled>
+                                                                <input type="text" class="form-control" value="{{ $project->gettyepename->name }}" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -474,6 +481,8 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="permit_id" value="{{ $project->id }}"/>
+                                    <input type="hidden" name="region_id" value="{{ $project->region }}"/>
+                                    <input type="hidden" name="type_id" value="{{ $project->type_id }}"/>
                                 </form>
                                     
                                  

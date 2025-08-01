@@ -23,5 +23,14 @@ class PermitRegistration extends Model
      public function getDistrict(){
         return $this->belongsTo(District::class, 'district', 'id');
     }
+      public function gettyepename(){
+        return $this->belongsTo(ProjectType::class, 'type_id', 'id');
+    }
+      public function getsectorname(){
+        return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
+    }
+      public function getcatname(){
+        return $this->belongsTo(ProjectCategory::class, 'cat_id', 'id');
+    }
  
 }

@@ -233,7 +233,7 @@ Route::get('view-region/{id}', [ServiceController::class, 'getRegionProfileView'
 /*Task Manager */
 Route::get('JobAssignment',[TaskMangerController::class,'getNewJobView'])->name('JobAssignment');
 Route::get('get-certificate-id/{id}', [TaskMangerController::class, 'getCertificateModalView'])->name('get-certificate-id');
-Route::get('get-task-id/{id}', [TaskMangerController::class, 'getTaskModalView'])->name('get-task-id');
+Route::get('get-permit-task-id/{id}', [TaskMangerController::class, 'getTaskModalView'])->name('get-permit-task-id');
 Route::post('add-assign-task-process',[TaskMangerController::class,'assignTask'])->name('add-assign-task-process');
 Route::post('add-reassign-task-process',[TaskMangerController::class,'ReassignTask'])->name('add-reassign-task-process');
 Route::get('permit-task-assignment',[TaskMangerController::class,'getPermitTaskView'])->name('permit-task-assignment');
@@ -502,5 +502,5 @@ Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTyp
 
 /* Screening */
 Route::get('application-screening/{id}',[TaskMangerController::class,'getApplicationScreeningView'])->name('application-screening');
-Route::get('add-permit-screening-process',[TaskMangerController::class,'addScreening'])->name('add-permit-screening-process');
+Route::post('add-permit-screening-process',[TaskMangerController::class,'addScreening'])->name('add-permit-screening-process');
 /* End of Screening */

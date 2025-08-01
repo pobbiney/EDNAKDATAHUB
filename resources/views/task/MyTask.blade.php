@@ -70,7 +70,7 @@ $subpageName = "mytask";
                                     <td>{{ $list->permitApp->proponent_name ?? 'N/A' }}</td>
                                     <td>{{ $list->permitApp->project_title ?? 'N/A' }}</td>
                                     <td>{{ $list->permitApp->contact_number ??  'N/A'}}</td>
-                                    <td>{{ $list->permitApp->town }}</td>
+                                    <td>{{ $list->permitApp->town ?? 'N/A'}}</td>
                                     <td>  {{ $list->taskname->firstname.' '.$list->taskname->surname }}</td>
                                     <td>
                                        

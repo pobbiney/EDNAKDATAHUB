@@ -78,7 +78,7 @@ $subpageName = "new_job";
                                         @endforeach </td>
                                     <td>
                                         @if($list->tasks->count() > 0)
-                                        <a data-bs-toggle="modal"  id="showedit" data-bs-target="#standard-modal1" data-url="{{ route('get-task-id',$lists->id)  }}" class="btn btn-sm btn-success" style="color: white"><i class="fa fa-undo"></i> Reassign Task</a>
+                                        <a data-bs-toggle="modal"  id="showedit" data-bs-target="#standard-modal1" data-url="{{ route('get-permit-task-id',$lists->id)  }}" class="btn btn-sm btn-success" style="color: white"><i class="fa fa-undo"></i> Reassign Task</a>
                                         @else
                                         
                                     <a  data-bs-toggle="modal"  id="showmodal" data-bs-target="#standard-modal" data-url="{{ route('get-certificate-id',$list->id)  }}"    class="btn btn-sm btn-primary" style="color: white"><i class="fa fa-share-square"></i> Assign Task</a>

@@ -16,10 +16,13 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Sms\SmsController;
+use App\Models\AppBill;
+use App\Models\BillItem;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
 use App\Models\Region;
 use App\Models\ScreenDecision;
+use App\Models\Screening;
 use Illuminate\Support\Facades\DB;
 
 class TaskMangerController extends Controller
@@ -77,7 +80,7 @@ class TaskMangerController extends Controller
       ]);
         
         // Check if payment exists (corrected logic)
-    $paymentExists = Payment::where('bill_type_id', 1)
+    $paymentExists = Payment::where('bill_type_id', 2)
     ->where('formId', $request->certID)
     ->exists();
 
@@ -85,19 +88,20 @@ class TaskMangerController extends Controller
         return back()->with('message_error', 'Payment of processing fee is required before assigning a task.');
     }
 
+
+        $data = new task();
+        $data->description = $request->description;
+        $data->assignee = $request->staff;
+        $data->taskId = $request->certID;
+        
+        $data->taskType = "permit";
+        $data->createdOn =Carbon::now();
+        $data->createdBy = Auth::user()->id; 
+        $data->status = "Active";
+        $data->region_id= $request->regionID;
+        $data->save();
        // Create the task
-    $task = Task::create([
-        'description' => $request->description,
-        'assignee' => $request->staff,
-        'taskId' => $request->certID,
-        'taskType' => "permit",
-        'createdOn' => Carbon::now(),
-        'region_id' => $request->regionID,
-        'status' => "Active",
-        'createdBy' => Auth::user()->id,
-    ]);
-
-
+    
         $cert =  PermitRegistration::find($request->certID);
         $cert->status="Pending";
         $cert->save();
@@ -112,7 +116,7 @@ class TaskMangerController extends Controller
         $track->save();
 
 
-        return $task? back()->with('message_success','Task assigned Successfully'): back()->with('message_error','Something went wrong, please try again.');
+        return $data? back()->with('message_success','Task assigned Successfully'): back()->with('message_error','Something went wrong, please try again.');
     
     }
 
@@ -554,17 +558,44 @@ Thank you' ;
         
     ]);
 
-    $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
-    $insertApp->applied_by = $request->applied_by;
-    $insertApp->declaration = "assigned";
+    $insertApp = new Screening();
+    $insertApp->application_id = $request->permit_id;
+    $insertApp->application_type = "permit";
+    $insertApp->evaluation = $request->evaluation;
+    $insertApp->severity = $request->severity;
+    $insertApp->recommendation = $request->recommendation;
+    $insertApp->region_id = $request->region_id;
     $insertApp->created_by = Auth::user()->id; 
      
-    
-    $insertApp->registration_step = "completed";
     $insertApp->save();
 
+    $track = new Tracker();
+    $track->formID = $request->permit_id;
+    $track->activity = "5";
+    $track->createdOn =Carbon::now();
+    $track->createdBy = Auth::user()->id; 
+    $track->activity_type = "1";
+    $track->regionId= $request->region_id;
+    $track->save();
+
+     PermitRegistration::where('id', $request->permit_id)
+            ->update([
+                'status' => "screened"
+            ]);
+   $billitem = BillItem::where('type', $request->type_id)->first(); // get first item
+$amount = $billitem ? $billitem->amount : 0;
+     // Save to AnotherTable
+     $appbill = new AppBill();
+    $appbill->formId = $request->permit_id;
+    $appbill->bill_type = $request->type_id;
+    $appbill->bill_amount = $amount;
+    $appbill->createdon =Carbon::now();
+    $appbill->createdby = Auth::user()->id;
+    $appbill->status =  "Active";
+    $appbill->save();
+
   
-   return $insertApp? back()->with('message_success','Application  Completed Successfully'): back()->with('message_error','Something went wrong, please try again.');
+   return $insertApp? back()->with('message_success','Application  Screened Successfully'): back()->with('message_error','Something went wrong, please try again.');
 
        }
 }

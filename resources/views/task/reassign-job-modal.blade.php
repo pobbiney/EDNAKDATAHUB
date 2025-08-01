@@ -12,7 +12,7 @@
                         <div class="row g-4" style="margin-top:5px ">
                             <div class="col mb-0">
                                 <label for="emailBasic" class="form-label"><b>Select Staff</b></label>
-                                <select class="form-control" name="staff" >
+                                <select class="form-control" name="staff" id="assignee">
                                 <option value="" selected disabled>--Choose Option--</option>
                                 @foreach($staf as $list)
                                 <option value="{{ $list->staff_id }}" >{{$list->surname.' '.$list->firstname}}</option>
