@@ -112,7 +112,7 @@ $subpageName = "new_job";
     var userUrl = $(this).data('url');
     $.get(userUrl, function(data){
     $('#standard-modal').modal('show');
-    $('#certID').val(data.formId);
+    $('#certID').val(data.formID);
     $('#regionID').val(data.region);
     })
     });
