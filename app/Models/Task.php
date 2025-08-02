@@ -58,14 +58,10 @@ class Task extends Model
 	function taskname(){
         return $this->belongsTo(Staff::class, 'assignee','staff_id');
     }
-	public function certificateApp() {
-		return $this->belongsTo(PermitRegistration::class, 'taskId', 'id'); // If taskId is your FK
-		// or more conventionally:
-		// return $this->belongsTo(CertificateApp::class, 'certificate_app_id');
-	}
+ 
 
 	public function permitApp() {
-		return $this->belongsTo(PermitRegistration::class, 'taskId', 'id'); // If taskId is your FK
+		return $this->belongsTo(PermitRegistration::class, 'taskId', 'formID'); // If taskId is your FK
 		// or more conventionally:
 		// return $this->belongsTo(PemitAPp::class, 'certificate_app_id');
 	}
