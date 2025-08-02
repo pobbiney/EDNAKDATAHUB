@@ -71,14 +71,14 @@ $subpageName = "new_job";
                                     <td>{{ $list->project_title }}</td>
                                     <td>{{ $list->contact_number }}</td>
                                     <td>{{ $list->town }}</td>
-                                    <td> @foreach($list->tasks as $lists)
-                                        <p>{{ $lists->taskname->firstname.' '.$lists->taskname->surname}}</p>
+                                    <td> @foreach($list->tasks->unique('taskname.id') as $task)
+                                        <p>{{ $task->taskname->firstname . ' ' . $task->taskname->surname }}</p>
                                         
                                         
                                         @endforeach </td>
                                     <td>
                                         @if($list->tasks->count() > 0)
-                                        <a data-bs-toggle="modal"  id="showedit" data-bs-target="#standard-modal1" data-url="{{ route('get-permit-task-id',$lists->id)  }}" class="btn btn-sm btn-success" style="color: white"><i class="fa fa-undo"></i> Reassign Task</a>
+                                        <a data-bs-toggle="modal"  id="showedit" data-bs-target="#standard-modal1" data-url="{{ route('get-permit-task-id',$task->id)  }}" class="btn btn-sm btn-success" style="color: white"><i class="fa fa-undo"></i> Reassign Task</a>
                                         @else
                                         
                                     <a  data-bs-toggle="modal"  id="showmodal" data-bs-target="#standard-modal" data-url="{{ route('get-certificate-id',$list->id)  }}"    class="btn btn-sm btn-primary" style="color: white"><i class="fa fa-share-square"></i> Assign Task</a>

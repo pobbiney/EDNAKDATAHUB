@@ -102,9 +102,11 @@ class TaskMangerController extends Controller
         $data->save();
        // Create the task
     
-        $cert =  PermitRegistration::find($request->certID);
-        $cert->status="Pending";
-        $cert->save();
+         $cert = PermitRegistration::where('formID', $request->certID)->first();
+        if ($cert) {
+            $cert->status = "Pending";
+            $cert->save();
+        }
 
         $track = new Tracker();
         $track->formID = $request->certID;
