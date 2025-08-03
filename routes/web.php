@@ -501,6 +501,7 @@ Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTyp
 /* End Registration Form */
 
 /* Screening */
-Route::get('application-screening/{id}',[TaskMangerController::class,'getApplicationScreeningView'])->name('application-screening');
+Route::get('application-screening/{id}',[TaskMangerController::class,'getAppScreeningView'])->name('application-screening');
+Route::get('viewScreening/{id}',[TaskMangerController::class,'getViewScreening'])->name('viewScreening');
 Route::post('add-permit-screening-process',[TaskMangerController::class,'addScreening'])->name('add-permit-screening-process');
 /* End of Screening */

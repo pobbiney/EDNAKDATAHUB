@@ -12,7 +12,7 @@ $subpageName = "mytask";
     <div class="page-header">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4 class="fw-bold">Task Manager</h4>
+                <h4 class="fw-bold">Review Manager</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-divide mb-0">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
@@ -35,7 +35,7 @@ $subpageName = "mytask";
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Task Assigned</h3>
+                    <h3>Screen Task</h3>
             </div> 
         </div>
         <div class="card-body">
@@ -73,9 +73,12 @@ $subpageName = "mytask";
                                     <td>{{ $list->permitApp->town ?? 'N/A'}}</td>
                                     <td>  {{ $list->taskname->firstname.' '.$list->taskname->surname }}</td>
                                     <td>
-                                       
-                                    <a   href="{{ route('application-screening',Crypt::encrypt($list->id)) }}" target="_"    class="btn btn-success" style="color: white">  Screen</a>
-                                    
+                                       @if ($list->status =="Active")
+                                         <a   href="{{ route('application-screening',Crypt::encrypt($list->application_id)) }}" target="_"    class="btn btn-success" style="color: white">  Screen</a>
+                                         @else
+                                    <a   href="{{ route('viewScreening',Crypt::encrypt($list->application_id)) }}" target="_"    class="btn btn-info" style="color: white">  View</a>
+                                       @endif
+                                   
                                     </td>
                                    </tr>
                                    @php

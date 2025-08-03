@@ -425,45 +425,30 @@
                         <div id="content5" class="displayContent"></div>
                         <div id="content6" class="displayContent">
                             <div class="row">
-                                <form enctype="multipart/form-data"   method="POST" action="{{route('add-permit-screening-process')}}">
-                                    @csrf
+                                <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="card-title">Impact Assessment Page</h5>
+                                            <h5 class="card-title">Impact Assessment </h5>
                                         </div>
                                         <div class="card-body">
-                                            <p>Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact. </p>
-                                            <div class="mb-3"> 
-                                                <textarea class="form-control" name="evaluation"></textarea>
-                                                @error('evaluation') <small style="color:red"> {{ $message}}</small> @enderror
-                                            </div>
-                                            <h4>Screening Decision /Recommendation</h4>
-                                            <p>Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment </p>
                                             <div class="mb-3">
-                                                <select class="form-control" name="severity">
-                                                    <option value="" selected disabled>--SELECT--</option>
-                                                    @foreach ($list as $lists )
-                                                        <option value="{{ $lists->id }}">{{ $lists->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('severity') <small style="color:red"> {{ $message}}</small> @enderror
+                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->evaluation ?? ''}}</h5>
                                             </div>
-                                            <h4>Recommendations</h4>
-                                            <p>Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary. </p>
                                             <div class="mb-3">
-                                                <textarea class="form-control" name="recommendation"></textarea>
-                                                @error('recommendation') <small style="color:red"> {{ $message}}</small> @enderror
+                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->getscreendecision->name ?? ''}}</h5>
                                             </div>
-                                            <div class="text-end" style="float: left">
-                                                <button type="submit" class="btn btn-primary">Submit Report</button>
+                                            <div class="mb-3">
+                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->recommendation ?? ''}}</h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="permit_id" value="{{ $project->formID }}"/>
-                                    <input type="hidden" name="region_id" value="{{ $project->region }}"/>
-                                    <input type="hidden" name="type_id" value="{{ $project->type_id }}"/>
-                                    <input type="hidden" name="type_id" value="{{ $project->type_id }}"/>
-                                </form>
+                                </div>
                             </div>
                         </div>
 

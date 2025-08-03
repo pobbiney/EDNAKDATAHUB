@@ -12,7 +12,7 @@ class PermitRegistration extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'taskId', 'formID'); 
+        return $this->hasMany(Task::class, 'application_id'); 
     }
 
  
@@ -24,17 +24,19 @@ class PermitRegistration extends Model
         return $this->belongsTo(District::class, 'district', 'id');
     }
  
-      public function gettyepename(){
+    public function type(){
         return $this->belongsTo(ProjectType::class, 'type_id', 'id');
     }
-      public function getsectorname(){
-        return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
-    }
-      public function getcatname(){
+
+    public function category(){
         return $this->belongsTo(ProjectCategory::class, 'cat_id', 'id');
     }
- 
 
-  
+    public function sector(){
+        return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
+    }
+ 
+ 
+ 
  
 }

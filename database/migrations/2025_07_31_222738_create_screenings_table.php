@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('screenings', function (Blueprint $table) {
             $table->id();
-            $table->string('application_id');
+            $table->string('formId');
             $table->string('application_type');
             $table->longText('evaluation');
             $table->string('severity');

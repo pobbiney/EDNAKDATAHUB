@@ -92,7 +92,7 @@ class TaskMangerController extends Controller
         $data = new task();
         $data->description = $request->description;
         $data->assignee = $request->staff;
-        $data->taskId = $request->certID;
+        $data->application_id = $request->certID;
         
         $data->taskType = "permit";
         $data->createdOn =Carbon::now();
@@ -192,7 +192,7 @@ class TaskMangerController extends Controller
         $data = new task();
         $data->description = $request->description;
         $data->assignee = $request->staff;
-        $data->taskId = $request->permitID;
+        $data->application_id = $request->permitID;
         $data->taskType = "permit";
         $data->createdOn = Carbon::now();
         $data->region_id= $request->regionId;
@@ -309,7 +309,7 @@ class TaskMangerController extends Controller
             $cert =  new Task();
             $cert->description = $request->activity;
             $cert->assignee = $request->officer; 
-            $cert->taskId = $request->cert_id;
+            $cert->application_id = $request->cert_id;
             $cert->createdOn = Carbon::now();
             $cert->createdBy = Auth::user()->id; 
             $cert->taskType = "certificateRenewal";
@@ -358,7 +358,7 @@ class TaskMangerController extends Controller
             $cert =  new Task();
             $cert->description = $request->activity;
             $cert->assignee = $request->officer; 
-            $cert->taskId = $request->cert_id;
+            $cert->application_id = $request->cert_id;
             $cert->createdOn = Carbon::now();
             $cert->createdBy = Auth::user()->id; 
             $cert->taskType = "permitRenewal";
@@ -561,7 +561,7 @@ Thank you' ;
     ]);
 
     $insertApp = new Screening();
-    $insertApp->application_id = $request->permit_id;
+    $insertApp->formId = $request->permit_id;
     $insertApp->application_type = "permit";
     $insertApp->evaluation = $request->evaluation;
     $insertApp->severity = $request->severity;
@@ -584,10 +584,16 @@ Thank you' ;
             ->update([
                 'status' => "screened"
             ]);
+
+    Task::where('application_id', $request->permit_id)
+    ->update([
+        'status' => "screened"
+    ]);
+
    $billitem = BillItem::where('type', $request->type_id)->first(); // get first item
     $amount = $billitem ? $billitem->amount : 0;
      // Save to AnotherTable
-     $appbill = new AppBill();
+    $appbill = new AppBill();
     $appbill->formId = $request->permit_id;
     $appbill->bill_type = $request->type_id;
     $appbill->bill_amount = $amount;
@@ -600,4 +606,26 @@ Thank you' ;
    return $insertApp? back()->with('message_success','Application  Screened Successfully'): back()->with('message_error','Something went wrong, please try again.');
 
        }
+
+       public function getAppScreeningView($id){
+          $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::where('formID',$decodeID)->first();
+         $list = ScreenDecision::all();
+        return view('task.application-screening',[
+            'project' => $project,'list'=>$list
+        ]);
+           
+       } 
+
+       public function getViewScreening($id)
+       {
+          $decodeID = Crypt::decrypt($id);
+         $project = PermitRegistration::where('formID',$decodeID)->first();
+       
+         $listscreen = Screening::where('formId',$decodeID)->first();
+        return view('task.viewScreening',[
+            'project' => $project,'listscreen'=>$listscreen
+        ]);
+       }
+
 }
