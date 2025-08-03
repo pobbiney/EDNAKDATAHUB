@@ -35,17 +35,6 @@ class PermitRegistration extends Model
     }
  
 
-    public function type(){
-        return $this->belongsTo(ProjectType::class, 'type_id', 'id');
-    }
-
-    public function category(){
-        return $this->belongsTo(ProjectCategory::class, 'cat_id', 'id');
-    }
-
-    public function sector(){
-        return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
-    }
- 
+  
  
 }

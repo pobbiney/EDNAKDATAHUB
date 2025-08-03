@@ -585,7 +585,7 @@ Thank you' ;
                 'status' => "screened"
             ]);
    $billitem = BillItem::where('type', $request->type_id)->first(); // get first item
-$amount = $billitem ? $billitem->amount : 0;
+    $amount = $billitem ? $billitem->amount : 0;
      // Save to AnotherTable
      $appbill = new AppBill();
     $appbill->formId = $request->permit_id;
