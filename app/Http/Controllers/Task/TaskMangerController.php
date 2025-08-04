@@ -472,6 +472,7 @@ Thank you' ;
     }
 
     public function getJobTrackerView(){
+
         return view('task.JobTracker');
     }
 
@@ -529,17 +530,17 @@ Thank you' ;
         }
 
         public function getJobTrackerDetailView($id)
-      {
-            $decodeId = Crypt::decrypt($id);
-        
-            // Eager load the relationships
-            $datas = Formsale::with(['certificates', 'trackers'])->findOrFail($decodeId);
+        {
+                $decodeId = Crypt::decrypt($id);
             
-            return view('task.view-job-tracker', [
-                'datas' => $datas,
-                'results' => $datas->trackers
-            ]);
-       }
+                // Eager load the relationships
+                $datas = Formsale::with(['permit_registrations'])->findOrFail($decodeId);
+                
+                return view('task.view-job-tracker', [
+                    'datas' => $datas,
+                    'results' => $datas->trackers
+                ]);
+        }
 
        public function getApplicationScreeningView($id){
           $decodeID = Crypt::decrypt($id);
