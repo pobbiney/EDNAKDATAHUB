@@ -60,17 +60,17 @@ $subpageName = "my_application";
                                                 @foreach ($listApp as $list)
                                                 <tr>
                                                     <td>{{$i}}</td>
-                                                    <td>{{$list->appname->applicantName}}</td>
-                                                    <td>{{$list->proponent_name}}</td>
-                                                    <td>{{$list->city}}</td>
-                                                    <td>{{$list->address}}</td>
-                                                    <td>{{$list->contact_number}}</td>
+                                                    <td>{{$list->appname->applicantName ?? ''}}</td>
+                                                    <td>{{$list->proponent_name ?? ''}}</td>
+                                                    <td>{{$list->city ?? ''}}</td>
+                                                    <td>{{$list->address ?? ''}}</td>
+                                                    <td>{{$list->contact_number ?? ''}}</td>
                                                    
                                                         @if ($list->registration_step =='completed')
                                                         <td>
                                                              <span class="badge badge-success d-flex align-items-center badge-xs"> Completed</span>
                                                         </td>
-                                                        <td> <a href="{{ route('registration.edit-permit-registration-form-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>  <a  class="btn btn-primary"><i class="fe fe-eye"></i> View</a></td>
+                                                        <td> <a href="{{ route('registration.edit-permit-registration-form-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>  <a href="{{ route('registration.view-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-primary"><i class="fe fe-eye"></i> View</a></td>
                                                         
                                                         
                                                          @else  

@@ -16,9 +16,13 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Sms\SmsController;
+use App\Models\AppBill;
+use App\Models\BillItem;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
 use App\Models\Region;
+use App\Models\ScreenDecision;
+use App\Models\Screening;
 use Illuminate\Support\Facades\DB;
 
 class TaskMangerController extends Controller
@@ -27,8 +31,8 @@ class TaskMangerController extends Controller
     {
         $list = PermitRegistration::where(function($query) {
             $query->where('status', 'Pending')
-             
-                  ->orWhere('status', 'pendingProcessing');
+            ->where('registration_step', 'completed')
+             ->orWhere('status', 'pendingProcessing');
         })
        
         ->where('region', Auth::user()->region_id)
@@ -70,12 +74,13 @@ class TaskMangerController extends Controller
     {
       $request->validate([
           'staff' => 'required',
+          'description' => 'required',
           
    
       ]);
         
         // Check if payment exists (corrected logic)
-    $paymentExists = Payment::where('bill_type_id', 1)
+    $paymentExists = Payment::where('bill_type_id', 2)
     ->where('formId', $request->certID)
     ->exists();
 
@@ -83,20 +88,25 @@ class TaskMangerController extends Controller
         return back()->with('message_error', 'Payment of processing fee is required before assigning a task.');
     }
 
+
         $data = new task();
         $data->description = $request->description;
         $data->assignee = $request->staff;
-        $data->taskId = $request->certID;
-        $data->taskType = "certificate";
-        $data->createdOn = Carbon::now();
-        $data->region_id= $request->regionID;
-        $data->status = "Active";
+        $data->application_id = $request->certID;
+        
+        $data->taskType = "permit";
+        $data->createdOn =Carbon::now();
         $data->createdBy = Auth::user()->id; 
+        $data->status = "Active";
+        $data->region_id= $request->regionID;
         $data->save();
-
-        $cert =  CertificateApp::find($request->certID);
-        $cert->status="Pending";
-        $cert->save();
+       // Create the task
+    
+         $cert = PermitRegistration::where('formID', $request->certID)->first();
+        if ($cert) {
+            $cert->status = "Pending";
+            $cert->save();
+        }
 
         $track = new Tracker();
         $track->formID = $request->certID;
@@ -108,7 +118,7 @@ class TaskMangerController extends Controller
         $track->save();
 
 
-        return $data? back()->with('message','Task assigned Successfully'): back()->with('message_error','Something went wrong, please try again.');
+        return $data? back()->with('message_success','Task assigned Successfully'): back()->with('message_error','Something went wrong, please try again.');
     
     }
 
@@ -117,19 +127,16 @@ class TaskMangerController extends Controller
      {
        $request->validate([
            'staff' => 'required',
-           
     
        ]);
+     
        
         $data =  Task::find($request->task_id);
         $data->description = $request->description;
         $data->assignee = $request->staff;
         $data->updateOn =Carbon::now();
-        
         $data->updateBy = Auth::user()->id; 
         $data->save();
-
-       
 
         $track = new Tracker();
         $track->formID = $request->CertID;
@@ -140,7 +147,7 @@ class TaskMangerController extends Controller
         $track->regionId= $request->region_id;
         $track->save();
 
-         return $data? back()->with('message','Task assigned  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
+         return $data? back()->with('message_success','Task assigned  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
          
      }
 
@@ -185,7 +192,7 @@ class TaskMangerController extends Controller
         $data = new task();
         $data->description = $request->description;
         $data->assignee = $request->staff;
-        $data->taskId = $request->permitID;
+        $data->application_id = $request->permitID;
         $data->taskType = "permit";
         $data->createdOn = Carbon::now();
         $data->region_id= $request->regionId;
@@ -302,7 +309,7 @@ class TaskMangerController extends Controller
             $cert =  new Task();
             $cert->description = $request->activity;
             $cert->assignee = $request->officer; 
-            $cert->taskId = $request->cert_id;
+            $cert->application_id = $request->cert_id;
             $cert->createdOn = Carbon::now();
             $cert->createdBy = Auth::user()->id; 
             $cert->taskType = "certificateRenewal";
@@ -351,7 +358,7 @@ class TaskMangerController extends Controller
             $cert =  new Task();
             $cert->description = $request->activity;
             $cert->assignee = $request->officer; 
-            $cert->taskId = $request->cert_id;
+            $cert->application_id = $request->cert_id;
             $cert->createdOn = Carbon::now();
             $cert->createdBy = Auth::user()->id; 
             $cert->taskType = "permitRenewal";
@@ -465,6 +472,7 @@ Thank you' ;
     }
 
     public function getJobTrackerView(){
+
         return view('task.JobTracker');
     }
 
@@ -477,8 +485,8 @@ Thank you' ;
     $table = "";
 
     // Base query with join
-    $query = Formsale::leftJoin('certificate_app', 'formsales.id', '=', 'certificate_app.formId')
-        ->select('formsales.*', 'certificate_app.status as cert_status', 'certificate_app.id as cert_id');
+    $query = Formsale::leftJoin('permit_registrations', 'formsales.id', '=', 'permit_registrations.formID')
+        ->select('formsales.*', 'permit_registrations.status as permit_status', 'permit_registrations.id as permit_id');
 
     // Apply search condition
     if ($operation == "equal") {
@@ -491,17 +499,17 @@ Thank you' ;
   
             $table .= '<table id="example"  class="dt-select-table table">';
     
-            $table .= '<thead> <tr>   <th><b>Company Name</b></th> <th><b>Telephone</b></th>  <th><b>Form Type</b></th><th><b>Current Stage </b></th> <th><b>Action</b></th> </tr></thead>';
+            $table .= '<thead> <tr>   <th><b>Proponent Name</b></th> <th><b>Telephone</b></th>  <th><b>Project Title</b></th><th><b>Current Stage </b></th> <th><b>Action</b></th> </tr></thead>';
     
             $table .= '<tbody>';
 
             foreach ($result as $item) {
               
                 $table .= '<tr>';
-                $table .= '<td>'.$item->applicantName.'</td>';
+                $table .= '<td>'.$item->permit_registrations->proponent_name.'</td>';
                 $table .= '<td>'.$item->tell.' </td>';
-                $table .= '<td>'.$item->formtype->formName.'</td>';
-                $table .= '<td>' . ($item->cert_status ?? 'N/A') . '  </td>';
+                $table .= '<td>'.$item->permit_registrations->project_title.'</td>';
+                $table .= '<td>' . ($item->permit_status ?? 'N/A') . '  </td>';
                 $table .= '<td><a href="'.route('view-job-tracker',Crypt::encrypt($item->id)).'" target="_"   class="btn btn-sm btn-primary" style="color:white"> View</a></td>';
                 $table .= '</tr>';
              }
@@ -522,15 +530,103 @@ Thank you' ;
         }
 
         public function getJobTrackerDetailView($id)
-      {
-            $decodeId = Crypt::decrypt($id);
-        
-            // Eager load the relationships
-            $datas = Formsale::with(['certificates', 'trackers'])->findOrFail($decodeId);
+        {
+                $decodeId = Crypt::decrypt($id);
             
-            return view('task.view-job-tracker', [
-                'datas' => $datas,
-                'results' => $datas->trackers
+                // Eager load the relationships
+                $datas = Formsale::with(['permit_registrations'])->findOrFail($decodeId);
+                
+                return view('task.view-job-tracker', [
+                    'datas' => $datas,
+                    'results' => $datas->trackers
+                ]);
+        }
+
+       public function getApplicationScreeningView($id){
+          $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::find($decodeID);
+         $list = ScreenDecision::all();
+        return view('task.application-screening',[
+            'project' => $project,'list'=>$list
+        ]);
+           
+       } 
+
+       public function addScreening(Request $request){
+        $request->validate([
+        'evaluation' => 'required',
+        'severity' => 'required',
+        'recommendation' => 'required',
+       
+        
+    ]);
+
+    $insertApp = new Screening();
+    $insertApp->formId = $request->permit_id;
+    $insertApp->application_type = "permit";
+    $insertApp->evaluation = $request->evaluation;
+    $insertApp->severity = $request->severity;
+    $insertApp->recommendation = $request->recommendation;
+    $insertApp->region_id = $request->region_id;
+    $insertApp->created_by = Auth::user()->id; 
+     
+    $insertApp->save();
+
+    $track = new Tracker();
+    $track->formID = $request->permit_id;
+    $track->activity = "5";
+    $track->createdOn =Carbon::now();
+    $track->createdBy = Auth::user()->id; 
+    $track->activity_type = "1";
+    $track->regionId= $request->region_id;
+    $track->save();
+
+     PermitRegistration::where('id', $request->permit_id)
+            ->update([
+                'status' => "screened"
             ]);
+
+    Task::where('application_id', $request->permit_id)
+    ->update([
+        'status' => "screened"
+    ]);
+
+   $billitem = BillItem::where('type', $request->type_id)->first(); // get first item
+    $amount = $billitem ? $billitem->amount : 0;
+     // Save to AnotherTable
+    $appbill = new AppBill();
+    $appbill->formId = $request->permit_id;
+    $appbill->bill_type = $request->type_id;
+    $appbill->bill_amount = $amount;
+    $appbill->createdon =Carbon::now();
+    $appbill->createdby = Auth::user()->id;
+    $appbill->status =  "Active";
+    $appbill->save();
+
+  
+   return $insertApp? back()->with('message_success','Application  Screened Successfully'): back()->with('message_error','Something went wrong, please try again.');
+
        }
+
+       public function getAppScreeningView($id){
+          $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::where('formID',$decodeID)->first();
+         $list = ScreenDecision::all();
+        return view('task.application-screening',[
+            'project' => $project,'list'=>$list
+        ]);
+           
+       } 
+
+       public function getViewScreening($id)
+       {
+          $decodeID = Crypt::decrypt($id);
+         $project = PermitRegistration::where('formID',$decodeID)->first();
+       
+         $listscreen = Screening::where('formId',$decodeID)->first();
+        return view('task.viewScreening',[
+            'project' => $project,'listscreen'=>$listscreen
+        ]);
+       }
+
 }

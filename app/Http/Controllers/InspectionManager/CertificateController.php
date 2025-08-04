@@ -303,7 +303,7 @@ class CertificateController extends Controller
         $track->regionId= $request->regionID;
         $track->save();
 
-        Task::where('taskId', $request->appID)
+        Task::where('application_id', $request->appID)
         ->update([
             'status' => "completed"
         ]);
@@ -660,16 +660,12 @@ class CertificateController extends Controller
         {
             $userID = Auth::id(); // Assuming the logged-in user
     
-            $tasks = Task::with(['certificateApp', 'assignees'])
+            $tasks = Task::with(['permitApp', 'assignees'])
             ->where('assignee', $userID)
-            ->where('status', 'Active')
-            ->where('taskType', 'certificate')
+             
+            ->where('taskType', 'permit')
             
             ->get();
-    
-      
-        
-            
             return view('task.MyTask', ['tasks'=>$tasks]);
         }
     

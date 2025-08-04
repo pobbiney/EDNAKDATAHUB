@@ -10,6 +10,7 @@ use App\Models\ProjectCategory;
 use App\Models\ProjectSector;
 use App\Models\ProjectType;
 use App\Models\Region;
+use App\Models\ScreenDecision;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -347,6 +348,7 @@ public function addPermitInfrastructure(Request $request){
     $insertApp->drainage = $request->drainage;
     $insertApp->water_body = $request->water_body;
     $insertApp->road_access = $request->road_access;
+    $insertApp->other = $request->other;
     
     $insertApp->registration_step = "Step3";
     $insertApp->save();
@@ -368,7 +370,7 @@ public function openPermitDeclarationView(){
 
 public function addDeclaration(Request $request){
     $request->validate([
-        'structures' => 'applied_by',
+        'structures' => 'required',
        
         
     ]);
@@ -544,6 +546,7 @@ public function editInfrastructure(Request $request,$id){
     $insertApp->drainage = $request->drainage;
     $insertApp->water_body = $request->water_body;
     $insertApp->road_access = $request->road_access;
+    $insertApp->other = $request->other;
    
     $insertApp->save();
  
@@ -592,4 +595,13 @@ public function getAttachedDocView(){
         $data=ProjectType::select('name','id')->where('category_id',$request->id)->get();
         return response()->json($data);//then sent this data to ajax success
 	}
+
+    public function viewApplication($id){
+        $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::find($decodeID);
+       
+        return view('registration.view-application',[
+            'project' => $project
+        ]);
+    }
 }
