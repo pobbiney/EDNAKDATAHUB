@@ -18,7 +18,7 @@ use App\Http\Controllers\Registration\RegistrationController;
 use App\Http\Controllers\RenewalManager\RenewalController;
 use App\Http\Controllers\Reports\ReportsController;
 use App\Http\Controllers\ReviewManager\ReviewController;
-
+use App\Http\Controllers\Staff\StaffController;
 
 Route::get('/',[AuthenticationController::class,'index']);
 Route::get('login',[AuthenticationController::class,'index'])->name('login');
@@ -498,3 +498,45 @@ Route::post('registration/edit-permit-registration-form-declaration-process/{id}
 Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
 Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTypeyData'])->name('findProjectTypeyData');
 /* End Registration Form */
+
+
+
+/*Staff Management */
+Route::get('create-staff',[StaffController::class,'addStaff'])->name('create-staff');
+
+ Route::get('list-staff',[StaffController::class,'listStaffView'])->name('list-staff');
+ Route::get('editstaff/{staff_id}',[StaffController::class,'EdittaffView'])->name('editstaff');
+ Route::post('edit-staff-process/{staff_id}',[StaffController::class,'updateStaff'])->name('edit-staff-process');
+ Route::post('edit-staff-process2/{staff_id}',[StaffController::class,'updateStaff2'])->name('edit-staff-process2');
+ Route::post('edit-staff-process3/{staff_id}',[StaffController::class,'updateStaff3'])->name('edit-staff-process3');
+ 
+ Route::get('staff-upload-image/{staff_id}',[StaffController::class,'uploadStaffPhotoView'])->name('staff-upload-image');
+ Route::post('create-staff-photo-process',[StaffController::class,'saveStaffPhoto'])->name('create-staff-photo-process');
+ Route::post('upload-staff-supervisor-process',[StaffController::class,'updateStaffSup'])->name('upload-staff-supervisor-process');
+ //Route::get('staff-upload-image/',[StaffController::class,'uploadStaffView2'])->name('staff-upload-image');
+ Route::get('staff-profile/{staff_id}', [StaffController::class, 'viewStaffProfile'])->name('staff-profile');
+ Route::get('next-of-kin', [StaffController::class, 'viewStaffNextKin'])->name('next-of-kin');
+ Route::post('staff_management.searchProcess', [StaffController::class, 'searchProcess'])->name('staff_management.searchProcess');
+
+ Route::get('next-of-kin-get-id/{staff_id}', [StaffController::class, 'StaffNextofKinModalView'])->name('next-of-kin-get-id');
+ //Route::get('add-staff-next-kin/{staff_id}', [StaffController::class, 'addStaffNextofKinModalView'])->name('add-staff-next-kin');
+ 
+ Route::post('next-of-kin-process', [StaffController::class, 'ProcessStaffNextofKin'])->name('next-of-kin-process');
+ 
+
+Route::get('create-staff-category',[StaffController::class,'CategoryView'])->name('create-staff-category');
+Route::post('create-staff-category-process',[StaffController::class,'createCategory'])->name('create-staff-category-process');
+Route::get('edit-staff-category/{id}',[StaffController::class,'editCategoryView'])->name('edit-staff-category');
+Route::post('edit-staff-category-process/{id}',[StaffController::class,'updatestaffCategory'])->name('edit-staff-category-process');
+Route::get('delete-staff-category/{id}', [StaffController::class, 'deleteStaffCategory'])->name('delete-staff-category');
+
+Route::post('create-staff-class-process',[StaffController::class,'createClassification'])->name('create-staff-class-process');
+Route::get('edit-staff-class/{id}',[StaffController::class,'editClassView'])->name('edit-staff-class');
+Route::post('edit-staff-class-process/{id}',[StaffController::class,'updatestaffClass'])->name('edit-staff-class-process');
+Route::get('delete-staff-class/{id}', [StaffController::class, 'deleteStaffClass'])->name('delete-staff-class');
+
+Route::post('create-staff-type-process',[StaffController::class,'createType'])->name('create-staff-type-process');
+Route::get('edit-staff-type/{id}',[StaffController::class,'editTypeView'])->name('edit-staff-type');
+Route::post('edit-staff-type-process/{id}',[StaffController::class,'updatestaffType'])->name('edit-staff-type-process');
+Route::get('delete-staff-type/{id}', [StaffController::class, 'deleteStaffType'])->name('delete-staff-type');
+/*Staff Management */
