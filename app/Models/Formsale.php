@@ -145,4 +145,9 @@ class Formsale extends Model
 	{
 		return $this->hasMany(Tracker::class, 'formID');
 	}
+
+	public function permit_registrations()
+	{
+		return $this->hasOne(PermitRegistration::class, 'formID');
+	}
 }
