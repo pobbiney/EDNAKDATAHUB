@@ -69,21 +69,24 @@ $subpageName = "job_tracker";
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
-                                                                                Applicant: <b>{{ $datas->contact_person ?? '' }}</b>
+                                                                                Applicant: <b>{{ $datas->permit_registrations->contact_person ?? '' }}</b>
                                                                             </div>
                                                                             <div class="col-md-4">
-                                                                            Project Name: {{ $datas->proponent_name ?? '' }}
+                                                                            Project Name: {{ $datas->permit_registrations->proponent_name ?? '' }}
                                                                             </div>
                                                                             <div class="col-md-4">
-                                                                                Telephone : {{ $datas->contact_number ?? '' }}
+                                                                                Telephone : {{ $datas->permit_registrations->contact_number ?? '' }}
                                                                             </div>
                                                                         </div>
                                                                         <div class="row" style="margin-top: 15px;">
                                                                             <div class="col-md-4">
-                                                                                Address : <b>{{ $datas->address ?? '' }}</b>
+                                                                                Address : <b>{{ $datas->permit_registrations->address ?? '' }}</b>
+                                                                            </div>
+                                                                             <div class="col-md-4">
+                                                                                Email : <b>{{ $datas->permit_registrations->email ?? '' }}</b>
                                                                             </div>
                                                                             <div class="col-md-4">
-                                                                            Position : <b> {{ $datas->position ?? '' }}</b>
+                                                                            Position : <b> {{ $datas->permit_registrations->position ?? '' }}</b>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                             
