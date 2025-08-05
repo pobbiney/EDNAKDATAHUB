@@ -13,10 +13,12 @@ use App\Models\ProjectType;
 use App\Models\Region;
 use App\Models\ScreenDecision;
 use App\Models\Screening;
+use App\Models\Tracker;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
 
 class RegistrationController extends Controller
 {
@@ -147,6 +149,19 @@ class RegistrationController extends Controller
     $insertApp->registration_step = "Step1";
     $insertApp->save();
 
+    $data = Formsale::where('id', $request->application_id)->first(); // get first item
+
+    $regionId = $data ? $data->regionId : 0;
+
+    $track = new Tracker();
+    $track->formID = $request->application_id;
+    $track->activity = "2";
+    $track->createdOn =Carbon::now();
+    $track->createdBy = Auth::user()->id; 
+    $track->activity_type = "1";
+    $track->regionId= $regionId;
+    $track->save();
+
       // Store the user ID in session to use in step 2 and 3
     Session::put('incomplete_user_id', $insertApp->id);
    return view('registration.success-message', [
@@ -228,6 +243,11 @@ public function openPermitApplicationView($id)
     $insertApp->type_id = $request->type;
     $insertApp->registration_step = "Step2";
     $insertApp->save();
+
+
+   
+
+    
 
       // Store the user ID in session to use in step 2 and 3
     Session::put('incomplete_user_id', $insertApp->id);
@@ -379,11 +399,10 @@ public function addDeclaration(Request $request){
     $insertApp->applied_by = $request->applied_by;
     $insertApp->declaration = "assigned";
     $insertApp->created_by = Auth::user()->id; 
-     
-    
     $insertApp->registration_step = "completed";
     $insertApp->save();
 
+   
       // Store the user ID in session to use in step 2 and 3
     Session::put('incomplete_user_id', $insertApp->id);
    return $insertApp? back()->with('message_success','Application  Completed Successfully'): back()->with('message_error','Something went wrong, please try again.');
