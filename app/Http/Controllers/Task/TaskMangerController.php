@@ -472,6 +472,7 @@ Thank you' ;
     }
 
     public function getJobTrackerView(){
+
         return view('task.JobTracker');
     }
 
@@ -484,8 +485,8 @@ Thank you' ;
     $table = "";
 
     // Base query with join
-    $query = Formsale::leftJoin('certificate_app', 'formsales.id', '=', 'certificate_app.formId')
-        ->select('formsales.*', 'certificate_app.status as cert_status', 'certificate_app.id as cert_id');
+    $query = Formsale::leftJoin('permit_registrations', 'formsales.id', '=', 'permit_registrations.formID')
+        ->select('formsales.*', 'permit_registrations.status as permit_status', 'permit_registrations.id as permit_id');
 
     // Apply search condition
     if ($operation == "equal") {
@@ -498,17 +499,17 @@ Thank you' ;
   
             $table .= '<table id="example"  class="dt-select-table table">';
     
-            $table .= '<thead> <tr>   <th><b>Company Name</b></th> <th><b>Telephone</b></th>  <th><b>Form Type</b></th><th><b>Current Stage </b></th> <th><b>Action</b></th> </tr></thead>';
+            $table .= '<thead> <tr>   <th><b>Proponent Name</b></th> <th><b>Telephone</b></th>  <th><b>Project Title</b></th><th><b>Current Stage </b></th> <th><b>Action</b></th> </tr></thead>';
     
             $table .= '<tbody>';
 
             foreach ($result as $item) {
               
                 $table .= '<tr>';
-                $table .= '<td>'.$item->applicantName.'</td>';
+                $table .= '<td>'.$item->permit_registrations->proponent_name.'</td>';
                 $table .= '<td>'.$item->tell.' </td>';
-                $table .= '<td>'.$item->formtype->formName.'</td>';
-                $table .= '<td>' . ($item->cert_status ?? 'N/A') . '  </td>';
+                $table .= '<td>'.$item->permit_registrations->project_title.'</td>';
+                $table .= '<td>' . ($item->permit_status ?? 'N/A') . '  </td>';
                 $table .= '<td><a href="'.route('view-job-tracker',Crypt::encrypt($item->id)).'" target="_"   class="btn btn-sm btn-primary" style="color:white"> View</a></td>';
                 $table .= '</tr>';
              }
@@ -529,17 +530,17 @@ Thank you' ;
         }
 
         public function getJobTrackerDetailView($id)
-      {
-            $decodeId = Crypt::decrypt($id);
-        
-            // Eager load the relationships
-            $datas = Formsale::with(['certificates', 'trackers'])->findOrFail($decodeId);
+        {
+                $decodeId = Crypt::decrypt($id);
             
-            return view('task.view-job-tracker', [
-                'datas' => $datas,
-                'results' => $datas->trackers
-            ]);
-       }
+                // Eager load the relationships
+                $datas = Formsale::with(['permit_registrations'])->findOrFail($decodeId);
+                
+                return view('task.view-job-tracker', [
+                    'datas' => $datas,
+                    'results' => $datas->trackers
+                ]);
+        }
 
        public function getApplicationScreeningView($id){
           $decodeID = Crypt::decrypt($id);

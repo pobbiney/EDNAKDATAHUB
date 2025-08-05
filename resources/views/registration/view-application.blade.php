@@ -421,64 +421,91 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="content4" class="displayContent"></div>
-                        <div id="content5" class="displayContent"></div>
-                        <div id="content6" class="displayContent">
+                        <div id="content4" class="displayContent">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="card-title">Impact Assessment </h5>
+                                            <h5 class="card-title">Concerns </h5>
                                         </div>
                                         <div class="card-body">
-                                            <div class="mb-3">
-                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
-                                                </label>
-                                                <h5 class="mt-2">{{$listscreen->evaluation ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
-                                                </label>
-                                                <h5 class="mt-2">{{$listscreen->getdecision->name ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
-                                                </label>
-                                                <h5 class="mt-2">{{$listscreen->recommendation ?? ''}}</h5>
-                                            </div>
+                                            {{-- <p class="mb-3">
+                                                Views of immediate adjourning neighbor’s and relevant stakeholders (if applicable provide evidence of consultation to facilitate identification of key issues/impacts)
+                                            </p> --}}
+                                            
+                                               
+                                                    <div class="col-xl-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Full Name</th>
+                                                                        <th>Telephone</th>
+                                                                        <th>Location to Project</th>
+                                                                        <th>Concern/Issue</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                               
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="content7" class="displayContent">
+                        <div id="content5" class="displayContent">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="card-title">Impact Assessment </h5>
+                                            <h5 class="card-title">Management of Impacts </h5>
                                         </div>
                                         <div class="card-body">
-                                            <div class="mb-3">
-                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
-                                                </label>
-                                                <h5 class="mt-2">{{$list->evaluation ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
-                                                </label>
-                                                <h5 class="mt-2">{{$list->getdecision->name ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
-                                                </label>
-                                                <h5 class="mt-2">{{$list->recommendation ?? ''}}</h5>
-                                            </div>
+                                             <p class="mb-3 text-white">
+                                                Impact provided by the applicant and management of that impact Impact provided by the applicant and management of that impact
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <h6>Construction Phase</h6>
+                                                          <div class="row mb-3">
+                                                            <div class="col-lg-12">
+                                                                <h5 class="mt-2">---</h5>
+                                                                <textarea name="" id="" cols="3" class="form-control" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <h6>Operational Phase</h6>
+                                                        <div class="row mb-3">
+                                                            <div class="col-lg-12">
+                                                                <h5 class="mt-2">----</h5>
+                                                                <textarea name="" id="" cols="3" class="form-control" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div id="content6" class="displayContent"></div>
 
                     </div>
                 </div>
