@@ -551,7 +551,7 @@ Thank you' ;
            
        } 
 
-       public function addScreening(Request $request){
+    public function addScreening(Request $request){
         $request->validate([
         'evaluation' => 'required',
         'severity' => 'required',
@@ -580,7 +580,7 @@ Thank you' ;
     $track->regionId= $request->region_id;
     $track->save();
 
-     PermitRegistration::where('id', $request->permit_id)
+     PermitRegistration::where('formID', $request->permit_id)
             ->update([
                 'status' => "screened"
             ]);

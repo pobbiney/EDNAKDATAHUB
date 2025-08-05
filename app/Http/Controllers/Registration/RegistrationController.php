@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
+use App\Models\PermitReview;
 use App\Models\ProjectCategory;
 use App\Models\ProjectSector;
 use App\Models\ProjectType;
 use App\Models\Region;
 use App\Models\ScreenDecision;
+use App\Models\Screening;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -370,9 +372,7 @@ public function openPermitDeclarationView(){
 
 public function addDeclaration(Request $request){
     $request->validate([
-        'structures' => 'required',
-       
-        
+        'applied_by' => 'required',
     ]);
 
     $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
@@ -568,7 +568,7 @@ public function editDeclaration(Request $request,$id)
 {
      $decodeID = Crypt::decrypt($id);
        $request->validate([
-        'structures' => 'applied_by',
+        'applied_by' => 'required',
        
         
     ]);
@@ -598,10 +598,11 @@ public function getAttachedDocView(){
 
     public function viewApplication($id){
         $decodeID = Crypt::decrypt($id);
-        $project = PermitRegistration::find($decodeID);
-       
+        $project = PermitRegistration::where('formId',$decodeID)->first();
+        $listscreen = Screening::where('formId',$decodeID)->first();
+         $list = PermitReview::where('formId',$decodeID)->first();
         return view('registration.view-application',[
-            'project' => $project
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list
         ]);
     }
 }

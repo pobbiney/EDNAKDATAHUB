@@ -80,8 +80,6 @@
 
 	@yield('css');
 
-	 
-
 
 </head>
 

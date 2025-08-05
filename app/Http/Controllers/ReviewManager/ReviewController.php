@@ -19,7 +19,12 @@ use App\Models\InspectionQuestionType;
 use App\Models\Meansofescape;
 use App\Models\PermitApp;
 use App\Models\Permitapproval;
+use App\Models\PermitRegistration;
+use App\Models\PermitReview;
 use App\Models\Permitvetting;
+use App\Models\ScreenDecision;
+use App\Models\Screening;
+use App\Models\Task;
 use App\Models\Tracker;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -295,10 +300,11 @@ class ReviewController extends Controller
     //Showing List of Reviewed Permit Application//
     public function getReviewPermit(){
         
-        $data = PermitApp::where('status', 'Reviewed')
-        ->where('region', Auth::user()->region_id)
-     ->get();
-     return view('review_manager.review_permit',['data'=>$data]);
+    
+            $tasks = PermitRegistration::where('status','screened')
+            ->where('region', Auth::user()->region_id)
+            ->get();
+           return view('review_manager.review_permit',['tasks'=>$tasks]);
 
     }
     
@@ -306,19 +312,15 @@ class ReviewController extends Controller
 //Display Reviewed Permit Application for Approval//
       public function getReviewVetPermit($id)
     {
-        $decodeId = Crypt::decrypt($id);
-        $data =  PermitApp::find($decodeId);
-
-        $floor = Floortable::where('applicationId', $decodeId)
-        ->where('applicationType' ,'permitApplication')
-        ->get();
-        $drawings = Drawingupload::where('appId', $decodeId)
-        ->where('uploadType' ,'permitApplication')
-        ->get();
-  
-
-        return view('review_manager.vet_application_permit_details',['data'=>$data,'floor'=>$floor,'drawings'=>$drawings
-      ]);
+         $decodeID = Crypt::decrypt($id);
+         $project = PermitRegistration::where('formID',$decodeID)->first();
+         $listscreen = Screening::where('formId',$decodeID)->first();
+         $list = ScreenDecision::all();
+        return view('review_manager.review_permit_application',[
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list
+        ]);
+           
+      
     }
 
     //Review Approval for permit Application//
@@ -806,5 +808,73 @@ class ReviewController extends Controller
            }
 
         }
+
+    public function addReview(Request $request){
+        $request->validate([
+        'evaluation' => 'required',
+        'decision_id' => 'required',
+        'recommendation' => 'required',
+       
+        
+    ]);
+
+    $insertApp = new PermitReview();
+    $insertApp->formId = $request->permit_id;
+    $insertApp->application_type = "permit";
+    $insertApp->evaluation = $request->evaluation;
+    $insertApp->decision_id = $request->decision_id;
+    $insertApp->recommendation = $request->recommendation;
+    $insertApp->region_id = $request->region_id;
+    $insertApp->created_by = Auth::user()->id; 
+     
+    $insertApp->save();
+    if($request->decision_id == 1){
+    $track = new Tracker();
+    $track->formID = $request->permit_id;
+    $track->activity = "7";
+    $track->createdOn =Carbon::now();
+    $track->createdBy = Auth::user()->id; 
+    $track->activity_type = "1";
+    $track->regionId= $request->region_id;
+    $track->save();
+    }
+    else{
+         $track = new Tracker();
+    $track->formID = $request->permit_id;
+    $track->activity = "14";
+    $track->createdOn =Carbon::now();
+    $track->createdBy = Auth::user()->id; 
+    $track->activity_type = "1";
+    $track->regionId= $request->region_id;
+    $track->save();
+    }
+
+     PermitRegistration::where('formID', $request->permit_id)
+            ->update([
+                'status' => "reviewed"
+            ]);
+
+    Task::where('application_id', $request->permit_id)
+    ->update([
+        'status' => "reviewed"
+    ]);
+
+  
+
+  
+   return $insertApp? back()->with('message_success','Application  Reviewed Successfully'): back()->with('message_error','Something went wrong, please try again.');
+
+       }
+
+       public function getReviewPermitReport($id)
+       {
+        $decodeID = Crypt::decrypt($id);
+         $project = PermitRegistration::where('formID',$decodeID)->first();
+       
+         $listscreen = Screening::where('formId',$decodeID)->first();
+        return view('review_manager.view-review_permit_application',[
+            'project' => $project,'listscreen'=>$listscreen
+        ]);
+       }
 
 }

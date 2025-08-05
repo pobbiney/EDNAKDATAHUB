@@ -161,6 +161,12 @@
                                                     <span class="fs-14 fw-medium ms-2">Impact Assessment</span>
                                                 </a>
                                             </li>
+                                            <li data-target="content7">
+                                                <a href="javascript:void(0);" class="active subdrop">
+                                                    <i class="ti ti-settings-2 fs-18"></i>
+                                                    <span class="fs-14 fw-medium ms-2">Review Application</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -417,7 +423,62 @@
                         </div>
                         <div id="content4" class="displayContent"></div>
                         <div id="content5" class="displayContent"></div>
-                        <div id="content6" class="displayContent"></div>
+                        <div id="content6" class="displayContent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Impact Assessment </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->evaluation ?? ''}}</h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->getdecision->name ?? ''}}</h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->recommendation ?? ''}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content7" class="displayContent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Impact Assessment </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
+                                                </label>
+                                                <h5 class="mt-2">{{$list->evaluation ?? ''}}</h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
+                                                </label>
+                                                <h5 class="mt-2">{{$list->getdecision->name ?? ''}}</h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
+                                                </label>
+                                                <h5 class="mt-2">{{$list->recommendation ?? ''}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
