@@ -424,7 +424,7 @@ class StaffController extends Controller implements HasMiddleware
         $data->dob = $validateData['dob'];
         $data->nationality = $validateData['nationality'];
         $data->marital_status_id = $validateData['marital_status_id'];
-        $data->reg_id = $validateData['region'];
+        $data->region_id = $validateData['region'];
         $data->mmda_id = $validateData['district'];
         $data->status = $validateData['status'];
         $data->town = $validateData['hometown'];
