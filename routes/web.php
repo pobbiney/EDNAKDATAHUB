@@ -401,10 +401,10 @@ Route::get('review_certificate',[ReviewController::class,'getReviewCertificate']
 Route::get('vet_application_cert_details/{id}',[ReviewController::class,'getReviewVetCertificate'])->name('vet_application_cert_details');
 Route::post('add-certreview-process', [ReviewController::class, 'ProcessCertReviewApproval'])->name('add-certreview-process');
 Route::get('review_permit',[ReviewController::class,'getReviewPermit'])->name('review_permit');
-Route::get('vet_application_permit_details/{id}',[ReviewController::class,'getReviewVetPermit'])->name('vet_application_permit_details');
+Route::get('review_permit_application/{id}',[ReviewController::class,'getReviewVetPermit'])->name('review_permit_application');
 Route::post('add-permitreview-process', [ReviewController::class, 'ProcessPermitReviewApproval'])->name('add-permitreview-process');
 Route::get('vet_certificate',[ReviewController::class,'getVetCertificate'])->name('vet_certificate');
-Route::get('InspectionReportCert/{id}',[ReviewController::class,'getReviewVetCertificateReport'])->name('InspectionReportCert');
+Route::get('view-review_permit_application/{id}',[ReviewController::class,'getReviewPermitReport'])->name('view-review_permit_application');
 Route::get('vet_permit',[ReviewController::class,'getVetPermit'])->name('vet_permit');
 Route::get('InspectionReportPermit/{id}',[ReviewController::class,'getReviewVetPermitReport'])->name('InspectionReportPermit');
 Route::get('approve_certificate',[ReviewController::class,'getApproveCertificateView'])->name('approve_certificate');
@@ -504,6 +504,7 @@ Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTyp
 Route::get('application-screening/{id}',[TaskMangerController::class,'getAppScreeningView'])->name('application-screening');
 Route::get('viewScreening/{id}',[TaskMangerController::class,'getViewScreening'])->name('viewScreening');
 Route::post('add-permit-screening-process',[TaskMangerController::class,'addScreening'])->name('add-permit-screening-process');
+Route::post('add-permit-review-process',[ReviewController::class,'addReview'])->name('add-permit-review-process');
 /* End of Screening */
 
 
