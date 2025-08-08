@@ -70,7 +70,7 @@ $subpageName = "my_application";
                                                         <td>
                                                              <span class="badge badge-success d-flex align-items-center badge-xs"> Completed</span>
                                                         </td>
-                                                        <td> <a href="{{ route('registration.edit-permit-registration-form-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>  <a href="{{ route('registration.view-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-primary"><i class="fe fe-eye"></i> View</a></td>
+                                                        <td> <a href="{{ route('registration.edit-permit-registration-form-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>  <a href="{{ route('registration.view-application', Crypt::encrypt($list->formID)) }}" target="_" class="btn btn-primary"><i class="fe fe-eye"></i> View</a></td>
                                                         
                                                         
                                                          @else  

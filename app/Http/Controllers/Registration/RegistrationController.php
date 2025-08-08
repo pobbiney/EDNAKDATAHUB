@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
+use App\Models\PermitReview;
 use App\Models\ProjectCategory;
 use App\Models\ProjectSector;
 use App\Models\ProjectType;
 use App\Models\Region;
 use App\Models\ScreenDecision;
+use App\Models\Screening;
+use App\Models\Tracker;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Carbon\Carbon;
 
 class RegistrationController extends Controller
 {
@@ -145,6 +149,19 @@ class RegistrationController extends Controller
     $insertApp->registration_step = "Step1";
     $insertApp->save();
 
+    $data = Formsale::where('id', $request->application_id)->first(); // get first item
+
+    $regionId = $data ? $data->regionId : 0;
+
+    $track = new Tracker();
+    $track->formID = $request->application_id;
+    $track->activity = "2";
+    $track->createdOn =Carbon::now();
+    $track->createdBy = Auth::user()->id; 
+    $track->activity_type = "1";
+    $track->regionId= $regionId;
+    $track->save();
+
       // Store the user ID in session to use in step 2 and 3
     Session::put('incomplete_user_id', $insertApp->id);
    return view('registration.success-message', [
@@ -226,6 +243,11 @@ public function openPermitApplicationView($id)
     $insertApp->type_id = $request->type;
     $insertApp->registration_step = "Step2";
     $insertApp->save();
+
+
+   
+
+    
 
       // Store the user ID in session to use in step 2 and 3
     Session::put('incomplete_user_id', $insertApp->id);
@@ -370,20 +392,17 @@ public function openPermitDeclarationView(){
 
 public function addDeclaration(Request $request){
     $request->validate([
-        'structures' => 'required',
-       
-        
+        'applied_by' => 'required',
     ]);
 
     $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
     $insertApp->applied_by = $request->applied_by;
     $insertApp->declaration = "assigned";
     $insertApp->created_by = Auth::user()->id; 
-     
-    
     $insertApp->registration_step = "completed";
     $insertApp->save();
 
+   
       // Store the user ID in session to use in step 2 and 3
     Session::put('incomplete_user_id', $insertApp->id);
    return $insertApp? back()->with('message_success','Application  Completed Successfully'): back()->with('message_error','Something went wrong, please try again.');
@@ -568,7 +587,7 @@ public function editDeclaration(Request $request,$id)
 {
      $decodeID = Crypt::decrypt($id);
        $request->validate([
-        'structures' => 'applied_by',
+        'applied_by' => 'required',
        
         
     ]);
@@ -598,10 +617,11 @@ public function getAttachedDocView(){
 
     public function viewApplication($id){
         $decodeID = Crypt::decrypt($id);
-        $project = PermitRegistration::find($decodeID);
-       
+        $project = PermitRegistration::where('formId',$decodeID)->first();
+        $listscreen = Screening::where('formId',$decodeID)->first();
+         $list = PermitReview::where('formId',$decodeID)->first();
         return view('registration.view-application',[
-            'project' => $project
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list
         ]);
     }
 }

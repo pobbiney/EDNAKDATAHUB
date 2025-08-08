@@ -77,10 +77,10 @@
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/datatable.css')}}">
-
-	@yield('css');
-
-	 
+ 
+	@yield('css')
+ 
+ 
 
 
 </head>

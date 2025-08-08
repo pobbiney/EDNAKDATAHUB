@@ -439,7 +439,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
                                                 </label>
-                                                <h5 class="mt-2">{{$listscreen->getscreendecision->name ?? ''}}</h5>
+                                                <h5 class="mt-2">{{$listscreen->getdecision->name ?? ''}}</h5>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.

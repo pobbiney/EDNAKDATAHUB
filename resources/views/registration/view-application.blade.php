@@ -161,6 +161,12 @@
                                                     <span class="fs-14 fw-medium ms-2">Impact Assessment</span>
                                                 </a>
                                             </li>
+                                            <li data-target="content7">
+                                                <a href="javascript:void(0);" class="active subdrop">
+                                                    <i class="ti ti-settings-2 fs-18"></i>
+                                                    <span class="fs-14 fw-medium ms-2">Review Application</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
