@@ -1,23 +1,26 @@
 <?php
 
-use App\Http\Controllers\ApplicationManager\ApplicationManagerController;
-use App\Http\Controllers\Authentication\AuthenticationController;
-use App\Http\Controllers\BillPayment\BillPaymentController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Equipment\EquipmentControoller;
+use App\Http\Controllers\Customer\ApplicationController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Customer\AuthController;
 use App\Http\Controllers\Finance\FinanceController;
-use App\Http\Controllers\IncidentManager\IncidentController;
-use App\Http\Controllers\MainSetup\MainSetupController;
-use App\Http\Controllers\UserManagement\UserManagementController;
+use App\Http\Controllers\Reports\ReportsController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Task\TaskMangerController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InspectionManager\CertificateController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\MainSetup\MainSetupController;
+use App\Http\Controllers\Equipment\EquipmentControoller;
+use App\Http\Controllers\ReviewManager\ReviewController;
+use App\Http\Controllers\RenewalManager\RenewalController;
+use App\Http\Controllers\BillPayment\BillPaymentController;
+use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
 use App\Http\Controllers\Registration\RegistrationController;
-use App\Http\Controllers\RenewalManager\RenewalController;
-use App\Http\Controllers\Reports\ReportsController;
-use App\Http\Controllers\ReviewManager\ReviewController;
+use App\Http\Controllers\Customer\CustomerDashboardController;
+use App\Http\Controllers\Authentication\AuthenticationController;
+use App\Http\Controllers\InspectionManager\CertificateController;
+use App\Http\Controllers\UserManagement\UserManagementController;
+use App\Http\Controllers\ApplicationManager\ApplicationManagerController;
 
 
 Route::get('/',[AuthenticationController::class,'index']);
@@ -505,3 +508,12 @@ Route::get('application-screening/{id}',[TaskMangerController::class,'getAppScre
 Route::get('viewScreening/{id}',[TaskMangerController::class,'getViewScreening'])->name('viewScreening');
 Route::post('add-permit-screening-process',[TaskMangerController::class,'addScreening'])->name('add-permit-screening-process');
 /* End of Screening */
+
+//Customer Routes
+Route::get('/customer-login',[AuthController::class,'index'])->name('customer-login');
+Route::post('/customer-authentication-process',[AuthController::class,'customerAuthenticationProcess'])->name('customer-authentication-process');
+Route::post('/customer-logout-authentication-process',[AuthController::class,'customerLogoutAuthenticationProcess'])->name('customer-logout-authentication-process');
+Route::get('/customer-dashboard',[CustomerDashboardController::class,'dashboardView'])->name('customer-dashboard');
+Route::get('/customer-track-application',[ApplicationController::class,'trackApplicationView'])->name('customer-track-application');
+Route::get('/customer-job-details/{id}',[ApplicationController::class,'jobDetails'])->name('customer-job-details');
+

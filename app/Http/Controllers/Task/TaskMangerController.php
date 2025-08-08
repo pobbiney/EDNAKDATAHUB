@@ -479,8 +479,8 @@ Thank you' ;
      /*searching for application*/
      public function JobTracker (Request $request){
         $field = $request->field;
-    $operation = $request->operator;
-    $parameter = $request->search_parameter;
+        $operation = $request->operator;
+        $parameter = $request->search_parameter;
 
     $table = "";
 
