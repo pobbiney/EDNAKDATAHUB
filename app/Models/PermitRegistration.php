@@ -12,7 +12,7 @@ class PermitRegistration extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'application_id'); 
+        return $this->hasMany(Task::class, 'application_id', 'formID'); 
     }
 
  
