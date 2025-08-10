@@ -37,7 +37,7 @@ class AppBill extends Model
 
 	public function getBillType(){
 
-		if(BillItem::where('id',$this->bill_type)->get()->count() > 0){
+		if(BillType::where('id',$this->bill_type)->get()->count() > 0){
 
 			return BillType::find($this->bill_type)->name;
 
