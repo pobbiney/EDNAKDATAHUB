@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Registration;
 
 use App\Http\Controllers\Controller;
 use App\Models\District;
+use App\Models\Drawingupload;
 use App\Models\Formsale;
 use App\Models\PermitRegistration;
 use App\Models\PermitReview;
@@ -620,8 +621,9 @@ public function getAttachedDocView(){
         $project = PermitRegistration::where('formId',$decodeID)->first();
         $listscreen = Screening::where('formId',$decodeID)->first();
          $list = PermitReview::where('formId',$decodeID)->first();
+         $documents = Drawingupload::where('appId',$project->id)->get();
         return view('registration.view-application',[
-            'project' => $project,'listscreen'=>$listscreen,'list'=>$list
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents
         ]);
     }
 }

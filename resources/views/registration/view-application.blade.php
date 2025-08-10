@@ -133,35 +133,41 @@
                                             </li>
                                             <li data-target="content2">
                                                 <a href="javascript:void(0);">
+                                                    <i class="ti ti-file fs-18"></i>
+                                                    <span class="fs-14 fw-medium ms-2">Document Tab</span>
+                                                </a>
+                                            </li>
+                                            <li data-target="content3">
+                                                <a href="javascript:void(0);">
                                                     <i class="ti ti-world fs-18"></i>
                                                     <span class="fs-14 fw-medium ms-2">Infrastructure Tab</span>
                                                 </a>
                                             </li>
-                                            <li data-target="content3">
+                                            <li data-target="content4">
                                                 <a href="javascript:void(0);">
                                                     <i class="ti ti-device-mobile fs-18"></i>
                                                     <span class="fs-14 fw-medium ms-2">Environment Impact Tab</span>
                                                 </a>
                                             </li>
-                                            <li data-target="content4">
+                                            <li data-target="content5">
                                                 <a href="javascript:void(0);">
                                                     <i class="ti ti-device-desktop fs-18"></i>
                                                     <span class="fs-14 fw-medium ms-2">Concerns Tab</span>
                                                 </a>
                                             </li>
-                                            <li data-target="content5">
+                                            <li data-target="content6">
                                                 <a href="javascript:void(0);">
                                                     <i class="ti ti-settings-dollar fs-18"></i>
                                                     <span class="fs-14 fw-medium ms-2">Management Impact Tab</span>
                                                 </a>
                                             </li>
-                                            <li data-target="content6">
+                                            <li data-target="content7">
                                                 <a href="javascript:void(0);" class="active subdrop">
                                                     <i class="ti ti-settings-2 fs-18"></i>
                                                     <span class="fs-14 fw-medium ms-2">Impact Assessment</span>
                                                 </a>
                                             </li>
-                                            <li data-target="content7">
+                                            <li data-target="content8">
                                                 <a href="javascript:void(0);" class="active subdrop">
                                                     <i class="ti ti-settings-2 fs-18"></i>
                                                     <span class="fs-14 fw-medium ms-2">Review Application</span>
@@ -182,6 +188,7 @@
                                             <h5 class="card-title">Project</h5>
                                         </div>
                                         <div class="card-body">
+                                             <p class="mb-3">This tab provides information about the project, including its title, type, and sector, as well as the project's description,scope and other information.</p>
                                             <form action="#">
                                                 <div class="row">
                                                     <div class="col-xl-6">
@@ -317,9 +324,60 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
+                                            <h5 class="card-title">Documents </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="mb-3">
+                                                This tab allows you to preview all the documents that have been uploaded.
+                                            </p>
+                                                    <div class="col-xl-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Upload Type</th>
+                                                                        <th>Document Type</th>
+                                                                        <th>Date</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if($documents->count() > 0)
+                                                                    @foreach($documents as $document)
+                                                                        <tr>
+                                                                            <td>{{$loop->iteration}}</td>
+                                                                            <td>{{$document->uploadType}}</td>
+                                                                            <td>{{$document->drawname->name}}</td>
+                                                                            <td>{{ \Carbon\Carbon::parse($document->createdOn)->format('M d,Y') }}</td>
+                                                                            <td ><a target="_blank" href="{{$document->path}}"  class="btn btn-success btn-sm"><i class="fas fa-file"></i> View File</a></td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    @else
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-center">No documents uploaded yet</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                               
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content3" class="displayContent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
                                             <h5 class="card-title">Infrastructure </h5>
                                         </div>
                                         <div class="card-body">
+                                            <p class="mb-3">This section provides information about the project's infrastructure, including access to water, electricity, and other vital services.</p>
                                                 <div class="mb-3">
                                                     <label class="form-label">Structures on the site</label>
                                                     <h5 class="mt-2">{{$project->structures ?? ''}}</h5>
@@ -356,7 +414,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="content3" class="displayContent">
+                        <div id="content4" class="displayContent">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
@@ -421,7 +479,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="content4" class="displayContent">
+                        <div id="content5" class="displayContent">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
@@ -466,7 +524,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="content5" class="displayContent">
+                        <div id="content6" class="displayContent">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
@@ -505,7 +563,58 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="content6" class="displayContent"></div>
+                        <div id="content7" class="displayContent">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Impact Assessment </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->evaluation ?? ''}}</h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->getdecision->name ?? ''}}</h5>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
+                                                </label>
+                                                <h5 class="mt-2">{{$listscreen->recommendation ?? ''}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content8" class="displayContent">
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Review Application Tab </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                    <label class="form-label">Evaluation</label>
+                                                    <h4 class="mt-2">{{$list->evaluation ?? ''}}</h4>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Screening Decision /Recommendation</label>
+                                                    <h4 class="mt-2">{{$list->recommendation ?? ''}}</h4>
+                                                </div>
+                                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
 
                     </div>
                 </div>
