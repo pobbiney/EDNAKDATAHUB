@@ -62,6 +62,8 @@ class User extends  Authenticatable
 
 	public function getDistrictName ($id){
 
+	
+
 		return District::find($id)->name;
 	}
 

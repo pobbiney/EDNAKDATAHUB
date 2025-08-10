@@ -40,7 +40,7 @@
         <td>{{ date('jS, F Y') }}</td>
         <td>&nbsp;</td>
         <td><strong>FORM NUMBER:</strong></td>
-        <td>{{ $formData->formNumber }}</td>
+        <td>{{ base64_encode($formData->id) }}</td>
     </tr>
     <tr>
         <td colspan="7"><hr></td>
@@ -48,30 +48,20 @@
     <tr>
         <td>&nbsp;</td>
         <td><strong>NAME:</strong></td>
-        <td>{{ $formData->applicantName }}</td>
+        <td>{{ $formData->proponent_name }}</td>
         <td>&nbsp;</td>
-        <td><strong><strong>Plot/House No : </strong>:</strong></td>
-        <td>
-            @if (count($formData->checkType()) > 0)
-                {{ $formData->checkType()[0]->plotNo }}
-            @endif
-        </td>
+        <td><strong><strong>Contact Number : </strong>:</strong></td>
+        <td>{{ $formData->contact_number }}</td>
 
         </tr>
     <tr>
         <td>&nbsp;</td>
-        <td><strong>Location : </strong></td>
-        <td>
-             @if (count($formData->checkType()) > 0)
-                {{ $formData->checkType()[0]->location }}
-            @endif
-        </td>
+        <td><strong>Town : </strong></td>
+       <td>{{ $formData->town }}</td>
         <td>&nbsp;</td>
-        <td><strong><strong>City : </strong></td>
+        <td><strong><strong>E-mail : </strong></td>
         <td>
-             @if (count($formData->checkType()) > 0)
-                {{ $formData->checkType()[0]->city }}
-            @endif
+           {{ $formData->email }}
         </td>
 
         </tr>
@@ -79,16 +69,16 @@
         <td>&nbsp;</td>
         <td><strong>District : </strong></td>
         <td>
-            @if (count($formData->checkType()) > 0)
-                {{ Auth::User()->getDistrictName($formData->checkType()[0]->district) }}
-            @endif
+            
+                {{ Auth::User()->getDistrictName($formData->district) }}
+           
         </td>
         <td>&nbsp;</td>
         <td><strong><strong>Region :</strong></td>
         <td>
-            @if (count($formData->checkType()) > 0)
-                {{ Auth::User()->getRegionName($formData->checkType()[0]->region) }}
-            @endif
+            
+                {{ Auth::User()->getRegionName($formData->region) }}
+           
         </td>
 
         </tr>
@@ -116,11 +106,11 @@
         <tr>
             <td></td>
             <td>{{ $loop->index+1 }}</td>
-            <td>{{ $billItemsListItem->name }}</td>
-            <td>{{ $billItemsListItem->currency }} {{ number_format($billItemsListItem->amount,2) }}</td>
+            <td>{{ $billItemsListItem->getBillType() }}</td>
+            <td>GHC {{ number_format($billItemsListItem->bill_amount,2) }}</td>
         </tr>
         @php
-            $total = $total + (double)$billItemsListItem->amount;
+            $total = $total + (double)$billItemsListItem->bill_amount;
         @endphp
     @endforeach
  
