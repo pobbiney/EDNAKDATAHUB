@@ -534,7 +534,10 @@ Route::post('/customer-enquiries-submit',[EnquiriesController::class,'store'])->
 Route::get('/customer/attach-document',[RegController::class,'getAttachedDocView'])->name('customer-attach-document');
 Route::post('/customer/application-attach-drawings-get-forms',[RegController::class,'getAttachDrawingForms'])->name('customer-application-attach-drawings-get-forms');
 Route::post('/customer/application-attach-drawings-get-forms-process',[RegController::class,'uploadAttachDrawingsProcess'])->name('customer-application-attach-drawings-get-forms-process');
-
+Route::get('/customer/registration/edit-permit-registration-form-infrastructure/{id}',[RegController::class,'openEditPermitInfrastructureView'])->name('customer.registration.edit-permit-registration-form-infrastructure');
+Route::post('/customer/registration/edit-permit-registration-form-infrastructure-process/{id}',[RegController::class,'editInfrastructure'])->name('customer.registration.edit-permit-registration-form-infrastructure-process');
+Route::get('/customer/registration/edit-permit-registration-form-declaration/{id}',[RegController::class,'openEditPermitDeclarationView'])->name('customer.registration.edit-permit-registration-form-declaration');
+Route::post('/customer/registration/edit-permit-registration-form-declaration-process/{id}',[RegController::class,'editDeclaration'])->name('customer.registration.edit-permit-registration-form-declaration-process');
 
 
 
