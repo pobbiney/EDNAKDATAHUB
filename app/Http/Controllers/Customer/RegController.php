@@ -133,6 +133,71 @@ class RegController extends Controller
 
     }
 
+    public function openEditPermitInfrastructureView($id){
+        $decodeID = Crypt::decrypt($id);
+        
+        $user = PermitRegistration::find($decodeID);
+    
+        return view('customer.registration.edit-permit-registration-form-infrastructure',
+        ['user'=>$user,'id'=>$id ]);
+    }
+
+    public function editInfrastructure(Request $request,$id){
+        $decodeID = Crypt::decrypt($id);
+        $request->validate([
+            'structures' => 'required',
+            'water' => 'required',
+            'power' => 'required',
+            'drainage' => 'required',
+            'water_body' => 'required',
+            'road_access' => 'required',
+            
+        ]);
+
+        $insertApp = PermitRegistration::findOrFail($decodeID);
+        $insertApp->structures = $request->structures;
+        $insertApp->water = $request->water;
+        $insertApp->power = $request->power;
+        $insertApp->drainage = $request->drainage;
+        $insertApp->water_body = $request->water_body;
+        $insertApp->road_access = $request->road_access;
+        $insertApp->other = $request->other;
+    
+        $insertApp->save();
+    
+    return view('customer.registration.success-message', [
+        'redirectUrl' => route('customer.registration.edit-permit-registration-form-declaration',Crypt::encrypt($insertApp->id))
+    ]);
+    }
+
+    public function openEditPermitDeclarationView($id){
+        $decodeID = Crypt::decrypt($id);
+        
+        $user = PermitRegistration::find($decodeID);
+    
+        return view('customer.registration.edit-permit-registration-form-declaration',
+        ['user'=>$user,'id'=>$id ]);
+    }
+
+    public function editDeclaration(Request $request,$id)
+    {
+        $decodeID = Crypt::decrypt($id);
+        $request->validate([
+            'applied_by' => 'required',
+        
+            
+        ]);
+
+        $insertApp = PermitRegistration::findOrFail($decodeID);
+        $insertApp->applied_by = $request->applied_by;
+        
+        $insertApp->updated_by = 0; 
+        
+        $insertApp->save();
+    
+    return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
+    }
+    
     public function resume($id)
     {
         $user = PermitRegistration::findOrFail($id);
@@ -250,5 +315,23 @@ class RegController extends Controller
 
 
     }
+
+     public function customerFindProjectTypeyData(Request $request){
+  
+        $data=ProjectType::select('name','id')->where('category_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+	}
+
+    public function customerFindCategoryData(Request $request){
+    
+            $data=ProjectCategory::select('name','id')->where('sector_id',$request->id)->get();
+            return response()->json($data);//then sent this data to ajax success
+        }
+
+    public function customerFindRegionData(Request $request){
+    
+            $data=District::select('name','id')->where('region_id',$request->id)->get();
+            return response()->json($data);//then sent this data to ajax success
+        }
 
 }

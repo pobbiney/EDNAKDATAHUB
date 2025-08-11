@@ -82,7 +82,7 @@
                                                 <div class="mb-4">
                                                     <h5>Enter Project  Details</h5>
                                                 </div>
-                                                <form enctype="multipart/form-data"   method="POST" action="{{route('registration.edit-permit-registration-form-project-process',$id)}}">
+                                                <form enctype="multipart/form-data"   method="POST" action="{{route('customer.registration.edit-permit-registration-form-project-process',$id)}}">
                                                            @csrf
                                                         <div class="row">
                                                             <div class="col-md-4">
@@ -241,7 +241,7 @@
 
                                                         </div>
                                                          <div class="text-end">
-                                                            <a href="{{ route('registration.edit-permit-registration-form-application',Crypt::encrypt($datas->id) ) }}" class="btn btn-soft-secondary" style="float: left">Previous</a>
+                                                            <a href="{{ route('customer.registration.edit-permit-registration-form-application',Crypt::encrypt($datas->id) ) }}" class="btn btn-soft-secondary" style="float: left">Previous</a>
                                                              <button type="submit" class="btn btn-primary">Update & Continue</button>
                                                         </div>
                                                         
@@ -279,7 +279,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{!! URL::to('findRegionData') !!}',
+            url: '{!! URL::to('customerFindRegionData') !!}',
             data: { 'id': cat_id },
             dataType: 'json', // ✅ 3. Explicitly expect JSON
             success: function(data) {
@@ -323,7 +323,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{!! URL::to('findCategoryData') !!}',
+            url: '{!! URL::to('customerFindCategoryData') !!}',
             data: { 'id': cat_id },
             dataType: 'json', // ✅ 3. Explicitly expect JSON
             success: function(data) {
@@ -368,7 +368,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{!! URL::to('findProjectTypeyData') !!}',
+            url: '{!! URL::to('customerFindProjectTypeyData') !!}',
             data: { 'id': cat_id },
             dataType: 'json', // ✅ 3. Explicitly expect JSON
             success: function(data) {
