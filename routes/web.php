@@ -539,6 +539,10 @@ Route::post('/customer/registration/edit-permit-registration-form-infrastructure
 Route::get('/customer/registration/edit-permit-registration-form-declaration/{id}',[RegController::class,'openEditPermitDeclarationView'])->name('customer.registration.edit-permit-registration-form-declaration');
 Route::post('/customer/registration/edit-permit-registration-form-declaration-process/{id}',[RegController::class,'editDeclaration'])->name('customer.registration.edit-permit-registration-form-declaration-process');
 
+Route::get('customerFindRegionData',[RegController::class,'customerFindRegionData'])->name('customerFindRegionData');
+Route::get('customerFindCategoryData',[RegController::class,'customerFindCategoryData'])->name('customerFindCategoryData');
+Route::get('customerFindProjectTypeyData',[RegController::class,'customerFindProjectTypeyData'])->name('customerFindProjectTypeyData');
+
 
 
 /*Staff Management */

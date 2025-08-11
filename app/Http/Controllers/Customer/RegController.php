@@ -316,4 +316,22 @@ class RegController extends Controller
 
     }
 
+     public function customerFindProjectTypeyData(Request $request){
+  
+        $data=ProjectType::select('name','id')->where('category_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+	}
+
+    public function customerFindCategoryData(Request $request){
+    
+            $data=ProjectCategory::select('name','id')->where('sector_id',$request->id)->get();
+            return response()->json($data);//then sent this data to ajax success
+        }
+
+    public function customerFindRegionData(Request $request){
+    
+            $data=District::select('name','id')->where('region_id',$request->id)->get();
+            return response()->json($data);//then sent this data to ajax success
+        }
+
 }

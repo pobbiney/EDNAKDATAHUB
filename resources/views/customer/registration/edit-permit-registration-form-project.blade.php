@@ -279,7 +279,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{!! URL::to('findRegionData') !!}',
+            url: '{!! URL::to('customerFindRegionData') !!}',
             data: { 'id': cat_id },
             dataType: 'json', // ✅ 3. Explicitly expect JSON
             success: function(data) {
@@ -323,7 +323,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{!! URL::to('findCategoryData') !!}',
+            url: '{!! URL::to('customerFindCategoryData') !!}',
             data: { 'id': cat_id },
             dataType: 'json', // ✅ 3. Explicitly expect JSON
             success: function(data) {
@@ -368,7 +368,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{!! URL::to('findProjectTypeyData') !!}',
+            url: '{!! URL::to('customerFindProjectTypeyData') !!}',
             data: { 'id': cat_id },
             dataType: 'json', // ✅ 3. Explicitly expect JSON
             success: function(data) {
