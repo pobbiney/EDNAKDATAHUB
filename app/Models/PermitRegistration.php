@@ -36,7 +36,10 @@ class PermitRegistration extends Model
         return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
     }
  
- 
+    public function issuance()
+    {
+        return $this->hasOne(CertIssuance::class, 'app_id', 'formID');
+    }
  
  
 }

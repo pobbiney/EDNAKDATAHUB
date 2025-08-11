@@ -413,7 +413,7 @@ Route::post('add-certificate-approval-process',[ReviewController::class,'addAppr
 Route::get('approve_permit',[ReviewController::class,'getApprovePermitView'])->name('approve_permit');
 
 Route::get('approve_application_permit_details/{id}',[ReviewController::class,'getApprovePermitDetailsView'])->name('approve_application_permit_details');
-Route::post('add-permit-approval-process',[ReviewController::class,'addApprovePermit'])->name('add-permit-approval-process');
+Route::post('approve-permit-review-processs',[ReviewController::class,'addApprovePermit'])->name('approve-permit-review-process');
 Route::get('search-permit-application',[ReviewController::class,'getSearchPermitView'])->name('search-permit-application');
 Route::post('review_manager.searchPermitProcess', [ReviewController::class, 'searchPermitProcess'])->name('review_manager.searchPermitProcess');
 Route::get('search-cert-application',[ReviewController::class,'getSearchCertView'])->name('search-cert-application');
