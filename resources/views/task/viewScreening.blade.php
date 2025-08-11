@@ -603,11 +603,11 @@
                                         <div class="card-body">
                                             <div class="mb-3">
                                                     <label class="form-label">Evaluation</label>
-                                                    <h4 class="mt-2">{{$list->evaluation ?? ''}}</h4>
+                                                    <h4 class="mt-2"></h4>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Screening Decision /Recommendation</label>
-                                                    <h4 class="mt-2">{{$list->recommendation ?? ''}}</h4>
+                                                    <h4 class="mt-2"></h4>
                                                 </div>
                                              
                                         </div>
