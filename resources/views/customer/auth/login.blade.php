@@ -12,7 +12,7 @@
 		<meta name="keywords" content="Environmental Protection Agency">
 		<meta name="author" content="Indexcom Ltd">
 		<meta name="robots" content="index, follow">
-        <title>@yield('title') || {{ _('EPA Customer Portal') }}</title>
+        <title>{{ _('EPA Customer Portal') }}</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
@@ -62,7 +62,7 @@
                                
                                 <div class="login-userheading">
                                     <h3>Sign In</h3>
-                                    <h4>Access the EPA customer portal using your Form ID and phone number.</h4>
+                                    <h4>Access the EPA customer portal using your Form Number and PIN.</h4>
                                 </div>
                                 <div class="mb-3">
                                         <label class="form-label">Form Number</label>

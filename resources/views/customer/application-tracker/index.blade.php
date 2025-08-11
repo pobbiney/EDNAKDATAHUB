@@ -50,6 +50,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Applicant</th>
                                         <th>Proponent Name</th>
                                         <th>Project Title</th>
                                         <th>Telephone </th>
@@ -65,6 +66,7 @@
                                   @foreach($tasks as $item)
                                    <tr>
                                     <td>{{ $i }}</td>
+                                    <td>{{ $item->permit_registrations->contact_person ?? 'N/A' }}</td>
                                     <td>{{ $item->permit_registrations->proponent_name ?? 'N/A' }}</td>
                                     <td>{{ $item->permit_registrations->project_title ?? 'N/A' }}</td>
                                     <td>{{ $item->tell ??  'N/A'}}</td>
