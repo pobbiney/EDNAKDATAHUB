@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\Customer\ApplicationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Staff\StaffController;
 use App\Http\Controllers\Customer\AuthController;
 use App\Http\Controllers\Finance\FinanceController;
 use App\Http\Controllers\Reports\ReportsController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Task\TaskMangerController;
+use App\Http\Controllers\Customer\EnquiriesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\MainSetup\MainSetupController;
+use App\Http\Controllers\Customer\ApplicationController;
 use App\Http\Controllers\Equipment\EquipmentControoller;
 use App\Http\Controllers\ReviewManager\ReviewController;
 use App\Http\Controllers\RenewalManager\RenewalController;
@@ -16,7 +18,6 @@ use App\Http\Controllers\BillPayment\BillPaymentController;
 use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
 use App\Http\Controllers\Registration\RegistrationController;
-use App\Http\Controllers\Staff\StaffController;
 use App\Http\Controllers\Customer\CustomerDashboardController;
 use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\InspectionManager\CertificateController;
@@ -518,6 +519,10 @@ Route::post('/customer-logout-authentication-process',[AuthController::class,'cu
 Route::get('/customer-dashboard',[CustomerDashboardController::class,'dashboardView'])->name('customer-dashboard');
 Route::get('/customer-track-application',[ApplicationController::class,'trackApplicationView'])->name('customer-track-application');
 Route::get('/customer-job-details/{id}',[ApplicationController::class,'jobDetails'])->name('customer-job-details');
+Route::get('customer-user-guide',[CustomerDashboardController::class,'userGuideView'])->name('customer-user-guide');
+Route::get('/customer-new-ticket',[EnquiriesController::class,'newTicketView'])->name('customer-new-ticket');
+Route::get('/customer-enquiries',[EnquiriesController::class,'enquiriesView'])->name('customer-enquiries');
+Route::post('/customer-enquiries-submit',[EnquiriesController::class,'store'])->name('customer-enquiries-submit');
 
 
 

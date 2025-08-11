@@ -299,15 +299,16 @@
 									<a href="{{route('customer-dashboard')}}"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Dashboard</span> </a>
 									 
 								</li>
-                                <li class="submenu">
-									<a href="javascript:void(0);"><i class="ti ti-user-edit fs-16 me-2"></i><span>Super Admin</span><span class="menu-arrow"></span></a>
+                               
+                                <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
+								 <li class="submenu">
+									<a href="javascript:void(0);"><i class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span class="menu-arrow"></span></a>
 									<ul>
-										<li><a href="dashboard.html">Dashboard</a></li>
-										<li><a href="companies.html">Companies</a></li>
+										<li><a href="{{route('customer-new-ticket')}}">New Ticket</a></li>
+										<li><a href="{{route('customer-enquiries')}}">Pending & Closed</a></li>
 									</ul>
 								</li>
-                                <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
- 
+								<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User Guide </span></a></li>
 							</ul>
 						</li> 
 							  
@@ -328,14 +329,16 @@
 							<a href="{{route('customer-dashboard')}}" ><i class="ti ti-layout-grid fs-16 me-2"></i><span> Dashboard</span> </a>
 						 
 						</li>
-                        <li class="submenu">
-									<a href="javascript:void(0);"><i class="ti ti-user-edit fs-16 me-2"></i><span>Super Admin</span><span class="menu-arrow"></span></a>
+                        
+                        <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
+						 <li class="submenu">
+									<a href="javascript:void(0);"><i class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span class="menu-arrow"></span></a>
 									<ul>
-										<li><a href="dashboard.html">Dashboard</a></li>
-										<li><a href="companies.html">Companies</a></li>
+										<li><a href="{{route('customer-new-ticket')}}">New Ticket</a></li>
+										<li><a href="{{route('customer-enquiries')}}">Pending & Closed</a></li>
 									</ul>
 								</li>
-                                <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
+						<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User Guide </span></a></li>
 						
 					 
 					</ul>
