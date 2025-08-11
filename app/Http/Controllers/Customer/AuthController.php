@@ -25,11 +25,9 @@ class AuthController extends Controller
          if ($formSale && sha1(base64_decode($request->password)) === $formSale->password ) {
             Session::put('formsale_id', $formSale->id);
             return redirect()->route('customer-dashboard')->with('success', 'Login successful.');
-         }else{
-            dd('lost');
+         
          }
-
-        //   return back()->withErrors(['invalid' => 'Invalid credentials'])->withInput();
+          return back()->withErrors(['invalid' => 'Invalid credentials'])->withInput();
         
     }
 
