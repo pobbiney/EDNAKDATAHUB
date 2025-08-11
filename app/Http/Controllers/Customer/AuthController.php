@@ -22,12 +22,12 @@ class AuthController extends Controller
         ]);
 
         $formSale = Formsale::where('formNumber', $request->formNumber)->first();
-         if ($formSale && sha1(base64_decode($request->password)) === $formSale->password ) {
+         if ($formSale && $request->password === $formSale->tell) {
             Session::put('formsale_id', $formSale->id);
             return redirect()->route('customer-dashboard')->with('success', 'Login successful.');
          
          }
-          return back()->withErrors(['invalid' => 'Invalid credentials'])->withInput();
+         return back()->with('login_error_message','Invalid Credentials');
         
     }
 

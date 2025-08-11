@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Controllers\Customer\ApplicationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Staff\StaffController;
+use App\Http\Controllers\Customer\RegController;
 use App\Http\Controllers\Customer\AuthController;
 use App\Http\Controllers\Finance\FinanceController;
 use App\Http\Controllers\Reports\ReportsController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Task\TaskMangerController;
+use App\Http\Controllers\Customer\EnquiriesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\MainSetup\MainSetupController;
+use App\Http\Controllers\Customer\ApplicationController;
 use App\Http\Controllers\Equipment\EquipmentControoller;
 use App\Http\Controllers\ReviewManager\ReviewController;
 use App\Http\Controllers\RenewalManager\RenewalController;
@@ -16,7 +19,6 @@ use App\Http\Controllers\BillPayment\BillPaymentController;
 use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
 use App\Http\Controllers\Registration\RegistrationController;
-use App\Http\Controllers\Staff\StaffController;
 use App\Http\Controllers\Customer\CustomerDashboardController;
 use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\InspectionManager\CertificateController;
@@ -417,7 +419,7 @@ Route::post('add-certificate-approval-process',[ReviewController::class,'addAppr
 Route::get('approve_permit',[ReviewController::class,'getApprovePermitView'])->name('approve_permit');
 
 Route::get('approve_application_permit_details/{id}',[ReviewController::class,'getApprovePermitDetailsView'])->name('approve_application_permit_details');
-Route::post('add-permit-approval-process',[ReviewController::class,'addApprovePermit'])->name('add-permit-approval-process');
+Route::post('approve-permit-review-processs',[ReviewController::class,'addApprovePermit'])->name('approve-permit-review-process');
 Route::get('search-permit-application',[ReviewController::class,'getSearchPermitView'])->name('search-permit-application');
 Route::post('review_manager.searchPermitProcess', [ReviewController::class, 'searchPermitProcess'])->name('review_manager.searchPermitProcess');
 Route::get('search-cert-application',[ReviewController::class,'getSearchCertView'])->name('search-cert-application');
@@ -512,12 +514,26 @@ Route::post('add-permit-review-process',[ReviewController::class,'addReview'])->
 /* End of Screening */
 
 //Customer Routes
+Route::get('/customer/application',[RegController::class,'getApplicationView'])->name('customer-application');
+Route::get('/customer/view-application/{id}',[RegController::class,'viewApplication'])->name('customer.view-application');
+Route::get('/customer/registration/edit-permit-registration-form-application/{id}',[RegController::class,'openEditPermitApplicationView'])->name('customer.registration.edit-permit-registration-form-application');
+Route::post('/customer/registration/edit-permit-registration-form-application-process/{id}',[RegController::class,'editPermitApplication'])->name('customer.registration.edit-permit-registration-form-application-process');
+Route::get('/customer/registration/edit-permit-registration-form-project/{id}',[RegController::class,'openEditPermitProjectView'])->name('customer.registration.edit-permit-registration-form-project');
+Route::post('/customer/registration/edit-permit-registration-form-project-process/{id}',[RegController::class,'editPermitProject'])->name('customer.registration.edit-permit-registration-form-project-process');
+Route::get('/customer/registration/resume/{id}',[RegController::class,'Resume'])->name('customer.registration.resume');
 Route::get('/customer-login',[AuthController::class,'index'])->name('customer-login');
 Route::post('/customer-authentication-process',[AuthController::class,'customerAuthenticationProcess'])->name('customer-authentication-process');
 Route::post('/customer-logout-authentication-process',[AuthController::class,'customerLogoutAuthenticationProcess'])->name('customer-logout-authentication-process');
 Route::get('/customer-dashboard',[CustomerDashboardController::class,'dashboardView'])->name('customer-dashboard');
 Route::get('/customer-track-application',[ApplicationController::class,'trackApplicationView'])->name('customer-track-application');
 Route::get('/customer-job-details/{id}',[ApplicationController::class,'jobDetails'])->name('customer-job-details');
+Route::get('customer-user-guide',[CustomerDashboardController::class,'userGuideView'])->name('customer-user-guide');
+Route::get('/customer-new-ticket',[EnquiriesController::class,'newTicketView'])->name('customer-new-ticket');
+Route::get('/customer-enquiries',[EnquiriesController::class,'enquiriesView'])->name('customer-enquiries');
+Route::post('/customer-enquiries-submit',[EnquiriesController::class,'store'])->name('customer-enquiries-submit');
+Route::get('/customer/attach-document',[RegController::class,'getAttachedDocView'])->name('customer-attach-document');
+Route::post('/customer/application-attach-drawings-get-forms',[RegController::class,'getAttachDrawingForms'])->name('customer-application-attach-drawings-get-forms');
+Route::post('/customer/application-attach-drawings-get-forms-process',[RegController::class,'uploadAttachDrawingsProcess'])->name('customer-application-attach-drawings-get-forms-process');
 
 
 

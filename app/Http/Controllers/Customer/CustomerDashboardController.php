@@ -37,6 +37,16 @@ class CustomerDashboardController extends Controller
 
             return view('customer.dashboard', compact('user', 'sales', 'totalFormSold', 'certificateCount', 'permitsCount','renewalCount', 'approveCertCount', 'approvePermitCount','latestCertificationData','latestPermitData','latestRenewalData'));
         }
+
+    public function userGuideView()
+    {
+        if (!Session::has('formsale_id')) {
+            return redirect()->route('customer-login');
+        }
+
+        // $user = Formsale::find(Session::get('formsale_id'));
+        return view('customer.user-guide');
+    }
 }
 
 
