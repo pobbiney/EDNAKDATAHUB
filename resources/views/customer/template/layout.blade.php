@@ -336,6 +336,14 @@
 							<a href="{{route('customer-dashboard')}}" ><i class="ti ti-layout-grid fs-16 me-2"></i><span> Dashboard</span> </a>
 						 
 						</li>
+
+						 <li class="submenu">
+									<a href="javascript:void(0);"><i class="ti ti-file fs-16 me-2"></i><span>Applications</span><span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="{{route('customer-application')}}">My Applications</a></li>
+										<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
+									</ul>
+								</li>
                         
                         <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
 						 <li class="submenu">

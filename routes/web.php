@@ -531,9 +531,9 @@ Route::get('customer-user-guide',[CustomerDashboardController::class,'userGuideV
 Route::get('/customer-new-ticket',[EnquiriesController::class,'newTicketView'])->name('customer-new-ticket');
 Route::get('/customer-enquiries',[EnquiriesController::class,'enquiriesView'])->name('customer-enquiries');
 Route::post('/customer-enquiries-submit',[EnquiriesController::class,'store'])->name('customer-enquiries-submit');
-Route::get('/customer/attach-document',[RegController::class,'getAttachedDocView'])->name('customer-attach-document');
-Route::post('/customer/application-attach-drawings-get-forms',[RegController::class,'getAttachDrawingForms'])->name('customer-application-attach-drawings-get-forms');
-Route::post('/customer/application-attach-drawings-get-forms-process',[RegController::class,'uploadAttachDrawingsProcess'])->name('customer-application-attach-drawings-get-forms-process');
+Route::get('/customer/attach-document',[ApplicationController::class,'getAttachedDocView'])->name('customer-attach-document');
+Route::post('/customer/application-attach-drawings-get-forms',[ApplicationController::class,'getAttachDrawingForms'])->name('customer-application-attach-drawings-get-forms');
+Route::post('/customer/application-attach-drawings-get-forms-process',[ApplicationController::class,'uploadAttachDrawingsProcess'])->name('customer-application-attach-drawings-get-forms-process');
 Route::get('/customer/registration/edit-permit-registration-form-infrastructure/{id}',[RegController::class,'openEditPermitInfrastructureView'])->name('customer.registration.edit-permit-registration-form-infrastructure');
 Route::post('/customer/registration/edit-permit-registration-form-infrastructure-process/{id}',[RegController::class,'editInfrastructure'])->name('customer.registration.edit-permit-registration-form-infrastructure-process');
 Route::get('/customer/registration/edit-permit-registration-form-declaration/{id}',[RegController::class,'openEditPermitDeclarationView'])->name('customer.registration.edit-permit-registration-form-declaration');
