@@ -7,6 +7,7 @@ use App\Models\Applicationform;
 use App\Models\CertificateApp;
 use App\Models\Formsale;
 use App\Models\PermitApp;
+use App\Models\PermitApproval;
 use App\Models\PermitRegistration;
 use App\Models\Region;
 use App\Models\RenewApp;
@@ -30,7 +31,7 @@ class DashboardController extends Controller implements HasMiddleware
         $permitsCount = PermitRegistration::where('registration_step','completed')->get()->count();
         $renewalCount = RenewApp::get()->count();
         $approveCertCount = CertificateApp::where([['status','Approved'],['region',Auth::User()->region_id]])->get()->count();
-        $approvePermitCount = PermitApp::where([['status','vettingApproved'],['region',Auth::User()->region_id]])->get()->count();
+        $approvePermitCount = PermitApproval::where([['decision_id',1]])->get()->count();
 
          $applicationFormType = Applicationform::get();
 

@@ -502,7 +502,7 @@ class FinanceController extends Controller implements HasMiddleware
         $newPaymentRecord = new Payment();
         $newPaymentRecord->amount = $request->amountPaid;
         $newPaymentRecord->createdBy = Auth::User()->id;
-        $newPaymentRecord->formId = $request->formId;
+        $newPaymentRecord->formId = $data->formID;
         $newPaymentRecord->payment_mode = $request->payment_mode;
         $newPaymentRecord->comment = $request->comment;
         $newPaymentRecord->type = 'certificateApplication';
@@ -513,7 +513,7 @@ class FinanceController extends Controller implements HasMiddleware
         if($request->bill_type == 1){
 
         $appBill = new AppBill();
-        $appBill->formId = $request->formId;
+        $appBill->formId = $data->formID;
         $appBill->bill_type = $request->bill_type;
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
@@ -527,7 +527,7 @@ class FinanceController extends Controller implements HasMiddleware
         }elseif($request->bill_type == 2){
 
         $appBill = new PermitBill();
-        $appBill->formId = $request->formId;
+        $appBill->formId = $data->formID;
         $appBill->bill_type = $request->bill_type;
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
