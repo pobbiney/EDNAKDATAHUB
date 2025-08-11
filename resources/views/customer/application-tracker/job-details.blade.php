@@ -1,13 +1,9 @@
-@php 
+@extends('customer.template.layout')
 
-$pageName = "task"; 
 
-$subpageName = "job_tracker";
-
-@endphp
-
-@extends('layouts.app')
-
+@section('title')
+{{__('Track Application')}}
+@endsection
 
 @section('content')
 <div class="content">
@@ -18,11 +14,11 @@ $subpageName = "job_tracker";
             <div class="row">
                 <div class="col">
                     <h3 class="page-title">Track Application</h3>
-                    {{-- <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                         <li class="breadcrumb-item active">Task Manager</li>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Application Status</a></li>
+                         <li class="breadcrumb-item active">Track Job</li>
                         <li class="breadcrumb-item active">Job Tracker</li>
-                    </ul> --}}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -55,7 +51,7 @@ $subpageName = "job_tracker";
                                  <div class="row">
                                     <div class="col-md-12">
                                         <div class="card bg-white">
-                                            <div class="card-header" style="background: rgb(213, 111, 10)">
+                                            <div class="card-header" style="background: rgb(11, 151, 18)">
                                                 <h5 class="card-title" style="color: white">Track Job </h5>
                                             </div>
                                             <div class="card-body">
@@ -153,4 +149,3 @@ $subpageName = "job_tracker";
 
 
 @endsection
-

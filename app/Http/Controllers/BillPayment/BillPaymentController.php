@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\BillPayment;
 
 use App\Http\Controllers\Controller;
+use App\Models\AppBill;
 use App\Models\BillItem;
 use App\Models\Formsale;
+use App\Models\PermitRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Crypt;
@@ -34,11 +36,11 @@ class BillPaymentController  extends Controller implements HasMiddleware
 
         if($operation == "equal"){
  
-            $result = Formsale::where($field,$parameter)->get();
+            $result = PermitRegistration::where($field,$parameter)->get();
     
            }else{
     
-            $result = Formsale::where($field,'LIKE','%'.$parameter.'%')->get();
+            $result = PermitRegistration::where($field,'LIKE','%'.$parameter.'%')->get();
     
          }
 
@@ -47,7 +49,7 @@ class BillPaymentController  extends Controller implements HasMiddleware
 
             $table .= '<table id="example" class="table table-striped table-bordered">';
     
-            $table .= '<thead> <tr> <th>Applicant Name</th> <th>Telephone</th> <th>Form Type</th> <th>Form number</th> <th>Action</th></tr></thead>';
+            $table .= '<thead> <tr> <th>Proponent Name</th> <th>Telephone</th> <th>Town</th> <th>Project Title</th> <th>Applied By</th> <th>Action</th></tr></thead>';
     
             $table .= '<tbody>';
 
@@ -55,10 +57,11 @@ class BillPaymentController  extends Controller implements HasMiddleware
 
                 $table .= '<tr>';
 
-                $table .= '<td><b>'.$item->applicantName.'</b></td>';
-                $table .= '<td>'.$item->tell.'</td>';
-                $table .= '<td>'.$item->formTypeDetails()->formName.'</td>';
-                $table .= '<td>'.$item->formNumber.'</td>';
+                $table .= '<td><b>'.$item->proponent_name.'</b></td>';
+                $table .= '<td>'.$item->contact_number.'</td>';
+                $table .= '<td>'.$item->town.'</td>';
+                $table .= '<td>'.$item->project_title.'</td>';
+                $table .= '<td>'.$item->applied_by.'</td>';
 
                 $table .= '<td><a style="color:white;" target="_blank" href="'.route('billPayment-print-bill',Crypt::encrypt($item->id)).'" class="btn btn-success btn-sm">Generate Bill</a></td>';
 
@@ -80,12 +83,13 @@ class BillPaymentController  extends Controller implements HasMiddleware
     }
 
     public function printBillView ($id){
+        
 
         $decode = Crypt::decrypt($id);
 
-        $formData = Formsale::find($decode);
+        $formData = PermitRegistration::find($decode);
 
-        $billItemsList = BillItem::where([['billType',1],['status','Active']])->get();
+        $billItemsList = AppBill::where('formId',$decode)->get();
 
         return view('bill-payment.printBill',[
             'formData' => $formData,

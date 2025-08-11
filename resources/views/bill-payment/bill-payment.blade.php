@@ -76,10 +76,10 @@ $subpageName = "bill-payments-generate";
                                                                 <td>
                                                                     
                                                                     <select id="field" name="field" class="form-select">
-                                                                        <option value="applicantName">Applicant Name</option>
-                                                                        <option value="tell">Telephone</option>
-                                                                        <option value="formNumber">Form number</option>
-                                                                        <option value="location">Location</option>
+                                                                        <option value="proponent_name">Proponent Name</option>
+                                                                        <option value="contact_number">Telephone</option>
+                                                                        <option value="town">Town</option>
+                                                                        <option value="project_title">Project Title</option>
                                                                     </select>
                                                                    
                                                                 </td>

@@ -13,6 +13,7 @@ use App\Models\Currency;
 use App\Models\Formsale;
 use App\Models\Payment;
 use App\Models\PermitBill;
+use App\Models\PermitRegistration;
 use App\Models\ProjectCategory;
 use App\Models\ProjectSector;
 use App\Models\ProjectType;
@@ -420,12 +421,14 @@ class FinanceController extends Controller implements HasMiddleware
 
         $tableOne = '';
 
-        $data = Formsale::find($request->formsID);
+        $data = PermitRegistration::find($request->formsID);
 
         $billItemList = AppBill::where([['formId',''.$data->id],['status','Active']])->get();
 
-        //$totalPaymentMade = Payment::where('formId',$data->id)->sum('amount');
-        $totalPaymentMade = AppBill::where([['formId',''.$data->id],['status','Active']])->sum('bill_amount');
+        $totalPaymentMade = Payment::where('formId',$data->id)->sum('amount');
+        $totalBill = AppBill::where([['formId',''.$data->id],['status','Active']])->sum('bill_amount');
+
+        $balance = $totalBill - $totalPaymentMade;
 
 
         $tableOne .= '<table class="table table-striped table-bordered">';
@@ -434,17 +437,17 @@ class FinanceController extends Controller implements HasMiddleware
 
         $tableOne .= '<tr>';
 
-        $tableOne .= '<td>Applicant Name : '.$data->applicantName.'</td>';
+        $tableOne .= '<td>Proponent Name : '.$data->proponent_name.'</td>';
 
-        $tableOne .= '<td>Phone number : '.$data->tell.'</td>';
+        $tableOne .= '<td>Contact number : '.$data->contact_number.'</td>';
 
         $tableOne .= '</tr>';
 
         $tableOne .= '<tr>';
 
-        $tableOne .= '<td>Form Number : '.$data->formNumber.'</td>';
+        $tableOne .= '<td>Project Title : '.$data->project_title.'</td>';
 
-        $tableOne .= '<td>Location : '.$data->formNumber.'</td>';
+        $tableOne .= '<td>Town : '.$data->project_title.'</td>';
 
         $tableOne .= '</tr>';
 
@@ -460,9 +463,10 @@ class FinanceController extends Controller implements HasMiddleware
 
         $tableOne .= '<tr>';
 
-        $tableOne .= '<th>Bill Item</th>';
+        $tableOne .= '<th>Total Bill</th>';
 
-        $tableOne .= '<th>Bill Amount</th>';
+        $tableOne .= '<th>Total Payments</th>';
+        $tableOne .= '<th>Balance</th>';
 
         $tableOne .= '</tr>';
 
@@ -470,15 +474,11 @@ class FinanceController extends Controller implements HasMiddleware
 
         $tableOne .= '<tbody>';
 
-        foreach ($billItemList as $key) {
-
-            $tableOne .= '<tr>';
-            $tableOne .= '<td>'.$key->getBillType().'</td>';
-            $tableOne .= '<td> GHS '.number_format($key->bill_amount,2).'</td>';
+        $tableOne .= '<tr>';
+            $tableOne .= '<td> GHS '.number_format($totalBill,2).'</td>';
+            $tableOne .= '<td> GHS '.number_format($totalPaymentMade,2).'</td>';
+            $tableOne .= '<td> GHS '.number_format($balance,2).'</td>';
             $tableOne .= '</tr>';
-            
-        }
-
         $tableOne .= '</tbody>';
 
         $tableOne .= '</table>';
@@ -486,21 +486,6 @@ class FinanceController extends Controller implements HasMiddleware
 
         $tableOne .= '<br>';
 
-        $tableOne .= '<table class="table table-striped table-bordered">';
-
-        $tableOne .= '<tbody>';
-
-        $tableOne .= '<tr>';
-
-        $tableOne .= '<td>Total Payment Made</td>';
-
-        $tableOne .= '<td> GHS '.number_format($totalPaymentMade,2).'</td>';
-
-        $tableOne .= '</tr>';
-
-        $tableOne .= '</tbody>';
-
-        $tableOne .= '</table>';
 
 
         return $tableOne;
@@ -512,7 +497,7 @@ class FinanceController extends Controller implements HasMiddleware
 
         $sendSMS = new SmsController();
 
-        $data = Formsale::find($request->formId);
+        $data = PermitRegistration::find($request->formId);
 
         $newPaymentRecord = new Payment();
         $newPaymentRecord->amount = $request->amountPaid;
@@ -533,7 +518,7 @@ class FinanceController extends Controller implements HasMiddleware
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
         $appBill->createdon = Carbon::now();
-         $appBill->appnumber = $data->formNumber;
+         $appBill->appnumber = $data->formID;
          $appBill->amt_paid = $request->amountPaid;
          $appBill->description = 'certificate_app';
          $appBill->currency = 'GHC';
@@ -547,7 +532,7 @@ class FinanceController extends Controller implements HasMiddleware
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
         $appBill->createdon = Carbon::now();
-         $appBill->appnumber = $data->formNumber;
+         $appBill->appnumber = $data->formID;
          $appBill->amt_paid = $request->amountPaid;
          $appBill->description = 'certificate_app';
          $appBill->currency = 'GHC';
@@ -561,9 +546,9 @@ class FinanceController extends Controller implements HasMiddleware
 
         if($status){
 
-            $message = 'Dear '.$data->applicantName.', we have received your payment of GHC '.number_format($request->amountPaid,2).'. Thank you!';
+            $message = 'Dear '.$data->proponent_name.', we have received your payment of GHC '.number_format($request->amountPaid,2).'. Thank you!';
 
-            $sendSMS->sendSMS($data->tell,$message);
+            $sendSMS->sendSMS($data->contact_number,$message);
 
             return back()->with('message_success','Payment made successfully');
 
@@ -591,11 +576,11 @@ class FinanceController extends Controller implements HasMiddleware
 
         if($operation == "equal"){
  
-            $result = Formsale::where($field,$parameter)->get();
+            $result = PermitRegistration::where($field,$parameter)->get();
     
            }else{
     
-            $result = Formsale::where($field,'LIKE','%'.$parameter.'%')->get();
+            $result = PermitRegistration::where($field,'LIKE','%'.$parameter.'%')->get();
     
          }
 
@@ -604,7 +589,7 @@ class FinanceController extends Controller implements HasMiddleware
 
             $table .= '<table id="example" class="table table-striped table-bordered">';
     
-            $table .= '<thead> <tr> <th>Applicant Name</th> <th>Telephone</th> <th>Form Type</th> <th>Form number</th> <th>Sold On</th> <th>Action</th></tr></thead>';
+            $table .= '<thead> <tr> <th>Proponent Name</th> <th>Telephone</th> <th>Town</th> <th>Project Title</th> <th>Applied By</th> <th>Action</th></tr></thead>';
     
             $table .= '<tbody>';
 
@@ -612,27 +597,29 @@ class FinanceController extends Controller implements HasMiddleware
 
                 $table .= '<tr>';
 
-                $table .= '<td><b>'.$item->applicantName.'</b></td>';
-                $table .= '<td>'.$item->tell.'</td>';
-                $table .= '<td>'.$item->formTypeDetails()->formName.'</td>';
-                $table .= '<td>'.$item->formNumber.'</td>';
-                $table .= '<td>'.$item->createdOn.'</td>';
+                $table .= '<td><b>'.$item->proponent_name.'</b></td>';
+                $table .= '<td>'.$item->contact_number.'</td>';
+                $table .= '<td>'.$item->town.'</td>';
+                $table .= '<td>'.$item->project_title.'</td>';
+                $table .= '<td>'.$item->applied_by.'</td>';
                 
-                if($item->formTypeDetails() != null){
+                // if($item->formTypeDetails() != null){
 
-                    if(number_format($item->formTypeDetails()->amount,2) == number_format($item->amountPaid,2)){
+                //     if(number_format($item->formTypeDetails()->amount,2) == number_format($item->amountPaid,2)){
 
-                        $table .= '<td><a id="makePaymentBtn" data-id="'.$item->id.'" data-bs-toggle="modal" data-bs-target="#basicModal" style="color:white;" class="btn btn-success btn-sm"><i class="fa fa-coins"></i> <small>Make Payment</small></a></td>';
+                //         $table .= '<td><a id="makePaymentBtn" data-id="'.$item->id.'" data-bs-toggle="modal" data-bs-target="#basicModal" style="color:white;" class="btn btn-success btn-sm"><i class="fa fa-coins"></i> <small>Make Payment</small></a></td>';
 
-                    }else{
-                        $table .= '<td></td>';
-                    }
+                //     }else{
+                //         $table .= '<td></td>';
+                //     }
 
-                }else{
+                // }else{
 
-                    $table .= '<td></td>';
+                //     $table .= '<td></td>';
 
-                }
+                // }
+
+                 $table .= '<td><a id="makePaymentBtn" data-id="'.$item->id.'" data-bs-toggle="modal" data-bs-target="#basicModal" style="color:white;" class="btn btn-success btn-sm"><i class="fa fa-coins"></i> <small>Make Payment</small></a></td>';
 
                
 

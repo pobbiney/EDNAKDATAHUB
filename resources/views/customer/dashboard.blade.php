@@ -1,28 +1,26 @@
-@php $pageName = "dashboard"; $subpageName = ""; @endphp
+@extends('customer.template.layout')
 
-@extends('layouts.app')
-
+@section('title')
+    {{__('Dashboard')}}
+@endsection
 
 @section('content')
-<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-2">
+    <div class="content">
+
+				<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-2">
 					<div class="mb-3">
-						<h1 class="mb-1">Welcome, {{auth()->user()->name}}</h1>
+						<h1 class="mb-1">Welcome, {{$user->applicantName}}</h1>
 						<p class="fw-medium">Have a   great day !!!</p>
 					</div>
-					<div class="input-icon-start position-relative mb-3">
+					{{-- <div class="input-icon-start position-relative mb-3">
 						<span class="input-icon-addon fs-16 text-gray-9">
 							<i class="ti ti-calendar"></i>
 						</span>
 						<input type="text" class="form-control date-range bookingrange" placeholder="Search Product">
-					</div>
+					</div> --}}
 				</div>
 
-				<div class="alert bg-orange-transparent alert-dismissible fade show mb-4">
-					<div>
-						<span><i class="ti ti-info-circle fs-14 text-orange me-2"></i>Your Product </span> <span class="text-orange fw-semibold"> Apple Iphone 15 is running Low, </span> already below 5 Pcs., <a href="javascript:void(0);" class="link-orange text-decoration-underline fw-semibold" data-bs-toggle="modal" data-bs-target="#add-stock">Add Stock</a>
-					</div>
-					<button type="button" class="btn-close text-gray-9 fs-14" data-bs-dismiss="alert" aria-label="Close"><i class="ti ti-x"></i></button>
-				</div>
+				
 
 				<div class="row">
 					<div class="col-xl-3 col-sm-6 col-12 d-flex">
@@ -65,6 +63,7 @@
 									<p class="text-white mb-1">Approved Permits</p>
 									<div class="d-inline-flex align-items-center flex-wrap gap-2">
 										<h4 class="text-white">{{ number_format($approvePermitCount) }}</h4>
+									
 									</div>
 								</div>
 							</div>
@@ -80,14 +79,13 @@
 									<p class="text-white mb-1">Expired Permits</p>
 									<div class="d-inline-flex align-items-center flex-wrap gap-2">
 										<h4 class="text-white">--</h4>
-									</div>
+										
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				
 				<div class="row">
 
 					<!-- Profit -->
@@ -167,46 +165,66 @@
 					<!-- /Returns -->
 
 				</div>
+	
+				
+				<div class="row">
 
-				{{-- <div class="row">
-					<div class="col-lg-4 col-sm-12 col-12 d-flex">
+
+                    <!-- Recent Transactions -->
+					<div class="col-xl-8 col-sm-12 col-12 d-flex">
 						<div class="card flex-fill">
-							<div class="card-header pb-0 d-flex justify-content-between align-items-center">
-								<h4 class="card-title mb-0">Turn Around Time</h4>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive dataview">
-									<table class="table datatable ">
-										<thead>
-											<tr>
-												<th>Type</th>
-												<th>Total</th>
-												<th>TRT</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach ($applicationFormType as $item)
-												<tr>
-												<td align="center">{{ $item->formName }}</td>
-												<td class="productimgname" align="center">
-													
-													<a href="#">{{ number_format($item->getFormCounts()) }}</a>
-												</td>
-												<td align="center">0.2 Day</td>
-											</tr>
-											@endforeach
-											
-										</tbody>
-									</table>
+							<div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-3">
+								<div class="d-inline-flex align-items-center">
+									<span class="title-icon bg-soft-orange fs-16 me-2"><i class="ti ti-flag"></i></span>
+									<h5 class="card-title mb-0">Recent Transactions</h5>
 								</div>
+								<a href="#" class="fs-13 fw-medium text-decoration-underline">View All</a>
+							</div>
+							<div class="card-body p-0">
+								<ul class="nav nav-tabs nav-justified transaction-tab">
+									<li class="nav-item"><a class="nav-link active" href="#sale" data-bs-toggle="tab">Permit</a></li>
+									<li class="nav-item"><a class="nav-link" href="#purchase-transaction" data-bs-toggle="tab">---</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane show active" id="sale">
+										<div class="table-responsive">
+											<table class="table table-borderless custom-table">
+												<thead class="thead-light">
+													<tr>
+														<th>Date</th>
+														<th>Project Title</th>
+														<th>Contact Person</th>
+														<th>stage</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach($latestPermitData as $item)
+													<tr>
+														<td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d,Y') }}</td>
+														<td>{{$item->project_title}}</td>
+														<td>{{$item->contact_person}}</td>
+														<td><span class="badge badge-success badge-xs d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>{{$item->registration_step}}</span></td>
+													</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="purchase-transaction">
+										<div class="table-responsive">
+											
+										</div>
+									</div>
+									
+								</div>						
 							</div>
 						</div>
 					</div>
-				</div> --}}
+					<!-- /Recent Transactions -->
 
+				
 
-@endsection
-
-@section('scripts')
-    
+				</div>
+				
+			</div>
 @endsection
