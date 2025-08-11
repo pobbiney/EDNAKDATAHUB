@@ -518,7 +518,7 @@ class FinanceController extends Controller implements HasMiddleware
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
         $appBill->createdon = Carbon::now();
-         $appBill->appnumber = $request->formId;
+         $appBill->appnumber = $data->formID;
          $appBill->amt_paid = $request->amountPaid;
          $appBill->description = 'certificate_app';
          $appBill->currency = 'GHC';
@@ -532,7 +532,7 @@ class FinanceController extends Controller implements HasMiddleware
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
         $appBill->createdon = Carbon::now();
-         $appBill->appnumber = $request->formId;
+         $appBill->appnumber = $data->formID;
          $appBill->amt_paid = $request->amountPaid;
          $appBill->description = 'certificate_app';
          $appBill->currency = 'GHC';
