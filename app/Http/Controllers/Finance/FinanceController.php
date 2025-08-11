@@ -497,7 +497,7 @@ class FinanceController extends Controller implements HasMiddleware
 
         $sendSMS = new SmsController();
 
-        $data = Formsale::find($request->formId);
+        $data = PermitRegistration::find($request->formId);
 
         $newPaymentRecord = new Payment();
         $newPaymentRecord->amount = $request->amountPaid;
@@ -518,7 +518,7 @@ class FinanceController extends Controller implements HasMiddleware
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
         $appBill->createdon = Carbon::now();
-         $appBill->appnumber = $data->formNumber;
+         $appBill->appnumber = $request->formId;
          $appBill->amt_paid = $request->amountPaid;
          $appBill->description = 'certificate_app';
          $appBill->currency = 'GHC';
@@ -532,7 +532,7 @@ class FinanceController extends Controller implements HasMiddleware
         $appBill->bill_amount = $request->amountPaid;
         $appBill->createdBy = Auth::User()->id;
         $appBill->createdon = Carbon::now();
-         $appBill->appnumber = $data->formNumber;
+         $appBill->appnumber = $request->formId;
          $appBill->amt_paid = $request->amountPaid;
          $appBill->description = 'certificate_app';
          $appBill->currency = 'GHC';
@@ -546,9 +546,9 @@ class FinanceController extends Controller implements HasMiddleware
 
         if($status){
 
-            $message = 'Dear '.$data->applicantName.', we have received your payment of GHC '.number_format($request->amountPaid,2).'. Thank you!';
+            $message = 'Dear '.$data->proponent_name.', we have received your payment of GHC '.number_format($request->amountPaid,2).'. Thank you!';
 
-            $sendSMS->sendSMS($data->tell,$message);
+            $sendSMS->sendSMS($data->contact_number,$message);
 
             return back()->with('message_success','Payment made successfully');
 
