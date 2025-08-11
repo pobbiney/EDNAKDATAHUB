@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers\Task;
 
-use App\Http\Controllers\Controller;
-use App\Models\AuthorizationApp;
-use App\Models\CertificateApp;
-use App\Models\Payment;
-use App\Models\PermitApp;
-use App\Models\RenewApp;
-use App\Models\Staff;
-use App\Models\Task;
-use App\Models\Tracker;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Crypt;
-use App\Http\Controllers\Sms\SmsController;
+use App\Models\Task;
+use App\Models\Staff;
+use App\Models\Region;
 use App\Models\AppBill;
+use App\Models\Payment;
+use App\Models\Tracker;
 use App\Models\BillItem;
 use App\Models\Formsale;
-use App\Models\PermitRegistration;
-use App\Models\Region;
-use App\Models\ScreenDecision;
+use App\Models\RenewApp;
+use App\Models\PermitApp;
 use App\Models\Screening;
+use Illuminate\Http\Request;
+use App\Models\Drawingupload;
+use App\Models\CertificateApp;
+use App\Models\ScreenDecision;
+use App\Models\AuthorizationApp;
+use App\Models\PermitRegistration;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Controllers\Sms\SmsController;
 
 class TaskMangerController extends Controller
 {
@@ -545,9 +546,11 @@ Thank you' ;
        public function getApplicationScreeningView($id){
           $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::find($decodeID);
+         $listscreen = Screening::where('formId',$decodeID)->first();
          $list = ScreenDecision::all();
+          $documents = Drawingupload::where('appId',$project->id)->get();
         return view('task.application-screening',[
-            'project' => $project,'list'=>$list
+            'project' => $project,'list'=>$list,'listscreen'=>$listscreen,'documents' => $documents
         ]);
            
        } 

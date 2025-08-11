@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class ApplicationController extends Controller
 {
+
     public function trackApplicationView(){
          if (!Session::has('formsale_id')) {
                 return redirect()->route('customer-login');
