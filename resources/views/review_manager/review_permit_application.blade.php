@@ -640,8 +640,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="text" name="permit_id" value="{{ $project->formID }}"/>
-                                                <input type="text" name="region_id" value="{{ $project->region }}"/>
+                                                <input type="hidden" name="permit_id" value="{{ $project->formID }}"/>
+                                                <input type="hidden" name="region_id" value="{{ $project->region }}"/>
                                                 
                                             </form>
                                         </div>

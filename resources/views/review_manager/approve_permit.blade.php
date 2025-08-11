@@ -75,7 +75,7 @@ $subpageName = "review_permit";
                                     <td>{{ $list->town ?? 'N/A'}}</td>
                                    
                                     <td>
-                                         <a   href="{{ route('review_permit_application',Crypt::encrypt($list->formID)) }}" target="_"    class="btn btn-primary" style="color: white">  Review</a>
+                                         <a   href="{{ route('approve_application_permit_details',Crypt::encrypt($list->formID)) }}" target="_"    class="btn btn-primary" style="color: white">  Permit Approval</a>
                                      
                                     </td>
                                    </tr>

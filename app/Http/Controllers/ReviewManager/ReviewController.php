@@ -568,115 +568,83 @@ class ReviewController extends Controller
 
     public function getApprovePermitView(){
 
-    $data = PermitApp::where('status', 'Vet Approved')
+    $tasks = PermitRegistration::where('status', 'reviewed')
         ->where('region', Auth::user()->region_id)
      ->get();
-     return view('review_manager.approve_permit',['data'=>$data]);
+     return view('review_manager.approve_permit',['tasks'=>$tasks]);
 
     }
 
     public function getApprovePermitDetailsView($id){
-        $decodeId = Crypt::decrypt($id);
-        $data =  PermitApp::find($decodeId);
 
-        $floor = Floortable::where('applicationId', $decodeId)
-        ->where('applicationType' ,'permitApplication')
-        ->get();
-        $drawings = Drawingupload::where('appId', $decodeId)
-        ->where('uploadType' ,'permitApplication')
-        ->get();
- 
-      $means = Appmeansofescape::with('meansofescape') // Eager load the relationship
-    ->where('applicationId', $decodeId)
-  
-    ->whereHas('meansofescape', function($query) {
-        $query->where('status', 'Active'); // Only where Meansofescape is active
-    })
-    ->get();
-
-
-    $fire = Appfire::with('appfire') // Eager load the relationship
-    ->where('applicationId', $decodeId)
-  
-    ->whereHas('appfire', function($query) {
-        $query->where('status', 'Active'); // Only where Meansofescape is active
-    })
-    ->get();
-    $alram = Appalarm::with('appalarm') // Eager load the relationship
-    ->where('applicationId', $decodeId)
-  
-    ->whereHas('appalarm', function($query) {
-        $query->where('status', 'Active'); // Only where Meansofescape is active
-    })
-    ->get();
-
-    $access = Appaccessroute::with('appaccess') // Eager load the relationship
-    ->where('applicationId', $decodeId)
-  
-    ->whereHas('appaccess', function($query) {
-        $query->where('status', 'Active'); // Only where Meansofescape is active
-    })
-    ->get();
-
-    $billItems = BillItem::where('billType', 1)
-            ->where('status', 'Active')
-            ->get();
-        return view('review_manager.approve_application_permit_details',['data'=>$data,'floor'=>$floor,'drawings'=>$drawings,
-        'means'=>$means,'fire'=>$fire,'alarm'=>$alram,'access'=>$access,'billItems'=>$billItems
-    ]);
-
-
+        $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::where('formID',$decodeID)->first();
+        $listscreen = Screening::where('formId',$decodeID)->first();
+        $list = ScreenDecision::all();
+        $reviewapp = PermitReview::where('formID',$decodeID)->first();
+       return view('review_manager.approve_application_permit_details',[
+           'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'reviewapp'=>$reviewapp
+       ]);
     }
 
     //Approving Permit
     public function addApprovePermit(Request $request)
     {
      
-        $application = PermitApp::findOrFail($request->application_ID);
-        
-        // Update application status based on action
-        if ($request->action === 'approve') {
-            $application->status = 'Approved';
-            $application->save();
-
-            $vet = new Permitapproval();
-            $vet->appId = $request->application_ID;
-        
-            $vet->createdOn = Carbon::now();
-            $vet->createdBy = Auth::user()->id; 
-            $vet->status = "Approved";
-            $vet->comment= $request->comment;
-            $vet->reason= $request->reason;
-            $vet->region_id= $request->region;
-            $vet->save();
-
-            $track = new Tracker();
-            $track->formID = $request->application_ID;
-            $track->activity = "8";
-            $track->createdOn = Carbon::now();
-            $track->createdBy = Auth::user()->id; 
-            $track->activity_type = "2";
-            $track->regionId= $request->region;
-            $track->save();
-            $message = 'Application approved successfully!';
-        } else {
-            $application->status = 'Approval Declined';
-            $application->save(); 
-
-            $track = new Tracker();
-            $track->formID = $request->application_ID;
-            $track->activity = "15";
-            $track->createdOn = Carbon::now();
-            $track->createdBy = Auth::user()->id; 
-            $track->activity_type = "2";
-            $track->regionId= $request->region;
-            $track->save();
+        $request->validate([
+            'evaluation' => 'required',
+            'decision_id' => 'required',
+            'recommendation' => 'required',
+           
             
-            $message = 'Application declined.';
+        ]);
+    
+        $insertApp = new Permitapproval();
+        $insertApp->formId = $request->permit_id;
+        $insertApp->application_type = "permit";
+        $insertApp->evaluation = $request->evaluation;
+        $insertApp->decision_id = $request->decision_id;
+        $insertApp->recommendation = $request->recommendation;
+        $insertApp->region_id = $request->region_id;
+        $insertApp->created_by = Auth::user()->id; 
+         
+        $insertApp->save();
+        if($request->decision_id == 1){
+        $track = new Tracker();
+        $track->formID = $request->permit_id;
+        $track->activity = "8";
+        $track->createdOn =Carbon::now();
+        $track->createdBy = Auth::user()->id; 
+        $track->activity_type = "1";
+        $track->regionId= $request->region_id;
+        $track->save();
         }
-        
-
-         return redirect()->back()->with('message', $message);
+        else{
+        $track = new Tracker();
+        $track->formID = $request->permit_id;
+        $track->activity = "15";
+        $track->createdOn =Carbon::now();
+        $track->createdBy = Auth::user()->id; 
+        $track->activity_type = "1";
+        $track->regionId= $request->region_id;
+        $track->save();
+        }
+    
+         PermitRegistration::where('formID', $request->permit_id)
+                ->update([
+                    'status' => "approved"
+                ]);
+    
+        Task::where('application_id', $request->permit_id)
+        ->update([
+            'status' => "approved"
+        ]);
+    
+      
+    
+      
+       return $insertApp? back()->with('message_success','Application  Approved Successfully'): back()->with('message_error','Something went wrong, please try again.');
+    
         
     }
 

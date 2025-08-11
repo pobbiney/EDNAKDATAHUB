@@ -1,6 +1,6 @@
 @php 
-$pageName = "review"; 
-$subpageName = "review_permit";
+$pageName = "issue"; 
+$subpageName = "print_cert";
 @endphp
 
 @extends('layouts.app')
@@ -16,9 +16,9 @@ $subpageName = "review_permit";
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-divide mb-0">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="#"> Review Manager </a></li>
+                        <li class="breadcrumb-item"><a href="#"> Issuance Manager </a></li>
                          
-                        <li class="breadcrumb-item active" aria-current="page">Review Permit </li>
+                        <li class="breadcrumb-item active" aria-current="page">Print Permit Certificate</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@ $subpageName = "review_permit";
     </div>
         <!-- /product list -->
         @if (session('message_success'))
-        <p class="alert alert-success" align="center" style="color:green">{{session('message_success')}}</p>
+        <p class="alert alert-success" align="center" style="color:green"><b>{{session('message_success')}}</b></p>
         @endif
 
         @if (session('message_error'))
@@ -35,7 +35,7 @@ $subpageName = "review_permit";
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Review Permit </h3>
+                    <h3>Print  Permit Certificate</h3>
             </div> 
         </div>
         <div class="card-body">
@@ -51,12 +51,13 @@ $subpageName = "review_permit";
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Proponent Name</th>
+                                        <th>Applicant Name</th>
                                         <th>Project Title</th>
                                         <th>Telephone </th>
-                                        <th>Email</th>
+                                        <th>Plot No</th>
                                         <th>Location</th>
-                                        
+                                        <th>City</th>
+                                      
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -64,26 +65,24 @@ $subpageName = "review_permit";
                                     @php
                                     $i=1;
                                   @endphp
-                                  @if($tasks)
-                                  @foreach($tasks as $list)
-                                   <tr>
+                                    @foreach($data as  $app)
+                                    
+                                <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $list->proponent_name ?? 'N/A' }}</td>
-                                    <td>{{ $list->project_title ?? 'N/A' }}</td>
-                                    <td>{{ $list->contact_number ??  'N/A'}}</td>
-                                    <td>{{ $list->email ??  'N/A'}}</td>
-                                    <td>{{ $list->town ?? 'N/A'}}</td>
-                                   
-                                    <td>
-                                         <a   href="{{ route('review_permit_application',Crypt::encrypt($list->formID)) }}" target="_"    class="btn btn-primary" style="color: white">  Review</a>
-                                     
+                                    <td>{{ $app->proponent_name }}</td>
+                                    <td>{{ $app->project_title }}</td>
+                                    <td>{{ $app->contact_number }}</td>
+                                    <td>{{ $app->plot_number }}</td>
+                                    <td>{{ $app->address }}</td>
+                                    <td>{{ $app->city }}</td>
+                                    <td >
+                                        <a href="{{route('print_application_cert_details',Crypt::encrypt($app->formID))}} " target="_" class="btn btn-sm btn-success" style="color: white"><i class="fa fa-eye"></i> Preview Certificate</a>          
                                     </td>
-                                   </tr>
-                                   @php
-                                   $i++;
-                                 @endphp
-                                 @endforeach
-                                 @endif
+                                </tr>
+                                        @php
+                                        $i++;
+                                      @endphp
+                                    @endforeach
                                 </tbody>
                             </table>          
                         </div>
@@ -94,9 +93,26 @@ $subpageName = "review_permit";
         </div>
     </div>
 </div>
- 
+@include('issuance_manager.issue-cert-modal') 
 @endsection
 
 @section('scripts')
- 
+<script>
+    $(document).ready(function(){
+    $('body').on('click', '#showmodal', function(){
+    var userUrl = $(this).data('url');
+    $.get(userUrl, function(data){
+    $('#standard-modal').modal('show');
+    $('#certID').val(data.formID);
+    $('#companyName').text(data.project_title);
+    $('#applicantName').text(data.proponent_name);
+    $('#telephone').text(data.contact_number);
+    $('#cityName').text(data.city);
+    $('#regionName').val(data.region);
+
+   
+    })
+    });
+    });
+</script>
 @endsection

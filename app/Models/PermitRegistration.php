@@ -12,7 +12,7 @@ class PermitRegistration extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'application_id'); 
+        return $this->hasMany(Task::class, 'application_id', 'formID'); 
     }
 
  
@@ -36,7 +36,10 @@ class PermitRegistration extends Model
         return $this->belongsTo(ProjectSector::class, 'sector_id', 'id');
     }
  
- 
+    public function issuance()
+    {
+        return $this->hasOne(CertIssuance::class, 'app_id', 'formID');
+    }
  
  
 }

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Appmeansofescape;
 use App\Models\CertificateApp;
 use App\Models\CertIssuance;
+use App\Models\Formsale;
 use App\Models\PermitApp;
+use App\Models\PermitRegistration;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
@@ -17,8 +19,8 @@ class IssuanceController extends Controller
 {
    public function getPrintCertificateView(){
 
-   $data = CertificateApp::where('certificate_app.status', 'Approved')
-        ->where('certificate_app.region', Auth::user()->region_id)
+   $data = PermitRegistration::where('status', 'approved')
+        ->where('region', Auth::user()->region_id)
       
         ->get();
     return view('issuance_manager.Print-Certificate',['data'=>$data]);
@@ -27,51 +29,14 @@ class IssuanceController extends Controller
    public function getPrintApplicationCertView($id){
 
     $decodeId = Crypt::decrypt($id); // This is certificate_app.id
-    $data = CertificateApp::find($decodeId);
-
-    
-    if (!$data) {
-        abort(404, 'Certificate Application not found.');
-    }
-
-      $formId = $data->formId; // get the related formSales.id
- 
-
-   $payment = DB::table('payment as p')
-    ->select('p.*', 'u.user_fullname', 'f.formNumber')
-    ->leftJoin('formsales as f', 'f.id', '=', 'p.formId')
-    ->leftJoin('usr_users as u', 'u.id', '=', 'p.createdBy')
-    ->where('p.formId', $formId)
-    ->first();
-
-   $results = DB::table('appmeansofescape as ae')
-    ->join('meansofescape as me', 'me.id', '=', 'ae.ItemId')
-    ->select('ae.*', 'me.name')
-    ->where('ae.applicationId', $decodeId)
-    ->where('ae.status', '!=', 'No') // Exclude status = 'No'
-    ->get();
-
-    $fire = DB::table('appfire as ae')
-    ->join('firefighting as me', 'me.id', '=', 'ae.ItemId')
-    ->select('ae.*', 'me.name')
-    ->where('ae.applicationId', $decodeId)
-    ->where('ae.status', '!=', 'No') // Exclude status = 'No'
-    ->get();
-
-     $alarm = DB::table('appalarm as ae')
-    ->join('alarmandwarning as me', 'me.id', '=', 'ae.ItemId')
-    ->select('ae.*', 'me.name')
-    ->where('ae.applicationId', $decodeId)
-    ->where('ae.status', '!=', 'No') // Exclude status = 'No'
-    ->get();
-
-
-     return view('issuance_manager.print_application_cert_details',['data'=>$data,'payment'=>$payment,'results'=>$results,'fire'=>$fire,'alarm'=>$alarm]);
+    $data = PermitRegistration::where('formID',$decodeId)->first();
+     $list = Formsale::where('id', $decodeId)->first();
+     return view('issuance_manager.print_application_cert_details',['data'=>$data,'list'=>$list]);
 
    }
 
    public function getIssueCertificateView(){
-    $data = CertificateApp::with('issuance')->where('status', 'Approved')
+    $data = PermitRegistration::with('issuance')->where('status', 'approved')
 
     ->where('region', Auth::user()->region_id)
  ->get();
@@ -105,7 +70,8 @@ class IssuanceController extends Controller
      
       $track->save();
 
-       return $track? back()->with('message','Certificate issued Successfully'): back()->with('message_error','Something went wrong, please try again.');
+    
+       return $track? back()->with('message_success','Certificate issued Successfully'): back()->with('message_error','Something went wrong, please try again.');
        
    }
 
