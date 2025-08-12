@@ -150,4 +150,9 @@ class Formsale extends Model
 	{
 		return $this->hasOne(PermitRegistration::class, 'formID');
 	}
+
+	public function currentStage()
+	{
+		return $this->hasOne(Tracker::class, 'formID')->latestOfMany();
+	}
 }

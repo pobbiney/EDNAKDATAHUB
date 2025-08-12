@@ -304,6 +304,7 @@
 									<ul>
 										<li><a href="{{route('customer-application')}}">My Applications</a></li>
 										<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
+										<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
 									</ul>
 								</li>
                                
@@ -342,6 +343,7 @@
 									<ul>
 										<li><a href="{{route('customer-application')}}">My Applications</a></li>
 										<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
+										<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
 									</ul>
 								</li>
                         
@@ -351,6 +353,7 @@
 									<ul>
 										<li><a href="{{route('customer-new-ticket')}}">New Ticket</a></li>
 										<li><a href="{{route('customer-enquiries')}}">Pending & Closed</a></li>
+										
 									</ul>
 								</li>
 						<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User Guide </span></a></li>

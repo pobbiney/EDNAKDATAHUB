@@ -542,6 +542,9 @@ Route::post('/customer/registration/edit-permit-registration-form-declaration-pr
 Route::get('customerFindRegionData',[RegController::class,'customerFindRegionData'])->name('customerFindRegionData');
 Route::get('customerFindCategoryData',[RegController::class,'customerFindCategoryData'])->name('customerFindCategoryData');
 Route::get('customerFindProjectTypeyData',[RegController::class,'customerFindProjectTypeyData'])->name('customerFindProjectTypeyData');
+Route::get('customer-buy-form',[ApplicationController::class,'customerBuyForm'])->name('customer-buy-form');
+Route::post('customer-finance-setup-sell-forms-process',[ApplicationController::class,'sellFormsProcess'])->name('customer-finance-setup-sell-forms-process');
+
 
 
 

@@ -40,6 +40,12 @@ class PermitRegistration extends Model
     {
         return $this->hasOne(CertIssuance::class, 'app_id', 'formID');
     }
+
+    public function formsale(){
+        return $this->belongsTo(Formsale::class, 'formID');
+    }
+
+ 
  
  
 }

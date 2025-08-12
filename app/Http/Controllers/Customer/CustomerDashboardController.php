@@ -32,7 +32,7 @@ class CustomerDashboardController extends Controller
             $approveCertCount = CertificateApp::where([['status','Approved'],['tel',$user->tell]])->get()->count();
             $approvePermitCount = PermitRegistration::where([['status','vettingApproved'],['contact_number',$user->tell]])->get()->count();
             $latestCertificationData = CertificateApp::where([['tel',$user->tell]])->orderBy('id','DESC')->get()->take(3);
-            $latestPermitData = PermitRegistration::where([['contact_number',$user->tell]])->orderBy('id','DESC')->get()->take(5);
+            $latestPermitData = PermitRegistration::with(['formsale.currentStage'])->where([['contact_number',$user->tell]])->orderBy('id','DESC')->get()->take(5);
             $latestRenewalData = RenewApp::orderBy('id','DESC')->get()->take(3);
 
             return view('customer.dashboard', compact('user', 'sales', 'totalFormSold', 'certificateCount', 'permitsCount','renewalCount', 'approveCertCount', 'approvePermitCount','latestCertificationData','latestPermitData','latestRenewalData'));
