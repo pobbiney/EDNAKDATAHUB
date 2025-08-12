@@ -52,7 +52,7 @@ $subpageName = "sell_forms";
                                                            <div class="mb-3">
                                                                 <label >Applicant</label>
                                                                 
-                                                                    <input type="text" class="form-control" name="applicant_name" placeholder="Applicant Name" value="{{auth()->user()->name ?? ''}}" readonly>
+                                                                    <input type="text" class="form-control" name="applicant_name" placeholder="Applicant Name" value="{{ old('applicant_name') }}">
                                                                     @error('applicant_name') <small style="color:red"> {{ $message}}</small> @enderror
                                                                 
                                                             </div>
