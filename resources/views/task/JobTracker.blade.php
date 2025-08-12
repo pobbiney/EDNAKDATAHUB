@@ -84,9 +84,9 @@ $subpageName = "job_tracker";
                                                                                             <td>
                                                                                                 
                                                                                                 <select id="field" name="field" class="form-select">
-                                                                                                    <option value="applicantName" >Name of Proponent</option>
-                                                                                                    <option value = "tell">Telephone Number</option>
-                                                                                                    <option value = "serialNumber"> Serial Number</option>
+                                                                                                    <option value="proponent_name" >Name of Proponent</option>
+                                                                                                    <option value = "contact_number">Telephone Number</option>
+                                                                                                    <option value = "project_title"> Project Title</option>
                                                                                                     
                                                                                                 </select>
                                                                                             

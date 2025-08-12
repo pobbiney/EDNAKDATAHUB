@@ -106,8 +106,7 @@ class ApplicationController extends Controller
             }
             $formsale= Formsale::find(Session::get('formsale_id'));
             
-            $tasks = Formsale::with('permit_registrations')->where('tell',$formsale->tell)->get();
-
+            $tasks = PermitRegistration::where('contact_number',$formsale->tell)->get();
 
             return view('customer.application-tracker.index',compact('tasks'));
     }
@@ -115,8 +114,9 @@ class ApplicationController extends Controller
       public function jobDetails($id)
         {
                 $decodeId = Crypt::decrypt($id);
-            
-                $datas = Formsale::with(['permit_registrations'])->findOrFail($decodeId);
+                $permit_reg = PermitRegistration::findOrFail($decodeId);
+                $formID = $permit_reg->formID;
+                $datas = Formsale::with(['permit_registrations'])->findOrFail($formID);
                 
                 return view('customer.application-tracker.job-details', [
                     'datas' => $datas,

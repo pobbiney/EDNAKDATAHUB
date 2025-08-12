@@ -483,11 +483,10 @@ Thank you' ;
         $operation = $request->operator;
         $parameter = $request->search_parameter;
 
-    $table = "";
+        $table = "";
 
     // Base query with join
-    $query = Formsale::leftJoin('permit_registrations', 'formsales.id', '=', 'permit_registrations.formID')
-        ->select('formsales.*', 'permit_registrations.status as permit_status', 'permit_registrations.id as permit_id');
+    $query = PermitRegistration::query();
 
     // Apply search condition
     if ($operation == "equal") {
@@ -507,10 +506,10 @@ Thank you' ;
             foreach ($result as $item) {
               
                 $table .= '<tr>';
-                $table .= '<td>'.$item->permit_registrations->proponent_name.'</td>';
-                $table .= '<td>'.$item->tell.' </td>';
-                $table .= '<td>'.$item->permit_registrations->project_title.'</td>';
-                $table .= '<td>' . ($item->permit_status ?? 'N/A') . '  </td>';
+                $table .= '<td>'.$item->proponent_name.'</td>';
+                $table .= '<td>'.$item->contact_number.' </td>';
+                $table .= '<td>'.$item->project_title.'</td>';
+                $table .= '<td>' . ($item->registration_step ?? 'N/A') . '  </td>';
                 $table .= '<td><a href="'.route('view-job-tracker',Crypt::encrypt($item->id)).'" target="_"   class="btn btn-sm btn-primary" style="color:white"> View</a></td>';
                 $table .= '</tr>';
              }
@@ -534,8 +533,9 @@ Thank you' ;
         {
                 $decodeId = Crypt::decrypt($id);
             
-                // Eager load the relationships
-                $datas = Formsale::with(['permit_registrations'])->findOrFail($decodeId);
+                $permit_reg = PermitRegistration::findOrFail($decodeId);
+                $formID = $permit_reg->formID;
+                $datas = Formsale::with(['permit_registrations'])->findOrFail($formID);
                 
                 return view('task.view-job-tracker', [
                     'datas' => $datas,
