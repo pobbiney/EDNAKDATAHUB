@@ -307,7 +307,7 @@
 										<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
 									</ul>
 								</li>
-                               
+                               <li><a href="{{route('customer-finance')}}"><i data-feather="credit-card"></i><span>Finance</span></a></li>
                                 <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
 								 <li class="submenu">
 									<a href="javascript:void(0);"><i class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span class="menu-arrow"></span></a>
@@ -345,8 +345,11 @@
 										<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
 										<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
 									</ul>
-								</li>
-                        
+							</li>
+
+						
+
+                         <li><a href="{{route('customer-finance')}}"><i data-feather="credit-card"></i><span>Finance</span></a></li>
                         <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
 						 <li class="submenu">
 									<a href="javascript:void(0);"><i class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span class="menu-arrow"></span></a>

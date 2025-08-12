@@ -16,6 +16,7 @@ use App\Http\Controllers\Equipment\EquipmentControoller;
 use App\Http\Controllers\ReviewManager\ReviewController;
 use App\Http\Controllers\RenewalManager\RenewalController;
 use App\Http\Controllers\BillPayment\BillPaymentController;
+use App\Http\Controllers\Customer\CustomerFinanceController;
 use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
 use App\Http\Controllers\Registration\RegistrationController;
@@ -544,6 +545,11 @@ Route::get('customerFindCategoryData',[RegController::class,'customerFindCategor
 Route::get('customerFindProjectTypeyData',[RegController::class,'customerFindProjectTypeyData'])->name('customerFindProjectTypeyData');
 Route::get('customer-buy-form',[ApplicationController::class,'customerBuyForm'])->name('customer-buy-form');
 Route::post('customer-finance-setup-sell-forms-process',[ApplicationController::class,'sellFormsProcess'])->name('customer-finance-setup-sell-forms-process');
+
+Route::get('customer-finance',[CustomerFinanceController::class,'financeView'])->name('customer-finance');
+Route::get('customer-bill-details/{id}',[CustomerFinanceController::class,'billDetailsView'])->name('customer-bill-details');
+Route::get('customer-payment-details/{id}',[CustomerFinanceController::class,'paymentDetailsView'])->name('customer-payment-details');
+Route::get('customer-download-receipt/{id}',[CustomerFinanceController::class,'downloadReceiptView'])->name('customer-download-receipt');
 
 
 

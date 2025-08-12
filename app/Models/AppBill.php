@@ -49,4 +49,18 @@ class AppBill extends Model
 
 		
 	}
+
+		public function getBillDescription (){
+
+		 if(BillType::where('id',$this->bill_type)->get()->count() > 0){
+
+			return BillType::find($this->bill_type)->description;
+
+		 }else{
+
+			return "N/A";
+		 }
+
+		 
+	}
 }
