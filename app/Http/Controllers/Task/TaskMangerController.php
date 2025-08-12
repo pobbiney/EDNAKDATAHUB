@@ -615,8 +615,11 @@ Thank you' ;
           $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::where('formID',$decodeID)->first();
          $list = ScreenDecision::all();
+         $documents = Drawingupload::where('appId',$project->id)->get();
+          $listscreen = Screening::where('formId',$decodeID)->first();
+
         return view('task.application-screening',[
-            'project' => $project,'list'=>$list
+            'project' => $project,'list'=>$list,'documents'=>$documents,'listscreen'=>$listscreen
         ]);
            
        } 
