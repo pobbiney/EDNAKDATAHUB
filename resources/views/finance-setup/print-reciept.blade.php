@@ -70,8 +70,8 @@
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td><strong>REF. NUMBER:</strong></td>
-        <td>{{ base64_encode($data->id) }}</td>
+        <td><strong>PIN:</strong></td>
+        <td>{{ $data->pin }}</td>
         <td>&nbsp;</td>
         <td></td>
     </tr>

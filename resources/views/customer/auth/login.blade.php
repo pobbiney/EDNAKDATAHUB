@@ -62,7 +62,7 @@
                                
                                 <div class="login-userheading">
                                     <h3>Sign In</h3>
-                                    <h4>Access the EPA customer portal using your Serial Number and Telephone Number.</h4>
+                                    <h4>Access the EPA customer portal using your Serial Number and PIN.</h4>
                                 </div>
                                 <div class="mb-3">
                                         <label class="form-label">Serial Number</label>
@@ -79,9 +79,9 @@
                                              @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Telephone</label>
+                                        <label class="form-label">PIN</label>
                                         <div class="pass-group">
-                                            <input type="password" class="pass-input form-control" name="password" placeholder="Enter the telephone number on the receipt">
+                                            <input type="password" class="pass-input form-control" name="password" placeholder="Enter the PIN on the receipt">
                                             <span class="ti toggle-password ti-eye-off text-gray-9"></span>
                                              @error('password')
                                               <small style="color:red;">{{$message}}</small>
