@@ -660,9 +660,7 @@ class CertificateController extends Controller
         {
             $userID = Auth::id(); // Assuming the logged-in user
     
-            $tasks = Task::with(['permitApp', 'assignees'])
-            ->where('assignee', $userID)
-             
+            $tasks = Task::where('assignee', $userID)
             ->where('taskType', 'permit')
             
             ->get();
