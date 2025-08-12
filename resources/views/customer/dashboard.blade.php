@@ -201,7 +201,7 @@
 													<tr>
 														<td>{{$item->project_title}}</td>
 														<td>{{$item->address}}</td>
-														<td><span class="badge badge-success badge-xs d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>{{$item->formsale->currentStage->activityname->activity}}</span></td>
+														<td><span class="badge badge-success badge-xs d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>{{$item->formsale->currentStage->activityname->activity ?? 'N/A'}}</span></td>
 													</tr>
 													@endforeach
 												</tbody>
