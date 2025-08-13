@@ -66,11 +66,11 @@
                                   @foreach($tasks as $item)
                                    <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $item->permit_registrations->contact_person ?? 'N/A' }}</td>
-                                    <td>{{ $item->permit_registrations->proponent_name ?? 'N/A' }}</td>
-                                    <td>{{ $item->permit_registrations->project_title ?? 'N/A' }}</td>
-                                    <td>{{ $item->tell ??  'N/A'}}</td>
-                                    <td>{{ $item->permit_status ?? 'N/A'}}</td>
+                                    <td>{{ $item->contact_person ?? 'N/A' }}</td>
+                                    <td>{{ $item->proponent_name ?? 'N/A' }}</td>
+                                    <td>{{ $item->project_title ?? 'N/A' }}</td>
+                                    <td>{{ $item->contact_number ??  'N/A'}}</td>
+                                    <td>{{ $item->registration_step ?? 'N/A'}}</td>
                                     <td>
                                         <a   href="{{ route('customer-job-details',Crypt::encrypt($item->id)) }}" target="_"    class="btn btn-success" style="color: white"> View Details</a>
                                         

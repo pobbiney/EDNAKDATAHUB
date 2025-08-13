@@ -21,16 +21,16 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $formSale = Formsale::where('formNumber', $request->formNumber)->first();
-         if ($formSale && $request->password === $formSale->tell) {
+       $formSale = Formsale::where('formNumber', $request->formNumber)->first();
+         if ($formSale && sha1(base64_decode($request->password)) === $formSale->password ) {
             Session::put('formsale_id', $formSale->id);
             return redirect()->route('customer-dashboard')->with('success', 'Login successful.');
-         
          }
          return back()->with('login_error_message','Invalid Credentials');
         
     }
 
+   
 
     public function customerLogoutAuthenticationProcess(Request $request)
     {

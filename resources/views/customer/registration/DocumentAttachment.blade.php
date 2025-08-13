@@ -94,7 +94,7 @@
         </div>
     </div>
 </div>
-@include('registration.document-attachment-modal')
+@include('customer.registration.document-attachment-modal')
 @endsection
 
 @section('scripts')
