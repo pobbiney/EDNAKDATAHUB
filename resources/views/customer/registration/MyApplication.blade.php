@@ -69,14 +69,15 @@
                                                         <td>
                                                              <span class="badge badge-success d-flex align-items-center badge-xs"> Completed</span>
                                                         </td>
-                                                        <td> <a href="{{ route('customer.registration.edit-permit-registration-form-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>  <a href="{{ route('customer.view-application', Crypt::encrypt($list->formID)) }}" target="_" class="btn btn-primary"><i class="fe fe-eye"></i> View</a></td>
+                                                        <td> <a href="{{ route('customer.view-application', Crypt::encrypt($list->formID)) }}" target="_" class="btn btn-info"><i class="fe fe-eye"></i> View</a></td>
                                                         
                                                         
                                                          @else  
                                                          <td>
                                                             <span class="badge badge-danger d-flex align-items-center badge-xs">Inomplete</span>
                                                         </td>
-                                                        <td>  <a href="#" class="btn btn-primary">Continue Application</a> 
+                                                         <td> <a href="{{ route('customer.registration.edit-permit-registration-form-application', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>  </td>
+                                                        
                                                      </td>
                                                         
                                                         @endif

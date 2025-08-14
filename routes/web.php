@@ -16,6 +16,7 @@ use App\Http\Controllers\Equipment\EquipmentControoller;
 use App\Http\Controllers\ReviewManager\ReviewController;
 use App\Http\Controllers\RenewalManager\RenewalController;
 use App\Http\Controllers\BillPayment\BillPaymentController;
+use App\Http\Controllers\Customer\CustomerFinanceController;
 use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
 use App\Http\Controllers\Registration\RegistrationController;
@@ -361,6 +362,10 @@ Route::post('billPayment-forms-search-process',[BillPaymentController::class,'se
 
 Route::get('billPayment-print-bill/{id}',[BillPaymentController::class,'printBillView'])->name('billPayment-print-bill');
 
+Route::get('finance',[BillPaymentController::class,'financeView'])->name('finance');
+Route::post('finance-forms-search-process',[BillPaymentController::class,'searchFomrs'])->name('finance-forms-search-process');
+Route::get('finance-view-financials/{id}',[BillPaymentController::class,'viewFinancials'])->name('finance-view-financials');
+
 /* End Bill payment  */
 
 
@@ -523,6 +528,7 @@ Route::post('/customer/registration/edit-permit-registration-form-project-proces
 Route::get('/customer/registration/resume/{id}',[RegController::class,'Resume'])->name('customer.registration.resume');
 Route::get('/customer-login',[AuthController::class,'index'])->name('customer-login');
 Route::post('/customer-authentication-process',[AuthController::class,'customerAuthenticationProcess'])->name('customer-authentication-process');
+Route::post('/customer-buy-forms-process',[ApplicationController::class,'buyFormsProcess'])->name('customer-buy-forms-process');
 Route::post('/customer-logout-authentication-process',[AuthController::class,'customerLogoutAuthenticationProcess'])->name('customer-logout-authentication-process');
 Route::get('/customer-dashboard',[CustomerDashboardController::class,'dashboardView'])->name('customer-dashboard');
 Route::get('/customer-track-application',[ApplicationController::class,'trackApplicationView'])->name('customer-track-application');
@@ -542,6 +548,14 @@ Route::post('/customer/registration/edit-permit-registration-form-declaration-pr
 Route::get('customerFindRegionData',[RegController::class,'customerFindRegionData'])->name('customerFindRegionData');
 Route::get('customerFindCategoryData',[RegController::class,'customerFindCategoryData'])->name('customerFindCategoryData');
 Route::get('customerFindProjectTypeyData',[RegController::class,'customerFindProjectTypeyData'])->name('customerFindProjectTypeyData');
+Route::get('customer-buy-form',[ApplicationController::class,'customerBuyForm'])->name('customer-buy-form');
+Route::post('customer-finance-setup-sell-forms-process',[ApplicationController::class,'sellFormsProcess'])->name('customer-finance-setup-sell-forms-process');
+
+Route::get('customer-finance',[CustomerFinanceController::class,'financeView'])->name('customer-finance');
+Route::get('customer-bill-details/{id}',[CustomerFinanceController::class,'billDetailsView'])->name('customer-bill-details');
+Route::get('customer-payment-details/{id}',[CustomerFinanceController::class,'paymentDetailsView'])->name('customer-payment-details');
+Route::get('customer-download-receipt/{id}',[CustomerFinanceController::class,'downloadReceiptView'])->name('customer-download-receipt');
+
 
 
 

@@ -171,7 +171,7 @@
 
 
                     <!-- Recent Transactions -->
-					<div class="col-xl-8 col-sm-12 col-12 d-flex">
+					<div class="col-xl-6 col-sm-12 col-12 d-flex">
 						<div class="card flex-fill">
 							<div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-3">
 								<div class="d-inline-flex align-items-center">
@@ -191,19 +191,17 @@
 											<table class="table table-borderless custom-table">
 												<thead class="thead-light">
 													<tr>
-														<th>Date</th>
 														<th>Project Title</th>
-														<th>Contact Person</th>
-														<th>stage</th>
+														<th>Location</th>
+														<th>Current Stage</th>
 													</tr>
 												</thead>
 												<tbody>
 													@foreach($latestPermitData as $item)
 													<tr>
-														<td>{{ \Carbon\Carbon::parse($item->created_at)->format('M d,Y') }}</td>
 														<td>{{$item->project_title}}</td>
-														<td>{{$item->contact_person}}</td>
-														<td><span class="badge badge-success badge-xs d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>{{$item->registration_step}}</span></td>
+														<td>{{$item->address}}</td>
+														<td><span class="badge badge-success badge-xs d-inline-flex align-items-center"><i class="ti ti-circle-filled fs-5 me-1"></i>{{$item->formsale->currentStage->activityname->activity ?? 'N/A'}}</span></td>
 													</tr>
 													@endforeach
 												</tbody>
