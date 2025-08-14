@@ -149,7 +149,7 @@ class BillPaymentController  extends Controller implements HasMiddleware
 
         $formData = PermitRegistration::find($decode);
 
-        $billItemsList = AppBill::where('formId',$decode)->get();
+        $billItemsList = AppBill::where('formId',$formData->formID)->get();
 
         return view('bill-payment.printBill',[
             'formData' => $formData,
