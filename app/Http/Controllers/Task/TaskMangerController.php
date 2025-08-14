@@ -594,6 +594,15 @@ Thank you' ;
         'status' => "screened"
     ]);
 
+    $bill = new Tracker();
+    $bill->formID = $request->permit_id;
+    $bill->activity = "17";
+    $bill->createdOn =Carbon::now();
+    $bill->createdBy = Auth::user()->id; 
+    $bill->activity_type = "1";
+    $bill->regionId= $request->region_id;
+    $bill->save();
+
    $billitem = BillItem::where('type', $request->type_id)->first(); // get first item
     $amount = $billitem ? $billitem->amount : 0;
     $bill_id = $billitem? $billitem->id:0;
