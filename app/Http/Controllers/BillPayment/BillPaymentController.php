@@ -82,6 +82,66 @@ class BillPaymentController  extends Controller implements HasMiddleware
 
     }
 
+     public function financeView(){
+
+        return view('bill-payment.finance');
+    }
+
+    public function searchFomrs (Request $request){
+        $field = $request->field;
+        $operation = $request->operator;
+        $parameter = $request->search_parameter;
+
+        $result = [];
+        $table = "";
+
+        if($operation == "equal"){
+            $result = PermitRegistration::where($field,$parameter)->get();
+    
+           }else{
+    
+            $result = PermitRegistration::where($field,'LIKE','%'.$parameter.'%')->get();
+    
+         }
+
+
+         if(count($result) > 0){
+
+            $table .= '<table id="example" class="table table-striped table-bordered">';
+    
+            $table .= '<thead> <tr> <th>Proponent Name</th> <th>Telephone</th> <th>Town</th> <th>Project Title</th> <th>Applied By</th> <th>Action</th></tr></thead>';
+    
+            $table .= '<tbody>';
+
+            foreach ($result as $item) {
+
+                $table .= '<tr>';
+
+                $table .= '<td><b>'.$item->proponent_name.'</b></td>';
+                $table .= '<td>'.$item->contact_number.'</td>';
+                $table .= '<td>'.$item->town.'</td>';
+                $table .= '<td>'.$item->project_title.'</td>';
+                $table .= '<td>'.$item->applied_by.'</td>';
+
+                $table .= '<td><a style="color:white;" target="_blank" href="'.route('finance-view-financials',Crypt::encrypt($item->id)).'" class="btn btn-success btn-sm">View Financials</a></td>';
+
+                $table .= '</tr>';
+
+             }
+   
+            $table .= '</tbody>';
+    
+            $table .='</table>';
+    
+            return $table;
+
+         }else{
+
+            return "no_data";
+         }
+
+    }
+
     public function printBillView ($id){
         
 
@@ -94,6 +154,21 @@ class BillPaymentController  extends Controller implements HasMiddleware
         return view('bill-payment.printBill',[
             'formData' => $formData,
             'billItemsList' => $billItemsList
+        ]);
+    }
+
+     public function viewFinancials($id){
+        
+
+        $decode = Crypt::decrypt($id);
+
+        $permit_reg = PermitRegistration::findOrFail($decode);
+        $form = Formsale::findOrFail($permit_reg->formID);
+
+               
+        return view('bill-payment.view-financials',[
+            'permit_reg' => $permit_reg,
+            'form'=>$form
         ]);
     }
 }

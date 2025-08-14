@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Models\Region;
 use App\Models\Formsale;
 use Illuminate\Http\Request;
+use App\Models\Applicationform;
+use App\Models\Applicationformtype;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -11,7 +14,15 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     public function index(){
-        return view('customer.auth.login');
+          $listForm = Applicationform::orderBy('formName','ASC')->get();
+            $regionList = Region::orderBy('name','ASC')->get();
+            $listtype = Applicationformtype::all();
+
+        return view('customer.auth.login',[
+              'listForm' => $listForm,
+                'regionList' =>$regionList,
+                'listtype' =>$listtype
+        ]);
     }
 
      public function customerAuthenticationProcess(Request $request){
