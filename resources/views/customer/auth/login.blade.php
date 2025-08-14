@@ -243,7 +243,7 @@
                     @endphp
                     <p><strong>Serial Number:</strong> {{ $formNumber }}</p>
                     <p><strong>PIN:</strong> {{ $pin }}</p>
-                    <p class="mt-4">Your login details have been pre-filled. Kindly proceed to log in to continue with the application process.</p>
+                    <p class="mt-4">Kindly enter these details in the Sign In section to access your account and continue with the application process.</p>
                     
                 @endif
             </div>

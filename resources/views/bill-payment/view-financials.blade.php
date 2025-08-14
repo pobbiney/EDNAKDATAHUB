@@ -54,68 +54,80 @@ $subpageName = "finance";
                                     <div class="col-lg-5">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title" style="text-align: center;">Project Description</h4>
+                                                <h4 class="card-title" style="text-align: center;">Project Information</h4>
                                             </div>
                                             <div class="card-body">
                                                  <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Applicant: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->proponent_name}}</h5>
+                                                            <div class="col-lg-4">
+                                                                <h5 class="mt-2">Applicant: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->proponent_name}}</label>
+                                                            
                                                  </div>
                                                   <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Project Name: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->project_title}}</h5>
+                                                            <div class="col-lg-4">
+                                                                <h5 class="mt-2">Project Name: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->project_title}}</label>
+                                                           
                                                  </div>
                                                   <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Address: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->address}}</h5>
+                                                             <div class="col-lg-4">
+                                                                <h5 class="mt-2">Address: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->address}}</label>
+                                                         
                                                  </div>
                                                  <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Telephone: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->contact_number}}</h5>
+                                                             <div class="col-lg-4">
+                                                                <h5 class="mt-2">Telephone: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->contact_number}}</label>
+                                                           
                                                  </div>
                                                  <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Email: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->email}}</h5>
+                                                            <div class="col-lg-4">
+                                                                <h5 class="mt-2">Email: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->email}}</label>
+                                                          
                                                  </div>
                                                  <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Position/Role: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->position}}</h5>
+                                                             <div class="col-lg-4">
+                                                                <h5 class="mt-2">Position/Role: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->position}}</label>
+                                                          
                                                  </div>
                                                  <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Town: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->town}}</h5>
+                                                            <div class="col-lg-4">
+                                                                <h5 class="mt-2">Town: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->town}}</label>
+                                                            
                                                  </div>
                                                   <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">District: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->district}}</h5>
+                                                             <div class="col-lg-4">
+                                                                <h5 class="mt-2">District: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->getDistrict->name}} </label>
+                                                           
                                                  </div>
                                                  <div class="row nb-3">
-                                                            <label class="col-lg-4 col-form-label">Region: </label>
-                                                            <div class="col-lg-8">
-                                                                <h5 class="mt-2">{{$permit_reg->region}}</h5>
+                                                             <div class="col-lg-4">
+                                                                <h5 class="mt-2">Region: </h5>
                                                             </div>
+                                                            <label class="col-lg-8 col-form-label">{{$permit_reg->getRegion->name}} </label>
+                                                         
                                                  </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title" style="text-align: center;">Bills & Payments</h4>
+                                            </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
                                                     <table class="table mb-0">
@@ -123,14 +135,40 @@ $subpageName = "finance";
                                                             <tr>
                                                                 <th>Date</th>
                                                                 <th>Description</th>
-                                                                <th>Credit(GH₵)</th>
-                                                                <th>Debit(GH₵)</th>
+                                                                <th>Payment(GH₵)</th>
+                                                                <th>Bill(GH₵)</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            @php
+                                                                $totalBill = 0;
+                                                                $totalPayment = 0;
+                                                            @endphp
+                                                            @foreach($bills_and_payment as $item)
+                                                             @php
+                                                                $totalBill += $item->bill ?? 0;
+                                                                $totalPayment += $item->payment ?? 0;
+                                                            @endphp
+                                                            <tr>
+                                                              <td>{{ \Carbon\Carbon::parse($item->createdOn)->format('M d,Y') }}</td>
+                                                                <td>{{$item->description}}</td>
+                                                                <td>{{ $item->payment !== null ? 'GH₵ ' . number_format($item->payment, 2) : '--' }}</td>
+                                                                
+                                                                <td>{{ $item->bill !== null ? 'GH₵ ' . number_format($item->bill, 2) : '--' }}</td>
+                                                            </tr>
+                                                            @endforeach
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th colspan="2">Total</th>
+                                                                    <th>GH₵ {{ number_format($totalPayment, 2) }}</th>
+                                                                    <th>GH₵ {{ number_format($totalBill, 2) }}</th>
+                                                                    <th colspan="2"></th>
+                                                                </tr>
+                                                            </tfoot>
                                                            
                                                         </tbody>  
                                                     </table>
+                                                    
                                                   
                                                 </div>
                                             </div>

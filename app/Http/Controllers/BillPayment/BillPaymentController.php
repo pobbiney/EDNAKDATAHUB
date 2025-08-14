@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\BillPayment;
 
-use App\Http\Controllers\Controller;
 use App\Models\AppBill;
 use App\Models\BillItem;
 use App\Models\Formsale;
-use App\Models\PermitRegistration;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
+use App\Models\PermitRegistration;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 class BillPaymentController  extends Controller implements HasMiddleware
 {
@@ -165,10 +166,40 @@ class BillPaymentController  extends Controller implements HasMiddleware
         $permit_reg = PermitRegistration::findOrFail($decode);
         $form = Formsale::findOrFail($permit_reg->formID);
 
-               
+        $bills = DB::table('app_bill')
+            ->join('bill_types', 'app_bill.bill_type', '=', 'bill_types.id')
+             ->where('app_bill.formId', $form->id)
+            ->select(
+                'app_bill.formId',
+                DB::raw('bill_types.name AS description'),
+                'app_bill.bill_amount AS bill',
+                DB::raw('NULL AS payment'),
+                'app_bill.createdOn',
+                DB::raw("'bill' AS source")
+            );
+
+        $payment = DB::table('payment')
+            ->join('bill_types', 'payment.bill_type_id', '=', 'bill_types.id')
+            ->where('payment.formId', $form->id)
+            ->select(
+                'payment.formId',
+                DB::raw('bill_types.name AS description'),
+                DB::raw('NULL AS bill'),
+                'payment.amount AS payment',
+                'payment.createdOn',
+                DB::raw("'payment' AS source")
+            );
+
+        $bills_and_payment = $bills
+            ->unionAll($payment)
+            ->orderBy('createdOn')
+            ->get();
+
         return view('bill-payment.view-financials',[
             'permit_reg' => $permit_reg,
-            'form'=>$form
+            'form'=>$form,
+            'bills_and_payment' => $bills_and_payment
+
         ]);
     }
 }
