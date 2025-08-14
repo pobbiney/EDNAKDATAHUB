@@ -528,6 +528,7 @@ Route::post('/customer/registration/edit-permit-registration-form-project-proces
 Route::get('/customer/registration/resume/{id}',[RegController::class,'Resume'])->name('customer.registration.resume');
 Route::get('/customer-login',[AuthController::class,'index'])->name('customer-login');
 Route::post('/customer-authentication-process',[AuthController::class,'customerAuthenticationProcess'])->name('customer-authentication-process');
+Route::post('/customer-buy-forms-process',[ApplicationController::class,'buyFormsProcess'])->name('customer-buy-forms-process');
 Route::post('/customer-logout-authentication-process',[AuthController::class,'customerLogoutAuthenticationProcess'])->name('customer-logout-authentication-process');
 Route::get('/customer-dashboard',[CustomerDashboardController::class,'dashboardView'])->name('customer-dashboard');
 Route::get('/customer-track-application',[ApplicationController::class,'trackApplicationView'])->name('customer-track-application');
