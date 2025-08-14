@@ -2,7 +2,7 @@
 
 $pageName = "bill-payments"; 
 
-$subpageName = "finance";
+$subpageName = "bill-payments-finance";
 
 @endphp
 
