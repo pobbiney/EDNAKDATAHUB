@@ -1,9 +1,9 @@
-@php 
-    $pageName = "registration";
-    $subpageName = "my_application";
-@endphp
+@extends('customer.template.layout')
 
-@extends('layouts.app')
+
+@section('title')
+{{__('Applications')}}
+@endsection
 
 @section('css')
 
@@ -20,7 +20,7 @@
 
 @section('content')
 
-    <div class="content">
+<div class="content">
         
         <div class="row">
             <div class="col-md-12">
@@ -624,7 +624,9 @@
 
 @endsection
 
+
 @section('scripts')
+
 
     <script>
         const items = document.querySelectorAll("#sidebar-menu5 li[data-target]");
@@ -646,5 +648,5 @@
         });
 
     </script>
-
+ 
 @endsection

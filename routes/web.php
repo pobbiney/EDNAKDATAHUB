@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Staff\StaffController;
+use App\Http\Controllers\Customer\RegController;
 use App\Http\Controllers\Customer\AuthController;
 use App\Http\Controllers\Finance\FinanceController;
 use App\Http\Controllers\Reports\ReportsController;
@@ -513,6 +514,13 @@ Route::post('add-permit-review-process',[ReviewController::class,'addReview'])->
 /* End of Screening */
 
 //Customer Routes
+Route::get('/customer/application',[RegController::class,'getApplicationView'])->name('customer-application');
+Route::get('/customer/view-application/{id}',[RegController::class,'viewApplication'])->name('customer.view-application');
+Route::get('/customer/registration/edit-permit-registration-form-application/{id}',[RegController::class,'openEditPermitApplicationView'])->name('customer.registration.edit-permit-registration-form-application');
+Route::post('/customer/registration/edit-permit-registration-form-application-process/{id}',[RegController::class,'editPermitApplication'])->name('customer.registration.edit-permit-registration-form-application-process');
+Route::get('/customer/registration/edit-permit-registration-form-project/{id}',[RegController::class,'openEditPermitProjectView'])->name('customer.registration.edit-permit-registration-form-project');
+Route::post('/customer/registration/edit-permit-registration-form-project-process/{id}',[RegController::class,'editPermitProject'])->name('customer.registration.edit-permit-registration-form-project-process');
+Route::get('/customer/registration/resume/{id}',[RegController::class,'Resume'])->name('customer.registration.resume');
 Route::get('/customer-login',[AuthController::class,'index'])->name('customer-login');
 Route::post('/customer-authentication-process',[AuthController::class,'customerAuthenticationProcess'])->name('customer-authentication-process');
 Route::post('/customer-logout-authentication-process',[AuthController::class,'customerLogoutAuthenticationProcess'])->name('customer-logout-authentication-process');
@@ -523,7 +531,17 @@ Route::get('customer-user-guide',[CustomerDashboardController::class,'userGuideV
 Route::get('/customer-new-ticket',[EnquiriesController::class,'newTicketView'])->name('customer-new-ticket');
 Route::get('/customer-enquiries',[EnquiriesController::class,'enquiriesView'])->name('customer-enquiries');
 Route::post('/customer-enquiries-submit',[EnquiriesController::class,'store'])->name('customer-enquiries-submit');
+Route::get('/customer/attach-document',[ApplicationController::class,'getAttachedDocView'])->name('customer-attach-document');
+Route::post('/customer/application-attach-drawings-get-forms',[ApplicationController::class,'getAttachDrawingForms'])->name('customer-application-attach-drawings-get-forms');
+Route::post('/customer/application-attach-drawings-get-forms-process',[ApplicationController::class,'uploadAttachDrawingsProcess'])->name('customer-application-attach-drawings-get-forms-process');
+Route::get('/customer/registration/edit-permit-registration-form-infrastructure/{id}',[RegController::class,'openEditPermitInfrastructureView'])->name('customer.registration.edit-permit-registration-form-infrastructure');
+Route::post('/customer/registration/edit-permit-registration-form-infrastructure-process/{id}',[RegController::class,'editInfrastructure'])->name('customer.registration.edit-permit-registration-form-infrastructure-process');
+Route::get('/customer/registration/edit-permit-registration-form-declaration/{id}',[RegController::class,'openEditPermitDeclarationView'])->name('customer.registration.edit-permit-registration-form-declaration');
+Route::post('/customer/registration/edit-permit-registration-form-declaration-process/{id}',[RegController::class,'editDeclaration'])->name('customer.registration.edit-permit-registration-form-declaration-process');
 
+Route::get('customerFindRegionData',[RegController::class,'customerFindRegionData'])->name('customerFindRegionData');
+Route::get('customerFindCategoryData',[RegController::class,'customerFindCategoryData'])->name('customerFindCategoryData');
+Route::get('customerFindProjectTypeyData',[RegController::class,'customerFindProjectTypeyData'])->name('customerFindProjectTypeyData');
 
 
 

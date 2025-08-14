@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers\Task;
 
-use App\Http\Controllers\Controller;
-use App\Models\AuthorizationApp;
-use App\Models\CertificateApp;
-use App\Models\Payment;
-use App\Models\PermitApp;
-use App\Models\RenewApp;
-use App\Models\Staff;
-use App\Models\Task;
-use App\Models\Tracker;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Crypt;
-use App\Http\Controllers\Sms\SmsController;
+use App\Models\Task;
+use App\Models\Staff;
+use App\Models\Region;
 use App\Models\AppBill;
+use App\Models\Payment;
+use App\Models\Tracker;
 use App\Models\BillItem;
 use App\Models\Formsale;
-use App\Models\PermitRegistration;
-use App\Models\Region;
-use App\Models\ScreenDecision;
+use App\Models\RenewApp;
+use App\Models\PermitApp;
 use App\Models\Screening;
+use Illuminate\Http\Request;
+use App\Models\Drawingupload;
+use App\Models\CertificateApp;
+use App\Models\ScreenDecision;
+use App\Models\AuthorizationApp;
+use App\Models\PermitRegistration;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Controllers\Sms\SmsController;
 
 class TaskMangerController extends Controller
 {
@@ -482,11 +483,10 @@ Thank you' ;
         $operation = $request->operator;
         $parameter = $request->search_parameter;
 
-    $table = "";
+        $table = "";
 
     // Base query with join
-    $query = Formsale::leftJoin('permit_registrations', 'formsales.id', '=', 'permit_registrations.formID')
-        ->select('formsales.*', 'permit_registrations.status as permit_status', 'permit_registrations.id as permit_id');
+    $query = PermitRegistration::query();
 
     // Apply search condition
     if ($operation == "equal") {
@@ -506,10 +506,10 @@ Thank you' ;
             foreach ($result as $item) {
               
                 $table .= '<tr>';
-                $table .= '<td>'.$item->permit_registrations->proponent_name.'</td>';
-                $table .= '<td>'.$item->tell.' </td>';
-                $table .= '<td>'.$item->permit_registrations->project_title.'</td>';
-                $table .= '<td>' . ($item->permit_status ?? 'N/A') . '  </td>';
+                $table .= '<td>'.$item->proponent_name.'</td>';
+                $table .= '<td>'.$item->contact_number.' </td>';
+                $table .= '<td>'.$item->project_title.'</td>';
+                $table .= '<td>' . ($item->registration_step ?? 'N/A') . '  </td>';
                 $table .= '<td><a href="'.route('view-job-tracker',Crypt::encrypt($item->id)).'" target="_"   class="btn btn-sm btn-primary" style="color:white"> View</a></td>';
                 $table .= '</tr>';
              }
@@ -533,8 +533,9 @@ Thank you' ;
         {
                 $decodeId = Crypt::decrypt($id);
             
-                // Eager load the relationships
-                $datas = Formsale::with(['permit_registrations'])->findOrFail($decodeId);
+                $permit_reg = PermitRegistration::findOrFail($decodeId);
+                $formID = $permit_reg->formID;
+                $datas = Formsale::with(['permit_registrations'])->findOrFail($formID);
                 
                 return view('task.view-job-tracker', [
                     'datas' => $datas,
@@ -545,9 +546,11 @@ Thank you' ;
        public function getApplicationScreeningView($id){
           $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::find($decodeID);
+         $listscreen = Screening::where('formId',$decodeID)->first();
          $list = ScreenDecision::all();
+          $documents = Drawingupload::where('appId',$project->id)->get();
         return view('task.application-screening',[
-            'project' => $project,'list'=>$list
+            'project' => $project,'list'=>$list,'listscreen'=>$listscreen,'documents' => $documents
         ]);
            
        } 
@@ -593,10 +596,13 @@ Thank you' ;
 
    $billitem = BillItem::where('type', $request->type_id)->first(); // get first item
     $amount = $billitem ? $billitem->amount : 0;
+    $bill_id = $billitem? $billitem->id:0;
+    $bill_type = $billitem? $billitem->billType:0;
      // Save to AnotherTable
     $appbill = new AppBill();
     $appbill->formId = $request->permit_id;
-    $appbill->bill_type = $request->type_id;
+    $appbill->bill_type = $bill_type;
+    $appbill->bill_id = $bill_id;
     $appbill->bill_amount = $amount;
     $appbill->createdon =Carbon::now();
     $appbill->createdby = Auth::user()->id;
@@ -622,10 +628,13 @@ Thank you' ;
        {
           $decodeID = Crypt::decrypt($id);
          $project = PermitRegistration::where('formID',$decodeID)->first();
+         $list = ScreenDecision::all();
+          $documents = Drawingupload::where('appId',$project->id)->get();
        
          $listscreen = Screening::where('formId',$decodeID)->first();
         return view('task.viewScreening',[
-            'project' => $project,'listscreen'=>$listscreen
+            'project' => $project,'listscreen'=>$listscreen,
+            'list'=>$list,'documents' => $documents
         ]);
        }
 

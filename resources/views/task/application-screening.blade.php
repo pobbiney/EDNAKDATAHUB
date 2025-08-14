@@ -636,7 +636,7 @@
                                     <input type="hidden" name="permit_id" value="{{ $project->formID }}"/>
                                     <input type="hidden" name="region_id" value="{{ $project->region }}"/>
                                     <input type="hidden" name="type_id" value="{{ $project->type_id }}"/>
-                                    <input type="hidden" name="type_id" value="{{ $project->type_id }}"/>
+                                    
                                 </form>
                             </div>
                         </div>

@@ -316,8 +316,9 @@ class ReviewController extends Controller
          $project = PermitRegistration::where('formID',$decodeID)->first();
          $listscreen = Screening::where('formId',$decodeID)->first();
          $list = ScreenDecision::all();
+         $documents = Drawingupload::where('appId',$project->id)->get();
         return view('review_manager.review_permit_application',[
-            'project' => $project,'listscreen'=>$listscreen,'list'=>$list
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents
         ]);
            
       
@@ -838,10 +839,12 @@ class ReviewController extends Controller
        {
         $decodeID = Crypt::decrypt($id);
          $project = PermitRegistration::where('formID',$decodeID)->first();
+          $list = PermitReview::where('formId',$decodeID)->first();
+         $documents = Drawingupload::where('appId',$project->id)->get();
        
          $listscreen = Screening::where('formId',$decodeID)->first();
         return view('review_manager.view-review_permit_application',[
-            'project' => $project,'listscreen'=>$listscreen
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents
         ]);
        }
 

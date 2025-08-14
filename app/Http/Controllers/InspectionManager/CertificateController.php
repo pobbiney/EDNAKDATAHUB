@@ -658,7 +658,7 @@ class CertificateController extends Controller
 
         public function getMyTaskView()
         {
-            $userID = Auth::id(); // Assuming the logged-in user
+            $userID = Auth::user()->staff_id;// Assuming the logged-in user
     
             $tasks = Task::where('assignee', $userID)
             ->where('taskType', 'permit')
