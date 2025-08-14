@@ -425,8 +425,8 @@ class FinanceController extends Controller implements HasMiddleware
 
         $billItemList = AppBill::where([['formId',''.$data->id],['status','Active']])->get();
 
-        $totalPaymentMade = Payment::where('formId',$data->id)->sum('amount');
-        $totalBill = AppBill::where([['formId',''.$data->id],['status','Active']])->sum('bill_amount');
+        $totalPaymentMade = Payment::where('formId',$data->formID)->sum('amount');
+        $totalBill = AppBill::where([['formId',''.$data->formID],['status','Active']])->sum('bill_amount');
 
         $balance = $totalBill - $totalPaymentMade;
 
