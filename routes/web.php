@@ -365,6 +365,7 @@ Route::get('billPayment-print-bill/{id}',[BillPaymentController::class,'printBil
 Route::get('finance',[BillPaymentController::class,'financeView'])->name('finance');
 Route::post('finance-forms-search-process',[BillPaymentController::class,'searchFomrs'])->name('finance-forms-search-process');
 Route::get('finance-view-financials/{id}',[BillPaymentController::class,'viewFinancials'])->name('finance-view-financials');
+Route::get('payment-print-bill/{id}',[BillPaymentController::class,'printPaymentView'])->name('payment-print-bill');
 
 /* End Bill payment  */
 

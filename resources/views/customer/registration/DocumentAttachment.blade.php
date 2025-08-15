@@ -67,11 +67,11 @@
                                                 @foreach ($listApp as $list)
                                                 <tr>
                                                     <td>{{$i}}</td>
-                                                    <td>{{$list->appname->applicantName}}</td>
-                                                    <td>{{$list->proponent_name}}</td>
-                                                    <td>{{$list->city}}</td>
-                                                    <td>{{$list->address}}</td>
-                                                    <td>{{$list->contact_number}}</td>
+                                                    <td>{{$list->appname->applicantName ?? 'N/A'}}</td>
+                                                    <td>{{$list->proponent_name ?? 'N/A'}}</td>
+                                                    <td>{{$list->city ?? 'N/A'}}</td>
+                                                    <td>{{$list->address ?? 'N/A'}}</td>
+                                                    <td>{{$list->contact_number ?? 'N/A'}}</td>
                                                    
                                                         
                                                         <td>

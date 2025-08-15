@@ -182,8 +182,8 @@
 							</div>
 							<div class="card-body p-0">
 								<ul class="nav nav-tabs nav-justified transaction-tab">
-									<li class="nav-item"><a class="nav-link active" href="#sale" data-bs-toggle="tab">Permit</a></li>
-									<li class="nav-item"><a class="nav-link" href="#purchase-transaction" data-bs-toggle="tab">---</a></li>
+									<li class="nav-item"><a class="nav-link active" href="#sale" data-bs-toggle="tab">Applications</a></li>
+									<li class="nav-item"><a class="nav-link" href="#purchase-transaction" data-bs-toggle="tab">Permits</a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane show active" id="sale">
@@ -191,8 +191,39 @@
 											<table class="table table-borderless custom-table">
 												<thead class="thead-light">
 													<tr>
+														<th>Applicant Name</th>
+														<th>Telephone</th>
+														<th>Form Type</th>
+														<th>Amount</th>
+														<th>Bought On</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach($sales as $item)
+													<tr>
+														<td>{{$item->applicantName}}</td>
+														<td>{{$item->tell}}</td>
+														<td>{{$item->formtype->formName}}</td>
+														<td>GH₵ {{number_format($item->amountPaid,2)}}</td>
+														 <td>{{ \Carbon\Carbon::parse($item->createdOn)->format('M d,Y') }}</td>
+														 <td>
+															<a href="#"    class="btn btn-success" style="color: white"> View Details</a>
+														</td>
+													</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="purchase-transaction">
+										<div class="table-responsive">
+											<table class="table table-borderless custom-table">
+												<thead class="thead-light">
+													<tr>
+														
 														<th>Project Title</th>
-														<th>Location</th>
+														<th>Address</th>
 														<th>Current Stage</th>
 													</tr>
 												</thead>
@@ -206,10 +237,6 @@
 													@endforeach
 												</tbody>
 											</table>
-										</div>
-									</div>
-									<div class="tab-pane fade" id="purchase-transaction">
-										<div class="table-responsive">
 											
 										</div>
 									</div>

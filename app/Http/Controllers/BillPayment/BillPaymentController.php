@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\PermitRegistration;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
@@ -145,7 +146,6 @@ class BillPaymentController  extends Controller implements HasMiddleware
 
     public function printBillView ($id){
         
-
         $decode = Crypt::decrypt($id);
 
         $formData = PermitRegistration::find($decode);
@@ -175,7 +175,7 @@ class BillPaymentController  extends Controller implements HasMiddleware
                 'app_bill.bill_amount AS bill',
                 DB::raw('NULL AS payment'),
                 'app_bill.createdOn',
-                DB::raw("'bill' AS source")
+                DB::raw('app_bill.id AS item_id')
             );
 
         $payment = DB::table('payment')
@@ -187,7 +187,7 @@ class BillPaymentController  extends Controller implements HasMiddleware
                 DB::raw('NULL AS bill'),
                 'payment.amount AS payment',
                 'payment.createdOn',
-                DB::raw("'payment' AS source")
+                DB::raw('payment.id AS item_id')
             );
 
         $bills_and_payment = $bills
@@ -195,11 +195,31 @@ class BillPaymentController  extends Controller implements HasMiddleware
             ->orderBy('createdOn')
             ->get();
 
+        $totalBills = $bills->get()->sum('bill');
+        $totalPayments = $payment->get()->sum('payment');
+
         return view('bill-payment.view-financials',[
             'permit_reg' => $permit_reg,
             'form'=>$form,
-            'bills_and_payment' => $bills_and_payment
+            'bills_and_payment' => $bills_and_payment,
+            'totalBills' => $totalBills,
+            'totalPayments' => $totalPayments,
 
         ]);
     }
+
+     public function printPaymentView ($id){
+        
+        $decode = Crypt::decrypt($id);
+
+        $payment = Payment::find($decode);
+
+        $formData= Formsale::find($payment->formId);
+
+        return view('bill-payment.print',[
+            'formData' => $formData,
+            'payment' => $payment
+        ]);
+    }
+
 }

@@ -126,11 +126,12 @@ $subpageName = "finance";
                                     <div class="col-lg-7">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title" style="text-align: center;">Bills & Payments</h4>
+                                                <h4 class="card-title" style="text-align: right;">Outstanding Balance: <span style="color: blue">GH₵ {{number_format($totalBills - $totalPayments,2)}}</span></h4>
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
                                                     <table class="table mb-0">
+                                                        <h6 class="text-center">Bills & Payment</h6>
                                                         <thead>
                                                             <tr>
                                                                 <th>Date</th>
@@ -140,28 +141,20 @@ $subpageName = "finance";
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @php
-                                                                $totalBill = 0;
-                                                                $totalPayment = 0;
-                                                            @endphp
                                                             @foreach($bills_and_payment as $item)
-                                                             @php
-                                                                $totalBill += $item->bill ?? 0;
-                                                                $totalPayment += $item->payment ?? 0;
-                                                            @endphp
                                                             <tr>
                                                               <td>{{ \Carbon\Carbon::parse($item->createdOn)->format('M d,Y') }}</td>
                                                                 <td>{{$item->description}}</td>
-                                                                <td>{{ $item->payment !== null ? 'GH₵ ' . number_format($item->payment, 2) : '--' }}</td>
-                                                                
+                                                                <td><a href="{{route('payment-print-bill',Crypt::encrypt($item->item_id))}}" target="_blank" style="color: blue">{{ $item->payment !== null ? 'GH₵ ' . number_format($item->payment, 2) : '--' }}</a></td>
                                                                 <td>{{ $item->bill !== null ? 'GH₵ ' . number_format($item->bill, 2) : '--' }}</td>
+                                                              
                                                             </tr>
                                                             @endforeach
                                                             <tfoot>
                                                                 <tr>
                                                                     <th colspan="2">Total</th>
-                                                                    <th>GH₵ {{ number_format($totalPayment, 2) }}</th>
-                                                                    <th>GH₵ {{ number_format($totalBill, 2) }}</th>
+                                                                    <th><span style="color: green;">GH₵ {{ number_format($totalPayments, 2) }}</span></th>
+                                                                    <th><span style="color: red;">GH₵ {{ number_format($totalBills, 2) }}</span></th>
                                                                     <th colspan="2"></th>
                                                                 </tr>
                                                             </tfoot>

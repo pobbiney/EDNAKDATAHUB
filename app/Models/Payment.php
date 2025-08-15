@@ -45,4 +45,20 @@ class Payment extends Model
 		'payment_mode',
 		'comment'
 	];
+
+	public function biilType(){
+		return $this->belongsTo(Applicationform::class, 'bill_type_id');
+	}
+
+	public function createdByName (){
+
+		if(User::where('id',$this->createdBy)->get()->count() > 0){
+
+			return User::find($this->createdBy)->name;
+
+		}else{
+
+			return "Not Available";
+		}
+	}
 }
