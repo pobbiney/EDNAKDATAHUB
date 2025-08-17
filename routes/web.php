@@ -16,9 +16,11 @@ use App\Http\Controllers\Equipment\EquipmentControoller;
 use App\Http\Controllers\ReviewManager\ReviewController;
 use App\Http\Controllers\RenewalManager\RenewalController;
 use App\Http\Controllers\BillPayment\BillPaymentController;
+use App\Http\Controllers\Customer\CustomerPermitController;
 use App\Http\Controllers\Customer\CustomerFinanceController;
 use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
+use App\Http\Controllers\Customer\ImpactAssessmentController;
 use App\Http\Controllers\Registration\RegistrationController;
 use App\Http\Controllers\Customer\CustomerDashboardController;
 use App\Http\Controllers\Authentication\AuthenticationController;
@@ -557,6 +559,12 @@ Route::get('customer-bill-details/{id}',[CustomerFinanceController::class,'billD
 Route::get('customer-payment-details/{id}',[CustomerFinanceController::class,'paymentDetailsView'])->name('customer-payment-details');
 Route::get('customer-download-receipt/{id}',[CustomerFinanceController::class,'downloadReceiptView'])->name('customer-download-receipt');
 
+Route::get('customer-permits',[CustomerPermitController::class,'getPrintCertificateView'])->name('customer-permits');
+Route::get('customer-print-application-cert-details/{id}',[CustomerPermitController::class,'getPrintApplicationCertView'])->name('customer-print-application-cert-details');
+
+Route::get('customer-impact-assessment',[ImpactAssessmentController::class,'index'])->name('customer-impact-assessment');
+Route::get('customer-environmental-impact/{id}',[ImpactAssessmentController::class,'environmentalView'])->name('customer-environmental-impact');
+Route::post('customer-store-environmental-impact/{id}',[ImpactAssessmentController::class,'storeEnvironmentalView'])->name('customer-store-environmental-impact');
 
 
 

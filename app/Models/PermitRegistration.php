@@ -45,6 +45,10 @@ class PermitRegistration extends Model
         return $this->belongsTo(Formsale::class, 'formID');
     }
 
+    public function environmental_impacts(){
+        return $this->hasMany(EnvironmentalImpact::class, 'app_id');
+    }
+
  
  
  

@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from dreamspos.dreamstechnologies.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Jul 2025 18:54:25 GMT -->
+
 <head>
 
 	<!-- Meta Tags -->
@@ -15,7 +16,7 @@
 	<meta name="robots" content="index, follow">
 	<title>@yield('title') || {{ _('EPA Customer Portal') }}</title>
 
-	<script src="{{asset('assets/js/theme-script.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>	
+	<script src="{{asset('assets/js/theme-script.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
@@ -26,9 +27,9 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 	<!-- Wizard CSS -->
-     <link rel="stylesheet" href="{{asset('assets/plugins/twitter-bootstrap-wizard/form-wizard.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/plugins/twitter-bootstrap-wizard/form-wizard.css')}}">
 
-	  
+
 	<!-- Datatable CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}">
 
@@ -37,11 +38,11 @@
 
 	<!-- animation CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
-            <!-- Feather CSS -->
+	<!-- Feather CSS -->
 	<link rel="stylesheet" href="{{asset('assets/plugins/icons/feather/feather.css')}}">
 
-    <!-- Pe7 CSS -->
-		<link rel="stylesheet" href="{{asset('assets/plugins/icons/flags/flags.css')}}">
+	<!-- Pe7 CSS -->
+	<link rel="stylesheet" href="{{asset('assets/plugins/icons/flags/flags.css')}}">
 	<!-- Select2 CSS -->
 	<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 
@@ -64,7 +65,7 @@
 
 	@yield('css');
 
-	 
+
 
 
 </head>
@@ -109,28 +110,29 @@
 							<a href="javascript:void(0);" class="responsive-search">
 								<i class="fa fa-search"></i>
 							</a>
-						 
+
 						</div>
 					</li>
 					<!-- /Search -->
 
 					<!-- Select Store -->
-				 
+
 					<!-- /Select Store -->
- 
-				 
-                    <li class="nav-item dropdown link-nav">
-						<a href="javascript:void(0);" class="btn btn-primary btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
+
+
+					<li class="nav-item dropdown link-nav">
+						<a href="javascript:void(0);" class="btn btn-primary btn-md d-inline-flex align-items-center"
+							data-bs-toggle="dropdown">
 							<i class="ti ti-calendar me-1"></i>{{ \Carbon\Carbon::now()->format('l, F j, Y g:i A') }}
 						</a>
-                    </li>
-					
+					</li>
+
 					<!-- Flag -->
 					<li class="nav-item dropdown has-arrow flag-nav nav-item-box">
-						 
-							<i class="flag flag-gh"></i>
+
+						<i class="flag flag-gh"></i>
 						</a>
-						 
+
 					</li>
 					<!-- /Flag -->
 
@@ -164,7 +166,9 @@
 													<img alt="Img" src="assets/img/profiles/avatar-13.jpg">
 												</span>
 												<div class="flex-grow-1">
-													<p class="noti-details"><span class="noti-title">James Kirwin</span> confirmed his order.  Order No: #78901.Estimated delivery: 2 days</p>
+													<p class="noti-details"><span class="noti-title">James Kirwin</span>
+														confirmed his order. Order No: #78901.Estimated delivery: 2 days
+													</p>
 													<p class="noti-time">4 mins ago</p>
 												</div>
 											</div>
@@ -177,7 +181,8 @@
 													<img alt="Img" src="assets/img/profiles/avatar-03.jpg">
 												</span>
 												<div class="flex-grow-1">
-													<p class="noti-details"><span class="noti-title">Leo Kelly</span> cancelled his order scheduled for  17 Jan 2025</p>
+													<p class="noti-details"><span class="noti-title">Leo Kelly</span>
+														cancelled his order scheduled for 17 Jan 2025</p>
 													<p class="noti-time">10 mins ago</p>
 												</div>
 											</div>
@@ -190,7 +195,8 @@
 													<img alt="Img" src="assets/img/profiles/avatar-17.jpg">
 												</span>
 												<div class="flex-grow-1">
-													<p class="noti-details">Payment of $50 received for Order #67890 from <span class="noti-title">Antonio Engle</span></p>
+													<p class="noti-details">Payment of $50 received for Order #67890
+														from <span class="noti-title">Antonio Engle</span></p>
 													<p class="noti-time">05 mins ago</p>
 												</div>
 											</div>
@@ -203,7 +209,9 @@
 													<img alt="Img" src="assets/img/profiles/avatar-02.jpg">
 												</span>
 												<div class="flex-grow-1">
-													<p class="noti-details"><span class="noti-title">Andrea</span> confirmed his order.  Order No: #73401.Estimated delivery: 3 days</p>
+													<p class="noti-details"><span class="noti-title">Andrea</span>
+														confirmed his order. Order No: #73401.Estimated delivery: 3 days
+													</p>
 													<p class="noti-time">4 mins ago</p>
 												</div>
 											</div>
@@ -232,7 +240,7 @@
 						</a>
 						<div class="dropdown-menu menu-drop-user">
 							<div class="profileset d-flex align-items-center">
-								 
+
 								<div>
 									<h6 class="fw-medium">--</h6>
 									<p>--</p>
@@ -242,10 +250,11 @@
 							<a class="dropdown-item" href="#"><i class="ti ti-file-text me-2"></i>Reports</a>
 							<a class="dropdown-item" href="#"><i class="ti ti-settings-2 me-2"></i>Settings</a>
 							<hr class="my-2">
-                            <form action="{{ route('customer-logout-authentication-process') }}" method="POST">
-									@csrf
-							<button type="submit" class="dropdown-item logout pb-0" href="#"><i class="ti ti-logout me-2"></i>Logout</button>
-                            </form>
+							<form action="{{ route('customer-logout-authentication-process') }}" method="POST">
+								@csrf
+								<button type="submit" class="dropdown-item logout pb-0" href="#"><i
+										class="ti ti-logout me-2"></i>Logout</button>
+							</form>
 						</div>
 					</li>
 				</ul>
@@ -258,10 +267,10 @@
 					<div class="dropdown-menu dropdown-menu-right">
 						<a class="dropdown-item" href="#">My Profile</a>
 						<a class="dropdown-item" href="#">Settings</a>
-						  <form action="{{ route('customer-logout-authentication-process') }}" method="POST">
-									@csrf
-						<button type="submit" class="dropdown-item" href="#">Logout</button>
-						 </form>
+						<form action="{{ route('customer-logout-authentication-process') }}" method="POST">
+							@csrf
+							<button type="submit" class="dropdown-item" href="#">Logout</button>
+						</form>
 					</div>
 				</div>
 				<!-- /Mobile Menu -->
@@ -287,8 +296,8 @@
 				</a>
 			</div>
 			<!-- /Logo -->
-			 
-		 
+
+
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
@@ -296,72 +305,111 @@
 							<h6 class="submenu-hdr">Main Menu</h6>
 							<ul>
 								<li>
-									<a href="{{route('customer-dashboard')}}"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Dashboard</span> </a>
-									 
+									<a href="{{route('customer-dashboard')}}"><i
+											class="ti ti-layout-grid fs-16 me-2"></i><span>Dashboard</span> </a>
+
 								</li>
-								 <li class="submenu">
-									<a href="javascript:void(0);"><i class="ti ti-file fs-16 me-2"></i><span>Applications</span><span class="menu-arrow"></span></a>
+								<li class="submenu">
+									<a href="javascript:void(0);"><i
+											class="ti ti-file fs-16 me-2"></i><span>Applications</span><span
+											class="menu-arrow"></span></a>
 									<ul>
 										<li><a href="{{route('customer-application')}}">My Applications</a></li>
-										<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
+										<li><a href="{{route('customer-attach-document')}}">Attach
+												Drawing/Attachment</a></li>
 										<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
 									</ul>
 								</li>
-                               <li><a href="{{route('customer-finance')}}"><i data-feather="credit-card"></i><span>Finance</span></a></li>
-                                <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
-								 <li class="submenu">
-									<a href="javascript:void(0);"><i class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span class="menu-arrow"></span></a>
+								<li class="submenu">
+									<a href="javascript:void(0);"><i
+											class="ti ti-certificate fs-16 me-2"></i><span>Permits/Certificates</span><span
+											class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="{{route('customer-permits')}}">Permits</a></li>
+									</ul>
+								</li>
+
+								<li><a href="{{route('customer-impact-assessment')}}"><i
+											class="ti ti-progress-alert fs-16 me-2"></i><span>Impact
+											Assessment</span></a></li>
+								<li><a href="{{route('customer-finance')}}"><i
+											data-feather="credit-card"></i><span>Finance</span></a></li>
+								<li><a href="{{route('customer-track-application')}}"><i
+											data-feather="box"></i><span>Track Application</span></a></li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><i
+											class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span
+											class="menu-arrow"></span></a>
 									<ul>
 										<li><a href="{{route('customer-new-ticket')}}">New Ticket</a></li>
 										<li><a href="{{route('customer-enquiries')}}">Pending & Closed</a></li>
 									</ul>
 								</li>
-								<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User Guide </span></a></li>
+								<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User
+											Guide </span></a></li>
 							</ul>
-						</li> 
-							  
+						</li>
+
 					</ul>
-					
+
 				</div>
 			</div>
 		</div>
 		<!-- /Horizontal Sidebar -->
 
-	 
+
 		<!-- Horizontal Sidebar -->
 		<div class="sidebar sidebar-horizontal" id="horizontal-menu">
 			<div id="sidebar-menu-3" class="sidebar-menu">
 				<div class="main-menu">
 					<ul class="nav-menu">
-						<li >
-							<a href="{{route('customer-dashboard')}}" ><i class="ti ti-layout-grid fs-16 me-2"></i><span> Dashboard</span> </a>
-						 
+						<li>
+							<a href="{{route('customer-dashboard')}}"><i class="ti ti-layout-grid fs-16 me-2"></i><span>
+									Dashboard</span> </a>
+
 						</li>
 
-						 <li class="submenu">
-									<a href="javascript:void(0);"><i class="ti ti-file fs-16 me-2"></i><span>Applications</span><span class="menu-arrow"></span></a>
-									<ul>
-										<li><a href="{{route('customer-application')}}">My Applications</a></li>
-										<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
-										<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
-									</ul>
-							</li>
+						<li class="submenu">
+							<a href="javascript:void(0);"><i
+									class="ti ti-file fs-16 me-2"></i><span>Applications</span><span
+									class="menu-arrow"></span></a>
+							<ul>
+								<li><a href="{{route('customer-application')}}">My Applications</a></li>
+								<li><a href="{{route('customer-attach-document')}}">Attach Drawing/Attachment</a></li>
+								<li><a href="{{route('customer-buy-form')}}">New Application</a></li>
+							</ul>
+						</li>
 
-						
+						<li class="submenu">
+							<a href="javascript:void(0);"><i
+									class="ti ti-certificate fs-16 me-2"></i><span>Permits/Certificates</span><span
+									class="menu-arrow"></span></a>
+							<ul>
+								<li><a href="{{route('customer-permits')}}">Permits</a></li>
+							</ul>
+						</li>
 
-                         <li><a href="{{route('customer-finance')}}"><i data-feather="credit-card"></i><span>Finance</span></a></li>
-                        <li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track Application</span></a></li>
-						 <li class="submenu">
-									<a href="javascript:void(0);"><i class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span class="menu-arrow"></span></a>
-									<ul>
-										<li><a href="{{route('customer-new-ticket')}}">New Ticket</a></li>
-										<li><a href="{{route('customer-enquiries')}}">Pending & Closed</a></li>
-										
-									</ul>
-								</li>
-						<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User Guide </span></a></li>
-						
-					 
+
+						<li><a href="{{route('customer-impact-assessment')}}"><i
+									class="ti ti-progress-alert fs-16 me-2"></i><span>Impact Assessment</span></a></li>
+						<li><a href="{{route('customer-finance')}}"><i
+									data-feather="credit-card"></i><span>Finance</span></a></li>
+						<li><a href="{{route('customer-track-application')}}"><i data-feather="box"></i><span>Track
+									Application</span></a></li>
+						<li class="submenu">
+							<a href="javascript:void(0);"><i
+									class="ti ti-message fs-16 me-2"></i><span>Enquiries</span><span
+									class="menu-arrow"></span></a>
+							<ul>
+								<li><a href="{{route('customer-new-ticket')}}">New Ticket</a></li>
+								<li><a href="{{route('customer-enquiries')}}">Pending & Closed</a></li>
+
+							</ul>
+						</li>
+						<li><a href="{{route('customer-user-guide')}}"><i data-feather="info"></i><span>User Guide
+								</span></a></li>
+
+
 					</ul>
 				</div>
 			</div>
@@ -375,10 +423,11 @@
 					<div class="sidebar-left slimscroll">
 						<div class="nav flex-column align-items-center nav-pills" id="sidebar-tabs" role="tablist"
 							aria-orientation="vertical">
-							<a href="#" class="nav-link active" title="Dashboard" data-bs-toggle="tab" data-bs-target="#dashboard">
+							<a href="#" class="nav-link active" title="Dashboard" data-bs-toggle="tab"
+								data-bs-target="#dashboard">
 								<i class="ti ti-smart-home"></i>
 							</a>
-							
+
 						</div>
 					</div>
 				</div>
@@ -395,12 +444,13 @@
 							<img src="assets/img/logo-png.png" alt="Img">
 						</a>
 					</div>
-					 
+
 					<!-- /Logo -->
 					<div class="sidebar-scroll">
 						<div class="text-center rounded bg-light p-3 mb-3 border">
 							<div class="avatar avatar-lg online mb-3">
-								<img src="assets/img/customer/customer15.jpg" alt="Img" class="img-fluid rounded-circle">
+								<img src="assets/img/customer/customer15.jpg" alt="Img"
+									class="img-fluid rounded-circle">
 							</div>
 							<h6 class="fs-14 fw-bold mb-1">--</h6>
 							<p class="fs-12 mb-0">--</p>
@@ -409,12 +459,12 @@
 							<div class="tab-pane fade show active" id="dashboard">
 								<ul>
 									<li class="menu-title"><span>MAIN</span></li>
-									<li><a  href="#">Admin Dashboard</a></li>
-									 
+									<li><a href="#">Admin Dashboard</a></li>
+
 								</ul>
 							</div>
-							
-					 
+
+
 						</div>
 					</div>
 				</div>
@@ -423,11 +473,12 @@
 		<!-- /Two Col Sidebar -->
 
 		<div class="page-wrapper">
-		 
-                @yield('content')
-				
-	 
-			<div class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
+
+			@yield('content')
+
+
+			<div
+				class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
 				<p class="fs-13 text-gray-9 mb-0"> 2025 &copy; Environmental Protection Agency All Right Reserved</p>
 				<p>Designed & Developed By <a href="javascript:void(0);" class="link-primary">Indexcom Ltd</a></p>
 			</div>
@@ -436,71 +487,91 @@
 	</div>
 	<!-- /Main Wrapper -->
 
- 
+
 	<!-- jQuery -->
 	<script src="{{asset('assets/js/jquery-3.7.1.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
 
-	<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}" ></script>
+	<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 
 	<!-- Feather Icon JS -->
 	<script src="{{asset('assets/js/feather.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- Slimscroll JS -->
-	<script src="{{asset('assets/js/jquery.slimscroll.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/js/jquery.slimscroll.min.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- Datatable JS -->
-	<script src="{{ asset('assets/js/jquery.dataTables.min.js')}}" type="7ab17edb451f901b9dfb4717-text/javascript"></script>
-	<script src="{{ asset('assets/js/dataTables.bootstrap5.min.js')}}" type="7ab17edb451f901b9dfb4717-text/javascript"></script>
+	<script src="{{ asset('assets/js/jquery.dataTables.min.js')}}"
+		type="7ab17edb451f901b9dfb4717-text/javascript"></script>
+	<script src="{{ asset('assets/js/dataTables.bootstrap5.min.js')}}"
+		type="7ab17edb451f901b9dfb4717-text/javascript"></script>
 
 
 	<!-- Bootstrap Core JS -->
-	<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- ApexChart JS -->
-	<script src="{{asset('assets/plugins/apexchart/apexcharts.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
-	<script src="{{asset('assets/plugins/apexchart/chart-data.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/apexchart/apexcharts.min.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/apexchart/chart-data.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- Chart JS -->
-	<script src="{{asset('assets/plugins/chartjs/chart.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
-	<script src="{{asset('assets/plugins/chartjs/chart-data.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/chartjs/chart.min.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/chartjs/chart-data.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- Daterangepikcer JS -->
 	<script src="{{asset('assets/js/moment.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
-	<script src="{{asset('assets/plugins/daterangepicker/daterangepicker.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/daterangepicker/daterangepicker.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
 	<!-- Select2 JS -->
-	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
-	
+
 
 	<!-- Color Picker JS -->
-	<script src="{{asset('assets/plugins/%40simonwep/pickr/pickr.es5.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
+	<script src="{{asset('assets/plugins/%40simonwep/pickr/pickr.es5.min.js')}}"
+		type="da66958c310097099013dd7e-text/javascript"></script>
 
-        <!-- Feather Icon JS -->
-    <script src="{{asset('assets/js/feather.min.js')}}" type="3bb0267ac42e367a8a8ce41d-text/javascript"></script>
+	<!-- Feather Icon JS -->
+	<script src="{{asset('assets/js/feather.min.js')}}" type="3bb0267ac42e367a8a8ce41d-text/javascript"></script>
 
 	<!-- Custom JS -->
 	<script src="{{asset('assets/js/theme-colorpicker.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
 	<script src="{{asset('assets/js/script.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
 	<script src="{{asset('assets/js/datatable.js')}}"></script>
 
-		<!-- Wizard JS -->
-		<script src="{{asset('assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}" type="a317a1ec46a9f5ed5f9ec2be-text/javascript"></script>
-		<script src="{{asset('assets/plugins/twitter-bootstrap-wizard/prettify.js')}}" type="a317a1ec46a9f5ed5f9ec2be-text/javascript"></script>
-		<script src="{{asset('assets/plugins/twitter-bootstrap-wizard/form-wizard.js')}}" type="a317a1ec46a9f5ed5f9ec2be-text/javascript"></script>
+	<!-- Wizard JS -->
+	<script src="{{asset('assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"
+		type="a317a1ec46a9f5ed5f9ec2be-text/javascript"></script>
+	<script src="{{asset('assets/plugins/twitter-bootstrap-wizard/prettify.js')}}"
+		type="a317a1ec46a9f5ed5f9ec2be-text/javascript"></script>
+	<script src="{{asset('assets/plugins/twitter-bootstrap-wizard/form-wizard.js')}}"
+		type="a317a1ec46a9f5ed5f9ec2be-text/javascript"></script>
 
-	
-	
-<script src="{{asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js')}}" data-cf-settings="da66958c310097099013dd7e-|49" defer></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"961c6d5ae94a9334","version":"2025.7.0","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}' crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function(){
-        $('#myTable').DataTable();
-    });
- </script>
- @yield('scripts')
+
+
+	<script src="{{asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js')}}"
+		data-cf-settings="da66958c310097099013dd7e-|49" defer></script>
+	<script defer
+		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+		data-cf-beacon='{"rayId":"961c6d5ae94a9334","version":"2025.7.0","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}'
+		crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function () {
+			$('#myTable').DataTable();
+		});
+	</script>
+	@yield('scripts')
 </body>
 
 
 <!-- Mirrored from dreamspos.dreamstechnologies.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Jul 2025 18:55:51 GMT -->
+
 </html>
