@@ -565,6 +565,10 @@ Route::get('customer-print-application-cert-details/{id}',[CustomerPermitControl
 Route::get('customer-impact-assessment',[ImpactAssessmentController::class,'index'])->name('customer-impact-assessment');
 Route::get('customer-environmental-impact/{id}',[ImpactAssessmentController::class,'environmentalView'])->name('customer-environmental-impact');
 Route::post('customer-store-environmental-impact/{id}',[ImpactAssessmentController::class,'storeEnvironmentalView'])->name('customer-store-environmental-impact');
+Route::get('customer-neighbour-concerns/{id}',[ImpactAssessmentController::class,'concernsView'])->name('customer-neighbour-concerns');
+Route::post('customer-store-neighbour-concerns/{id}',[ImpactAssessmentController::class,'storeConcerns'])->name('customer-store-neighbour-concerns');
+Route::get('customer-impact-mgt/{id}',[ImpactAssessmentController::class,'impactMgtView'])->name('customer-impact-mgt');
+Route::post('customer-store-impact-mgt/{id}',[ImpactAssessmentController::class,'storeImpactMgt'])->name('customer-store-impact-mgt');
 
 
 

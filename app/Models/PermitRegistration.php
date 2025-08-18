@@ -49,6 +49,10 @@ class PermitRegistration extends Model
         return $this->hasMany(EnvironmentalImpact::class, 'app_id');
     }
 
+     public function concerns(){
+        return $this->hasMany(NeighbourConcern::class, 'app_id');
+    }
+
  
  
  

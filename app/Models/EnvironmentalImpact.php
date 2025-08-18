@@ -19,5 +19,9 @@ class EnvironmentalImpact extends Model
         return $this->belongsTo(PermitRegistration::class, 'app_id');
     }
 
+    public function impact_mgt(){
+        return $this->hasOne(ImpactMgt::class, 'env_impact_id');
+    }
+
 
 }

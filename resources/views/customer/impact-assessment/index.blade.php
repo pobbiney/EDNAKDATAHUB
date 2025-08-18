@@ -72,10 +72,10 @@
                                     <td>{{ $app->getDistrict->name }}</td>
                                     <td>{{ $app->getRegion->name }}</td>
                                     <td >
-                                        <a target="_" class="btn btn-sm btn-success" style="color: white">View</a>    
+                                        <a href="#" class="btn btn-sm btn-success" style="color: white">View</a>    
                                         <a href="{{route('customer-environmental-impact',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-warning" style="color: white">Impact</a>     
-                                        {{-- <a  target="_" class="btn btn-sm btn-danger" style="color: white">Concerns</a> 
-                                        <a  target="_" class="btn btn-sm btn-info" style="color: white">Impact Management</a>          --}}
+                                        <a href="{{route('customer-neighbour-concerns',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-danger" style="color: white">Concerns</a> 
+                                        <a href="{{route('customer-impact-mgt',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-info" style="color: white">Impact Management</a>         
                                     </td>
                                 </tr>
                                         @php
