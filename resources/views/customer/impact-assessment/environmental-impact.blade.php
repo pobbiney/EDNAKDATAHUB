@@ -61,24 +61,19 @@
                                                                 <div class="col-xl-5">
                                                                     <div class="row mb-3">
                                                                         <div class="col-lg-9">
-                                                                            <input type="text" value="{{$item->construction_impact}}" disabled class="form-control" />
+                                                                            <textarea class="form-control" cols="30" rows="2" disabled>{{$item->construction_impact}}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-5">
                                                                     <div class="row mb-3">
                                                                         <div class="col-lg-9">
-                                                                            <input type="text" value="{{$item->operational_impact}}" disabled class="form-control" />
+                                                                            <textarea class="form-control" cols="30" rows="2" disabled>{{$item->operational_impact}}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
-
                                                             </div>
                                                     @endforeach
-                                                  
-                                                   
-
                                                 @endif
                                                 
                                             
@@ -97,18 +92,20 @@
                                                                 <div class="col-xl-5">
                                                                     <div class="row mb-3">
                                                                         <div class="col-lg-9">
-                                                                            <input type="text" name="impacts[{{ $i }}][impact]" required class="form-control" />
+                                                                            <textarea name="impacts[{{ $i }}][impact]" class="form-control" cols="30" rows="2"  required></textarea>
+                                    
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-5">
                                                                     <div class="row mb-3">
                                                                         <div class="col-lg-9">
-                                                                            <input type="text" name="impacts[{{ $i }}][operational_impact]" required class="form-control" />
+                                                                            <textarea name="impacts[{{ $i }}][operational_impact]" class="form-control" cols="30" rows="2"  required></textarea>
+                                                                           
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                @if($i != 0)
+                                                                @if($i > 1)
                                                                 <div class="col-xl-2">
                                                                     <button type="button" class="btn btn-link text-danger remove-impact">
                                                                         <i class="fas fa-trash-alt"></i>
@@ -135,7 +132,7 @@
 @section('scripts')
 
 <script>
-    let impactIndex = 3; // Starting index since 0,1,2 already exist from Blade
+    let impactIndex = 3; 
 
     document.getElementById('add-impact').addEventListener('click', function () {
         const wrapper = document.getElementById('impacts-wrapper');
@@ -148,14 +145,16 @@
                 <div class="col-xl-5">
                     <div class="row mb-3">
                         <div class="col-lg-9">
-                            <input type="text" name="impacts[\${impactIndex}][impact]" required class="form-control" />
+                            <textarea name="impacts[\${impactIndex}][impact]" class="form-control" cols="30" rows="2"  required></textarea>
+                           
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-5">
                     <div class="row mb-3">
                         <div class="col-lg-9">
-                            <input type="text" name="impacts[\${impactIndex}][operational_impact]" required class="form-control" />
+                            <textarea name="impacts[\${impactIndex}][operational_impact]" class="form-control" cols="30" rows="2"  required></textarea>
+                                    
                         </div>
                     </div>
                 </div>
@@ -171,7 +170,7 @@
         impactIndex++;
     });
 
-    // Remove impact group when trash icon is clicked
+    
     document.getElementById('impacts-wrapper').addEventListener('click', function (e) {
         if (e.target.closest('.remove-impact')) {
             e.target.closest('.impact-group').remove();

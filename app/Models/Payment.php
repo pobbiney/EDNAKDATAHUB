@@ -61,4 +61,18 @@ class Payment extends Model
 			return "Not Available";
 		}
 	}
+
+	public function getPaymentType (){
+
+		 if(BillType::where('id',$this->bill_type_id)->get()->count() > 0){
+
+			return BillType::find($this->bill_type_id)->name;
+
+		 }else{
+
+			return "N/A";
+		 }
+
+		 
+	}
 }
