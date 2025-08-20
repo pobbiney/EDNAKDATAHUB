@@ -52,8 +52,6 @@
                                         <th>Telephone </th>
                                         <th>Project Name</th>
                                         <th>Town</th>
-                                        <th>District</th>
-                                        <th>Region</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -69,10 +67,8 @@
                                     <td>{{ $app->contact_number }}</td>
                                      <td>{{ $app->project_title }}</td>
                                     <td>{{ $app->town }}</td>
-                                    <td>{{ $app->getDistrict->name }}</td>
-                                    <td>{{ $app->getRegion->name }}</td>
                                     <td >
-                                        <a href="#" class="btn btn-sm btn-success" style="color: white">View</a>    
+                                        <a href="{{route('customer-view-app',Crypt::encrypt($app->id))}}" target="_blank" class="btn btn-sm btn-success" style="color: white">View</a>    
                                         <a href="{{route('customer-environmental-impact',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-warning" style="color: white">Impact</a>     
                                         <a href="{{route('customer-neighbour-concerns',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-danger" style="color: white">Concerns</a> 
                                         <a href="{{route('customer-impact-mgt',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-info" style="color: white">Impact Management</a>         

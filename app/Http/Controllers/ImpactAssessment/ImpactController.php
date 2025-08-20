@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\ImpactAssessment;
 
-use App\Models\Formsale;
 use App\Models\ImpactMgt;
 use App\Models\Screening;
 use App\Models\PermitReview;
@@ -12,30 +11,77 @@ use App\Models\NeighbourConcern;
 use App\Models\PermitRegistration;
 use App\Models\EnvironmentalImpact;
 use App\Http\Controllers\Controller;
+use App\Models\Formsale;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class ImpactAssessmentController extends Controller
+class ImpactController extends Controller implements HasMiddleware
 {
-     public function index(){
-         if (!Session::has('formsale_id')) {
-                return redirect()->route('customer-login');
-            }
-
-        $formsale= Formsale::find(Session::get('formsale_id'));
-
-        $data = PermitRegistration::where('contact_number',$formsale->tell)->get();
-
-        return view('customer.impact-assessment.index',['data'=>$data]);
+     public static function middleware(): array
+    {
+        return ['auth'];
     }
 
-     public function environmentalView($id){
-         if (!Session::has('formsale_id')) {
-                return redirect()->route('customer-login');
-            }
+    public function index(){
+
+        return view('impact-assessment.index');
+    }
+
+      public function searchImpactAssessment (Request $request){
+        $field = $request->field;
+        $operation = $request->operator;
+        $parameter = $request->search_parameter;
+
+        $table = "";
+
+        // Base query with join
+        $query = PermitRegistration::query();
+
+        // Apply search condition
+        if ($operation == "equal") {
+            $result = $query->where($field, $parameter)->get();
+        } else {
+            $result = $query->where($field, 'LIKE', '%' . $parameter . '%')->get();
+        }
+
+        if($result->count() > 0){
+  
+            $table .= '<table id="example"  class="dt-select-table table">';
+    
+            $table .= '<thead> <tr>   <th><b>Applicant</b></th> <th><b>Telephone</b></th>  <th><b>Project Name</b></th><th><b>Town</b></th> <th><b>Action</b></th> </tr></thead>';
+    
+            $table .= '<tbody>';
+
+            foreach ($result as $item) {
+                $table .= '<tr>';
+                $table .= '<td>'.$item->proponent_name.'</td>';
+                $table .= '<td>'.$item->contact_number.' </td>';
+                $table .= '<td>'.$item->project_title.'</td>';
+                $table .= '<td>' . ($item->town ?? 'N/A') . '  </td>';
+                $table .= '<td><a href="'.route('view-app',Crypt::encrypt($item->id)).'" target="_" class="btn btn-sm btn-success m-1" style="color:white"> View</a><a href="'.route('environmental-impact',Crypt::encrypt($item->id)).'" class="btn btn-sm btn-warning m-1" style="color:white"> Impact</a><a href="'.route('neighbour-concerns',Crypt::encrypt($item->id)).'" class="btn btn-sm btn-danger m-1" style="color:white"> Concerns</a><a href="'.route('impact-mgt',Crypt::encrypt($item->id)).'" class="btn btn-sm btn-info m-1" style="color:white"> Impact Management</a></td>';
+                $table .= '</tr>';
+             }
+   
+            $table .= '</tbody>';
+    
+            $table .='</table>';
+    
+            return $table;
+    
+    
+           }else{
+    
+            return "no data";
+    
+           }
+
+    }
+
+      public function environmentalView($id){
         $decodeId = Crypt::decrypt($id);
         $impactData = EnvironmentalImpact::where('app_id',$decodeId)->get();
-        return view('customer.impact-assessment.environmental-impact',[
+        return view('impact-assessment.environmental-impact',[
             'decodeId' => $decodeId,
             'impactData' => $impactData
         ]);
@@ -56,21 +102,17 @@ class ImpactAssessmentController extends Controller
                 'app_id' => $decodeId,
                 'construction_impact' => $impactData['impact'],
                 'operational_impact' => $impactData['operational_impact'],
-                'created_by' => 0,
+                'created_by' => Auth::user()->id,
             ]);
         }
-
-        return redirect()->route('customer-impact-assessment')->with('message_success', 'Environmental Impacts saved successfully');
+        return redirect()->route('impact-assessment')->with('message_success', 'Environmental Impacts saved successfully');
        
     }
 
     public function concernsView($id){
-         if (!Session::has('formsale_id')) {
-                return redirect()->route('customer-login');
-            }
         $decodeId = Crypt::decrypt($id);
 
-        return view('customer.impact-assessment.neighbour-concerns',[
+        return view('impact-assessment.neighbour-concerns',[
             'decodeId' => $decodeId,
         ]);
     }
@@ -95,22 +137,19 @@ class ImpactAssessmentController extends Controller
                 'telephone' => $impactData['telephone'],
                 'location' => $impactData['location'],
                 'concern' => $impactData['concern'],
-                'created_by' => 0,
+                'created_by' => Auth::user()->id,
             ]);
         }
 
-        return redirect()->route('customer-impact-assessment')->with('message_success', 'Neighbour Concerns saved successfully');
+        return redirect()->route('impact-assessment')->with('message_success', 'Neighbour Concerns saved successfully');
        
     }
 
     public function impactMgtView($id){
-         if (!Session::has('formsale_id')) {
-                return redirect()->route('customer-login');
-            }
         $decodeId = Crypt::decrypt($id);
         $envImpact= EnvironmentalImpact::with('impact_mgt')->where('app_id',$decodeId)->get();
       
-        return view('customer.impact-assessment.impact-mgt',[
+        return view('impact-assessment.impact-mgt',[
             'decodeId' => $decodeId,
             'envImpact' =>$envImpact
         ]);
@@ -143,24 +182,31 @@ class ImpactAssessmentController extends Controller
                     'env_impact_id' => $impactData['impact_id'],
                     'operational_mgt' => $impactData['operational_mgt'],
                     'construction_mgt' => $impactData['construction_mgt'],
-                    'created_by' => 0,
+                    'created_by' => Auth::user()->id,
                 ]);
             }
         }
 
-        return redirect()->route('customer-impact-assessment')->with('message_success', 'Management of Impacts saved successfully');
+        return redirect()->route('impact-assessment')->with('message_success', 'Management of Impacts saved successfully');
        
     }
 
-     public function viewApp($id){
-        if (!Session::has('formsale_id')) {
-            return redirect()->route('customer-login');
-        }
+      public function viewApp($id){
         $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::findOrFail($decodeID);
         $formsale = Formsale::findOrFail($project->formID);
 
-      
-        return view('customer.impact-assessment.view');
+        $listscreen = Screening::where('formId',$formsale->id)->first();
+         $list = PermitReview::where('formId',$formsale->id)->first();
+         $documents = Drawingupload::where('appId',$project->id)->get();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = ImpactMgt::where('app_id',$project->id)->get();
+        return view('impact-assessment.view',[
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents,
+            'envImpact' => $envImpact, 'concerns' => $concerns, 'impactMgt' => $impactMgt
+        ]);
     }
+
+
 }

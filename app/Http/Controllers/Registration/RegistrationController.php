@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Registration;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Drawingupload;
+use App\Models\EnvironmentalImpact;
 use App\Models\Formsale;
+use App\Models\ImpactMgt;
+use App\Models\NeighbourConcern;
 use App\Models\PermitRegistration;
 use App\Models\PermitReview;
 use App\Models\ProjectCategory;
@@ -622,8 +625,12 @@ public function getAttachedDocView(){
         $listscreen = Screening::where('formId',$decodeID)->first();
          $list = PermitReview::where('formId',$decodeID)->first();
          $documents = Drawingupload::where('appId',$project->id)->get();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = ImpactMgt::where('app_id',$project->id)->get();
         return view('registration.view-application',[
-            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents,
+            'envImpact' => $envImpact, 'concerns' => $concerns, 'impactMgt' => $impactMgt
         ]);
     }
 }

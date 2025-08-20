@@ -17,6 +17,7 @@ use App\Http\Controllers\ReviewManager\ReviewController;
 use App\Http\Controllers\RenewalManager\RenewalController;
 use App\Http\Controllers\BillPayment\BillPaymentController;
 use App\Http\Controllers\Customer\CustomerPermitController;
+use App\Http\Controllers\ImpactAssessment\ImpactController;
 use App\Http\Controllers\Customer\CustomerFinanceController;
 use App\Http\Controllers\IncidentManager\IncidentController;
 use App\Http\Controllers\IssuanceManager\IssuanceController;
@@ -262,6 +263,18 @@ Route::post('task.searchJobTrackerProcess', [TaskMangerController::class, 'JobTr
 Route::get('view-job-tracker/{id}', [TaskMangerController::class, 'getJobTrackerDetailView'])->name('view-job-tracker');
 
 /* end Task Manager */
+
+
+// Impact Assessment
+Route::get('impact-assessment',[ImpactController::class,'index'])->name('impact-assessment');
+Route::post('impact.searchImpactAssessment', [ImpactController::class, 'searchImpactAssessment'])->name('impact.searchImpactAssessment');
+Route::get('environmental-impact/{id}',[ImpactController::class,'environmentalView'])->name('environmental-impact');
+Route::post('store-environmental-impact/{id}',[ImpactController::class,'storeEnvironmentalView'])->name('store-environmental-impact');
+Route::get('neighbour-concerns/{id}',[ImpactController::class,'concernsView'])->name('neighbour-concerns');
+Route::post('store-neighbour-concerns/{id}',[ImpactController::class,'storeConcerns'])->name('store-neighbour-concerns');
+Route::get('impact-mgt/{id}',[ImpactController::class,'impactMgtView'])->name('impact-mgt');
+Route::post('store-impact-mgt/{id}',action: [ImpactController::class,'storeImpactMgt'])->name('store-impact-mgt');
+Route::get('view-app/{id}',[ImpactController::class,'viewApp'])->name('view-app');
 
 /*Inspection Manager */
 Route::get('Certificate',[CertificateController::class,'getCertificateView'])->name('Certificate');
@@ -569,7 +582,7 @@ Route::get('customer-neighbour-concerns/{id}',[ImpactAssessmentController::class
 Route::post('customer-store-neighbour-concerns/{id}',[ImpactAssessmentController::class,'storeConcerns'])->name('customer-store-neighbour-concerns');
 Route::get('customer-impact-mgt/{id}',[ImpactAssessmentController::class,'impactMgtView'])->name('customer-impact-mgt');
 Route::post('customer-store-impact-mgt/{id}',[ImpactAssessmentController::class,'storeImpactMgt'])->name('customer-store-impact-mgt');
-
+Route::get('customer-view-app/{id}',[ImpactAssessmentController::class,'viewApp'])->name('customer-view-app');
 
 
 /*Staff Management */
