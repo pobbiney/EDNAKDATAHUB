@@ -79,7 +79,7 @@ $subpageName = "reports-national";
                                                                 <td>{{$formListitem->tel}}</td>
                                                                  <td>{{$formListitem->location}}</td>
                                                                 
-                                                                <td><b>{{$formListitem->city, }}</b></td>
+                                                                <td><b>{{$formListitem->city }}</b></td>
                                                                 <td>{{ $formListitem->createdOn }}</td>
 
                                                               

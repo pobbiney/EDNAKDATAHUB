@@ -68,7 +68,7 @@
                                      <td>{{ $app->project_title }}</td>
                                     <td>{{ $app->town }}</td>
                                     <td >
-                                        <a href="{{route('customer-view-app',Crypt::encrypt($app->id))}}" target="_blank" class="btn btn-sm btn-success" style="color: white">View</a>    
+                                        <a href="{{route('customerviewapp',Crypt::encrypt($app->id))}}" target="_blank" class="btn btn-sm btn-success" style="color: white">View</a>    
                                         <a href="{{route('customer-environmental-impact',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-warning" style="color: white">Impact</a>     
                                         <a href="{{route('customer-neighbour-concerns',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-danger" style="color: white">Concerns</a> 
                                         <a href="{{route('customer-impact-mgt',Crypt::encrypt($app->id))}}" class="btn btn-sm btn-info" style="color: white">Impact Management</a>         
@@ -90,6 +90,3 @@
 </div>
 @endsection
 
-@section('scripts')
-
-@endsection

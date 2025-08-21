@@ -152,15 +152,26 @@ class ImpactAssessmentController extends Controller
        
     }
 
-     public function viewApp($id){
-        if (!Session::has('formsale_id')) {
+
+     public function viewApplication($id){
+             if (!Session::has('formsale_id')) {
             return redirect()->route('customer-login');
         }
         $decodeID = Crypt::decrypt($id);
         $project = PermitRegistration::findOrFail($decodeID);
-        $formsale = Formsale::findOrFail($project->formID);
+        $formsale = Formsale::where('id',$project->formID)->first();
+         $listscreen = Screening::where('formId',$formsale->id)->first();
+         $list = PermitReview::where('formId',$formsale->id)->first();
+         $documents = Drawingupload::where('appId',$project->id)->get();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
+        
+        return view('customer.impact-assessment.view-app',[
+            'project'=>$project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents,
+            'envImpact' => $envImpact, 'concerns' => $concerns, 'impactMgt' => $impactMgt
 
-      
-        return view('customer.impact-assessment.view');
+        ]);
+
     }
 }

@@ -61,7 +61,7 @@
                                                                             <td class="text-dark">GH₵ 
                                                                                  {{ number_format($sale->appBills?->sum('bill_amount')?? 0, 2) }}
                                                                             </td>
-                                                                            <td style="word-wrap: break-word; white-space: normal; text-align: center;"><a href="{{route('customer-bill-details',Crypt::encrypt($sale->id))}}" data-id="" class="btn btn-warning btn-sm"><i class="fas fa-credit-card"></i> View Bills</a></td>
+                                                                            <td><a href="{{route('customer-bill-details',Crypt::encrypt($sale->id))}}" data-id="" class="btn btn-warning btn-sm"><i class="fas fa-credit-card"></i> View Bills</a></td>
                                                                          
                                                                         </tr>
                                                                         @endforeach
@@ -94,9 +94,11 @@
                                                                                 <td class="text-dark" style="word-wrap: break-word; white-space: normal;">{{$sale->tell}}</td>
                                                                             <td class="text-dark"  style="word-wrap: break-word; white-space: normal;">{{ $sale->formtype->formName }}</td>
                                                                             <td class="text-dark">GH₵ 
-                                                                                {{-- {{ number_format($sale->amountPaid,2) }} --}}
+                                                                                 {{ number_format($sale->payments?->sum('amount')?? 0, 2) }}
                                                                             </td>
-                                                                            <td style="word-wrap: break-word; white-space: normal; text-align: center;"><a href="{{route('customer-payment-details',Crypt::encrypt($sale->id))}}" data-id="" class="btn btn-info btn-sm"><i class="fas fa-credit-card"></i> View Payments</a></td>
+                                                                            <td ><a href="{{route('customer-payment-details',Crypt::encrypt($sale->id))}}" data-id="" class="btn btn-info btn-sm"><i class="fas fa-credit-card"></i> View Payments</a>
+                                                                         
+                                                                            </td>
                                                         
                                                                         </tr>
                                                                         @endforeach

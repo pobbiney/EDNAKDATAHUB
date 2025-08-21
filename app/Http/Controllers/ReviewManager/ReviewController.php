@@ -2,36 +2,39 @@
 
 namespace App\Http\Controllers\ReviewManager;
 
-use App\Http\Controllers\Controller;
-use App\Models\Appaccessroute;
-use App\Models\Appalarm;
+use Carbon\Carbon;
+use App\Models\Task;
 use App\Models\Appfire;
+use App\Models\Tracker;
+use App\Models\Appalarm;
+use App\Models\BillItem;
+use App\Models\ImpactMgt;
+use App\Models\PermitApp;
+use App\Models\Screening;
+use App\Models\Floortable;
+use App\Models\Certvetting;
+use App\Models\Certapproval;
+use App\Models\PermitReview;
+use Illuminate\Http\Request;
+use App\Models\Drawingupload;
+use App\Models\Meansofescape;
+use App\Models\Permitvetting;
+use App\Models\Appaccessroute;
+use App\Models\CertificateApp;
+use App\Models\Permitapproval;
+use App\Models\ScreenDecision;
 use App\Models\Appmeansofescape;
 use App\Models\AuthorizationApp;
-use App\Models\BillItem;
-use App\Models\Certapproval;
-use App\Models\CertificateApp;
-use App\Models\Certvetting;
-use App\Models\Drawingupload;
-use App\Models\Floortable;
-use App\Models\GeneralCommentReport;
-use App\Models\InspectionQuestionType;
-use App\Models\Meansofescape;
-use App\Models\PermitApp;
-use App\Models\Permitapproval;
-use App\Models\PermitRegistration;
-use App\Models\PermitReview;
-use App\Models\Permitvetting;
-use App\Models\ScreenDecision;
-use App\Models\Screening;
-use App\Models\Task;
-use App\Models\Tracker;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
+use App\Models\NeighbourConcern;
 use PhpParser\Node\Expr\FuncCall;
+use App\Models\PermitRegistration;
+use Illuminate\Support\Facades\DB;
+use App\Models\EnvironmentalImpact;
+use App\Http\Controllers\Controller;
+use App\Models\GeneralCommentReport;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use App\Models\InspectionQuestionType;
 
 class ReviewController extends Controller
 {
@@ -317,8 +320,13 @@ class ReviewController extends Controller
          $listscreen = Screening::where('formId',$decodeID)->first();
          $list = ScreenDecision::all();
          $documents = Drawingupload::where('appId',$project->id)->get();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
+
         return view('review_manager.review_permit_application',[
-            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents,
+            'envImpact' => $envImpact, 'concerns' =>$concerns, 'impactMgt'=>$impactMgt
         ]);
            
       
@@ -583,8 +591,14 @@ class ReviewController extends Controller
         $listscreen = Screening::where('formId',$decodeID)->first();
         $list = ScreenDecision::all();
         $reviewapp = PermitReview::where('formID',$decodeID)->first();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+         $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
+
+        
        return view('review_manager.approve_application_permit_details',[
-           'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'reviewapp'=>$reviewapp
+           'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'reviewapp'=>$reviewapp,
+           'envImpact' => $envImpact, 'concerns' =>$concerns, 'impactMgt'=>$impactMgt
        ]);
     }
 
@@ -841,10 +855,14 @@ class ReviewController extends Controller
          $project = PermitRegistration::where('formID',$decodeID)->first();
           $list = PermitReview::where('formId',$decodeID)->first();
          $documents = Drawingupload::where('appId',$project->id)->get();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
        
          $listscreen = Screening::where('formId',$decodeID)->first();
         return view('review_manager.view-review_permit_application',[
-            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents,
+            'envImpact' => $envImpact, 'concerns' => $concerns, 'impactMgt' => $impactMgt
         ]);
        }
 

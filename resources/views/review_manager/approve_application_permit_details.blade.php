@@ -187,254 +187,316 @@ $subpageName = "my_application";
                 </div>
                 <div id="tab-content">
                     <div id="content1" class="displayContent active">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Project</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Title of the Project:
-                                                        </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->project_title ?? ''}}</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Project</h5>
+                                        </div>
+                                        <div class="card-body">
+                                             <p class="mb-3">This tab provides information about the project, including its title, type, and sector, as well as the project's description,scope and other information.</p>
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Title of the Project:</h6>
+                                                            </label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->project_title ?? ''}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Sector Project: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->sector->name ?? ''}}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Sector Project: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->sector->name ?? ''}}</h5>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Project Category:</h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->category->name ?? ''}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Type of Project: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->type->name ?? ''}}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Project Category:</label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->category->name ?? ''}}</h5>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-12">
+                                                        <label class="form-label"><h6>Description of the proposed</h6>
+                                                            Project:</label>
+                                                            <p class="mt-1">{{$project->project_description}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-12">
+                                                        <label class="form-label"><h6>Scope of the proposed Project: </h6></label>
+                                                        <p class="mt-1">{{$project->scope}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Plot/House No: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->plot_number}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Street Name: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->street_name ?? ''}}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Type of Project: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->type->name ?? ''}}</h5>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>GPS Address: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->gps ?? ''}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Town: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->town ?? ''}}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-lg-12">
-                                                    <label class="form-label">Description of the proposed
-                                                        Project:</label>
-                                                        <h5 class="mt-2">{{$project->project_description}}</h5>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-lg-12">
-                                                    <label class="form-label">Scope of the proposed Project:</label>
-                                                    <h5 class="mt-2">{{$project->scope}}</h5>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Plot/House No: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->plot_number}}</h5>
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>Region: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->getRegion->name ?? ''}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <label class="col-lg-4 col-form-label"><h6>District: </h6></label>
+                                                            <div class="col-lg-8">
+                                                                <p class="mt-1">{{$project->getDistrict->name ?? ''}}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Street Name: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->street_name ?? ''}}</h5>
-                                                        </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-12">
+                                                        <label class="form-label"><h6>Major Landmark(If any)</h6></label>
+                                                        <p class="mt-1">{{$project->landmark ?? ''}}</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">GPS Address: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->gps ?? ''}}</h5>
-                                                        </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-12">
+                                                        <label class="form-label"><h6>Adjacent Land Uses(Existing)</h6></label>
+                                                        <p class="mt-1">{{$project->land_uses ?? ''}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Town: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->town ?? ''}}</h5>
-                                                        </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-12">
+                                                        <label class="form-label"><h6>Site description (immediate activities andadjacent)</h6></label>
+                                                        <p class="mt-1">{{$project->site_description ?? ''}}</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">Region: </label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->getRegion->name ?? ''}}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-lg-4 col-form-label">District:</label>
-                                                        <div class="col-lg-8">
-                                                            <h5 class="mt-2">{{$project->getDistrict->name ?? ''}}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-lg-12">
-                                                    <label class="form-label">Major Landmark(If any)</label>
-                                                    <h5 class="mt-2">{{$project->landmark ?? ''}}</h5>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-lg-12">
-                                                    <label class="form-label">Adjacent Land Uses(Existing)</label>
-                                                    <h5 class="mt-2">{{$project->land_uses ?? ''}}</h5>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-lg-12">
-                                                    <label class="form-label">Site description (immediate activities and
-                                                        adjacent)</label>
-                                                        <h5 class="mt-2">{{$project->site_description ?? ''}}</h5>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="content2" class="displayContent">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Infrastructure </h5>
-                                    </div>
-                                    <div class="card-body">
-                                            <div class="mb-3">
-                                                <label class="form-label">Structures on the site</label>
-                                                <h5 class="mt-2">{{$project->structures ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Access to water (source, quantity)</label>
-                                                <h5 class="mt-2">{{$project->water ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Access to power (type, source,
-                                                    quantity)</label>
-                                                    <h5 class="mt-2">{{$project->power ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Drainage provision in the project area
-                                                </label>
-                                                <h5 class="mt-2">{{$project->drainage ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Nearness to water body</label>
-                                                <h5 class="mt-2">{{$project->water_body ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Access to road to project site </label>
-                                                <h5 class="mt-2">{{$project->road_access ?? ''}}</h5>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Other major utilities proposed or existing on
-                                                    site </label>
-                                                    <h5 class="mt-2">{{$project->other ?? ''}}</h5>
-                                            </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="content3" class="displayContent">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Environmental Impacts </h5>
+                        <div id="content2" class="displayContent">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Infrastructure </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="mb-3">This section provides information about the project's infrastructure, including access to water, electricity, and other vital services.</p>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Structures on the site</h6></label>
+                                                    <p class="mt-1">{{$project->structures ?? ''}}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Access to water (source, quantity)</h6></label>
+                                                     <p class="mt-1">{{$project->water ?? ''}}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Access to power (type, source,quantity)</h6></label>
+                                                    <p class="mt-1">{{$project->power ?? ''}}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Drainage provision in the project area</h6>
+                                                    </label>
+                                                     <p class="mt-1">{{$project->drainage ?? ''}}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Nearness to water body</h6></label>
+                                                      <p class="mt-1">{{$project->water_body ?? ''}}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Access to road to project site </h6></label>
+                                                    <p class="mt-1">{{$project->road_access ?? ''}}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label"><h6>Other major utilities proposed or existing on site </h6></label>
+                                                    <p class="mt-1">{{$project->other ?? ''}}</p>
+                                                </div>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        <p class="mb-3">Potential environmental impacts of proposed undertaking (both
-                                            constructional and operational phases)</p>
-                                        <form action="#">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content3" class="displayContent">
+                          <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Environmental Impacts </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="mb-3">Potential environmental impacts of proposed undertaking (both
+                                                constructional and operational phases)</p>
+                                            
                                             <div class="row">
                                                 <div class="col-xl-6">
                                                     <h6>Construction Phase</h6>
-                                                      <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="col-xl-6">
                                                     <h6>Operational Phase</h6>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
+                                                </div>
+                                            </div>
+                                            @foreach($envImpact as $item)
+                                                <div class="row">
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <div class="col-lg-10">
+                                                                
+                                                                <textarea class="form-control" cols="30" rows="2"
+                                                                    disabled>{{$item->construction_impact}}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-lg-9">
-                                                            <h5 class="mt-2"></h5>
+                                                    <div class="col-xl-6">
+                                                        <div class="row mb-3">
+                                                            <div class="col-lg-10">
+                                                                
+                                                                <textarea class="form-control" cols="30" rows="2"
+                                                                    disabled>{{$item->operational_impact}}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            @endforeach
+                                  
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="content4" class="displayContent"></div>
-                    <div id="content5" class="displayContent"></div>
+                        <div id="content4" class="displayContent">
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Concerns </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            {{-- <p class="mb-3">
+                                                Views of immediate adjourning neighbor’s and relevant stakeholders (if applicable provide evidence of consultation to facilitate identification of key issues/impacts)
+                                            </p> --}}
+                                            
+                                               
+                                                    <div class="col-xl-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th><h6>Full Name</h6></th>
+                                                                        <th><h6>Telephone</h6></th>
+                                                                        <th><h6>Location to Project</h6></th>
+                                                                        <th><h6>Concern/Issue</h6></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($concerns as $item)
+                                                                        <tr>
+                                                                            <td><p>{{$loop->iteration}}</p></td>
+                                                                            <td><p>{{$item->full_name}}</p></td>
+                                                                            <td><p>{{$item->telephone}}</p></td>
+                                                                            <td><p>{{$item->location}}</p></td>
+                                                                            <td><p>{{$item->concern}}</p></td>
+                                                                           
+                                                                        </tr>
+                                                                        @endforeach
+                                                                
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                               
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content5" class="displayContent">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Management of Impacts </h5>
+                                        </div>
+                                        <div class="card-body">
+                                         <div class="row mb-2">
+                                                <div class="col-xl-12">
+                                                    <h5>Construction Phase</h5>
+                                                </div>
+                                        </div>
+                                            @foreach($impactMgt as $item)
+                                                <div class="row">
+                                                    <h6>{{$item->construction_impact}}</h6>
+                                                    <li>{{$item->impact_mgt->construction_mgt}}</li>
+                                                </div>
+                                            @endforeach
+                                        <div class="row mt-3 mb-2">
+                                                <div class="col-xl-12">
+                                                    <h5>Operational Phase</h5>
+                                                </div>
+                                        </div>
+                                            @foreach($impactMgt as $item)
+                                                <div class="row">
+                                                    <h6>{{$item->operational_impact}}</h6>
+                                                    <li>{{$item->impact_mgt->operational_mgt}}</li>
+                                                </div>
+                                            @endforeach
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div id="content6" class="displayContent">
                         <div class="row">
                              

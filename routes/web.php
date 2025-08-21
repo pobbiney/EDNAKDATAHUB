@@ -582,7 +582,7 @@ Route::get('customer-neighbour-concerns/{id}',[ImpactAssessmentController::class
 Route::post('customer-store-neighbour-concerns/{id}',[ImpactAssessmentController::class,'storeConcerns'])->name('customer-store-neighbour-concerns');
 Route::get('customer-impact-mgt/{id}',[ImpactAssessmentController::class,'impactMgtView'])->name('customer-impact-mgt');
 Route::post('customer-store-impact-mgt/{id}',[ImpactAssessmentController::class,'storeImpactMgt'])->name('customer-store-impact-mgt');
-Route::get('customer-view-app/{id}',[ImpactAssessmentController::class,'viewApp'])->name('customer-view-app');
+Route::get('customerviewapp/{id}',[ImpactAssessmentController::class,'viewApplication'])->name('customerviewapp');
 
 
 /*Staff Management */

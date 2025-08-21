@@ -201,7 +201,7 @@ class ImpactController extends Controller implements HasMiddleware
          $documents = Drawingupload::where('appId',$project->id)->get();
         $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
         $concerns = NeighbourConcern::where('app_id',$project->id)->get();
-        $impactMgt = ImpactMgt::where('app_id',$project->id)->get();
+        $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
         return view('impact-assessment.view',[
             'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents,
             'envImpact' => $envImpact, 'concerns' => $concerns, 'impactMgt' => $impactMgt

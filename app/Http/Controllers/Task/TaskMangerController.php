@@ -12,6 +12,7 @@ use App\Models\Tracker;
 use App\Models\BillItem;
 use App\Models\Formsale;
 use App\Models\RenewApp;
+use App\Models\ImpactMgt;
 use App\Models\PermitApp;
 use App\Models\Screening;
 use Illuminate\Http\Request;
@@ -19,8 +20,10 @@ use App\Models\Drawingupload;
 use App\Models\CertificateApp;
 use App\Models\ScreenDecision;
 use App\Models\AuthorizationApp;
+use App\Models\NeighbourConcern;
 use App\Models\PermitRegistration;
 use Illuminate\Support\Facades\DB;
+use App\Models\EnvironmentalImpact;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -629,24 +632,32 @@ Thank you' ;
          $list = ScreenDecision::all();
          $documents = Drawingupload::where('appId',$project->id)->get();
           $listscreen = Screening::where('formId',$decodeID)->first();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
+
 
         return view('task.application-screening',[
             'project' => $project,'list'=>$list,'documents'=>$documents,'listscreen'=>$listscreen
+            , 'envImpact' => $envImpact, 'concerns' =>$concerns, 'impactMgt'=>$impactMgt
         ]);
            
        } 
 
        public function getViewScreening($id)
        {
-          $decodeID = Crypt::decrypt($id);
-         $project = PermitRegistration::where('formID',$decodeID)->first();
-         $list = ScreenDecision::all();
-          $documents = Drawingupload::where('appId',$project->id)->get();
+        $decodeID = Crypt::decrypt($id);
+        $project = PermitRegistration::where('formID',$decodeID)->first();
+        $list = ScreenDecision::all();
+        $documents = Drawingupload::where('appId',$project->id)->get();
+        $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+        $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+        $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
        
          $listscreen = Screening::where('formId',$decodeID)->first();
         return view('task.viewScreening',[
             'project' => $project,'listscreen'=>$listscreen,
-            'list'=>$list,'documents' => $documents
+            'list'=>$list,'documents' => $documents, 'envImpact' => $envImpact, 'concerns' =>$concerns, 'impactMgt'=>$impactMgt
         ]);
        }
 
