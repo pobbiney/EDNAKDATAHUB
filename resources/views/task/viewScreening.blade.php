@@ -40,7 +40,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Applicant: </label>
                                         <div class="col-lg-8">
-                                            <h5 class="mt-2">{{$project->contact_person ?? ''}}</h5>
+                                            <h5 class="mt-2">{{$project->contact_person ?? 'N/A'}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Project Name: </label>
                                         <div class="col-lg-8">
-                                            <h5 class="mt-2">{{$project->proponent_name ?? ''}}</h5>
+                                            <h5 class="mt-2">{{$project->proponent_name ?? 'N/A'}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Address: </label>
                                         <div class="col-lg-8">
-                                            <h5 class="mt-2">{{$project->address ?? ''}}</h5>
+                                            <h5 class="mt-2">{{$project->address ?? 'N/A'}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">District: </label>
                                         <div class="col-lg-8">
-                                            <h5 class="mt-2">{{$project->getDistrict->name ?? ''}}</h5>
+                                            <h5 class="mt-2">{{$project->getDistrict->name ?? 'N/A'}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-4 col-form-label">Region: </label>
                                         <div class="col-lg-8">
-                                            <h5 class="mt-2">{{$project->getRegion->name ?? ''}}</h5>
+                                            <h5 class="mt-2">{{$project->getRegion->name ?? 'N/A'}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@
                                                             <label class="col-lg-4 col-form-label"><h6>Title of the Project:</h6>
                                                             </label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->project_title ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->project_title ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -198,7 +198,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>Sector Project: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->sector->name ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->sector->name ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,7 +208,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>Project Category:</h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->category->name ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->category->name ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -216,7 +216,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>Type of Project: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->type->name ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->type->name ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -247,7 +247,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>Street Name: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->street_name ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->street_name ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -257,7 +257,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>GPS Address: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->gps ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->gps ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -265,7 +265,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>Town: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->town ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->town ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -275,7 +275,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>Region: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->getRegion->name ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->getRegion->name ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -283,7 +283,7 @@
                                                         <div class="row mb-3">
                                                             <label class="col-lg-4 col-form-label"><h6>District: </h6></label>
                                                             <div class="col-lg-8">
-                                                                <p class="mt-1">{{$project->getDistrict->name ?? ''}}</p>
+                                                                <p class="mt-1">{{$project->getDistrict->name ?? 'N/A'}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -291,19 +291,19 @@
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label"><h6>Major Landmark(If any)</h6></label>
-                                                        <p class="mt-1">{{$project->landmark ?? ''}}</p>
+                                                        <p class="mt-1">{{$project->landmark ?? 'N/A'}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label"><h6>Adjacent Land Uses(Existing)</h6></label>
-                                                        <p class="mt-1">{{$project->land_uses ?? ''}}</p>
+                                                        <p class="mt-1">{{$project->land_uses ?? 'N/A'}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
                                                         <label class="form-label"><h6>Site description (immediate activities andadjacent)</h6></label>
-                                                        <p class="mt-1">{{$project->site_description ?? ''}}</p>
+                                                        <p class="mt-1">{{$project->site_description ?? 'N/A'}}</p>
                                                     </div>
                                                 </div>
                                             </form>
@@ -323,32 +323,32 @@
                                             <p class="mb-3">This section provides information about the project's infrastructure, including access to water, electricity, and other vital services.</p>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Structures on the site</h6></label>
-                                                    <p class="mt-1">{{$project->structures ?? ''}}</p>
+                                                    <p class="mt-1">{{$project->structures ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Access to water (source, quantity)</h6></label>
-                                                     <p class="mt-1">{{$project->water ?? ''}}</p>
+                                                     <p class="mt-1">{{$project->water ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Access to power (type, source,quantity)</h6></label>
-                                                    <p class="mt-1">{{$project->power ?? ''}}</p>
+                                                    <p class="mt-1">{{$project->power ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Drainage provision in the project area</h6>
                                                     </label>
-                                                     <p class="mt-1">{{$project->drainage ?? ''}}</p>
+                                                     <p class="mt-1">{{$project->drainage ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Nearness to water body</h6></label>
-                                                      <p class="mt-1">{{$project->water_body ?? ''}}</p>
+                                                      <p class="mt-1">{{$project->water_body ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Access to road to project site </h6></label>
-                                                    <p class="mt-1">{{$project->road_access ?? ''}}</p>
+                                                    <p class="mt-1">{{$project->road_access ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Other major utilities proposed or existing on site </h6></label>
-                                                    <p class="mt-1">{{$project->other ?? ''}}</p>
+                                                    <p class="mt-1">{{$project->other ?? 'N/A'}}</p>
                                                 </div>
                                         </div>
                                     </div>
@@ -494,17 +494,17 @@
                                             <div class="mb-3">
                                                 <label class="form-label"><h6>Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact</h6>
                                                 </label>
-                                                <p class="mt-1">{{$listscreen->evaluation ?? ''}}</p>
+                                                <p class="mt-1">{{$listscreen->evaluation ?? 'N/A'}}</p>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label"><h6>Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment</h6>
                                                 </label>
-                                                <p class="mt-1">{{$listscreen->getdecision->name ?? ''}}</p>
+                                                <p class="mt-1">{{$listscreen->getdecision->name ?? 'N/A'}}</p>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label"><h6>Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.</h6>
                                                 </label>
-                                                 <p class="mt-1">{{$listscreen->recommendation ?? ''}}</p>
+                                                 <p class="mt-1">{{$listscreen->recommendation ?? 'N/A'}}</p>
                                             </div>
                                         </div>
                                     </div>
