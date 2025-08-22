@@ -229,8 +229,8 @@
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-12">
-                                                        <label class="form-label"><h6>Description of the proposed</h6>
-                                                            Project:</label>
+                                                        <label class="form-label"><h6>Description of the proposed project:</h6>
+                                                            </label>
                                                             <p class="mt-1">{{$project->project_description}}</p>
                                                     </div>
                                                 </div>
