@@ -440,6 +440,7 @@ $subpageName = "my_application";
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                @if($concerns->count() > 0)
                                                                     @foreach($concerns as $item)
                                                                         <tr>
                                                                             <td><p>{{$loop->iteration}}</p></td>
@@ -449,7 +450,12 @@ $subpageName = "my_application";
                                                                             <td><p>{{$item->concern}}</p></td>
                                                                            
                                                                         </tr>
-                                                                        @endforeach
+                                                                    @endforeach
+                                                                 @else
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-center">No concerns available </td>
+                                                                        </tr>
+                                                                    @endif
                                                                 
                                                                 </tbody>
                                                             </table>
@@ -474,23 +480,36 @@ $subpageName = "my_application";
                                                     <h5>Construction Phase</h5>
                                                 </div>
                                         </div>
+                                        @if($impactMgt->count() > 0)
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->construction_impact}}</h6>
                                                     <li>{{$item->impact_mgt->construction_mgt}}</li>
                                                 </div>
                                             @endforeach
+                                        @else
+                                            <div class="row">
+                                                <h6>N/A</h6>
+                                            </div>
+                                        @endif
+
                                         <div class="row mt-3 mb-2">
                                                 <div class="col-xl-12">
                                                     <h5>Operational Phase</h5>
                                                 </div>
                                         </div>
+                                         @if($impactMgt->count() > 0)
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->operational_impact}}</h6>
                                                     <li>{{$item->impact_mgt->operational_mgt}}</li>
                                                 </div>
                                             @endforeach
+                                          @else
+                                         <div class="row">
+                                                <h6>N/A</h6>
+                                         </div>
+                                        @endif
                                             
                                         </div>
                                     </div>

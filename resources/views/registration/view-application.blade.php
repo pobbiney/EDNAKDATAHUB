@@ -485,6 +485,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    @if($concerns->count() > 0)
                                                                     @foreach($concerns as $item)
                                                                         <tr>
                                                                             <td><p>{{$loop->iteration}}</p></td>
@@ -494,7 +495,12 @@
                                                                             <td><p>{{$item->concern}}</p></td>
                                                                            
                                                                         </tr>
-                                                                        @endforeach
+                                                                    @endforeach
+                                                                    @else
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-center">No concerns available </td>
+                                                                        </tr>
+                                                                    @endif
                                                                 
                                                                 </tbody>
                                                             </table>
@@ -519,7 +525,7 @@
                                                     <h5>Construction Phase</h5>
                                                 </div>
                                         </div>
-                                         @if(count($impactMgt) >0 )
+                                         @if($impactMgt->count() > 0)
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->construction_impact}}</h6>
@@ -536,7 +542,7 @@
                                                     <h5>Operational Phase</h5>
                                                 </div>
                                         </div>
-                                        @if(count($impactMgt) >0 )
+                                        @if($impactMgt->count() > 0)
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->operational_impact}}</h6>
