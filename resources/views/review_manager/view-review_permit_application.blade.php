@@ -538,7 +538,7 @@
                                             @endforeach
                                         @else
                                             <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
                                         <div class="row mt-3 mb-2">
@@ -555,7 +555,7 @@
                                             @endforeach
                                         @else
                                          <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
                                             

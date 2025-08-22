@@ -489,7 +489,7 @@ $subpageName = "my_application";
                                             @endforeach
                                         @else
                                             <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
 
@@ -507,7 +507,7 @@ $subpageName = "my_application";
                                             @endforeach
                                           @else
                                          <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                          </div>
                                         @endif
                                             

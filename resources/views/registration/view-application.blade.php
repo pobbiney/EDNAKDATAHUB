@@ -534,7 +534,7 @@
                                             @endforeach
                                         @else
                                             <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
                                         <div class="row mt-3 mb-2">
@@ -551,7 +551,7 @@
                                             @endforeach
                                          @else
                                          <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
                                             
@@ -567,21 +567,21 @@
                                         <div class="card-header">
                                             <h5 class="card-title">Impact Assessment </h5>
                                         </div>
-                                        <div class="card-body">
+                                         <div class="card-body">
                                             <div class="mb-3">
-                                                <label class="form-label">Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact
+                                                <label class="form-label"><h6>Evaluation of the significance of the identified impacts, considering factors like the magnitude, duration, and extent of the impact</h6>
                                                 </label>
-                                                <h5 class="mt-2">{{$listscreen->evaluation ?? 'N/A'}}</h5>
+                                                <p class="mt-1">{{$listscreen->evaluation ?? 'N/A'}}</p>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment
+                                                <label class="form-label"><h6>Categorization of the project based on the severity of its environmental impacts, determining whether it requires further environmental assessment</h6>
                                                 </label>
-                                                <h5 class="mt-2">{{$listscreen->getdecision->name ?? 'N/A'}}</h5>
+                                                <p class="mt-1">{{$listscreen->getdecision->name ?? 'N/A'}}</p>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.
+                                                <label class="form-label"><h6>Suggestions for appropriate mitigation measures to minimize negative impacts and enhance positive impacts, as well as recommendations for further environmental assessment if necessary.</h6>
                                                 </label>
-                                                <h5 class="mt-2">{{$listscreen->recommendation ?? 'N/A'}}</h5>
+                                                 <p class="mt-1">{{$listscreen->recommendation ?? 'N/A'}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -597,12 +597,12 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="mb-3">
-                                                    <label class="form-label">Evaluation</label>
-                                                    <h4 class="mt-2">{{$list->evaluation ?? 'N/A'}}</h4>
+                                                    <label class="form-label"><h6>Evaluation</h6></label>
+                                                    <p class="mt-1">{{$list->evaluation ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Screening Decision /Recommendation</label>
-                                                    <h4 class="mt-2">{{$list->recommendation ?? 'N/A'}}</h4>
+                                                    <label class="form-label"><h6>Screening Decision /Recommendation</h6></label>
+                                                    <p class="mt-1">{{$list->recommendation ?? 'N/A'}}</p>
                                                 </div>
                                              
                                         </div>

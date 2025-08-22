@@ -482,7 +482,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @if($impactMgt->count() > 0)
+                                                                    @if($concerns->count() > 0)
                                                                     @foreach($concerns as $item)
                                                                         <tr>
                                                                             <td><p>{{$loop->iteration}}</p></td>
@@ -493,11 +493,11 @@
                                                                            
                                                                         </tr>
                                                                         @endforeach
-                                                                      @else
-                                                                        <div class="row">
-                                                                                <h6>N/A</h6>
-                                                                            </div>
-                                                                    @endif
+                                                                        @else
+                                                                            <tr>
+                                                                                <td colspan="5" class="text-center">No concerns available </td>
+                                                                            </tr>
+                                                                        @endif
                                                                 
                                                                 </tbody>
                                                             </table>
@@ -531,7 +531,7 @@
                                             @endforeach
                                           @else
                                          <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
                                         <div class="row mt-3 mb-2">
@@ -548,7 +548,7 @@
                                             @endforeach
                                         @else
                                          <div class="row">
-                                                <h6>N/A</h6>
+                                                 <p>N/A</p>
                                             </div>
                                         @endif
                                             
