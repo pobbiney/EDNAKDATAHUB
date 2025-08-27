@@ -323,10 +323,11 @@ class ReviewController extends Controller
         $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
         $concerns = NeighbourConcern::where('app_id',$project->id)->get();
         $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
+        $permitRev = PermitReview::where('formId',$decodeID)->first();
 
         return view('review_manager.review_permit_application',[
             'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents'=>$documents,
-            'envImpact' => $envImpact, 'concerns' =>$concerns, 'impactMgt'=>$impactMgt
+            'envImpact' => $envImpact, 'concerns' =>$concerns, 'impactMgt'=>$impactMgt,'permitRev'=>$permitRev
         ]);
            
       

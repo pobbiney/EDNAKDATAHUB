@@ -601,11 +601,11 @@
                                         <div class="card-body">
                                             <div class="mb-3">
                                                     <label class="form-label"><h6>Evaluation</h6></label>
-                                                     <p class="mt-1">{{$list->evaluation ?? 'N/A'}}</p>
+                                                     <p class="mt-1">{{$permitRev->evaluation ?? 'N/A'}}</p>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"><h6>Screening Decision /Recommendation</h6></label>
-                                                     <p class="mt-1">{{$list->recommendation ?? 'N/A'}}</p>
+                                                     <p class="mt-1">{{$permitRev->recommendation ?? 'N/A'}}</p>
                                                 </div>
                                              
                                         </div>
