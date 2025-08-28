@@ -52,11 +52,11 @@
 							<div class="card-header">
 								<div class="d-flex align-items-center  row-gap-3">
 									<div class="d-flex align-items-center justify-content-center avatar avatar-xxl border border-dashed me-2 flex-shrink-0 text-dark frames">
-										<img src="{{ asset('uploads/StaffPhotos/'.$data->picture) }}" class="img-fluid" alt="img">
+										<img src="{{ asset($data->picture) }}" class="img-fluid" alt="img">
 									</div>
 									<div>
 										<span class="badge badge-soft-success d-inline-flex align-items-center mb-1"><i class="ti ti-circle-filled fs-5 me-1"></i>{{ $data->status }}</span>
-										<h5 class="mb-1">{{ $data->title ?? '' }}{{ $data->surname ?? '' }} {{ $data->firstname ?? ''}}</h5>
+										<h5 class="mb-1">{{ $data->title ?? '' }} {{ $data->surname ?? '' }} {{ $data->firstname ?? ''}}</h5>
 										<p class="text-primary m-0">{{ $data->employee_id ?? '' }}</p>
 							
 									</div>
@@ -77,6 +77,10 @@
 									<dd class="col-6  mb-3">{{ $data->dob ?? 'N/A' }}</dd>
 									<dt class="col-6 fw-medium text-dark mb-3"><b>Marital Status</b></dt>
 									<dd class="col-6  mb-3">{{$data->marital_status_id ?? 'N/A'}}</dd>
+                                    <dt class="col-6 fw-medium text-dark mb-3"><b>Region</b></dt>
+									<dd class="col-6  mb-3">{{ $data->regionName->name ?? 'N/A' }}</dd>
+                                     <dt class="col-6 fw-medium text-dark mb-3"><b>District</b></dt>
+									<dd class="col-6  mb-3">{{ $data->districtName->name ?? 'N/A' }}</dd>
 									<dt class="col-6 fw-medium text-dark mb-3"><b>Hometown</b></dt>
 									<dd class="col-6  mb-3">{{ $data->hometown ?? 'N/A' }}</dd>
 								
@@ -91,10 +95,10 @@
 							<div class="col-md-12" id="sidebar-menu5">
 								<ul class="nav nav-tabs nav-tabs-bottom mb-4">
 									<li data-target="content1">
-										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-info-square-rounded me-2"></i>Employment</a>
+										<a class="nav-link" href="javascript:void(0);"><i class="tf-icons ti ti-users ti-sm me-1_5"></i>Employment</a>
 									</li>
 									<li data-target="content2">
-										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-file-dollar me-2"></i>Employee Contact</a>
+										<a class="nav-link" href="javascript:void(0);"><i class="tf-icons ti ti-phone ti-sm me-1_5"></i>Employee Contact</a>
 									</li>
 									<li data-target="content3"> 
 										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-calendar-due me-2"></i>Document Manager</a>

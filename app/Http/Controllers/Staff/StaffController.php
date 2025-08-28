@@ -428,11 +428,21 @@ class StaffController extends Controller implements HasMiddleware
         $data->region_id = $validateData['region'];
         $data->mmda_id = $validateData['district'];
         $data->status = $validateData['status'];
-        $data->town = $validateData['hometown'];
+         $data->hometown = $validateData['hometown'];
         $data->title = $validateData['title'];
         $data->updated_on = date("Y-m-d H:i:s");
         $data->updated_by = Auth::user()->id;
         $data->update();
+        if($request->hasFile('photo')){
+            $file = $request->file('photo');
+            $ext = $file->getClientOriginalExtension();
+            $filename =time().'.'.$ext;
+  
+            $file->move('uploads/StaffPhotos/',$filename);
+            $data->picture = 'uploads/StaffPhotos/'.$filename;
+            $data->update();
+          }
+          
         return back()->with('message','Staff Information  updated Successfully');
     }
 

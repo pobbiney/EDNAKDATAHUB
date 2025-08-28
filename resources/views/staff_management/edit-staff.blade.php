@@ -9,6 +9,8 @@
 @endsection
 
 
+
+
 @section('content')
 
 
@@ -33,7 +35,7 @@
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Add Application Form </h3>
+                    <h3>Edit Staff Details </h3>
             </div> 
         </div>
         <div class="card-body">
@@ -70,6 +72,24 @@
                         <h6 class="mb-0">Personal Details</h6>
                         <small>Enter Your Personal Details.</small>
                     </div>
+                    <div class="row mb-3">
+                            <div class="col-sm-4">
+                                <div class="form-group ">
+                                    <div class="col-lg-12">
+                                        <div class="text-left m-2" >
+                                        <img src="{{ asset($datas->picture) }}" alt="No Image"  style="height:100px; width:auto; border:1px solid #ccc; border-radius:5px;padding:5px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-10">
+                                    <label class="col-form-label">Replace Image </label>
+                                    <div class="form-input position-relative">
+                                        <input class="form-control" type="file" name="photo" accept="image/*" >
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="col-sm-4">
                         <label class="form-label" for="username">Title</label>
                         <select class="form-control" name="title">
@@ -87,11 +107,12 @@
                         <input type="text" class="form-control" placeholder="Enter Surnaname" name="surname" value="{{ $datas->surname }}">
                         <small class="text-danger">@error('surname'){{$message}}@enderror </small>
                     </div>
-                    <div class="col-sm-4 form-password-toggle">
-                        <label class="form-label" for="firstname">Firstname</label>
-                        <input type="firstname" class="form-control" placeholder="Enter Firstname" "  name="firstname " value="{{ $datas->firstname }}">
+                     <div class="col-sm-4">
+                        <label class="form-label">Firstname</label>
+                        <input type="text" class="form-control" placeholder="Enter First Name" name="firstname" value="{{ $datas->firstname }}">
                         <small class="text-danger">@error('firstname'){{$message}}@enderror </small>
                     </div>
+                  
                 </div>
                 <div class="row g-6 mb-3" style="margin-top:2px">
                     <div class="col-sm-4">
@@ -140,7 +161,7 @@
                 </div>
                 <div class="row g-6 mb-3" style="margin-top:2px;">
                     <div class="col-sm-4">
-                        <label class="form-label" for="confirm-password">Home Twon</label>
+                        <label class="form-label" for="confirm-password">Hometown</label>
                         <input type="text" class="form-control" placeholder="Enter Hometown" name="hometown" value="{{ $datas->hometown }}">
                         <small class="text-danger">@error('hometown'){{$message}}@enderror </small>
                     </div>
@@ -150,7 +171,7 @@
                         <select class="select2 form-select changeregion" data-allow-clear="true" name="region">
                             <option value="" selected disabled>--Choose Region--</option>
                             @foreach($regs as $reg)
-                            <option @if($reg->id== $datas->reg_id ) selected @endif value="{{$reg->id}}">{{$reg->name}}</option>
+                            <option @if($reg->id== $datas->region_id ) selected @endif value="{{$reg->id}}">{{$reg->name}}</option>
                             @endforeach
 
                         </select>
@@ -184,7 +205,7 @@
                 </div>
                 <div class="row g-6 mb-3" style="margin-top:2px;">
                 <div class="col-md-4 mb-3">
-                    <button type="submit" class="btn btn-success">Edit</button>
+                    <button type="submit" class="btn btn-success">UPDATE</button>
                 </div>
                 </div>
             </form>
@@ -254,7 +275,7 @@
                 <br/>
                 <div class="row g-6 mb-3" style="margin-top:2px;">
                   <div class="col-md-4">
-                      <button type="submit" class="btn btn-success">Edit</button>
+                      <button type="submit" class="btn btn-success">UPDATE</button>
                   </div>
                 </div> 
 
@@ -323,7 +344,7 @@
                 <br/>
                 <div class="row g-6 mb-3" style="margin-top:2px ">
                   <div class="col-md-4">
-                      <button type="submit" class="btn btn-success">Edit</button>
+                      <button type="submit" class="btn btn-success">UPDATE</button>
                   </div>
                 </div>
             </form>
@@ -333,7 +354,7 @@
 </div>
 @endsection
 
-@section('script')
+@section('scripts')
 <script>
    $('#dobs').datepicker({
         format: "yyyy-mm-dd",
@@ -344,9 +365,9 @@
 <script>
   $(document).ready(function(){
       $(document).on('change','.changeregion',function(){
-       //console.log("Hello world");
+    //    console.log("Hello world");
        var cat_id = $(this).val();
-       //console.log(cat_id);
+    //    console.log(cat_id);
 
        var div=$(this).parent();
 
@@ -357,7 +378,7 @@
         data:{'id':cat_id},
         success:function(data){
          //console.log('success');
-         //console.log(data);
+        //  console.log(data);
 
          op+='<option value="0" selected disabled>Choose District</option>';
     for(var i=0;i<data.length;i++){

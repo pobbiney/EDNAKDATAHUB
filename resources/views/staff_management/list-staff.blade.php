@@ -51,7 +51,7 @@
  
 <td>
 
-<a  href="#"  type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Edit Info ">
+<a  href="{{route('editstaff',Crypt::encrypt($reg->staff_id))}}"  type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Edit Info ">
 <i class="tf-icons ti ti-edit" style="color: white"></i>
 </a> 
 <a data-bs-toggle="modal" id="showmodal" data-bs-target="#basicModal" data-url="{{ route('staff-upload-image',$reg->staff_id)  }}" type="button"  class="btn btn-sm  btn-info" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-custom-class="tooltip-info" title="Upload ID/Image"  >

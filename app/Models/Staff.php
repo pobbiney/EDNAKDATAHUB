@@ -41,12 +41,14 @@ class Staff extends Model
 	public $timestamps = false;
 
 	protected $fillable = [
+		'title',
 		'surname',
 		'firstname',
 		'othername',
 		'gender',
 		'service_no',
 		'year',
+		'nationality',
 		'rank_class',
 		'rank',
 		'region_id',
@@ -56,10 +58,15 @@ class Staff extends Model
 		'unit',
 		'phone',
 		'email',
+		'mmda_id',
 		'res_address',
 		'dob',
+		'status',
 		'marital_status_id',
-		'picture'
+		'picture',
+		'town',
+		'updated_on',
+		'updated_at'
 	];
 
 	 
@@ -77,4 +84,15 @@ class Staff extends Model
 	{
 		return $this->belongsTo(Department::class, 'department');
 	}
+
+	public function regionName()
+	{
+		return $this->belongsTo(Region::class, 'region_id');
+	}
+
+	public function districtName()
+	{
+		return $this->belongsTo(District::class, 'mmda_id');
+	}
+
 }
