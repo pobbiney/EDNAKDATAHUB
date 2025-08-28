@@ -51,7 +51,7 @@
  
 <td>
 
-<a  href="{{route('editstaff',Crypt::encrypt($reg->staff_id))}}"  type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Edit Info ">
+<a  href="#"  type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Edit Info ">
 <i class="tf-icons ti ti-edit" style="color: white"></i>
 </a> 
 <a data-bs-toggle="modal" id="showmodal" data-bs-target="#basicModal" data-url="{{ route('staff-upload-image',$reg->staff_id)  }}" type="button"  class="btn btn-sm  btn-info" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-custom-class="tooltip-info" title="Upload ID/Image"  >
@@ -59,9 +59,9 @@
 </a> 
 <a data-bs-toggle="modal" id="showmodals" data-bs-target="#smallModal" data-url="{{ route('staff-upload-image',$reg->staff_id)  }}" type="button" class="btn btn-sm  btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-warning" title="Add Supervisor">
 <i class="tf-icons ti ti-user" style="color: white"></i></a>
-{{-- <a href="{{route('staff-profile',Crypt::encrypt($reg->staff_id))}}"   type="button" class="btn btn-sm  btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-primary" title="View Staff">
+<a href="{{route('staff-profile',Crypt::encrypt($reg->staff_id))}}"   type="button" class="btn btn-sm  btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-primary" title="Staff Details">
   <i class="tf-icons ti ti-eye" style="color: white"></i>
-</a>  --}}
+</a> 
 </td>
 </tr>
 @endforeach

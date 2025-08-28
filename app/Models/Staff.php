@@ -67,4 +67,14 @@ class Staff extends Model
     {
         return $this->hasMany(Task::class, 'assignee', 'staff_id');
     }
+
+	public function staffCat()
+	{
+		return $this->belongsTo(StaffCategory::class, 'staff_cat_id','cat_id');
+	}
+
+	public function departmentName()
+	{
+		return $this->belongsTo(Department::class, 'department');
+	}
 }

@@ -2,213 +2,274 @@
 
 @extends('layouts.app')
 
-@section('content')
-     <!-- Content -->
-    
-      <div class="container-xxl flex-grow-1 container-p-y">
-        
-            <div class="row">
-                <div class="col-12">
-                <div class="card mb-6">
-                    <div class="user-profile-header-banner">
-                    <img src="../../assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top">
-                    </div>
-                    <div class="user-profile-header d-flex flex-column flex-lg-row text-sm-start text-center mb-5">
-                    <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                        <img src="{{ asset('uploads/StaffPhotos/'.$data->picture) }}" alt="user image" class="d-block h-auto ms-0 ms-sm-6 rounded user-profile-img">
-                    </div>
-                    <div class="flex-grow-1 mt-3 mt-lg-5">
-                        <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
-                        <div class="user-profile-info">
-                            <h4 class="mb-2 mt-lg-6">{{ $data->surname }} {{ $data->firstname }}</h4>
-                            <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4 my-2">
-                            <li class="list-inline-item d-flex gap-2 align-items-center">
-                                <i class='ti ti-palette ti-lg'></i><span class="fw-medium">{{ $data->employee_id }}</span>
-                            </li>
-                            <li class="list-inline-item d-flex gap-2 align-items-center">
-                                <i class='ti ti-user ti-lg'></i><span class="fw-medium">{{ $data->position }}</span>
-                            </li>
-                            <li class="list-inline-item d-flex gap-2 align-items-center">
-                                <i class='ti ti-calendar ti-lg'></i><span class="fw-medium"> {{ $data->dob }}</span></li>
-                            </ul>
-                        </div>
-                        <a href="javascript:void(0)" class="btn btn-success mb-1">
-                            <i class='ti ti-user-check ti-xs me-2'></i>{{ $data->status }}
-                        </a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div class="col-xl-12">
-                 
-                <div class="nav-align-top mb-6">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
-                                <li class="nav-item mb-1 mb-sm-0">
-                                <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true"><span class="d-none d-sm-block"><i class="tf-icons ti ti-users ti-sm me-1_5 align-text-bottom"></i> Personal Profile <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger ms-1_5 pt-50">1</span></span><i class="ti ti-users ti-sm d-sm-none"></i></button>
-                                </li>
-                                <li class="nav-item mb-1 mb-sm-0">
-                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile" aria-selected="false"><span class="d-none d-sm-block"><i class="tf-icons ti ti-file ti-sm me-1_5 align-text-bottom"></i> Employee Details <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger ms-1_5 pt-50">2</span></span><i class="ti ti-file ti-sm d-sm-none"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-messages" aria-controls="navs-pills-justified-messages" aria-selected="false"><span class="d-none d-sm-block"><i class="tf-icons ti ti-settings ti-sm me-1_5 align-text-bottom"></i> Employee Contact <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger ms-1_5 pt-50">3</span></span><i class="ti ti-settings ti-sm d-sm-none"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                  <div class="tab-content">
-                    <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label><b>Name:</b> {{ $data->title }} {{ $data->surname }} {{ $data->firstname }}</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Gender:</b> {{ $data->gender }} </label>
-                            </div>
-                            
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Nationality:</b> {{ $data->nationality }}</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Employee ID:</b> {{ $data->employee_id }} </label>
-                            </div>
-                           
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Marital Status:</b> {{ $data->marital_status }}</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Branch:</b>  </label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Date of Birht:</b> {{ $data->dob }} </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Region:</b>  </label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>District:</b> </label>
-                            </div>
-                          
-                            <div class="col-md-6">
-                                <label><b>Town:</b> {{ $data->town }}</label>
-                            </div>
-                           
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <h5>Next of Kin</h5>
-                            <table id="example" class="table" >
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Fullname</th>
-                                        <th>Contact Number</th>
-                                        <th>Email</th>
-                                        <th>Contact Address</th>
-                                        <th>Relationship</th>
-                                        <th>Note</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if($sta)
-                                    @foreach($sta as $reg)
-                                    <tr>
-                                        <td>{{ $reg->surname }} {{ $reg->firstname }}</td>
-                                        <td>{{ $reg->contact_num }}</td>
-                                        <td>{{ $reg->email }}</td>
-                                        <td>{{ $reg->contact_address }}</td>
-                                        <td>{{ $reg->relation }}</td>
-                                        <td>{{ $reg->notes }}</td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        
-                        
-                    </div>
-                    <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label><b>Employee ID:</b> {{ $data->employee_id }} </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Staff Classification:</b> {{ $data->staff_class }} </label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Staff Category:</b> </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Staff Branch:</b>  </label>
-                            </div>
-                        </div>
-                       
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Department:</b> </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Unit:</b> {{ $data->unit }} </label>
-                            </div>
-                        </div>
-                     
-                    </div>
-                    <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Official Email Address:</b> {{ $data->corporate_email }} </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Personal Email:</b> {{ $data->personal_email }} </label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Mobile Number:</b> {{ $data->contact_num }} </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Official Number:</b> {{ $data->office_num }} </label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Residential Address:</b> {{ $data->personal_address }} </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label><b>Residential Digital Address:</b> {{ $data->digital_address }} </label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                            <div class="col-md-6">
-                                <label><b>Region :</b> </label>
-                            </div>
-                            
-                        </div>
-                    </div>
-                  </div>
-                </div>
-             </div>
-      </div>
-      
- 
+@section('css')
+
+<style>
+    .displayContent {
+        display: none;
+    }
+
+    .displayContent.active {
+        display: block;
+    }
+</style>
 
 @endsection
 
-@section('script')
+@section('content')
+   
+<div class="content" style="transform: none;">
+				<div class="row" style="transform: none;">
+					<!-- Page Header -->
+					<div class="col-md-12">
+						<div class="d-md-flex d-block align-items-center justify-content-between mb-3">
+							<div class="my-auto mb-2">
+								<h3 class="page-title mb-1">Staff Details</h3>
+								<nav>
+									<ol class="breadcrumb mb-0">
+										<li class="breadcrumb-item">
+											<a href="index.html">Dashboard</a>
+										</li>
+										<li class="breadcrumb-item">
+											<a href="students.html">HRM</a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">Staff Details</li>
+									</ol>
+								</nav>
+							</div>
+							<div class="d-flex my-xl-auto right-content align-items-center  flex-wrap">
+								<a href="#" class="btn btn-primary d-flex align-items-center mb-2"><i class="ti ti-edit-circle me-2"></i>Edit Staff</a>
+							</div>
+						</div>
+
+					</div>
+					<!-- /Page Header -->
+					<div class="col-xxl-3 col-lg-4 " style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+						
+						
+
+					<div class="" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;"><div class="card border-white">
+							<div class="card-header">
+								<div class="d-flex align-items-center  row-gap-3">
+									<div class="d-flex align-items-center justify-content-center avatar avatar-xxl border border-dashed me-2 flex-shrink-0 text-dark frames">
+										<img src="{{ asset('uploads/StaffPhotos/'.$data->picture) }}" class="img-fluid" alt="img">
+									</div>
+									<div>
+										<span class="badge badge-soft-success d-inline-flex align-items-center mb-1"><i class="ti ti-circle-filled fs-5 me-1"></i>{{ $data->status }}</span>
+										<h5 class="mb-1">{{ $data->title ?? '' }}{{ $data->surname ?? '' }} {{ $data->firstname ?? ''}}</h5>
+										<p class="text-primary m-0">{{ $data->employee_id ?? '' }}</p>
+							
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<h5 class="mb-3">Basic Information</h5>
+								<dl class="row mb-0">
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Staff ID</b></dt>
+									<dd class="col-6  mb-3">{{ $data->employee_id ?? '' }}</dd>
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Gender</b></dt>
+									<dd class="col-6  mb-3">{{ $data->gender ?? '' }}</dd>
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Position</b></dt>
+									<dd class="col-6  mb-3">{{ $data->position ?? 'N/A' }}</dd>
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Nationality</b></dt>
+									<dd class="col-6  mb-3">{{ $data->nationality ?? 'N/A' }}</dd>
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Date Of Birth</b></dt>
+									<dd class="col-6  mb-3">{{ $data->dob ?? 'N/A' }}</dd>
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Marital Status</b></dt>
+									<dd class="col-6  mb-3">{{$data->marital_status_id ?? 'N/A'}}</dd>
+									<dt class="col-6 fw-medium text-dark mb-3"><b>Hometown</b></dt>
+									<dd class="col-6  mb-3">{{ $data->hometown ?? 'N/A' }}</dd>
+								
+								</dl>
+							</div>
+						</div><div class="card border-white">
+							
+						</div><div dir="ltr" class="resize-sensor" style="pointer-events: none; position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;"><div class="resize-sensor-expand" style="pointer-events: none; position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;"><div style="position: absolute; left: 0px; top: 0px; transition: all; width: 324px; height: 736px;"></div></div><div class="resize-sensor-shrink" style="pointer-events: none; position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;"><div style="position: absolute; left: 0px; top: 0px; transition: all; width: 200%; height: 200%;"></div></div></div></div></div>
+
+					<div class="col-xxl-9 col-lg-8">
+						<div class="row">
+							<div class="col-md-12" id="sidebar-menu5">
+								<ul class="nav nav-tabs nav-tabs-bottom mb-4">
+									<li data-target="content1">
+										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-info-square-rounded me-2"></i>Employment</a>
+									</li>
+									<li data-target="content2">
+										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-file-dollar me-2"></i>Employee Contact</a>
+									</li>
+									<li data-target="content3"> 
+										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-calendar-due me-2"></i>Document Manager</a>
+									</li>
+									
+								</ul>
+							</div>
+						</div>
+                         <div id="tab-content">
+                            <div id="content1" class="displayContent active">
+                        
+                                <div class="row">
+                                
+                                    <!-- Bank Details -->
+                                    <div class="col-xxl-12 d-flex">
+                                        <div class="card flex-fill">
+                                            <div class="card-header">
+                                                <h5>Employment</h5>
+                                            </div>
+                                            <div class="card-body pb-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Staff ID</b></p>
+                                                            <p>{{ $data->employee_id ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Staff Classification</b></p>
+                                                            <p>{{ $data->staff_class ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Staff Category</b></p>
+                                                            <p>{{ $data->staffCat->name ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                   <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Staff Branch</b></p>
+                                                            <p>---</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Department</b></p>
+                                                            <p>{{$data->departmentName->name ?? 'N/A'}}</p>
+                                                        </div>
+                                                    </div>
+                                                     <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Unit</b></p>
+                                                            <p>{{ $data->unit ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Bank Details -->
+
+                                
+                                </div>
+                            </div>
+                            <div id="content2" class="displayContent">
+                        
+                                <div class="row">
+                                  
+                                    <div class="col-xxl-12 d-flex">
+                                        <div class="card flex-fill">
+                                            <div class="card-header">
+                                                <h5>Employee Contact</h5>
+                                            </div>
+                                            <div class="card-body pb-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Official Email Address</b></p>
+                                                            <p>{{ $data->corporate_email ?? '' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Personal Email</b></p>
+                                                            <p>{{ $data->personal_email ?? '' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Mobile Number</b></p>
+                                                            <p>{{ $data->contact_num ?? ''}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3" >
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Official Number</b></p>
+                                                            <p>{{ $data->office_num ?? 'N/A'}}</p>
+                                                        </div>
+                                                    </div>
+                                                  
+                                                   
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Bank Details -->
+
+                                      <!-- Address -->
+                                    <div class="col-xxl-6 d-flex">
+                                        <div class="card flex-fill">
+                                            <div class="card-header">
+                                                <h5>Address </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <span class="avatar avatar-md bg-light-300 rounded me-2 flex-shrink-0 text-default"><i class="ti ti-map-pin-up"></i></span>
+                                                    <div>
+                                                        <p class="mb-1 fw-medium text-dark ">Residential Address</p>
+                                                        <p>{{ $data->personal_address ?? 'N/A' }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="avatar avatar-md bg-light-300 rounded me-2 flex-shrink-0 text-default"><i class="ti ti-map-pins"></i></span>
+                                                    <div>
+                                                        <p class="mb-1 fw-medium text-dark ">Residential Digital Address</p>
+                                                         <p>{{ $data->digital_address ?? 'N/A'}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Address -->
+
+                                
+                                </div>
+                            </div>
+                            <div id="content3" class="displayContent">
+                        
+                                <div class="row">
+                                  
+                                
+                                </div>
+                            </div>
+                           
+                         </div>   
+					</div>
+				</div>
+			</div>
+
+@endsection
+
+@section('scripts')
     <script>
-    
-    </script> 
+        const items = document.querySelectorAll("#sidebar-menu5 li[data-target]");
+        const contents = document.querySelectorAll("#tab-content .displayContent");
+
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                const targetId = item.getAttribute("data-target");
+
+                contents.forEach(content => content.classList.remove("active"));
+
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.classList.add("active");
+                } else {
+                    console.warn("No element found with ID:", targetId);
+                }
+            });
+        });
+
+    </script>
 @endsection

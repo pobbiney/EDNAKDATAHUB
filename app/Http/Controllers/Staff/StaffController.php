@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
 use App\Models\BusClass;
+use App\Models\Businessclass;
 use App\Models\District;
 use App\Models\Nationality;
 use App\Models\Region;
@@ -238,7 +239,7 @@ class StaffController extends Controller implements HasMiddleware
         $datas = Staff::all();
       
         return response()->json($data);
-        return response()->json($datas);
+   
     
     }
 
@@ -293,8 +294,8 @@ class StaffController extends Controller implements HasMiddleware
         $data = Staff::find($decodeId);
         $datas = Staff::all();
         
-        $sta = StaffNextofKin::where('staff_id',$decodeId)->get();
-        return view('staff_management.staff-profile',['data'=>$data,'datas'=>$datas,'sta'=>$sta, 'staff_id'=>$staff_id]);
+        // $sta = StaffNextofKin::where('staff_id',$decodeId)->get();
+        return view('staff_management.staff-profile',data: ['data'=>$data,'datas'=>$datas,'sta'=>null, 'staff_id'=>$staff_id]);
 
     }
 
@@ -404,7 +405,7 @@ class StaffController extends Controller implements HasMiddleware
         $clas = StaffClassification::all();
         $cat = StaffCategory::all();
         $bra = Branch::all();
-        $dep = BusClass::all();
+        $dep = Businessclass::all();
        
         return view('staff_management.edit-staff',['data'=>$data,'regs'=>$regs,'clas'=>$clas,'cat'=>$cat,'bra'=>$bra,'dep'=>$dep,'datas'=>$datas,'dist'=>$dist,'staff_id'=>$staff_id]);
     }
