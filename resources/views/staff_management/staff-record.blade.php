@@ -51,9 +51,9 @@
  
 <td>
 
-<a  href="{{route('editstaff',Crypt::encrypt($reg->staff_id))}}"  type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Edit Info ">
+{{-- <a  href="{{route('editstaff',Crypt::encrypt($reg->staff_id))}}"  type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" title="Edit Info ">
 <i class="tf-icons ti ti-edit" style="color: white"></i>
-</a> 
+</a>  --}}
 <a data-bs-toggle="modal" id="showmodal" data-bs-target="#basicModal" data-url="{{ route('staff-upload-image',$reg->staff_id)  }}" type="button"  class="btn btn-sm  btn-info" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-custom-class="tooltip-info" title="Upload Document"  >
 <i class="tf-icons ti ti-files" style="color: white"></i>
 </a> 
@@ -127,13 +127,13 @@
                                         </div>
 
                                     </div>
-                                    <div class="col mb-0">
+                                    <div class="col mt-1">
                                         <label for="dobBasic" class="form-label"><b>Title</b></label>
                                         <input type="text" name="title" class="form-control"
                                             placeholder="Enter title of document" />
                                         <small class="text-danger">@error('title'){{$message}}@enderror </small>
                                     </div>
-                                    <div class="row g-4" style="margin-top:5px ">
+                                    <div class="row g-4 mt-1" >
                                         <label for="emailBasic" class="form-label"><b>Document</b></label>
                                         <input type="file" name="file_path" class="form-control" required />
 
@@ -159,7 +159,7 @@
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel1">Add Supervisor</h5>
+                        <h5 class="modal-title" id="exampleModalLabel1">Add Bank Details</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     

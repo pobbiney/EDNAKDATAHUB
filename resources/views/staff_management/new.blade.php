@@ -1,229 +1,311 @@
-<div class="content" style="transform: none;">
-				<div class="row" style="transform: none;">
-					<!-- Page Header -->
-					<div class="col-md-12">
-						<div class="d-md-flex d-block align-items-center justify-content-between mb-3">
-							<div class="my-auto mb-2">
-								<h3 class="page-title mb-1">Staff Details</h3>
-								<nav>
-									<ol class="breadcrumb mb-0">
-										<li class="breadcrumb-item">
-											<a href="index.html">Dashboard</a>
-										</li>
-										<li class="breadcrumb-item">
-											<a href="students.html">HRM</a>
-										</li>
-										<li class="breadcrumb-item active" aria-current="page">Staff Details</li>
-									</ol>
-								</nav>
-							</div>
-							<div class="d-flex my-xl-auto right-content align-items-center  flex-wrap">
-								<a href="edit-staff.html" class="btn btn-primary d-flex align-items-center mb-2"><i class="ti ti-edit-circle me-2"></i>Edit Staff</a>
-							</div>
-						</div>
+@php $pageName = "staff";
+$subpageName = "staff_record"; @endphp
 
-					</div>
-					<!-- /Page Header -->
-					<div class="col-xxl-3 col-lg-4 " style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
-						
-						
+@extends('layouts.app')
 
-					<div class="" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;"><div class="card border-white">
-							<div class="card-header">
-								<div class="d-flex align-items-center  row-gap-3">
-									<div class="d-flex align-items-center justify-content-center avatar avatar-xxl border border-dashed me-2 flex-shrink-0 text-dark frames">
-										<img src="assets/img/profiles/avatar-27.jpg" class="img-fluid" alt="img">
-									</div>
-									<div>
-										<span class="badge badge-soft-success d-inline-flex align-items-center mb-1"><i class="ti ti-circle-filled fs-5 me-1"></i>Active</span>
-										<h5 class="mb-1">Kevin Larry</h5>
-										<p class="text-primary m-0">AD1256589</p>
-										<p class="p-0">Joined On : 10 Mar 2024</p>
-									</div>
-								</div>
-							</div>
-							<div class="card-body">
-								<h5 class="mb-3">Basic Information</h5>
-								<dl class="row mb-0">
-									<dt class="col-6 fw-medium text-dark mb-3">Staff ID</dt>
-									<dd class="col-6  mb-3">35013</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Gender</dt>
-									<dd class="col-6  mb-3">Male</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Designation</dt>
-									<dd class="col-6  mb-3">25 Jan 2008</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Department</dt>
-									<dd class="col-6  mb-3">Technical Lead</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Date Of Birth</dt>
-									<dd class="col-6  mb-3">Admin</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Blood Group</dt>
-									<dd class="col-6  mb-3">15 Aug 1987</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Blood Group</dt>
-									<dd class="col-6  mb-3">O+</dd>
-									<dt class="col-6 fw-medium text-dark mb-3">Mother tongue</dt>
-									<dd class="col-6  mb-3">English</dd>
-									<dt class="col-6 fw-medium text-dark mb-0">Language</dt>
-									<dd class="col-6 text-dark mb-0"><span class="badge badge-light text-dark me-2">English</span><span class="badge badge-light text-dark">Spanish</span></dd>
-								</dl>
-							</div>
-						</div><div class="card border-white">
-							<div class="card-body">
-								<h5 class="mb-3">Primary Contact Info</h5>
-								<div class="d-flex align-items-center mb-3">
-									<span class="avatar avatar-md bg-light-300 rounded me-2 flex-shrink-0 text-default"><i class="ti ti-phone"></i></span>
-									<div>
-										<span class="mb-1 fw-medium text-dark ">Phone Number</span>
-										<p>+1 46548 84498</p>
-									</div>
-								</div>
-								<div class="d-flex align-items-center">
-									<span class="avatar avatar-md bg-light-300 rounded me-2 flex-shrink-0 text-default"><i class="ti ti-mail"></i></span>
-									<div>
-										<span class="mb-1 fw-medium text-dark ">Email Address</span>
-										<p>jan@example.com</p>
-									</div>
-								</div>
-							</div>
-						</div><div dir="ltr" class="resize-sensor" style="pointer-events: none; position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;"><div class="resize-sensor-expand" style="pointer-events: none; position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;"><div style="position: absolute; left: 0px; top: 0px; transition: all; width: 324px; height: 736px;"></div></div><div class="resize-sensor-shrink" style="pointer-events: none; position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;"><div style="position: absolute; left: 0px; top: 0px; transition: all; width: 200%; height: 200%;"></div></div></div></div></div>
+@section('content')
 
-					<div class="col-xxl-9 col-lg-8">
-						<div class="row">
-							<div class="col-md-12">
-								<ul class="nav nav-tabs nav-tabs-bottom mb-4">
-									<li data-target="content1">
-										<a class="nav-link active"><i class="ti ti-info-square-rounded me-2"></i>Basic Details</a>
-									</li>
-									<li data-target="content2">
-										<a class="nav-link"><i class="ti ti-file-dollar me-2"></i>Payroll</a>
-									</li>
-									<li data-target="content3"> 
-										<a class="nav-link"><i class="ti ti-calendar-due me-2"></i>Leaves</a>
-									</li>
-									<li data-target="content4">
-										<a class="nav-link"><i class="ti ti-calendar-due me-2"></i>Attendance</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="row">
-							<!-- Address -->
-							<div class="col-xxl-6 d-flex">
-								<div class="card flex-fill">
-									<div class="card-header">
-										<h5>Address</h5>
-									</div>
-									<div class="card-body">
-										<div class="d-flex align-items-center mb-3">
-											<span class="avatar avatar-md bg-light-300 rounded me-2 flex-shrink-0 text-default"><i class="ti ti-map-pin-up"></i></span>
-											<div>
-												<p class="mb-1 fw-medium text-dark ">Current Address</p>
-												<p>3495 Red Hawk Road, Buffalo Lake, MN 55314</p>
-											</div>
-										</div>
-										<div class="d-flex align-items-center">
-											<span class="avatar avatar-md bg-light-300 rounded me-2 flex-shrink-0 text-default"><i class="ti ti-map-pins"></i></span>
-											<div>
-												<p class="mb-1 fw-medium text-dark ">Permanent Address</p>
-												<p>3495 Red Hawk Road, Buffalo Lake, MN 55314</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Address -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-header">Staff Management</h5><small class="text-muted float-end"><a
+                    class="btn btn-sm btn-warning" href="{{ route('create-staff') }}"><i class="fa fa-plus"></i> Add Staff
+                </a></small>
+        </div>
+        <div class="card-body">
 
-							<!-- Documents -->
-							<div class="col-xxl-6 d-flex">
-								<div class="card flex-fill">
-									<div class="card-header">
-										<h5>Documents</h5>
-									</div>
-									<div class="card-body">
-										<div class="bg-light-300 border rounded d-flex align-items-center justify-content-between mb-3 p-2">
-											<div class="d-flex align-items-center overflow-hidden">
-												<span class="avatar avatar-md bg-white rounded flex-shrink-0 text-default"><i class="ti ti-pdf fs-15"></i></span>
-												<div class="ms-2">
-													<p class="text-truncate fw-medium text-dark ">Resume.pdf</p>
-												</div>
-											</div>
-											<a href="#" class="btn btn-dark btn-icon btn-sm"><i class="ti ti-download"></i></a>
-										</div>
-										<div class="bg-light-300 border rounded d-flex align-items-center justify-content-between p-2">
-											<div class="d-flex align-items-center overflow-hidden">
-												<span class="avatar avatar-md bg-white rounded flex-shrink-0 text-default"><i class="ti ti-pdf fs-15"></i></span>
-												<div class="ms-2">
-													<p class="text-truncate fw-medium text-dark ">Joining Letter.pdf</p>
-												</div>
-											</div>
-											<a href="#" class="btn btn-dark btn-icon btn-sm"><i class="ti ti-download"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Documents -->
 
-							<!-- Bank Details -->
-							<div class="col-xxl-12 d-flex">
-								<div class="card flex-fill">
-									<div class="card-header">
-										<h5>Bank Details</h5>
-									</div>
-									<div class="card-body pb-1">
-										<div class="row">
-											<div class="col-md-4">
-												<div class="mb-3">
-													<p class="mb-1 fw-medium text-dark ">Account Name</p>
-													<p>Bank of America</p>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="mb-3">
-													<p class="mb-1 fw-medium text-dark ">Account Number</p>
-													<p>178849035684</p>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="mb-3">
-													<p class="mb-1 fw-medium text-dark ">Bank Name</p>
-													<p>Bank of America</p>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="mb-3">
-													<p class="mb-1 fw-medium text-dark ">Branch</p>
-													<p>Cincinnati</p>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="mb-3">
-													<p class="mb-1 fw-medium text-dark ">IFSC</p>
-													<p>BOA83209832</p>
-												</div>
-											</div>
+            @if(Session::has('message'))
+                <div class="alert alert-solid-success d-flex align-items-center" role="alert">
+                    <span class="alert-icon rounded">
+                        <i class="ti ti-check"></i>
+                    </span>
+                    {{session('message')}}
+                </div>
+            @endif
+            <div class="col-xl-12">
 
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Bank Details -->
+                <div class="row">
 
-							<!-- Other Info -->
-							<div class="col-xxl-12">
-								<div class="card">
-									<div class="card-header">
-										<h5>Other Info</h5>
-									</div>
-									<div class="card-body">
-										<p>Depending on the specific needs of your organization or system, additional
-											information may be collected or tracked. It's important to ensure that any
-											data
-											collected complies with privacy regulations and policies to protect
-											students'
-											sensitive information.</p>
-									</div>
-								</div>
-							</div>
-							<!-- /Other Info -->
-						</div>
-					</div>
-				</div>
-			</div>
+
+                    <table id="example" class="table " style="width:100%">
+                        <thead class="table-light">
+                            <tr>
+
+                                <th>Fullname</th>
+                                <th>Gender</th>
+                                <th>Nationality</th>
+                                <th>Employee ID</th>
+                                <th>Phone</th>
+
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if($data)
+                                @foreach($data as $reg)
+                                    <tr>
+
+                                        <td> {{ $reg->surname }} {{ $reg->firstname }}</td>
+                                        <td>{{ $reg->gender }}</td>
+                                        <td>{{ $reg->nationality }}</td>
+                                        <td>{{ $reg->employee_id }}</td>
+                                        <td>{{ $reg->contact_num }}</td>
+
+                                        <td>
+
+                                            <a href="#" type="button" class="btn btn-sm  btn-success" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" data-bs-custom-class="tooltip-success"
+                                                title="Attach Documents">
+                                                <i class="tf-icons ti ti-edit" style="color: white"></i>
+                                            </a>
+                                            <a data-bs-toggle="modal" id="showmodal" data-bs-target="#basicModal" data-url=""
+                                                type="button" class="btn btn-sm  btn-info" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" data-bs-custom-class="tooltip-info"
+                                                title="Attach Documents">
+                                                <i class="tf-icons ti ti-files" style="color: white"></i>
+                                            </a>
+                                            <a data-bs-toggle="modal" id="showmodals" data-bs-target="#smallModal"
+                                                data-url="{{ route('staff-upload-image',$reg->staff_id)  }}" type="button"
+                                                class="btn btn-sm  btn-warning" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                data-bs-custom-class="tooltip-warning" title="Add Supervisor">
+                                                <i class="tf-icons ti ti-user" style="color: white"></i></a>
+                                            <a href="{{route('staff-profile',Crypt::encrypt($reg->staff_id))}}" type="button"
+                                                class="btn btn-sm  btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                data-bs-custom-class="tooltip-primary" title="Staff Details">
+                                                <i class="tf-icons ti ti-eye" style="color: white"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+                    <form method="post" enctype="multipart/form-data" autocomplete="off" action="">
+                        @csrf
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1">Upload Staff Documents</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="row g-4">
+                                        <div class="col mb-0">
+                                            <label for="nameBasic" class="form-label"><b>Name :</b></label>
+                                            <span id="firstname"></span> <span id="surname"></span>
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="nameBasic" class="form-label"><b>Employee ID :</b></label>
+                                            <span id="employeeid"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row g-4" style="margin-top:5px ">
+                                        <div class="col mb-0">
+                                            <label for="dobBasic" class="form-label"><b>Phone</b></label>
+                                            <span id="phone"></span>
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="emailBasic" class="form-label"><b>Email</b></label>
+                                            <span id="staffemail"></span>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <div class="row g-4" style="margin-top:5px ">
+                                        <div class="col mb-0">
+                                            <label for="emailBasic" class="form-label"><b>Select Category</b></label>
+                                            <select class="form-select" name="doc_cat">
+                                                <option value="">--Select here--</option>
+                                                @foreach($docCats as $docCat)
+                                                    <option value="{{$docCat->id}}">{{$docCat->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <small class="text-danger">@error('doc_cat'){{$message}}@enderror </small>
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="emailBasic" class="form-label"><b>Select Type</b></label>
+                                            <select class="form-select" name="doc_type">
+                                                <option value="">--Select here--</option>
+                                                @foreach($docTypes as $docType)
+                                                    <option value="{{$docType->id}}">{{$docType->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <small class="text-danger">@error('doc_type'){{$message}}@enderror </small>
+                                        </div>
+
+                                    </div>
+                                    <div class="col mb-0">
+                                        <label for="dobBasic" class="form-label"><b>Title</b></label>
+                                        <input type="text" name="title" class="form-control"
+                                            placeholder="Enter title of document" />
+                                        <small class="text-danger">@error('title'){{$message}}@enderror </small>
+                                    </div>
+                                    <div class="row g-4" style="margin-top:5px ">
+                                        <label for="emailBasic" class="form-label"><b>Document</b></label>
+                                        <input type="file" name="file_path" class="form-control" required />
+
+                                    </div>
+                                    <input type="hidden" name="staff_id" id="staffID" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-label-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </form>
+
+
+        <div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true">
+            <form method="post" enctype="multipart/form-data" autocomplete="off" action="">
+                @csrf
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">Add Supervisor</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row g-4">
+                                <div class="col mb-0">
+                                    <label for="nameBasic" class="form-label"><b>Name :</b></label>
+                                    <span id="firstnames"></span> <span id="surnames"></span>
+                                </div>
+                                <div class="col mb-0">
+                                    <label for="nameBasic" class="form-label"><b>Employee ID :</b></label>
+                                    <span id="employeeids"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row g-4" style="margin-top:5px ">
+                                <div class="col mb-0">
+                                    <label for="emailBasic" class="form-label"><b>Email</b></label>
+                                    <span id="staffemails"></span>
+                                </div>
+                                <div class="col mb-0">
+                                    <label for="dobBasic" class="form-label"><b>Phone</b></label>
+                                    <span id="phones"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row g-4">
+
+                                <label class="form-label" for="emailSmall">Select Staff</label>
+                                <select class="select2 form-select" data-allow-clear="true" name="supervisor_id">
+                                    <option value="" selected disabled>--Choose Staff--</option>
+                                    @foreach($data as $procats)
+                                        <option value="{{$procats->staff_id}}">{{$procats->surname}} {{$procats->firstname}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-danger">@error('supervisor_id'){{$message}}@enderror </small>
+                            </div>
+                            <input type="hidden" name="staff_id" id="staffIDs" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+    </form>
+
+
+    </div>
+
+    <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel4">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#showmodal', function () {
+                var userUrl = $(this).data('url');
+                $.get(userUrl, function (data) {
+                    $('#basicModal').modal('show');
+                    $('#staffID').val(data.staff_id);
+                    $('#surname').text(data.surname);
+                    $('#firstname').text(data.firstname);
+                    $('#employeeid').text(data.employee_id);
+                    $('#staffemail').text(data.personal_email);
+                    $('#phone').text(data.contact_num);
+
+                })
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#showmodals', function () {
+                var userUrl = $(this).data('url');
+                $.get(userUrl, function (data) {
+                    $('#smallModal').modal('show');
+                    $('#staffIDs').val(data.staff_id);
+                    $('#surnames').text(data.surname);
+                    $('#firstnames').text(data.firstname);
+                    $('#employeeids').text(data.employee_id);
+                    $('#staffemails').text(data.personal_email);
+                    $('#phones').text(data.contact_num);
+
+                })
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#showmodaledit', function () {
+                var userUrl = $(this).data('url');
+                $.get(userUrl, function (data) {
+                    $('#fullscreenModal').modal('show');
+                    $('#staff_ID').val(data.staff_id);
+                    $('#title').val(data.title);
+                    $('#first_name').val(data.firstname);
+                    $('#sur_name').val(data.surname);
+                    $('#other_name').val(data.othername);
+                    $('#gender').val(data.gender);
+                    $('#dob').val(data.dob);
+                    $('#marital_status_id').val(data.marital_status_id);
+                    $('#nationality').val(data.nationality);
+                    $('#other_name').val(data.othername);
+                    $('#other_name').val(data.othername);
+
+
+                })
+            });
+        });
+    </script>
+@endsection

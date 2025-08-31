@@ -51,8 +51,8 @@ class StaffController extends Controller implements HasMiddleware
         $data = StaffCategory::all();
         $datas = StaffType::all();
         $regs = StaffClassification::all();
-        $docCats = DocumentCategory::all();
-        $docTypes = DocumentType::all();
+        $docCats = DocumentCategory::orderBy('name','ASC')->get();
+        $docTypes = DocumentType::orderBy('name','ASC')->get();
         return view('staff_management.create-staff-category',['data'=>$data,'regs'=>$regs,'datas'=>$datas,'docCats'=>$docCats,'docTypes'=>$docTypes]);
     }
 
