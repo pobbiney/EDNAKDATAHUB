@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Http\Controllers\Controller;
-use App\Models\Branch;
-use App\Models\BusClass;
-use App\Models\Businessclass;
-use App\Models\District;
-use App\Models\Nationality;
-use App\Models\Region;
+use App\Models\BankDetail;
 use App\Models\Staff;
-use App\Models\StaffCategory;
-use App\Models\StaffClassification;
-use App\Models\StaffNextofKin;
+use App\Models\Branch;
+use App\Models\Region;
+use App\Models\BusClass;
+use App\Models\District;
 use App\Models\StaffType;
+use App\Models\Nationality;
+use App\Models\DocumentType;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
+use App\Models\Businessclass;
+use App\Models\StaffCategory;
+use App\Models\StaffDocument;
+use App\Models\StaffNextofKin;
+use App\Models\DocumentCategory;
+use App\Models\StaffClassification;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 
 
@@ -47,7 +51,9 @@ class StaffController extends Controller implements HasMiddleware
         $data = StaffCategory::all();
         $datas = StaffType::all();
         $regs = StaffClassification::all();
-        return view('staff_management.create-staff-category',['data'=>$data,'regs'=>$regs,'datas'=>$datas]);
+        $docCats = DocumentCategory::all();
+        $docTypes = DocumentType::all();
+        return view('staff_management.create-staff-category',['data'=>$data,'regs'=>$regs,'datas'=>$datas,'docCats'=>$docCats,'docTypes'=>$docTypes]);
     }
 
     public function listStaffView()
@@ -503,5 +509,156 @@ class StaffController extends Controller implements HasMiddleware
         $data->updated_by = Auth::user()->id;
         $data->update();
         return back()->with('message','Staff Information  updated Successfully');
+    }
+
+        //save Document category
+    public function createDocCategory(Request $request)
+    {
+        $validateData = $request;
+        $validateData->validate([
+            'categoryName' => 'required',
+            'category_status' => 'required'
+        ]);
+        $data = new DocumentCategory;
+        $data->name = $validateData['categoryName'];
+        $data->status = $validateData['category_status'];
+        $data->created_by = Auth::user()->id;
+        $data->save();
+        return back()->with('message','Document Category saved Successfully');
+    }
+
+    //edit Document category view
+    public function editDocCategoryView ($cat_id)
+    {
+        $data = DocumentCategory::all();
+        $decodeId = Crypt::decrypt($cat_id);
+        $datas = DocumentCategory::find($decodeId);
+        return view('staff_management.edit-document-category',['data'=>$data,'datas'=>$datas, 'cat_id'=>$cat_id]);
+    }
+
+    //update Document category table
+    public function updateDocCategory(Request $request,$cat_id)
+    {
+        $decodeId = Crypt::decrypt($cat_id);
+        $validateData = $request;
+
+        $validateData->validate([
+            'name' => 'required',
+            'status' => 'required'
+        ]);
+         
+        $data =  DocumentCategory::find($decodeId);
+        $data->name = $validateData['name'];
+        $data->status = $validateData['status'];
+        $data->update();
+        return redirect('create-staff-category')->with('message','Document Category updated Successfully');
+    }
+    public function deleteDocCategory(string $cat_id)
+    {
+        DocumentCategory::where('id',$cat_id)->delete();
+        return redirect('create-staff-category')->with('message','Document Category  deleted successfully');
+    }
+
+    
+    public function createDocType(Request $request)
+    {
+        
+        $validateData = $request;
+        $data = new DocumentType;
+        $data->name = $validateData['docType'];
+        $data->category_id = $validateData['category'];
+        $data->status = $validateData['type_status'];
+        $data->created_by = Auth::user()->id;
+        $data->save();
+        return back()->with('message','Document Type saved Successfully');
+    }
+
+     public function editDocTypeView ($id)
+     {
+         $docCats = DocumentCategory::all();
+         $decodeId = Crypt::decrypt($id);
+         $data = DocumentType::find($decodeId);
+         return view('staff_management.edit-doc-type',['data'=>$data,'docCats'=>$docCats, 'id'=>$id]);
+     }
+
+     public function updateDocType(Request $request,$id)
+    {
+        $decodeId = Crypt::decrypt($id);
+        $validateData = $request;
+ 
+        $data =  DocumentType::find($decodeId);
+        $data->name = $validateData['type'];
+        $data->category_id = $validateData['category'];
+        $data->status = $validateData['type_status'];
+
+        $data->created_by = Auth::user()->id;
+        $data->update();
+        return redirect('create-staff-category')->with('message','Document Type updated Successfully');
+    }
+
+    public function deleteDocType(string $id)
+    {
+        DocumentType::where('id',$id)->delete();
+        return redirect('create-staff-category')->with('message','Document Type  deleted successfully');
+    
+    }
+
+     public function staffRecordView()
+    {
+        $data = Staff::all();
+        $docCats = DocumentCategory::where('status','Active')->get();
+        $docTypes = DocumentType::where('status','Active')->get();
+
+        return view('staff_management.staff-record',['data'=>$data,'docCats'=>$docCats,'docTypes'=>$docTypes]);
+    }
+
+      public function saveStaffDocument(Request $request)
+    {
+        $validateData = $request;
+
+        $validateData->validate([
+            'doc_cat' => 'required',
+            'doc_type' => 'required',
+            'title' => 'required',
+        ]);
+        $newDoc = new StaffDocument();
+        $newDoc->staff_id = $request->staff_id;
+        $newDoc->category_id = $validateData['doc_cat'];
+        $newDoc->type_id = $validateData['doc_type'];
+        $newDoc->title = $validateData['title'];
+        
+        if($request->hasFile('file_path')){
+            $file = $request->file('file_path');
+            $ext = $file->getClientOriginalExtension();
+            $filename =time().'.'.$ext;
+  
+            $file->move('uploads/StaffDocuments/',$filename);
+            $newDoc->file_path = 'uploads/StaffDocuments/'.$filename;
+          }
+        $newDoc->created_by = Auth::user()->id;
+        $newDoc->save();
+
+        return redirect('staff-record')->with('message','Staff Document  saved successfully');
+    }
+
+    public function saveBankDetails(Request $request)
+    {
+        $validateData = $request;
+
+        $validateData->validate([
+            'bank_name' => 'required',
+            'account_name' => 'required',
+            'account_number' => 'required',
+            'branch_name' => 'required'
+        ]);
+        $data =  new BankDetail();
+        $data->staff_id = $request->staff_id;
+        $data->bank_name = $validateData['bank_name'];
+        $data->account_name = $validateData['account_name'];
+        $data->account_number = $validateData['account_number'];
+        $data->branch_name = $validateData['branch_name'];
+        $data->created_by = Auth::user()->id;
+        $data->save();
+        return redirect('staff-record')->with('message','Staff Bank Details  saved successfully');
     }
 }
