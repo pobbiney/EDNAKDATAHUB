@@ -102,7 +102,7 @@ Route::get('edit-type/{id}',[MainSetupController::class,'edittypeView'])->name('
 Route::post('edit-project-type-process/{id}',[MainSetupController::class,'editType'])->name('edit-project-type-process');
 
 Route::get('findCategoryData',[MainSetupController::class,'findCategoryData'])->name('findCategoryData');
-
+Route::get('findDocTypeData',[MainSetupController::class,'findDocTypeData'])->name('findDocTypeData');
 
 Route::get('equipment-setup',[EquipmentControoller::class,'index'])->name('equipment-setup');
 Route::post('equipment-inser-alarm-system',[EquipmentControoller::class,'alarmSystemInsert'])->name('equipment-inser-alarm-system');

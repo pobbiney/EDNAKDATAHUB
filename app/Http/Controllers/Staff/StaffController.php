@@ -299,9 +299,10 @@ class StaffController extends Controller implements HasMiddleware
         $decodeId = Crypt::decrypt($staff_id);
         $data = Staff::find($decodeId);
         $datas = Staff::all();
+        $staffDocs = StaffDocument::where('staff_id',$decodeId)->get();
         
         // $sta = StaffNextofKin::where('staff_id',$decodeId)->get();
-        return view('staff_management.staff-profile',data: ['data'=>$data,'datas'=>$datas,'sta'=>null, 'staff_id'=>$staff_id]);
+        return view('staff_management.staff-profile',data: ['data'=>$data,'datas'=>$datas,'sta'=>null, 'staff_id'=>$staff_id,'staffDocs'=>$staffDocs]);
 
     }
 

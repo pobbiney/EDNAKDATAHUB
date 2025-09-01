@@ -142,7 +142,7 @@
                                                    <div class="col-md-4 mb-3">
                                                         <div class="mb-3">
                                                             <p class="mb-1 fw-medium text-dark "><b>Staff Branch</b></p>
-                                                            <p>---</p>
+                                                            <p>{{$data->branchName->branch_name ?? 'N/A'}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 mb-3">
@@ -242,8 +242,35 @@
                             </div>
                             <div id="content3" class="displayContent">
                         
-                                <div class="row">
-                                  
+                                 	<div class="row">
+                                    <!-- Address -->
+                                    <div class="col-xxl-8 d-flex">
+                                        <div class="card flex-fill">
+                                            <div class="card-header">
+                                                <h5>Documents</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                @foreach($staffDocs as $item)
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <div>
+                                                        <p class="mb-1 fw-medium text-dark "><b>Title: </b>{{$item->title}}</p>
+                                                        <p class="mb-1 fw-medium text-dark "><b>Category: </b>{{$item->category->name}}</p>
+                                                         <p class="mb-1 fw-medium text-dark "><b>Type: </b>{{$item->type->name}}</p>
+                                                    </div>
+                                                    <div style="text-align: right; margin-left: auto;">
+                                                        <a  href="{{asset($item->file_path)}}" target="_blank" class="btn btn-dark btn-icon btn-sm"><i class="ti ti-download"></i></a>
+                                                    </div>
+                                                    
+                                                </div>
+                                                @endforeach
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Address -->
+
+                                
+
                                 
                                 </div>
                             </div>

@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\MainSetup;
 
-use App\Http\Controllers\Controller;
-use App\Models\Activity;
-use App\Models\ActivityType;
-use App\Models\Businessclass;
-use App\Models\Businesstype;
+use Carbon\Carbon;
 use App\Models\Phase;
+use App\Models\Activity;
+use App\Models\ProjectType;
+use App\Models\ActivityType;
+use App\Models\Businesstype;
+use App\Models\DocumentType;
+use Illuminate\Http\Request;
+use App\Models\Businessclass;
 use App\Models\ProjectSector;
 use App\Models\ProjectCategory;
-use App\Models\ProjectType;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 class MainSetupController extends Controller implements HasMiddleware
 {
@@ -538,4 +539,10 @@ public function phaseView(){
         $data=ProjectCategory::select('name','id')->where('sector_id',$request->id)->get();
         return response()->json($data);//then sent this data to ajax success
 	}
+
+    //Get All Document Type base on selected Category
+    public function findDocTypeData(Request $request){
+        $data = DocumentType::select('name','id')->where('category_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+    }
 }

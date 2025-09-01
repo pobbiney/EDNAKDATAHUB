@@ -107,7 +107,7 @@
                                     <div class="row g-4" >
                                         <div class="col mb-0">
                                             <label for="emailBasic" class="form-label"><b>Select Category</b></label>
-                                            <select class="form-select" name="doc_cat">
+                                            <select class="form-select changecategory" name="doc_cat">
                                                 <option value="">--Select here--</option>
                                                 @foreach($docCats as $docCat)
                                                     <option value="{{$docCat->id}}">{{$docCat->name}}</option>
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="col mb-0">
                                             <label for="emailBasic" class="form-label"><b>Select Type</b></label>
-                                            <select class="form-select" name="doc_type">
+                                            <select class="form-select doc_type" name="doc_type" id="doc_type">
                                                 <option value="">--Select here--</option>
                                                 @foreach($docTypes as $docType)
                                                     <option value="{{$docType->id}}">{{$docType->name}}</option>
@@ -314,4 +314,38 @@
   });
   });
 </script>
+
+<script>
+  $(document).ready(function(){
+      $(document).on('change','.changecategory',function(){
+    //    console.log("Hello world");
+       var cat_id = $(this).val();
+    //    console.log(cat_id);
+
+       var div=$(this).parent();
+
+       var op ='';
+       $.ajax({
+        type:'get',
+        url:'{!!URL::to('findDocTypeData')!!}',
+        data:{'id':cat_id},
+        success:function(data){
+         //console.log('success');
+         console.log(data);
+
+         op+='<option value="0" selected disabled>Select Type</option>';
+    for(var i=0;i<data.length;i++){
+    op+='<option value="'+data[i].id+'">'+data[i].name+'</option>';
+
+          }
+          $(".doc_type").html(op);
+          
+        },
+        error:function(){
+        }
+       });
+      });
+
+  });
+  </script>
 @endsection

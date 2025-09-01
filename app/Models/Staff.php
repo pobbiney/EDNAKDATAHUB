@@ -95,4 +95,9 @@ class Staff extends Model
 		return $this->belongsTo(District::class, 'mmda_id');
 	}
 
+	public function branchName()
+	{
+		return $this->belongsTo(Branch::class, 'branch');
+	}
+
 }
