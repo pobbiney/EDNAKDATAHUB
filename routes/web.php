@@ -593,9 +593,11 @@ Route::get('create-staff',[StaffController::class,'addStaff'])->name('create-sta
  Route::post('edit-staff-process/{staff_id}',[StaffController::class,'updateStaff'])->name('edit-staff-process');
  Route::post('edit-staff-process2/{staff_id}',[StaffController::class,'updateStaff2'])->name('edit-staff-process2');
  Route::post('edit-staff-process3/{staff_id}',[StaffController::class,'updateStaff3'])->name('edit-staff-process3');
+  Route::post('edit-bank-details/{staff_id}',[StaffController::class,'updateBankDetails'])->name('edit-bank-details');
 
   Route::get('staff-record',[StaffController::class,'staffRecordView'])->name('staff-record');
    Route::post('create-staff-document-process',[StaffController::class,'saveStaffDocument'])->name('create-staff-document-process');
+   Route::post('edit-staff-document-process',[StaffController::class,'editStaffDocument'])->name('edit-staff-document-process');
       Route::post('create-bank-details-process',[StaffController::class,'saveBankDetails'])->name('create-bank-details-process');
  
  Route::get('staff-upload-image/{staff_id}',[StaffController::class,'uploadStaffPhotoView'])->name('staff-upload-image');

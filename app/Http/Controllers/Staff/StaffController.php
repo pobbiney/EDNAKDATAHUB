@@ -60,6 +60,7 @@ class StaffController extends Controller implements HasMiddleware
     {
         $data = Staff::all();
         
+        
         return view('staff_management.list-staff',['data'=>$data]);
     }
 
@@ -300,9 +301,10 @@ class StaffController extends Controller implements HasMiddleware
         $data = Staff::find($decodeId);
         $datas = Staff::all();
         $staffDocs = StaffDocument::where('staff_id',$decodeId)->get();
+        $bankDetails = BankDetail::where('staff_id',$decodeId)  ->orderBy('created_at', 'desc')->first();
         
         // $sta = StaffNextofKin::where('staff_id',$decodeId)->get();
-        return view('staff_management.staff-profile',data: ['data'=>$data,'datas'=>$datas,'sta'=>null, 'staff_id'=>$staff_id,'staffDocs'=>$staffDocs]);
+        return view('staff_management.staff-profile',data: ['data'=>$data,'datas'=>$datas,'sta'=>null, 'staff_id'=>$staff_id,'staffDocs'=>$staffDocs,'bankDetails'=>$bankDetails]);
 
     }
 
@@ -413,8 +415,14 @@ class StaffController extends Controller implements HasMiddleware
         $cat = StaffCategory::all();
         $bra = Branch::all();
         $dep = Businessclass::all();
+        $bankDetails = BankDetail::where('staff_id',$decodeId)  ->orderBy('created_at', 'desc')->first();
+        $staffDocs = StaffDocument::where('staff_id',$decodeId)->get();
+        $docCats = DocumentCategory::where('status','Active')->get();
+        $docTypes = DocumentType::where('status','Active')->get();
        
-        return view('staff_management.edit-staff',['data'=>$data,'regs'=>$regs,'clas'=>$clas,'cat'=>$cat,'bra'=>$bra,'dep'=>$dep,'datas'=>$datas,'dist'=>$dist,'staff_id'=>$staff_id]);
+        return view('staff_management.edit-staff',['data'=>$data,'regs'=>$regs,'clas'=>$clas,'cat'=>$cat,'bra'=>$bra,'dep'=>$dep,
+        'datas'=>$datas,'dist'=>$dist,'staff_id'=>$staff_id,'bankDetails'=>$bankDetails,'staffDocs'=>$staffDocs,'docCats'=>$docCats,'docTypes'=>$docTypes
+    ]);
     }
 
 
@@ -510,6 +518,40 @@ class StaffController extends Controller implements HasMiddleware
         $data->updated_by = Auth::user()->id;
         $data->update();
         return back()->with('message','Staff Information  updated Successfully');
+    }
+
+     public function updateBankDetails(Request $request,$staff_id)
+    {
+        $decodeId = Crypt::decrypt($staff_id);
+        $validateData = $request;
+
+        $validateData->validate([
+                'branch_name'=>'required',
+                'account_number'=>'required',
+                'account_name'=>'required',
+                'bank_name'=>'required',
+            ]);
+
+        $data =  BankDetail::where('staff_id',$decodeId)  ->orderBy('created_at', 'desc')->first();
+        if($data){
+            $data->bank_name = $validateData['bank_name'];
+            $data->account_number = $validateData['account_number'];
+            $data->account_name = $validateData['account_name'];
+            $data->branch_name = $validateData['branch_name'];
+            $data->update();
+        }
+        else{
+            $data =  new BankDetail();
+            $data->staff_id = $decodeId;
+            $data->bank_name = $validateData['bank_name'];
+            $data->account_number = $validateData['account_number'];
+            $data->account_name = $validateData['account_name'];
+            $data->branch_name = $validateData['branch_name'];
+            $data->created_by = Auth::user()->id;
+            $data->save();
+        }
+        return back()->with('message','Employee Bank Details  updated Successfully');
+   
     }
 
         //save Document category
@@ -640,6 +682,35 @@ class StaffController extends Controller implements HasMiddleware
         $newDoc->save();
 
         return redirect('staff-record')->with('message','Staff Document  saved successfully');
+    }
+
+       public function editStaffDocument(Request $request)
+    {
+        $validateData = $request;
+        $decodeId =  $request->doc_id;
+
+        $validateData->validate([
+            'doc_cat' => 'required',
+            'doc_type' => 'required',
+            'title' => 'required',
+
+        ]);
+        $doc = StaffDocument::find($decodeId);
+        $doc->category_id = $validateData['doc_cat'];
+        $doc->type_id = $validateData['doc_type'];
+        $doc->title = $validateData['title'];
+        
+        if($request->hasFile('file_path')){
+            $file = $request->file('file_path');
+            $ext = $file->getClientOriginalExtension();
+            $filename =time().'.'.$ext;
+  
+            $file->move('uploads/StaffDocuments/',$filename);
+            $doc->file_path = 'uploads/StaffDocuments/'.$filename;
+          }
+        $doc->update();
+
+         return back()->with('message','Employee Document updated Successfully');
     }
 
     public function saveBankDetails(Request $request)

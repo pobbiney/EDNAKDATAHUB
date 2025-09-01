@@ -38,7 +38,7 @@
 								</nav>
 							</div>
 							<div class="d-flex my-xl-auto right-content align-items-center  flex-wrap">
-								<a href="#" class="btn btn-primary d-flex align-items-center mb-2"><i class="ti ti-edit-circle me-2"></i>Edit Staff</a>
+								<a href="{{route('editstaff',Crypt::encrypt($data->staff_id))}}" class="btn btn-primary d-flex align-items-center mb-2"><i class="ti ti-edit-circle me-2"></i>Edit Staff</a>
 							</div>
 						</div>
 
@@ -102,6 +102,9 @@
 									</li>
 									<li data-target="content3"> 
 										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-calendar-due me-2"></i>Document Manager</a>
+									</li>
+                                    	<li data-target="content4"> 
+										<a class="nav-link" href="javascript:void(0);"><i class="ti ti-building-bank me-2"></i>Bank Details</a>
 									</li>
 									
 								</ul>
@@ -270,6 +273,55 @@
                                     <!-- /Address -->
 
                                 
+
+                                
+                                </div>
+                            </div>
+
+                             <div id="content4" class="displayContent">
+                        
+                                <div class="row">
+                                
+                                    <!-- Bank Details -->
+                                    <div class="col-xxl-12 d-flex">
+                                        <div class="card flex-fill">
+                                            <div class="card-header">
+                                                <h5>Bank Details</h5>
+                                            </div>
+                                            <div class="card-body pb-1">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Account Name</b></p>
+                                                            <p>{{ $bankDetails->account_name ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Account Number</b></p>
+                                                            <p>{{ $bankDetails->account_number ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Bank Name</b></p>
+                                                            <p>{{ $bankDetails->bank_name ?? 'N/A' }}</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                   <div class="col-md-4 mb-3">
+                                                        <div class="mb-3">
+                                                            <p class="mb-1 fw-medium text-dark "><b>Branch Name</b></p>
+                                                            <p>{{$bankDetails->branch_name ?? 'N/A'}}</p>
+                                                        </div>
+                                                    </div>
+                                                  
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Bank Details -->
 
                                 
                                 </div>
