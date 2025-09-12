@@ -522,7 +522,7 @@
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->construction_impact}}</h6>
-                                                    <li>{{$item->impact_mgt->construction_mgt}}</li>
+                                                    <li>{{$item->impact_mgt->construction_mgt ?? ''}}</li>
                                                 </div>
                                             @endforeach
                                         <div class="row mt-3 mb-2">
@@ -533,7 +533,7 @@
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->operational_impact}}</h6>
-                                                    <li>{{$item->impact_mgt->operational_mgt}}</li>
+                                                    <li>{{$item->impact_mgt->operational_mgt ?? ''}}</li>
                                                 </div>
                                             @endforeach
                                             

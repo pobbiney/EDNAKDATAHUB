@@ -256,12 +256,12 @@
                                                 @foreach($staffDocs as $item)
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div>
-                                                        <p class="mb-1 fw-medium text-dark "><b>Title: </b>{{$item->title}}</p>
-                                                        <p class="mb-1 fw-medium text-dark "><b>Category: </b>{{$item->category->name}}</p>
-                                                         <p class="mb-1 fw-medium text-dark "><b>Type: </b>{{$item->type->name}}</p>
+                                                        <p class="mb-1 fw-medium text-dark "><b>Title: </b>{{$item->title ?? 'N/A'}}</p>
+                                                        <p class="mb-1 fw-medium text-dark "><b>Category: </b>{{$item->category->name ?? 'N/A'}}</p>
+                                                         <p class="mb-1 fw-medium text-dark "><b>Type: </b>{{$item->type->name ?? 'N/A'}}</p>
                                                     </div>
                                                     <div style="text-align: right; margin-left: auto;">
-                                                        <a  href="{{asset($item->file_path)}}" target="_blank" class="btn btn-dark btn-icon btn-sm"><i class="ti ti-download"></i></a>
+                                                        <a  href="{{asset($item->file_path ?? '')}}" target="_blank" class="btn btn-dark btn-icon btn-sm"><i class="ti ti-download"></i></a>
                                                     </div>
                                                     
                                                 </div>

@@ -410,7 +410,7 @@ $subpageName = "application_forms"; @endphp
                          
                                 <div class="content-header mb-4">
                                     <h6 class="mb-0">Employee Documents</h6>
-                                    <small>Edit Your Documents</small>
+                                    <small>Edit Your Documents</small> <small class="text-muted float-end"><a  class = "btn btn-sm btn-info" href="{{ route('staff-record') }}?showDocumentModal=true"><i class="fa fa-plus"></i> Add New Document </a></small>
                                 </div>
                                 <table id="example" class="table ">
                                     <thead class="table-light">
@@ -537,6 +537,8 @@ $subpageName = "application_forms"; @endphp
                     </div>
                 </div>
             </div>
+
+    
 @endsection
 
         @section('scripts')

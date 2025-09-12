@@ -11,6 +11,8 @@
 <div class="card-body">
 
 
+
+
 @if(Session::has('message'))
 <div class="alert alert-solid-success d-flex align-items-center" role="alert">
 <span class="alert-icon rounded">
@@ -250,6 +252,8 @@
     </div>
   </div>
 </div>
+
+
  
 @endsection
 
