@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use Carbon\Carbon;
 use App\Models\Region;
 use App\Models\Drawing;
+use App\Models\Tracker;
 use App\Models\District;
 use App\Models\Formsale;
 use App\Models\Screening;
@@ -250,5 +251,211 @@ class RegController extends Controller
             $data=District::select('name','id')->where('region_id',$request->id)->get();
             return response()->json($data);//then sent this data to ajax success
         }
+
+    public function openPermitForm($id)
+    {
+           if (!Session::has('formsale_id')) {
+                return redirect()->route('customer-login');
+            }
+          $decodeID = Crypt::decrypt($id);
+
+        $data = Formsale::find($decodeID);
+
+        $regionsList = Region::orderBy('name','ASC')->get();
+        $districtList = District::orderBy('name','ASC')->get();
+      
+
+        return view('customer.registration.permit-registration-form-application',[
+            'data' => $data,
+            'regionsList' => $regionsList,
+            'districtList' => $districtList,
+           
+        ]);
+    }
+
+        public function addPermitApplication(Request $request)
+    {
+        $request->validate([
+            'proponent_name' => 'required',
+            'email' => 'required|email|email',
+            'contact_person' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'position' => 'required',
+            'contact_number' => 'required',
+        ]);
+
+        $insertApp = New PermitRegistration();
+        $insertApp->proponent_name = $request->proponent_name;
+        $insertApp->contact_person = $request->contact_person;
+        $insertApp->city = $request->city;
+        $insertApp->email = $request->email;
+        $insertApp->address = $request->address;
+        $insertApp->position = $request->position;
+        $insertApp->contact_number = $request->contact_number;
+        $insertApp->formID = $request->application_id;
+        $insertApp->registration_step = "Step1";
+        $insertApp->save();
+
+        $data = Formsale::where('id', $request->application_id)->first(); // get first item
+
+        $regionId = $data ? $data->regionId : 0;
+
+        $track = new Tracker();
+        $track->formID = $request->application_id;
+        $track->activity = "2";
+        $track->createdOn =Carbon::now();
+        $track->createdBy = 0; 
+        $track->activity_type = "1";
+        $track->regionId= $regionId;
+        $track->save();
+
+        // Store the user ID in session to use in step 2 and 3
+        Session::put('incomplete_user_id', $insertApp->id);
+            return view('customer.registration.success-message', [
+                'redirectUrl' => route('customer-registration.permit-registration-form-project')
+            ]);
+
+
+    }
+
+    public function getStep2Back()
+        {
+            $user = null;
+
+            if (Session::has('incomplete_user_id')) {
+                $user = PermitRegistration::find(Session::get('incomplete_user_id'));
+                $regionsList = Region::orderBy('name','ASC')->get();
+                $data = District::orderBy('name','ASC')->get();
+                $sec = ProjectSector::all();
+                $catlist = ProjectCategory::all();
+                $typelist = ProjectType::all();
+                
+            }
+
+            return view('customer.registration.permit-registration-form-project', compact('user','regionsList','data','sec','catlist','typelist'));
+        }
+
+       public function addPermitProject(Request $request)
+        {
+            $request->validate([
+                'project_title' => 'required',
+                'plot_number' => 'required',
+                'street_name' => 'required',
+                'project_description' => 'required',
+                'scope' => 'required',
+                'gps' => 'required',
+                'town' => 'required',
+                'region' => 'required',
+                'district' => 'required',
+                'site_description' => 'required',
+                'sector' => 'required',
+                'type' => 'required',
+                'category' => 'required',
+            ]);
+
+            
+
+            $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
+            $insertApp->project_title = $request->project_title;
+            $insertApp->plot_number = $request->plot_number;
+            $insertApp->street_name = $request->street_name;
+            $insertApp->project_description = $request->project_description;
+            $insertApp->scope = $request->scope;
+            $insertApp->gps = $request->gps;
+            $insertApp->town = $request->town;
+            $insertApp->region = $request->region;
+            $insertApp->district = $request->district;
+            $insertApp->landmark = $request->landmark;
+            $insertApp->land_uses = $request->land_uses;
+            $insertApp->site_description = $request->site_description;
+            $insertApp->sector_id = $request->sector;
+            $insertApp->cat_id = $request->category;
+            $insertApp->type_id = $request->type;
+            $insertApp->registration_step = "Step2";
+            $insertApp->save();
+
+            // Store the user ID in session to use in step 2 and 3
+            Session::put('incomplete_user_id', $insertApp->id);
+                return view('customer.registration.success-message', [
+                    'redirectUrl' => route('customer-registration.permit-registration-form-infrastructure')
+                ]);
+
+
+        }
+
+        public function openPermitInfrastructureView()
+        {
+        if (!Session::has('formsale_id')) {
+                    return redirect()->route('customer-login');
+                }
+            $regionsList = Region::orderBy('name','ASC')->get();
+            $data = District::orderBy('name','ASC')->get();
+        
+
+            return view('customer.registration.permit-registration-form-infrastructure',[
+                
+                'regionsList' => $regionsList,
+                'data' => $data,
+            
+            ]);
+        }
+
+    public function addPermitInfrastructure(Request $request){
+
+        $request->validate([
+            'structures' => 'required',
+            'water' => 'required',
+            'power' => 'required',
+            'drainage' => 'required',
+            'water_body' => 'required',
+            'road_access' => 'required',
+            
+        ]);
+
+        $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
+        $insertApp->structures = $request->structures;
+        $insertApp->water = $request->water;
+        $insertApp->power = $request->power;
+        $insertApp->drainage = $request->drainage;
+        $insertApp->water_body = $request->water_body;
+        $insertApp->road_access = $request->road_access;
+        $insertApp->other = $request->other;
+        
+        $insertApp->registration_step = "Step3";
+        $insertApp->save();
+
+        // Store the user ID in session to use in step 2 and 3
+        Session::put('incomplete_user_id', $insertApp->id);
+            return view('customer.registration.success-message', [
+                'redirectUrl' => route('customer-registration.permit-registration-form-declaration')
+            ]);
+
+    }
+
+    public function openPermitDeclarationView(){
+        return view('customer.registration.permit-registration-form-declaration');
+    }
+
+    public function addDeclaration(Request $request){
+        $request->validate([
+            'applied_by' => 'required',
+        ]);
+
+        $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
+        $insertApp->applied_by = $request->applied_by;
+        $insertApp->declaration = "assigned";
+        $insertApp->created_by = 0; 
+        $insertApp->registration_step = "completed";
+        $insertApp->save();
+
+    
+        // Store the user ID in session to use in step 2 and 3
+        Session::put('incomplete_user_id', $insertApp->id);
+        return $insertApp? back()->with('message_success','Application  Completed Successfully'): back()->with('message_error','Something went wrong, please try again.');
+    }
+
+
+
 
 }

@@ -561,6 +561,17 @@ Route::post('/customer/registration/edit-permit-registration-form-infrastructure
 Route::get('/customer/registration/edit-permit-registration-form-declaration/{id}',[RegController::class,'openEditPermitDeclarationView'])->name('customer.registration.edit-permit-registration-form-declaration');
 Route::post('/customer/registration/edit-permit-registration-form-declaration-process/{id}',[RegController::class,'editDeclaration'])->name('customer.registration.edit-permit-registration-form-declaration-process');
 
+Route::get('/customer-registration-open-permit-forms/{id}',[RegController::class,'openPermitForm'])->name('customer-registration-open-permit-forms');
+Route::post('/customer/registration/add-permit-registration-form-application-process',[RegController::class,'addPermitApplication'])->name('customer-registration.add-permit-registration-form-application-process');
+Route::get('/customer/registration/permit-registration-form-project',[RegController::class,'getStep2Back'])->name('customer-registration.permit-registration-form-project');
+Route::post('/customer/registration/add-permit-registration-form-project-process',[RegController::class,'addPermitProject'])->name('customer-registration.add-permit-registration-form-project-process');
+
+Route::get('/customer/registration/permit-registration-form-infrastructure',[RegController::class,'openPermitInfrastructureView'])->name('customer-registration.permit-registration-form-infrastructure');
+Route::post('/customer/registration/add-permit-registration-form-infrastructure-process', [RegController::class,'addPermitInfrastructure'])->name('customer-registration.add-permit-registration-form-infrastructure-process');
+Route::get('/customer/registration/permit-registration-form-declaration',[RegController::class,'openPermitDeclarationView'])->name('customer-registration.permit-registration-form-declaration');
+Route::post('/customer/registration/add-permit-registration-form-declaration-process',[RegController::class,'addDeclaration'])->name('customer-registration.add-permit-registration-form-declaration-process');
+
+
 Route::get('customerFindRegionData',[RegController::class,'customerFindRegionData'])->name('customerFindRegionData');
 Route::get('customerFindCategoryData',[RegController::class,'customerFindCategoryData'])->name('customerFindCategoryData');
 Route::get('customerFindProjectTypeyData',[RegController::class,'customerFindProjectTypeyData'])->name('customerFindProjectTypeyData');
