@@ -82,7 +82,7 @@
                                                 <div class="mb-4">
                                                     <h5>Enter Application  Details</h5>
                                                 </div>
-                                                <form enctype="multipart/form-data"  method="POST" action="{{route('customer.registration.add-permit-registration-form-application-process')}}">
+                                                <form enctype="multipart/form-data"  method="POST" action="{{route('customer-registration.add-permit-registration-form-application-process')}}">
                                                            @csrf
                                                         <div class="row">
                                                             <div class="col-md-4">
