@@ -102,7 +102,7 @@
                                                 <div class="mb-4">
                                                     <h5>Enter Daclaration  Details</h5>
                                                 </div>
-                                                <form enctype="multipart/form-data"   method="POST" action="{{route('cutomer-registration.add-permit-registration-form-declaration-process')}}">
+                                                <form enctype="multipart/form-data"   method="POST" action="{{route('customer-registration.add-permit-registration-form-declaration-process')}}">
                                                            @csrf
                                                       
                                                         <p style="margin: 0; padding: 0;font-size:large">
