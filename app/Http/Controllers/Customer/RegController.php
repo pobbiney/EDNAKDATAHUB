@@ -336,6 +336,40 @@ class RegController extends Controller
             return view('customer.registration.permit-registration-form-project', compact('user','regionsList','data','sec','catlist','typelist'));
         }
 
+        public function addPermitApp(Request $request)
+        {
+            $request->validate([
+                'proponent_name' => 'required',
+                'email' => 'required|email|email',
+                'contact_person' => 'required',
+                'city' => 'required',
+                'address' => 'required',
+                'position' => 'required',
+                'contact_number' => 'required',
+            ]);
+
+            $insertApp = PermitRegistration::findOrFail(Session::get('incomplete_user_id'));
+            $insertApp->proponent_name = $request->proponent_name;
+            $insertApp->contact_person = $request->contact_person;
+            $insertApp->city = $request->city;
+            $insertApp->email = $request->email;
+            $insertApp->address = $request->address;
+            $insertApp->position = $request->position;
+            $insertApp->contact_number = $request->contact_number;
+            $insertApp->formID = $request->application_id;
+            $insertApp->registration_step = "Step1";
+            $insertApp->save();
+
+            // Store the user ID in session to use in step 2 and 3
+            Session::put('incomplete_user_id', $insertApp->id);
+            return view('customer.registration.success-message', [
+                'redirectUrl' => route('customer-registration.permit-registration-form-project')
+            ]);
+
+
+        }
+
+
        public function addPermitProject(Request $request)
         {
             $request->validate([
@@ -454,6 +488,20 @@ class RegController extends Controller
         Session::put('incomplete_user_id', $insertApp->id);
         return $insertApp? back()->with('message_success','Application  Completed Successfully'): back()->with('message_error','Something went wrong, please try again.');
     }
+
+     public function getStep1Back()
+        {
+            $user = null;
+
+            if (Session::has('incomplete_user_id')) {
+                $user = PermitRegistration::find(Session::get('incomplete_user_id'));
+                
+                $regionsList = Region::orderBy('name','ASC')->get();
+                $data = District::orderBy('name','ASC')->get();
+            }
+
+            return view('customer.registration.permit-registration-form-app', compact('user','regionsList','data'));
+        }
 
 
 

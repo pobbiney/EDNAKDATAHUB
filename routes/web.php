@@ -565,7 +565,8 @@ Route::get('/customer-registration-open-permit-forms/{id}',[RegController::class
 Route::post('/customer/registration/add-permit-registration-form-application-process',[RegController::class,'addPermitApplication'])->name('customer-registration.add-permit-registration-form-application-process');
 Route::get('/customer/registration/permit-registration-form-project',[RegController::class,'getStep2Back'])->name('customer-registration.permit-registration-form-project');
 Route::post('/customer/registration/add-permit-registration-form-project-process',[RegController::class,'addPermitProject'])->name('customer-registration.add-permit-registration-form-project-process');
-
+Route::get('/customer/registration/permit-registration-form-app',[RegController::class,'getStep1Back'])->name('customer-registration.permit-registration-form-app');
+Route::post('/customer/registration/add-permit-registration-form-app-process',[RegController::class,'addPermitApp'])->name('customer-registration.add-permit-registration-form-app-process');
 Route::get('/customer/registration/permit-registration-form-infrastructure',[RegController::class,'openPermitInfrastructureView'])->name('customer-registration.permit-registration-form-infrastructure');
 Route::post('/customer/registration/add-permit-registration-form-infrastructure-process', [RegController::class,'addPermitInfrastructure'])->name('customer-registration.add-permit-registration-form-infrastructure-process');
 Route::get('/customer/registration/permit-registration-form-declaration',[RegController::class,'openPermitDeclarationView'])->name('customer-registration.permit-registration-form-declaration');
