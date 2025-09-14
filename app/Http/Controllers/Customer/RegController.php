@@ -265,7 +265,7 @@ class RegController extends Controller
         $districtList = District::orderBy('name','ASC')->get();
       
 
-        return view('customer.registration.permit-registration-form-application',[
+        return view('customer-registration.permit-registration-form-application',[
             'data' => $data,
             'regionsList' => $regionsList,
             'districtList' => $districtList,
