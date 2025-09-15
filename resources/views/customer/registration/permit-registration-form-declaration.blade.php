@@ -110,7 +110,7 @@
                                                             hereby declare that the information provided on this form is true to the best of my knowledge and shall provide any additional information that shall come to my notice in the course of processing the application. I also declare that the information provided is true.
                                                             </p><br/>
                                                         <div class="text-end">
-                                                            <a href="{{ route('cutomer-registration.permit-registration-form-infrastructure') }}" class="btn btn-soft-secondary" style="float: left">Previous</a>
+                                                            <a href="{{ route('customer-registration.permit-registration-form-infrastructure') }}" class="btn btn-soft-secondary" style="float: left">Previous</a>
                                                              <button type="submit" class="btn btn-success">Complete Application</button>
                                                         </div>
                                                 </form>
