@@ -233,6 +233,17 @@ class EquipmentControoller extends Controller implements HasMiddleware
         ]);
     }
 
+     public function currencyView(){
+
+        $drawingsList = Drawing::orderBy('name','asc')->get();
+        $currencyList = Currency::orderBy('name','asc')->get();
+
+        return view('others.add-currency',[
+            'drawingsList' => $drawingsList,
+            'currencyList' => $currencyList
+        ]);
+    }
+
 
     public function insertDrawings(Request $request){
 
@@ -267,8 +278,10 @@ class EquipmentControoller extends Controller implements HasMiddleware
         $decodeID = Crypt::decrypt($id);
 
         $data = Drawing::find($decodeID);
+         $drawingsList = Drawing::orderBy('name','asc')->get();
 
         return view('others.edit-drawings',[
+             'drawingsList' => $drawingsList,
             'data' => $data,
             'id' => $id
         ]);
@@ -330,9 +343,11 @@ class EquipmentControoller extends Controller implements HasMiddleware
         $decodeID = Crypt::decrypt($id);
 
         $data = Currency::find($decodeID);
+         $currencyList = Currency::orderBy('name','asc')->get();
 
         return view('others.edit-currency',[
             'data' => $data,
+            'currencyList'=>$currencyList,
             'id' => $id
         ]);
     }
