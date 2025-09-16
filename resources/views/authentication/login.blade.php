@@ -64,7 +64,7 @@
                                 @csrf
                                 <div class="login-userheading">
                                     <h3>Sign In</h3>
-                                    <h4>Access the EPA dashboard using your email and passcode.</h4>
+                                    <h4>Access the Unified Electronic Development Permit Management System dashboard using your email and passcode.</h4>
                                 </div>
                                 <div class="mb-3">
                                         <label class="form-label">Email Address</label>
