@@ -290,13 +290,13 @@
 			<!-- Logo -->
 			<div class="sidebar-logo active">
 				<a href="{{route('dashboard')}}" class="logo logo-normal">
-					<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+					<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 				</a>
 				<a href="{{route('dashboard')}}" class="logo logo-white">
-					<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+					<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 				</a>
 				<a href="{{route('dashboard')}}" class="logo-small">
-					<img src="{{asset('assets/img/logo-png.png')}}" alt="Img">
+					<img src="{{asset('assets/img/favlogo.png')}}" alt="Img">
 				</a>
 				<a id="toggle_btn" href="javascript:void(0);">
 					<i data-feather="chevrons-left" class="feather-16"></i>
@@ -392,13 +392,13 @@
 					<!-- Logo -->
 					<div class="sidebar-logo">
 						<a href="{{route('dashboard')}}" class="logo logo-normal">
-							<img src="assets/img/EPA-top-logo.png" alt="Img">
+							<img src="assets/img/Epermit-logo.png" alt="Img">
 						</a>
 						<a href="{{route('dashboard')}}" class="logo logo-white">
-							<img src="assets/img/EPA-top-logo.png" alt="Img">
+							<img src="assets/imgEpermit-logo.png" alt="Img">
 						</a>
 						<a href="{{route('dashboard')}}" class="logo-small">
-							<img src="assets/img/logo-png.png" alt="Img">
+							<img src="assets/img/favlogo.png" alt="Img">
 						</a>
 					</div>
 					 
