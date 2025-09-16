@@ -301,16 +301,34 @@ class ReviewController extends Controller
 
 
     //Showing List of Reviewed Permit Application//
-    public function getReviewPermit(){
-        
+  //Showing List of Reviewed Permit Application//
+public function getReviewPermit()
+{
+    $tasks = PermitRegistration::where('status', 'screened')
+        ->where('region', Auth::user()->region_id)
+        ->get();
     
-            $tasks = PermitRegistration::where('status','screened')
-            ->where('region', Auth::user()->region_id)
-            ->get();
-           return view('review_manager.review_permit',['tasks'=>$tasks]);
-
+    // Calculate bill differences for each task
+    foreach ($tasks as $task) {
+        $totalBill = DB::table('app_bill')
+            ->where('formId', $task->formID)
+            ->sum('bill_amount');
+            
+        $totalPaid = DB::table('payment')
+            ->where('formId', $task->formID) // Note: using 'found' column as per your payment table structure
+            ->sum('amount');
+            
+        $balance = $totalBill - $totalPaid;
+        
+        // Add the calculated values to each task object
+        $task->total_bill = $totalBill;
+        $task->total_paid = $totalPaid;
+        $task->balance = $balance;
+        $task->has_outstanding_bill = $balance > 0;
     }
     
+    return view('review_manager.review_permit', ['tasks' => $tasks]);
+}
 
 //Display Reviewed Permit Application for Approval//
       public function getReviewVetPermit($id)
