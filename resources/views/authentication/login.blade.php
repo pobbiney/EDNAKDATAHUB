@@ -15,7 +15,7 @@
 		<title>Environmental Protection Agency | Login</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favlogo.png')}}">
 
 		<!-- Apple Touch Icon -->
 		<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -47,12 +47,15 @@
                     <div class="col-lg-6 p-0">
                         <div class="login-content">
                             <form action="{{ route('authentication-process') }}" method="POST">
+                                 <div style="display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{ asset('assets/img/Epermit-logo.png') }}" alt="img" width="350px">
+                                </div><br/>
                                 <div class="login-userset">
-                                    <div class="login-logo logo-normal">
-                                    <img src="{{asset('assets/img/logo-png.png')}}" alt="img">
-                                </div>
-                                <a href="index.html" class="login-logo logo-white">
-                                    <img src="{{asset('assets/img/logo-png.png')}}"  alt="Img">
+                                    <div class="login-logo">
+                                   
+                                    </div>
+                                <a href="#" class="login-logo logo-white">
+                                    <img src="{{asset('assets/img/Epermit-logo.png')}}"  alt="Img">
                                 </a>
 
                                 @if (session('login_error_message'))

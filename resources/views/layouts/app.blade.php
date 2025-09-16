@@ -34,7 +34,7 @@
 	<script src="{{asset('assets/js/theme-script.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>	
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favlogo.png')}}">
 
 	<!-- Apple Touch Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/apple-touch-icon.png')}}">
@@ -98,13 +98,13 @@
 				<!-- Logo -->
 				<div class="header-left active">
 					<a href="{{route('dashboard')}}" class="logo logo-normal">
-						<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+						<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 					</a>
 					<a href="{{route('dashboard')}}" class="logo logo-white">
-						<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+						<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 					</a>
 					<a href="{{route('dashboard')}}" class="logo-small">
-						<img src="{{asset('assets/img/logo-png.png')}}" alt="Img">
+						<img src="{{asset('assets/img/favlogo.png')}}" alt="Img">
 					</a>
 				</div>
 				<!-- /Logo -->
