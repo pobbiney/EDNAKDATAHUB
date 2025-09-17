@@ -12,8 +12,8 @@ jobs:
     - name: Sync files to server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ftp.index-com.com
-        username: epa@epa.index-com.com
-        password: mGAe65RnOrJ$
+        server: 192.249.121.28
+        username: admin@admin.developmentpermit.com.gh
+        password: o$nCX4+LD$)d
 
         

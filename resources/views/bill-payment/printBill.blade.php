@@ -21,7 +21,7 @@
 <table class="receipt" style="border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;">
     <tr>
         <td>&nbsp;</td>
-        <td colspan="5" align="center"><img src="{{ asset('assets/img/EPA-top-logo.png') }}"></td>
+        <td colspan="5" align="center"><img src="{{ asset('assets/img//Epermit-logo.png') }}"></td>
     </tr>
     <tr>
         <td>&nbsp;</td>

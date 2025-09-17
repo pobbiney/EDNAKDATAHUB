@@ -10,6 +10,7 @@ use App\Models\Applicationformtype;
 use App\Models\BillItem;
 use App\Models\BillType;
 use App\Models\Currency;
+use App\Models\District;
 use App\Models\Formsale;
 use App\Models\Payment;
 use App\Models\PermitBill;
@@ -312,6 +313,7 @@ class FinanceController extends Controller implements HasMiddleware
 
         $listForm = Applicationform::orderBy('formName','ASC')->get();
         $regionList = Region::orderBy('name','ASC')->get();
+        $districtList = District::orderBy('name','ASC')->get();
         $listtype = Applicationformtype::all();
 
 
@@ -319,6 +321,7 @@ class FinanceController extends Controller implements HasMiddleware
             'listForm' => $listForm,
             'regionList' => $regionList,
             'listtype' =>$listtype,
+            'districtList'=>$districtList,
         ]);
     }
 
@@ -332,7 +335,8 @@ class FinanceController extends Controller implements HasMiddleware
             'location' => 'required',
             'form_type' => 'required',
             'region' => 'required',
-            'permit_type' => 'required'
+            'permit_type' => 'required',
+            'district' => 'required'
         ]);
 
 
@@ -355,6 +359,7 @@ class FinanceController extends Controller implements HasMiddleware
         $insertSale->pin = base64_encode($pin);
         $insertSale->formNumber = $formNumber;
         $insertSale->regionId = $request->region;
+        $insertSale->district_id = $request->district;
         $insertSale->amountPaid = $formData->amount;
         $insertSale->password = sha1($pin);
         $insertSale->location = $request->location;

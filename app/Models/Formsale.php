@@ -39,7 +39,8 @@ class Formsale extends Model
 		'formType' => 'int',
 		'createdBy' => 'int',
 		'createdOn' => 'datetime',
-		'regionId' => 'int'
+		'regionId' => 'int',
+		'disttict_id' => 'int'
 	];
 
 	protected $hidden = [
@@ -61,7 +62,8 @@ class Formsale extends Model
 		'password',
 		'email',
 		'location',
-		'permit_type'
+		'permit_type',
+		'district_id'
 	];
 
 	public function formTypeDetails (){

@@ -29,12 +29,12 @@
 	<meta name="keywords" content="Environmental Protection Agency">
 	<meta name="author" content="Indexcom Ltd">
 	<meta name="robots" content="index, follow">
-	<title>Environmental Protection Agency</title>
+	<title>Unified Electronic Development Permit Management System</title>
 
 	<script src="{{asset('assets/js/theme-script.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>	
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favlogo.png')}}">
 
 	<!-- Apple Touch Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/apple-touch-icon.png')}}">
@@ -98,13 +98,13 @@
 				<!-- Logo -->
 				<div class="header-left active">
 					<a href="{{route('dashboard')}}" class="logo logo-normal">
-						<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+						<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 					</a>
 					<a href="{{route('dashboard')}}" class="logo logo-white">
-						<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+						<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 					</a>
 					<a href="{{route('dashboard')}}" class="logo-small">
-						<img src="{{asset('assets/img/logo-png.png')}}" alt="Img">
+						<img src="{{asset('assets/img/favlogo.png')}}" alt="Img">
 					</a>
 				</div>
 				<!-- /Logo -->
@@ -290,13 +290,13 @@
 			<!-- Logo -->
 			<div class="sidebar-logo active">
 				<a href="{{route('dashboard')}}" class="logo logo-normal">
-					<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+					<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 				</a>
 				<a href="{{route('dashboard')}}" class="logo logo-white">
-					<img src="{{asset('assets/img/EPA-top-logo.png')}}" alt="Img">
+					<img src="{{asset('assets/img/Epermit-logo.png')}}" alt="Img">
 				</a>
 				<a href="{{route('dashboard')}}" class="logo-small">
-					<img src="{{asset('assets/img/logo-png.png')}}" alt="Img">
+					<img src="{{asset('assets/img/favlogo.png')}}" alt="Img">
 				</a>
 				<a id="toggle_btn" href="javascript:void(0);">
 					<i data-feather="chevrons-left" class="feather-16"></i>
@@ -392,13 +392,13 @@
 					<!-- Logo -->
 					<div class="sidebar-logo">
 						<a href="{{route('dashboard')}}" class="logo logo-normal">
-							<img src="assets/img/EPA-top-logo.png" alt="Img">
+							<img src="assets/img/Epermit-logo.png" alt="Img">
 						</a>
 						<a href="{{route('dashboard')}}" class="logo logo-white">
-							<img src="assets/img/EPA-top-logo.png" alt="Img">
+							<img src="assets/imgEpermit-logo.png" alt="Img">
 						</a>
 						<a href="{{route('dashboard')}}" class="logo-small">
-							<img src="assets/img/logo-png.png" alt="Img">
+							<img src="assets/img/favlogo.png" alt="Img">
 						</a>
 					</div>
 					 
@@ -446,7 +446,7 @@
 				
 	 
 			<div class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
-				<p class="fs-13 text-gray-9 mb-0"> 2025 &copy; Environmental Protection Agency All Right Reserved</p>
+				<p class="fs-13 text-gray-9 mb-0"> 2025 &copy; Unified Electronic Development Permit Management System All Right Reserved</p>
 				<p>Designed & Developed By <a href="javascript:void(0);" class="link-primary">Indexcom Ltd</a></p>
 			</div>
 		</div>

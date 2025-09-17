@@ -12,10 +12,10 @@
 		<meta name="keywords" content="Environmental Protection Agency">
 		<meta name="author" content="Indexcom Ltd">
 		<meta name="robots" content="index, follow">
-		<title>Environmental Protection Agency | Login</title>
+		<title>Unified Electronic Development Permit Management system | Login</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favlogo.png')}}">
 
 		<!-- Apple Touch Icon -->
 		<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -47,12 +47,15 @@
                     <div class="col-lg-6 p-0">
                         <div class="login-content">
                             <form action="{{ route('authentication-process') }}" method="POST">
+                                 <div style="display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{ asset('assets/img/Epermit-logo.png') }}" alt="img" width="350px">
+                                </div><br/>
                                 <div class="login-userset">
-                                    <div class="login-logo logo-normal">
-                                    <img src="{{asset('assets/img/logo-png.png')}}" alt="img">
-                                </div>
-                                <a href="index.html" class="login-logo logo-white">
-                                    <img src="{{asset('assets/img/logo-png.png')}}"  alt="Img">
+                                    <div class="login-logo">
+                                   
+                                    </div>
+                                <a href="#" class="login-logo logo-white">
+                                    <img src="{{asset('assets/img/Epermit-logo.png')}}"  alt="Img">
                                 </a>
 
                                 @if (session('login_error_message'))
@@ -61,7 +64,7 @@
                                 @csrf
                                 <div class="login-userheading">
                                     <h3>Sign In</h3>
-                                    <h4>Access the EPA dashboard using your email and passcode.</h4>
+                                    <h4>Access the Unified Electronic Development Permit Management Syste dashboard using your email and passcode.</h4>
                                 </div>
                                 <div class="mb-3">
                                         <label class="form-label">Email Address</label>
@@ -118,7 +121,7 @@
                     </div>
                     <div class="col-lg-6 p-0">
                         <div class="login-img">
-                            <img src="assets/img/authentication/authentication-01.svg" alt="img">
+                            <img src="assets/img/building-permit.png" alt="img">
                         </div>
                     </div>
                 </div>

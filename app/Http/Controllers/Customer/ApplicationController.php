@@ -156,7 +156,8 @@ class ApplicationController extends Controller
             'location' => 'required',
             'form_type' => 'required',
             'region' => 'required',
-            'permit_type' => 'required'
+            'permit_type' => 'required',
+            'district' => 'required'
         ]);
 
 
@@ -179,6 +180,7 @@ class ApplicationController extends Controller
         $insertSale->pin = base64_encode($pin);
         $insertSale->formNumber = $formNumber;
         $insertSale->regionId = $request->region;
+        $insertSale->district_id = $request->district;
         $insertSale->amountPaid = $formData->amount;
         $insertSale->password = sha1($pin);
         $insertSale->location = $request->location;
@@ -217,7 +219,8 @@ class ApplicationController extends Controller
             'location' => 'required',
             'form_type' => 'required',
             'region' => 'required',
-            'permit_type' => 'required'
+            'permit_type' => 'required',
+            'district' => 'required'
         ]);
 
 
@@ -238,6 +241,7 @@ class ApplicationController extends Controller
         $insertSale->pin = base64_encode($pin);
         $insertSale->formNumber = $formNumber;
         $insertSale->regionId = $request->region;
+        $insertSale->district_id = $request->district;
         $insertSale->amountPaid = $formData->amount;
         $insertSale->password = sha1($pin);
         $insertSale->location = $request->location;

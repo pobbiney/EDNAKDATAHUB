@@ -36,6 +36,17 @@ class MainSetupController extends Controller implements HasMiddleware
         ]);
     }
 
+      public function typefacilityView (){
+
+        $busCLass = Businessclass::orderBy('name','ASC')->get();
+        $busType = Businesstype::orderBy('name','ASC')->get();
+
+        return view ('main-setup.facility-type',[
+            'busCLass' => $busCLass,
+            'busType' => $busType
+        ]);
+    }
+
     public function insertFacilityProcess (Request $request){
 
         $request->validate([
@@ -68,10 +79,11 @@ class MainSetupController extends Controller implements HasMiddleware
     public function facilityEditView ($id){
 
         $decodeID = Crypt::decrypt($id);
-
+        $busCLass = Businessclass::orderBy('name','ASC')->get();
         $data = Businessclass::find($decodeID);
 
         return view ('main-setup.edit-facility-view',[
+            'busCLass' => $busCLass,
             'data' => $data,
             'id' => $id
         ]);
@@ -137,11 +149,13 @@ class MainSetupController extends Controller implements HasMiddleware
 
         $busCLass = Businessclass::orderBy('name','ASC')->get();
         $data = Businesstype::find($decodeID);
+         $busType = Businesstype::orderBy('name','ASC')->get();
 
         return view ('main-setup.edit-facility-type-view',[
             'busCLass' => $busCLass,
             'id' => $id,
-            'data' => $data
+            'data' => $data,
+             'busType' => $busType
         ]);
     }
 
@@ -182,6 +196,18 @@ class MainSetupController extends Controller implements HasMiddleware
         ]);
     }
 
+     public function AddactivityView (){
+
+         $activityClass = ActivityType::orderBy('name','ASC')->get();
+         $activity = Activity::orderBy('activity','ASC')->get();
+
+        return view ('activity-setup.add-activity',[
+            'activityClass' => $activityClass,
+            'activityList' => $activity
+        ]);
+    }
+
+
     public function addActivityTypeProcess (Request $request){
 
         $request->validate([
@@ -213,8 +239,10 @@ class MainSetupController extends Controller implements HasMiddleware
         $decodeID = Crypt::decrypt($id);
 
         $data = ActivityType::find($decodeID);
+         $activityClass = ActivityType::orderBy('name','ASC')->get();
 
         return view ('activity-setup.edit-activity',[
+             'activityClass' => $activityClass,
             'data' => $data,
             'id' => $id
         ]);
@@ -278,9 +306,11 @@ class MainSetupController extends Controller implements HasMiddleware
         $activityClass = ActivityType::orderBy('name','ASC')->get();
 
         $data = Activity::find($decodeID);
+        $activity = Activity::orderBy('activity','ASC')->get();
         
 
        return view ('activity-setup.edit-activity-main',[
+        'activityList' => $activity,
            'activityClass' => $activityClass,
            'id' => $id,
            'data' => $data

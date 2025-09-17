@@ -12,10 +12,10 @@
 		<meta name="keywords" content="Environmental Protection Agency">
 		<meta name="author" content="Indexcom Ltd">
 		<meta name="robots" content="index, follow">
-        <title>{{ _('EPA Customer Portal') }}</title>
+        <title>{{ _('Unified Electronic Development Permit Management system  Customer Portal') }}</title>
 		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/logo-png.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favlogo.png')}}">
 
 		<!-- Apple Touch Icon -->
 		<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -50,14 +50,15 @@
                         <div class="col-lg-6 p-0">
                             <div class="login-content">
                                 <form action="{{ route('customer-authentication-process') }}" method="POST">
+                                      <div style="display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{ asset('assets/img/Epermit-logo.png') }}" alt="img" width="350px">
+                                </div><br/>
                                     @csrf
                                     <div class="login-userset">
                                         <div class="login-logo logo-normal">
-                                        <img src="{{asset('assets/img/logo-png.png')}}" alt="img">
+                                       
                                     </div>
-                                    <a href="index.html" class="login-logo logo-white">
-                                        <img src="{{asset('assets/img/logo-png.png')}}"  alt="Img">
-                                    </a>
+                                     
 
                                     @if (session('login_error_message'))
                                         <p class="alert alert-danger" align="center">{{session('login_error_message')}}</p>
@@ -65,7 +66,7 @@
                                 
                                     <div class="login-userheading">
                                         <h3>Sign In</h3>
-                                        <h4>Access the EPA customer portal using your Serial Number and PIN.</h4>
+                                         <h4>Access the Unified Electronic Development Permit Management Syste dashboard using your Serial Number and PIN.</h4>
                                     </div>
                                     <div class="mb-3">
                                             <label class="form-label">Serial Number</label>
@@ -120,16 +121,16 @@
                                 </form>
                             </div>
                         </div>
-                         <div class="col-lg-6 p-0" style="background-color: #FFD8B1">
+                         <div class="col-lg-6" style="background-color: #FFD8B1">
                             <div class="login-content">
                                   <form action="{{route('customer-buy-forms-process')}}" method="POST">
                                     @csrf
                                     <div class="login-userset">
                                         <div class="login-logo logo-normal">
-                                        <img src="{{asset('assets/img/logo-png.png')}}" alt="img">
+                                        <!-- <img src="{{asset('assets/img/logo-png.png')}}" alt="img"> -->
                                     </div>
                                     <a href="index.html" class="login-logo logo-white">
-                                        <img src="{{asset('assets/img/logo-png.png')}}"  alt="Img">
+                                        <!-- <img src="{{asset('assets/img/logo-png.png')}}"  alt="Img"> -->
                                     </a>
 
                                     @if (session('login_error_message'))
@@ -193,7 +194,7 @@
                                             <div class="col-xl-6">
                                                     <div class="mb-3">
                                                     <label >Region</label>
-                                                        <select id="region" name="region" class="form-select select2" data-allow-clear="true">
+                                                        <select id="region" name="region" class="form-select select2 changeregion" data-allow-clear="true">
                                                             <option value="">-- SELECT --</option>
                                                             @foreach ($regionList as $regionListItem)
                                                                 <option value="{{ $regionListItem->id }}"  @if (old('region') ==$regionListItem->id ) selected @endif>{{ $regionListItem->name }}</option>
@@ -202,6 +203,23 @@
                                                         @error('region') <small style="color:red"> {{ $message}}</small> @enderror
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="mb-3">
+                                                <label >District</label>
+                                                
+                                                    <select id="district" name="district" class="form-select select2 districtname" data-allow-clear="true">
+                                                        <option value="">-- SELECT --</option>
+                                                         @foreach ($districtList as $districtList)
+                                                                <option value="{{ $districtList->id }}"  @if (old('region') ==$districtList->id ) selected @endif>{{ $districtList->name }}</option>
+                                                            @endforeach
+                                                    </select>
+                                                    @error('district') <small style="color:red"> {{ $message}}</small> @enderror
+                                                
+                                            </div>
+                                            
+                                        </div>
                                         </div>
                                         
                                    
@@ -269,7 +287,9 @@
 
     
         <script src="{{asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js')}}" data-cf-settings="55920f5ce491673adaa565ba-|49" defer></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"961c6e5b8ac09334","version":"2025.7.0","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}' crossorigin="anonymous"></script>
-
+   
+  
+ 
        @if(session('registration_success'))
         @php
             [$pin, $formNumber] = session('registration_success');
@@ -284,8 +304,56 @@
                 document.getElementById('password').value = @json($pin);
             });
         </script>
+        
     @endif
+    
+    
+   @section('scripts')
+<script>
+$(document).ready(function() {
+    $(document).on('change', '.changeregion', function() {
+        var cat_id = $(this).val();
+        
+        // ✅ 1. Validate input (prevent unnecessary AJAX calls)
+        if (!cat_id || cat_id <= 0) {
+            $(".districtname").html('<option value="0" selected disabled>--Choose District--</option>');
+            return;
+        }
 
+        // ✅ 2. Show loading state (better UX)
+        var $typeSelect = $(".districtname");
+        $typeSelect.prop('disabled', true).html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: 'GET',
+            url: '{!! URL::to('findRegionData') !!}',
+            data: { 'id': cat_id },
+            dataType: 'json', // ✅ 3. Explicitly expect JSON
+            success: function(data) {
+                var op = '<option value="0" selected disabled>--Choose District--</option>';
+                
+                // ✅ 4. Check if data exists and is an array
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(type) {
+                        op += `<option value="${type.id}">${type.name}</option>`;
+                    });
+                } else {
+                    op = '<option value="0" selected disabled>No District available</option>';
+                }
+                
+                $typeSelect.html(op).prop('disabled', false);
+            },
+            error: function(xhr, status, error) {
+                // ✅ 5. Proper error handling
+                console.error("AJAX Error:", error);
+                $typeSelect.html('<option value="0" selected disabled>Error loading Districts</option>')
+                           .prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
+   @endsection
     </body>
 
 <!-- Mirrored from dreamspos.dreamstechnologies.com/html/template/signin-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Jul 2025 18:58:40 GMT -->

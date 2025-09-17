@@ -66,6 +66,7 @@ Route::post('user-management-edit-user-account-process/{id}',[UserManagementCont
 
 /* Main setup */
 Route::get('main-setup-facility',[MainSetupController::class,'facilityView'])->name('main-setup-facility');
+Route::get('facility-type',[MainSetupController::class,'typefacilityView'])->name('facility-type');
 Route::post('main-setup-facility-insert-process',[MainSetupController::class,'insertFacilityProcess'])->name('main-setup-facility-insert-process');
 Route::get('main-setup-facility-edit-view/{id}',[MainSetupController::class,'facilityEditView'])->name('main-setup-facility-edit-view');
 Route::post('main-setup-facility-edit-view-process/{id}',[MainSetupController::class,'updateFacilityProcess'])->name('main-setup-facility-edit-view-process');
@@ -82,6 +83,8 @@ Route::post('activity-setup-facility-edit-view-process/{id}',[MainSetupControlle
 Route::post('activity-setup-activity-insert',[MainSetupController::class,'insertActivityProcess'])->name('activity-setup-activity-insert');
 Route::get('activity-setup-activity-edit-view/{id}',[MainSetupController::class,'editActivityView'])->name('activity-setup-activity-edit-view');
 Route::post('activity-setup-activity-edit-process/{id}',[MainSetupController::class,'UpdateActivityProcess'])->name('activity-setup-activity-edit-process');
+
+Route::get('add-activity',[MainSetupController::class,'AddactivityView'])->name('add-activity');
 
 Route::get('addPhase',[MainSetupController::class,'phaseView'])->name('addPhase');
 Route::post('add-phase-process',[MainSetupController::class,'addPhase'])->name('add-phase-process');
@@ -119,6 +122,12 @@ Route::get('equipment-edit-meansOfEscape-view/{id}',[EquipmentControoller::class
 Route::post('equipment-edit-meansOfEscape-view-process/{id}',[EquipmentControoller::class,'escapeEditViewProcess'])->name('equipment-edit-meansOfEscape-view-process');
 
 Route::get('others-setup',[EquipmentControoller::class,'othersView'])->name('others-setup');
+Route::get('add-doc-type',[EquipmentControoller::class,'doctypeview'])->name('add-doc-type');
+Route::post('add-document-type-process',[EquipmentControoller::class,'addDocType'])->name('add-document-type-process');
+Route::get('edit-doc-type/{id}',[EquipmentControoller::class,'editDoctypeView'])->name('edit-doc-type');
+Route::post('edit-doc-type-process/{id}',[EquipmentControoller::class,'editDocTypeProcess'])->name('edit-doc-type-process');
+
+Route::get('add-currency',[EquipmentControoller::class,'currencyView'])->name('add-currency');
 Route::post('others-insert-drawings-process',[EquipmentControoller::class,'insertDrawings'])->name('others-insert-drawings-process');
 Route::get('others-setup-drawings-view/{id}',[EquipmentControoller::class,'editDrawingsView'])->name('others-setup-drawings-view');
 Route::post('others-setup-drawings-view-update-process/{id}',[EquipmentControoller::class,'updateDrawings'])->name('others-setup-drawings-view-update-process');

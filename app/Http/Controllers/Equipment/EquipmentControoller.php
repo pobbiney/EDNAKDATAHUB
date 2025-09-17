@@ -7,10 +7,12 @@ use App\Models\Alarmandwarning;
 use App\Models\Buildingtype;
 use App\Models\ConstructionType;
 use App\Models\Currency;
+use App\Models\DocType;
 use App\Models\Drawing;
 use App\Models\Firefighting;
 use App\Models\Meansofescape;
 use Carbon\Carbon;
+use App\Models\DocumentType;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +65,71 @@ class EquipmentControoller extends Controller implements HasMiddleware
 
 
     }
+
+    public function doctypeview(){
+        $listytpe = DocType::orderBy('name','ASC')->get();
+        return view('others.add-doc-type',['listytpe'=>$listytpe]);
+    }
+
+      public function addDocType(Request $request){
+
+        $request->validate([
+            'name' =>'required'
+        ]);
+
+        if(DocType::where('name',$request->name)->get()->count() > 0){
+
+            return back()->with('message_error','Record already exist');
+
+        }else{
+
+            $insertCat = new DocType();
+            $insertCat->name = trim($request->name);
+            $insertCat->description = $request->description;
+            $insertCat->status = 'Active';
+          
+           
+            $status = $insertCat->save();
+
+            return $status ? back()->with('message_success','Record added successfully') : back()->with('message_error','Something went wrong, please try again.');
+
+
+        }
+    }
+
+
+
+    public function editDocTypeProcess(Request $request,$id){
+
+        $request->validate([
+            'name' =>'required',
+            'status'=> 'required'
+        ]);
+
+        
+             $decodeID = Crypt::decrypt($id);
+            $insertCat = DocType::find($decodeID);
+            $insertCat->name = trim($request->name);
+            $insertCat->description = $request->description;
+            $insertCat->status = $request->status;
+            
+           
+            $status = $insertCat->save();
+
+            return $status ? back()->with('message_success','Record updated successfully') : back()->with('message_error','Something went wrong, please try again.');
+
+ 
+    }
+
+    public function editDoctypeView($id){
+         $decodeID = Crypt::decrypt($id);
+
+        $data = DocType::find($decodeID);
+        $listytpe = DocType::orderBy('name','ASC')->get();
+        return view('others.edit-doc-type',['listytpe'=>$listytpe, 'data' => $data,
+            'id' => $id]);
+    }
+
 
     public function alarmSystemInsertEditView ($id){
 
@@ -226,8 +293,21 @@ class EquipmentControoller extends Controller implements HasMiddleware
 
         $drawingsList = Drawing::orderBy('name','asc')->get();
         $currencyList = Currency::orderBy('name','asc')->get();
+        $listType = DocType::orderBy('name','asc')->get();
 
         return view('others.others-setup',[
+            'drawingsList' => $drawingsList,
+            'currencyList' => $currencyList,
+            'listType'=>$listType
+        ]);
+    }
+
+     public function currencyView(){
+
+        $drawingsList = Drawing::orderBy('name','asc')->get();
+        $currencyList = Currency::orderBy('name','asc')->get();
+
+        return view('others.add-currency',[
             'drawingsList' => $drawingsList,
             'currencyList' => $currencyList
         ]);
@@ -248,6 +328,7 @@ class EquipmentControoller extends Controller implements HasMiddleware
 
             $insertCat = new Drawing();
             $insertCat->name = trim($request->name);
+            $insertCat->document_type = $request->document_type;
             $insertCat->description = $request->description;
             $insertCat->status = 'Active';
             $insertCat->createdBy = Auth::User()->id;
@@ -267,10 +348,14 @@ class EquipmentControoller extends Controller implements HasMiddleware
         $decodeID = Crypt::decrypt($id);
 
         $data = Drawing::find($decodeID);
+         $drawingsList = Drawing::orderBy('name','asc')->get();
+          $listType = DocType::orderBy('name','asc')->get();
 
         return view('others.edit-drawings',[
+             'drawingsList' => $drawingsList,
             'data' => $data,
-            'id' => $id
+            'id' => $id,
+            'listType'=>$listType
         ]);
     }
 
@@ -286,6 +371,7 @@ class EquipmentControoller extends Controller implements HasMiddleware
 
         $insertCat = Drawing::find($decodeID);
         $insertCat->name = trim($request->name);
+        $insertCat->document_type = $request->document_type;
         $insertCat->description = $request->description;
         $insertCat->status = $request->status;
         $insertCat->updatedBy = Auth::User()->id;
@@ -330,9 +416,11 @@ class EquipmentControoller extends Controller implements HasMiddleware
         $decodeID = Crypt::decrypt($id);
 
         $data = Currency::find($decodeID);
+         $currencyList = Currency::orderBy('name','asc')->get();
 
         return view('others.edit-currency',[
             'data' => $data,
+            'currencyList'=>$currencyList,
             'id' => $id
         ]);
     }
