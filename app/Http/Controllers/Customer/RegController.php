@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Models\Drawingupload;
 use App\Models\ProjectSector;
 use App\Models\ProjectCategory;
+use App\Models\NeighbourConcern;
 use App\Models\PermitRegistration;
 use App\Models\EnvironmentalImpact;
 use App\Http\Controllers\Controller;
@@ -245,10 +246,11 @@ class RegController extends Controller
          $list = PermitReview::where('formId',$decodeID)->first();
          $documents = Drawingupload::where('appId',$project->id)->get();
           $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+           $concerns = NeighbourConcern::where('app_id',$project->id)->get();
            $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
         return view('customer.registration.view-application',[
             'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents,
-            'envImpact' => $envImpact, 'impactMgt' => $impactMgt
+            'envImpact' => $envImpact, 'impactMgt' => $impactMgt, 'concerns' => $concerns
         ]);
     }
 
