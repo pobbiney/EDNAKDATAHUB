@@ -12,7 +12,7 @@
 		<meta name="keywords" content="Environmental Protection Agency">
 		<meta name="author" content="Indexcom Ltd">
 		<meta name="robots" content="index, follow">
-		<title>Environmental Protection Agency | Login</title>
+		<title>Unified Electronic Development Permit Management system | Login</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favlogo.png')}}">
@@ -64,7 +64,7 @@
                                 @csrf
                                 <div class="login-userheading">
                                     <h3>Sign In</h3>
-                                    <h4>Access the Unified Electronic Development Permit Management System dashboard using your email and passcode.</h4>
+                                    <h4>Access the Unified Electronic Development Permit Management Syste dashboard using your email and passcode.</h4>
                                 </div>
                                 <div class="mb-3">
                                         <label class="form-label">Email Address</label>
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-lg-6 p-0">
                         <div class="login-img">
-                            <img src="assets/img/authentication/authentication-01.svg" alt="img">
+                            <img src="assets/img/building-permit.png" alt="img">
                         </div>
                     </div>
                 </div>

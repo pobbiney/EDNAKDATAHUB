@@ -111,17 +111,30 @@ $subpageName = "sell_forms";
                                                             </div>
                                                           
                                                         </div>
-                                                        <div class="col-xl-6">
+                                                        <div class="col-xl-3">
                                                              <div class="mb-3">
                                                                 <label >Region</label>
                                                                
-                                                                    <select id="region" name="region" class="form-select select2" data-allow-clear="true">
+                                                                    <select id="region" name="region" class="form-select select2 changeregion" data-allow-clear="true">
                                                                         <option value="">-- SELECT --</option>
                                                                         @foreach ($regionList as $regionListItem)
                                                                             <option value="{{ $regionListItem->id }}"  @if (old('region') ==$regionListItem->id ) selected @endif>{{ $regionListItem->name }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                     @error('region') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                
+                                                            </div>
+                                                          
+                                                        </div>
+                                                         <div class="col-xl-3">
+                                                             <div class="mb-3">
+                                                                <label >District</label>
+                                                               
+                                                                    <select id="region" name="district" class="form-select select2 districtname" data-allow-clear="true">
+                                                                        <option value="">-- SELECT --</option>
+                                                                        
+                                                                    </select>
+                                                                    @error('district') <small style="color:red"> {{ $message}}</small> @enderror
                                                                 
                                                             </div>
                                                           
@@ -151,4 +164,48 @@ $subpageName = "sell_forms";
         $('#myTable').DataTable();
     });
  </script>
+  <script>
+$(document).ready(function() {
+    $(document).on('change', '.changeregion', function() {
+        var cat_id = $(this).val();
+        
+        // ✅ 1. Validate input (prevent unnecessary AJAX calls)
+        if (!cat_id || cat_id <= 0) {
+            $(".districtname").html('<option value="0" selected disabled>--Choose District--</option>');
+            return;
+        }
+
+        // ✅ 2. Show loading state (better UX)
+        var $typeSelect = $(".districtname");
+        $typeSelect.prop('disabled', true).html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: 'GET',
+            url: '{!! URL::to('findRegionData') !!}',
+            data: { 'id': cat_id },
+            dataType: 'json', // ✅ 3. Explicitly expect JSON
+            success: function(data) {
+                var op = '<option value="0" selected disabled>--Choose District--</option>';
+                
+                // ✅ 4. Check if data exists and is an array
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(type) {
+                        op += `<option value="${type.id}">${type.name}</option>`;
+                    });
+                } else {
+                    op = '<option value="0" selected disabled>No District available</option>';
+                }
+                
+                $typeSelect.html(op).prop('disabled', false);
+            },
+            error: function(xhr, status, error) {
+                // ✅ 5. Proper error handling
+                console.error("AJAX Error:", error);
+                $typeSelect.html('<option value="0" selected disabled>Error loading Districts</option>')
+                           .prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
 @endsection

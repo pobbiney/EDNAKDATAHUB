@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Applicationform;
 use App\Models\Applicationformtype;
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -16,12 +17,14 @@ class AuthController extends Controller
     public function index(){
           $listForm = Applicationform::orderBy('formName','ASC')->get();
             $regionList = Region::orderBy('name','ASC')->get();
+            $districtList = District::orderBy('name','ASC')->get();
             $listtype = Applicationformtype::all();
 
         return view('customer.auth.login',[
               'listForm' => $listForm,
                 'regionList' =>$regionList,
-                'listtype' =>$listtype
+                'listtype' =>$listtype,
+                'districtList'=>$districtList
         ]);
     }
 
