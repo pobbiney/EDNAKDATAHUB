@@ -29,7 +29,7 @@
 	<meta name="keywords" content="Environmental Protection Agency">
 	<meta name="author" content="Indexcom Ltd">
 	<meta name="robots" content="index, follow">
-	<title>Environmental Protection Agency</title>
+	<title>Unified Electronic Development Permit Management System</title>
 
 	<script src="{{asset('assets/js/theme-script.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>	
 
@@ -446,7 +446,7 @@
 				
 	 
 			<div class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
-				<p class="fs-13 text-gray-9 mb-0"> 2025 &copy; Environmental Protection Agency All Right Reserved</p>
+				<p class="fs-13 text-gray-9 mb-0"> 2025 &copy; Unified Electronic Development Permit Management System All Right Reserved</p>
 				<p>Designed & Developed By <a href="javascript:void(0);" class="link-primary">Indexcom Ltd</a></p>
 			</div>
 		</div>
