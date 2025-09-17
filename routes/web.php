@@ -122,6 +122,11 @@ Route::get('equipment-edit-meansOfEscape-view/{id}',[EquipmentControoller::class
 Route::post('equipment-edit-meansOfEscape-view-process/{id}',[EquipmentControoller::class,'escapeEditViewProcess'])->name('equipment-edit-meansOfEscape-view-process');
 
 Route::get('others-setup',[EquipmentControoller::class,'othersView'])->name('others-setup');
+Route::get('add-doc-type',[EquipmentControoller::class,'doctypeview'])->name('add-doc-type');
+Route::post('add-document-type-process',[EquipmentControoller::class,'addDocType'])->name('add-document-type-process');
+Route::get('edit-doc-type/{id}',[EquipmentControoller::class,'editDoctypeView'])->name('edit-doc-type');
+Route::post('edit-doc-type-process/{id}',[EquipmentControoller::class,'editDocTypeProcess'])->name('edit-doc-type-process');
+
 Route::get('add-currency',[EquipmentControoller::class,'currencyView'])->name('add-currency');
 Route::post('others-insert-drawings-process',[EquipmentControoller::class,'insertDrawings'])->name('others-insert-drawings-process');
 Route::get('others-setup-drawings-view/{id}',[EquipmentControoller::class,'editDrawingsView'])->name('others-setup-drawings-view');

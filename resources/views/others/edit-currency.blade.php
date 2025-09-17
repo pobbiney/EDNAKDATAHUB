@@ -47,9 +47,13 @@ $subpageName = "others";
                     <div class="row">
                          		<div class="card-body">
 								   <ul class="nav nav-pills nav-fill mb-3" role="tablist">
+                                     <li class="nav-item">
+										   <a class="nav-link  "   aria-current="page"
+										   href="{{ route('add-doc-type')}}" aria-selected="true">Add Document Type</a>
+									   </li>
 									   <li class="nav-item">
 										   <a class="nav-link "   aria-current="page"
-										   href="{{ route('others-setup')}}" aria-selected="true">Add Drawing</a>
+										   href="{{ route('others-setup')}}" aria-selected="true">Add Document</a>
 									   </li>
 									   <li class="nav-item">
 										   <a class="nav-link active"   aria-current="page"

@@ -35,7 +35,7 @@ $subpageName = "others";
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Add Drawing </h3>
+                    <h3>Add Document </h3>
             </div> 
         </div>
         <div class="card-body">
@@ -48,8 +48,12 @@ $subpageName = "others";
                          		<div class="card-body">
 								   <ul class="nav nav-pills nav-fill mb-3" role="tablist">
 									   <li class="nav-item">
+										   <a class="nav-link "   aria-current="page"
+										   href="{{ route('add-doc-type')}}" aria-selected="true">Add Document Type</a>
+									   </li>
+                                       <li class="nav-item">
 										   <a class="nav-link active"   aria-current="page"
-										   href="{{ route('others-setup')}}" aria-selected="true">Add Drawing</a>
+										   href="{{ route('others-setup')}}" aria-selected="false">Add Document </a>
 									   </li>
 									   <li class="nav-item">
 										   <a class="nav-link "   aria-current="page"
@@ -64,7 +68,7 @@ $subpageName = "others";
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5 class="card-title">Add Drawing</h5>
+                                                            <h5 class="card-title">Add Document</h5>
                                                         </div>
                                                         <div class="card-body">
                                                              <form action="{{ route('others-insert-drawings-process') }}" method="POST">
@@ -74,6 +78,18 @@ $subpageName = "others";
                                                                      
                                                                         <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                                                         @error('name') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                     
+                                                                </div>
+                                                                 <div class="mb-3">
+                                                                    <label class="col-lg-3 col-form-label">Document Type</label>
+                                                                     
+                                                                         <select name="document_type" class="form-control">
+                                                                              <option value="" selected disabled>--SELECT DOCUMENT TYPE--</option>
+                                                                               @foreach($listType as $listType)
+                                                                              <option value="{{$listType->id}}">{{$listType->name}}</option>
+                                                                              @endforeach
+                                                                         </select>
+                                                                        @error('document_type') <small style="color:red"> {{ $message}}</small> @enderror
                                                                      
                                                                 </div>
                                                                 <div class="mb-3">

@@ -35,7 +35,7 @@ $subpageName = "others";
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Update Drawing </h3>
+                    <h3>Update Document </h3>
             </div> 
         </div>
         <div class="card-body">
@@ -47,9 +47,13 @@ $subpageName = "others";
                     <div class="row">
                          		<div class="card-body">
 								   <ul class="nav nav-pills nav-fill mb-3" role="tablist">
+                                     <li class="nav-item">
+										   <a class="nav-link  "   aria-current="page"
+										   href="{{ route('add-doc-type')}}" aria-selected="true">Add Document Type</a>
+									   </li>
 									   <li class="nav-item">
 										   <a class="nav-link active"   aria-current="page"
-										   href="{{ route('others-setup')}}" aria-selected="true">Add Drawing</a>
+										   href="{{ route('others-setup')}}" aria-selected="true">Add Document</a>
 									   </li>
 									   <li class="nav-item">
 										   <a class="nav-link "   aria-current="page"
@@ -76,6 +80,18 @@ $subpageName = "others";
                                                                             @error('name') <small style="color:red"> {{ $message}}</small> @enderror
                                                                         
                                                                     </div>
+                                                                     <div class="mb-3">
+                                                                    <label class="col-lg-3 col-form-label">Document Type</label>
+                                                                     
+                                                                         <select name="document_type" class="form-control">
+                                                                              <option value="" selected disabled>--SELECT DOCUMENT TYPE--</option>
+                                                                               @foreach($listType as $listType)
+                                                                              <option value="{{$listType->id}}" @if($data->document_type == $listType->id) selected @endif >{{$listType->name}}</option>
+                                                                              @endforeach
+                                                                         </select>
+                                                                        @error('document_type') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                     
+                                                                </div>
                                                                     <div class="mb-3">
                                                                         <label class="col-lg-3 col-form-label">Description</label>
                                                                         

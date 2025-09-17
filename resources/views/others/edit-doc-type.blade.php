@@ -35,7 +35,7 @@ $subpageName = "others";
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Add Currency </h3>
+                    <h3>Update Document Type </h3>
             </div> 
         </div>
         <div class="card-body">
@@ -47,16 +47,16 @@ $subpageName = "others";
                     <div class="row">
                          		<div class="card-body">
 								   <ul class="nav nav-pills nav-fill mb-3" role="tablist">
-                                     <li class="nav-item">
-										   <a class="nav-link  "   aria-current="page"
+									   <li class="nav-item">
+										   <a class="nav-link active"   aria-current="page"
 										   href="{{ route('add-doc-type')}}" aria-selected="true">Add Document Type</a>
+									   </li>
+                                       <li class="nav-item">
+										   <a class="nav-link "   aria-current="page"
+										   href="{{ route('others-setup')}}" aria-selected="false">Add Document </a>
 									   </li>
 									   <li class="nav-item">
 										   <a class="nav-link "   aria-current="page"
-										   href="{{ route('others-setup')}}" aria-selected="true">Add Document</a>
-									   </li>
-									   <li class="nav-item">
-										   <a class="nav-link active"   aria-current="page"
 										   href="{{ route('add-currency')}}" aria-selected="false">Add Currency</a>
 									   </li>
 									 
@@ -68,37 +68,47 @@ $subpageName = "others";
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5 class="card-title">Add Currency</h5>
+                                                            <h5 class="card-title">Update Document Type</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                              <form action="{{ route('others-insert-currency-process') }}" method="POST">
-                                                                    @csrf
-                                                                   <div class="mb-3">
-                                                                        <label class="col-lg-3 col-form-label">Name</label>
-                                                                        
-                                                                            <input type="text" class="form-control" name="currency" value="{{ old('currency') }}">
-                                                                            @error('currency') <small style="color:red"> {{ $message}}</small> @enderror
-                                                                         
-                                                                    </div>
-                                                
-                                                                   <div class="mb-3">
-                                                                        <label class="col-lg-3 col-form-label">Description</label>
-                                                                       
-                                                                            <textarea type="text" class="form-control" name="currency_description" >{{ old('currency_description') }}</textarea>
-                                                                            @error('currency_description') <small style="color:red"> {{ $message}}</small> @enderror
-                                                                        
-                                                                    </div>
-                                                                    <div class="text-end">
-                                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                                    </div>
-                                                                </form>
+                                                             <form action="{{ route('edit-doc-type-process',$id) }}" method="POST">
+                                                                @csrf
+                                                                 <div class="mb-3">
+                                                                    <label class="col-lg-3 col-form-label">Name</label>
+                                                                     
+                                                                        <input type="text" class="form-control" name="name" value="{{$data->name}}">
+                                                                        @error('name') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                     
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="col-lg-3 col-form-label">Description</label>
+                                                                   
+                                                                        <textarea type="text" class="form-control" name="description" >{{ $data->description }}</textarea>
+                                                                        @error('description') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                    
+                                                                </div>
+                                                                 <div class="mb-3">
+                                                                    <label class="col-lg-3 col-form-label">Status</label>
+                                                                     <select name="status" class="form-control">
+                                                                        <option value="{{$data->status}}">{{$data->status}}</option>
+                                                                        <option value="Active">Active</option>
+                                                                        <option value="Inactive">Inactive</option>
+                                                                     </select>
+                                                                        @error('status') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                    
+                                                                </div>
+
+                                                                <div class="text-end">
+                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5 class="card-title">List All Currencies</h5>
+                                                            <h5 class="card-title">List All Document Type</h5>
                                                         </div>
                                                         <div class="card-body">
                                                              <div class="table-responsive">
@@ -106,15 +116,14 @@ $subpageName = "others";
                                                                     <thead>
                                                                         <tr>
                                                                             <th>Name</th>
-                                                                            <th></th>
+                                                                            <th>Action</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach ($currencyList as $currencyListItem)
+                                                                        @foreach ($listytpe as $listytpe)
                                                                         <tr>
-                                                                            <td>{{$currencyListItem->name}}</td>
-                                                                            
-                                                                            <td><a style="color:white;" href="{{ route('others-edit-currency-view', Crypt::encrypt($currencyListItem->id)) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a></td>
+                                                                            <td>{{$listytpe->name}}</td>
+                                                                            <td><a style="color:white;" href="{{ route('edit-doc-type', Crypt::encrypt($listytpe->id)) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a></td>
                                                                         </tr>
                                                                         @endforeach
                                                                         
