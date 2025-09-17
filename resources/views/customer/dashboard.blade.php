@@ -208,7 +208,7 @@
 														<td>GH₵ {{number_format($item->amountPaid,2)}}</td>
 														 <td>{{ \Carbon\Carbon::parse($item->createdOn)->format('M d,Y') }}</td>
 														 <td>
-															<a href="{{route('customer-registration-open-permit-forms',Crypt::encrypt($item->id))}}" class="btn btn-success" style="color: white"> View Details</a>
+															<a href="{{route('customer-registration-open-permit-forms',Crypt::encrypt($item->id))}}" class="btn btn-success" style="color: white">Fill Form</a>
 														</td>
 													</tr>
 													@endforeach
