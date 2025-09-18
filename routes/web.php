@@ -28,6 +28,7 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\InspectionManager\CertificateController;
 use App\Http\Controllers\UserManagement\UserManagementController;
 use App\Http\Controllers\ApplicationManager\ApplicationManagerController;
+use App\Http\Controllers\InstitutionManager\InstitutionController;
 
 
 Route::get('/',[AuthenticationController::class,'index']);
@@ -663,3 +664,11 @@ Route::get('edit-document-type/{id}',[StaffController::class,'editDocTypeView'])
 Route::post('edit-document-type-process/{id}',[StaffController::class,'updateDocType'])->name('edit-document-type-process');
 Route::get('delete-document-type/{id}', [StaffController::class, 'deleteDocType'])->name('delete-document-type');
 /*Staff Management */
+
+/* Institution Manager */
+
+Route::get('Category',[InstitutionController::class,'CategoryView'])->name('Category');
+Route::post('add-institution-category-process',[InstitutionController::class,'addCategory'])->name('add-institution-category-process');
+Route::get('edit-category/{id}',[InstitutionController::class,'editCategoryView'])->name('edit-category');
+Route::post('edit-institution-category-process/{id}',[InstitutionController::class,'updateCategory'])->name('edit-institution-category-process');
+/* End Institution Manager */
