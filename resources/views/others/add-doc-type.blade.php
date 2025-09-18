@@ -35,7 +35,7 @@ $subpageName = "others";
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
             <div class="search-set">
-                    <h3>Add Drawing </h3>
+                    <h3>Add Document Type </h3>
             </div> 
         </div>
         <div class="card-body">
