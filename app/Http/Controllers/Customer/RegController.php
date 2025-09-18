@@ -15,7 +15,9 @@ use Illuminate\Http\Request;
 use App\Models\Drawingupload;
 use App\Models\ProjectSector;
 use App\Models\ProjectCategory;
+use App\Models\NeighbourConcern;
 use App\Models\PermitRegistration;
+use App\Models\EnvironmentalImpact;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
@@ -30,6 +32,22 @@ class RegController extends Controller
 
         $listApp = PermitRegistration::where('contact_number',$formsale->tell)->get();
         return view('customer.registration.MyApplication',['listApp'=>$listApp]);
+
+    }
+
+    public function getFillFormView(){
+        if (!Session::has('formsale_id')) {
+                return redirect()->route('customer-login');
+            }
+        $formsale= Formsale::find(Session::get('formsale_id'));
+
+        $sales = Formsale::with('formtype')
+                        ->doesntHave('permit_registrations')
+                        ->where('formsales.tell', $formsale->tell)
+                        ->orderBy('formsales.id', 'desc')
+                        ->get(); 
+
+        return view('customer.registration.fill-application',['sales'=>$sales]);
 
     }
 
@@ -227,8 +245,12 @@ class RegController extends Controller
         $listscreen = Screening::where('formId',$decodeID)->first();
          $list = PermitReview::where('formId',$decodeID)->first();
          $documents = Drawingupload::where('appId',$project->id)->get();
+          $envImpact = EnvironmentalImpact::where('app_id',$project->id)->get();
+           $concerns = NeighbourConcern::where('app_id',$project->id)->get();
+           $impactMgt = EnvironmentalImpact::with('impact_mgt')->where('app_id',$project->id)->get();
         return view('customer.registration.view-application',[
-            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents
+            'project' => $project,'listscreen'=>$listscreen,'list'=>$list,'documents' => $documents,
+            'envImpact' => $envImpact, 'impactMgt' => $impactMgt, 'concerns' => $concerns
         ]);
     }
 

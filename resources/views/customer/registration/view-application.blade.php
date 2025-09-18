@@ -519,23 +519,35 @@
                                                     <h5>Construction Phase</h5>
                                                 </div>
                                         </div>
+                                         @if($impactMgt->count() > 0)
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->construction_impact}}</h6>
-                                                    <li>{{$item->impact_mgt->construction_mgt ?? ''}}</li>
+                                                    <li style="margin-left:1.5rem;"> {{$item->impact_mgt->construction_mgt ?? ''}}</li>
                                                 </div>
                                             @endforeach
+                                             @else
+                                            <div class="row">
+                                                 <p>N/A</p>
+                                            </div>
+                                        @endif
                                         <div class="row mt-3 mb-2">
                                                 <div class="col-xl-12">
                                                     <h5>Operational Phase</h5>
                                                 </div>
                                         </div>
+                                        @if($impactMgt->count() > 0)
                                             @foreach($impactMgt as $item)
                                                 <div class="row">
                                                     <h6>{{$item->operational_impact}}</h6>
-                                                    <li>{{$item->impact_mgt->operational_mgt ?? ''}}</li>
+                                                    <li style="margin-left:1.5rem;">{{$item->impact_mgt->operational_mgt ?? ''}}</li>
                                                 </div>
                                             @endforeach
+                                             @else
+                                         <div class="row">
+                                                 <p>N/A</p>
+                                            </div>
+                                        @endif
                                             
                                         </div>
                                     </div>

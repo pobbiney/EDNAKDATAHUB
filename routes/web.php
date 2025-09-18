@@ -544,7 +544,11 @@ Route::post('add-permit-screening-process',[TaskMangerController::class,'addScre
 Route::post('add-permit-review-process',[ReviewController::class,'addReview'])->name('add-permit-review-process');
 /* End of Screening */
 
+
+
 //Customer Routes
+Route::get('/customer/fill-form',[RegController::class,'getFillFormView'])->name('customer-fill-form');
+
 Route::get('/customer/application',[RegController::class,'getApplicationView'])->name('customer-application');
 Route::get('/customer/view-application/{id}',[RegController::class,'viewApplication'])->name('customer.view-application');
 Route::get('/customer/registration/edit-permit-registration-form-application/{id}',[RegController::class,'openEditPermitApplicationView'])->name('customer.registration.edit-permit-registration-form-application');
