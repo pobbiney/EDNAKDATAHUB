@@ -22,9 +22,11 @@ class CustomerDashboardController extends Controller
             $user = Formsale::find(Session::get('formsale_id'));
 
             $sales = Formsale::with('formtype')
+                        ->doesntHave('permit_registrations')
                         ->where('formsales.tell', $user->tell)
                         ->orderBy('formsales.id', 'desc')
                         ->get(); 
+
             $totalFormSold = $sales->count();
             $certificateCount = CertificateApp::where('tel', $user->tell)->get()->count();
             $permitsCount = PermitRegistration::where('contact_number', $user->tell)->where('registration_step','completed')->get()->count();

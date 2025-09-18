@@ -28,6 +28,7 @@ use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\InspectionManager\CertificateController;
 use App\Http\Controllers\UserManagement\UserManagementController;
 use App\Http\Controllers\ApplicationManager\ApplicationManagerController;
+use App\Http\Controllers\InstitutionManager\InstitutionController;
 
 
 Route::get('/',[AuthenticationController::class,'index']);
@@ -543,7 +544,11 @@ Route::post('add-permit-screening-process',[TaskMangerController::class,'addScre
 Route::post('add-permit-review-process',[ReviewController::class,'addReview'])->name('add-permit-review-process');
 /* End of Screening */
 
+
+
 //Customer Routes
+Route::get('/customer/fill-form',[RegController::class,'getFillFormView'])->name('customer-fill-form');
+
 Route::get('/customer/application',[RegController::class,'getApplicationView'])->name('customer-application');
 Route::get('/customer/view-application/{id}',[RegController::class,'viewApplication'])->name('customer.view-application');
 Route::get('/customer/registration/edit-permit-registration-form-application/{id}',[RegController::class,'openEditPermitApplicationView'])->name('customer.registration.edit-permit-registration-form-application');
@@ -663,3 +668,22 @@ Route::get('edit-document-type/{id}',[StaffController::class,'editDocTypeView'])
 Route::post('edit-document-type-process/{id}',[StaffController::class,'updateDocType'])->name('edit-document-type-process');
 Route::get('delete-document-type/{id}', [StaffController::class, 'deleteDocType'])->name('delete-document-type');
 /*Staff Management */
+
+/* Institution Manager */
+
+Route::get('Category',[InstitutionController::class,'CategoryView'])->name('Category');
+Route::post('add-institution-category-process',[InstitutionController::class,'addCategory'])->name('add-institution-category-process');
+Route::get('edit-category/{id}',[InstitutionController::class,'editCategoryView'])->name('edit-category');
+Route::post('edit-institution-category-process/{id}',[InstitutionController::class,'updateCategory'])->name('edit-institution-category-process');
+Route::get('type',[InstitutionController::class,'typeview'])->name('type');
+Route::post('add-institution-type-process',[InstitutionController::class,'addType'])->name('add-institution-type-process');
+Route::get('edit-type/{id}',[InstitutionController::class,'editTypeView'])->name('edit-type');
+Route::post('edit-institution-type-process/{id}',[InstitutionController::class,'updateType'])->name('edit-institution-type-process');
+Route::get('Institution',[InstitutionController::class,'InstitutionView'])->name('Institution');
+Route::post('add-institution-process',[InstitutionController::class,'addInstitution'])->name('add-institution-process');
+Route::get('list-Institution',[InstitutionController::class,'listInstitutionView'])->name('list-Institution');
+/* End Institution Manager */
+
+//Get list of types//
+Route::get('findCategoryData',[InstitutionController::class,'findCategoryData'])->name('findCategoryData');
+//end Get list of types//
