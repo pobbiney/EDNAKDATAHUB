@@ -24,7 +24,7 @@ class ApplicationController extends Controller
                 return redirect()->route('customer-login');
             }
         $formsale= Formsale::find(Session::get('formsale_id'));
-        $listApp = PermitRegistration::where('registration_step', 'completed')->where('contact_number',$formsale->tell)->get();
+        $listApp = PermitRegistration::where('registration_step', 'completed')->where('contact_number',$formsale->tell)->latest('id')->get();
         return view('customer.registration.DocumentAttachment',['listApp'=>$listApp]);
 
     }

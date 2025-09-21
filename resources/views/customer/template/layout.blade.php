@@ -314,7 +314,7 @@
 											class="ti ti-file fs-16 me-2"></i><span>Applications</span><span
 											class="menu-arrow"></span></a>
 									<ul>
-										<li><a href="{{route('customer-fill-form')}}">Fill Application</a></li>
+										<li><a href="{{route('customer-fill-form')}}">Fill Forms</a></li>
 										<li><a href="{{route('customer-application')}}">My Applications</a></li>
 										<li><a href="{{route('customer-attach-document')}}">Attach
 												Drawing/Attachment</a></li>

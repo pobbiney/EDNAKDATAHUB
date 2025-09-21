@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="standard-modalLabel">Attach Drawings</h4>
+                <h4 class="modal-title" id="standard-modalLabel">Attach Documents</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" autocomplete="off" action="{{ route('customer-application-attach-drawings-get-forms-process') }}" enctype="multipart/form-data">

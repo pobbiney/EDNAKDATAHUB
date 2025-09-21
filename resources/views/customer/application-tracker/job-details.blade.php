@@ -104,12 +104,12 @@
                                                                                     $i=1;
                                                                                 @endphp
                                                                                 @if($results)
-                                                                                @foreach($results as $results)
+                                                                                @foreach($results as $result)
                                                                                 <tr>
                                                                                     <td>{{ $i}}</td>
-                                                                                    <td>{{ $results->createdOn }}</td>
-                                                                                    <td> {{ $results->activityname->activity }} </td>
-                                                                                    <td> {{ $results->staff->firstname.' '.$results->staff->surname }} </td>
+                                                                                    <td>{{ $result->createdOn ?? '' }}</td>
+                                                                                    <td> {{ $result->activityname->activity ?? '' }} </td>
+                                                                                    <td>  {{ ($result->staff->firstname ?? '') . ' ' . ($result->staff->surname ?? '') }} </td>
 
                                                                                 </tr>
                                                                                 @php
