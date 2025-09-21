@@ -12,7 +12,7 @@ $subpageName = "inst_cat";
     <div class="page-header">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4 class="fw-bold">Institution Manaer</h4>
+                <h4 class="fw-bold">Institution Manager</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-divide mb-0">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>

@@ -682,6 +682,12 @@ Route::post('edit-institution-type-process/{id}',[InstitutionController::class,'
 Route::get('Institution',[InstitutionController::class,'InstitutionView'])->name('Institution');
 Route::post('add-institution-process',[InstitutionController::class,'addInstitution'])->name('add-institution-process');
 Route::get('list-Institution',[InstitutionController::class,'listInstitutionView'])->name('list-Institution');
+Route::get('edit-institution/{id}',[InstitutionController::class,'editInstitutionView'])->name('edit-institution');
+Route::post('edit-institution-process/{id}',[InstitutionController::class,'updateInstitution'])->name('edit-institution-process');
+Route::get('institution-upload-image/{id}',[InstitutionController::class,'uploadInstitutionPhotoView'])->name('institution-upload-image');
+Route::post('upload-institution-photo-process',[InstitutionController::class,'uploadPhoto'])->name('upload-institution-photo-process');
+Route::post('add-contact-person-process',[InstitutionController::class,'addContactPerson'])->name('add-contact-person-process');
+Route::get('view-institution-details/{id}',[InstitutionController::class,'viewInstitution'])->name('view-institution-details');
 /* End Institution Manager */
 
 //Get list of types//

@@ -12,7 +12,7 @@ $subpageName = "add_inst";
     <div class="page-header">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4 class="fw-bold">Institution Manaer</h4>
+                <h4 class="fw-bold">Institution Manager</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-divide mb-0">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
@@ -75,9 +75,10 @@ $subpageName = "add_inst";
                                                         <td>{{$list->email}}</td>
                                                         <td>{{$list->telephone}}</td>
                                                         <td>
-                                                            <a style="color:white;" href="{{ route('edit-type', Crypt::encrypt($list->id)) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <a style="color:white;" href="{{ route('edit-type', Crypt::encrypt($list->id)) }}" class="btn btn-info btn-sm"><i class="fa fa-upload"></i></a>
-                                                            <a style="color:white;" href="{{ route('edit-type', Crypt::encrypt($list->id)) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <a style="color:white;" href="{{route('edit-institution', Crypt::encrypt($list->id)) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <a data-bs-toggle="modal" id="showmodal" data-bs-target="#basicModal" data-url="{{ route('institution-upload-image',$list->id)  }}" type="button"  class="btn btn-sm  btn-info" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-custom-class="tooltip-info" title="Upload Logo"  ><i class="tf-icons ti ti-camera" style="color: white"></i></a> 
+                                                            <a data-bs-toggle="modal" id="showmodal2" data-bs-target="#basicModal2" data-url="{{ route('institution-upload-image',$list->id)  }}" type="button"  class="btn btn-sm  btn-warning" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-custom-class="tooltip-warning" title="Add Contact Person"  ><i class="tf-icons ti ti-users" style="color: white"></i></a> 
+                                                            <a style="color:white;" href="{{ route('view-institution-details', Crypt::encrypt($list->id)) }}" target="_" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>
                                                         @php
@@ -104,9 +105,45 @@ $subpageName = "add_inst";
         </div>
     </div>
 </div>
+
+@include('institution.upload-institution-logo');
+@include('institution.add-contact-person-modal');
  
 @endsection
 
 @section('scripts')
- 
+ <script>
+    $(document).ready(function(){
+    $('body').on('click', '#showmodal', function(){
+    var userUrl = $(this).data('url');
+    $.get(userUrl, function(data){
+    $('#basicModal').modal('show');
+    $('#InstID').val(data.id);
+    $('#inst_name').text(data.name);
+    $('#inst_loc').text(data.location);
+    $('#inst_email').text(data.email);
+    $('#inst_tel').text(data.telephone);
+    
+    
+    })
+    });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+    $('body').on('click', '#showmodal2', function(){
+    var userUrl = $(this).data('url');
+    $.get(userUrl, function(data){
+    $('#basicModal2').modal('show');
+    $('#InstID2').val(data.id);
+    $('#inst_name2').text(data.name);
+    $('#inst_loc2').text(data.location);
+    $('#inst_email2').text(data.email);
+    $('#inst_tel2').text(data.telephone);
+    
+    
+    })
+    });
+    });
+</script> 
 @endsection
