@@ -629,6 +629,7 @@ Route::get('create-staff',[StaffController::class,'addStaff'])->name('create-sta
  Route::get('staff-upload-image/{staff_id}',[StaffController::class,'uploadStaffPhotoView'])->name('staff-upload-image');
  Route::post('create-staff-photo-process',[StaffController::class,'saveStaffPhoto'])->name('create-staff-photo-process');
  Route::post('upload-staff-supervisor-process',[StaffController::class,'updateStaffSup'])->name('upload-staff-supervisor-process');
+  Route::post('save-staff-institution',[StaffController::class,'saveStaffInstitution'])->name('save-staff-institution');
  //Route::get('staff-upload-image/',[StaffController::class,'uploadStaffView2'])->name('staff-upload-image');
  Route::get('staff-profile/{staff_id}', [StaffController::class, 'viewStaffProfile'])->name('staff-profile');
  Route::get('next-of-kin', [StaffController::class, 'viewStaffNextKin'])->name('next-of-kin');

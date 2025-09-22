@@ -69,6 +69,8 @@
 									<dd class="col-6  mb-3">{{ $data->employee_id ?? '' }}</dd>
 									<dt class="col-6 fw-medium text-dark mb-3"><b>Gender</b></dt>
 									<dd class="col-6  mb-3">{{ $data->gender ?? '' }}</dd>
+                                    <dt class="col-6 fw-medium text-dark mb-3"><b>Institution</b></dt>
+									<dd class="col-6  mb-3">{{ $data->institution_name }}</dd>
 									<dt class="col-6 fw-medium text-dark mb-3"><b>Position</b></dt>
 									<dd class="col-6  mb-3">{{ $data->position ?? 'N/A' }}</dd>
 									<dt class="col-6 fw-medium text-dark mb-3"><b>Nationality</b></dt>

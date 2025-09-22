@@ -598,12 +598,16 @@ public function editDeclaration(Request $request,$id)
 
     $insertApp = PermitRegistration::findOrFail($decodeID);
     $insertApp->applied_by = $request->applied_by;
-    
+     $insertApp->registration_step = "completed";
     $insertApp->updated_by = Auth::user()->id; 
       
     $insertApp->save();
  
-   return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
+    if ($insertApp) {
+        return redirect()->route('DocumentAttachment')->with('message_success', 'Application updated successfully.Your next stage is to upload all required documents, reports or drawings to the application as required');
+    } else {
+        return back()->with('message_error', 'Something went wrong, please try again.');
+    }
 }
 
 public function getAttachedDocView(){

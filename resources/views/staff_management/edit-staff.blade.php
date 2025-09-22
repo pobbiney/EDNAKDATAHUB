@@ -157,7 +157,20 @@ $subpageName = "application_forms"; @endphp
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
+                                        
                                         <small class="text-danger">@error('gender'){{$message}}@enderror </small>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="form-label" for="confirm-password">Institution</label>
+                                        <select class="form-control" name="institution_id">
+                                           <option value="" selected disabled>--Choose Institution--</option>
+                                           @foreach($institutions as $institution)
+                                                <option @if($institution->id == $datas->institution_id) selected @endif value="{{$institution->id}}">
+                                                    {{$institution->name}}</option>
+                                            @endforeach
+                                        </select>
+                                         
+                                        <small class="text-danger">@error('institution_id'){{$message}}@enderror </small>
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="form-label" for="confirm-password">Date of Birth</label>

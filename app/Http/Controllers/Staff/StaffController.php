@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Models\BankDetail;
 use App\Models\Staff;
 use App\Models\Branch;
 use App\Models\Region;
 use App\Models\BusClass;
 use App\Models\District;
 use App\Models\StaffType;
+use App\Models\BankDetail;
+use App\Models\Institution;
 use App\Models\Nationality;
 use App\Models\DocumentType;
 use Illuminate\Http\Request;
@@ -59,9 +60,10 @@ class StaffController extends Controller implements HasMiddleware
     public function listStaffView()
     {
         $data = Staff::all();
+        $institutions = Institution::orderBy('name','ASC')->get();
         
         
-        return view('staff_management.list-staff',['data'=>$data]);
+        return view('staff_management.list-staff',['data'=>$data,'institutions'=>$institutions]);
     }
 
 
@@ -295,6 +297,22 @@ class StaffController extends Controller implements HasMiddleware
         return back()->with('message','Staff Supervisor updated Successfully');
     }
 
+     public function saveStaffInstitution(Request $request)
+    {
+        
+        $validateData = $request;
+
+        $validateData->validate([
+            'institution_id' => 'required'
+        ]);
+         
+        $data =  Staff::find($request->staff_id);
+        $data->institution_id = $validateData['institution_id'];
+        
+        $data->update();
+        return back()->with('message','Staff Institution updated Successfully');
+    }
+
     public function viewStaffProfile($staff_id)
     {
         $decodeId = Crypt::decrypt($staff_id);
@@ -419,9 +437,10 @@ class StaffController extends Controller implements HasMiddleware
         $staffDocs = StaffDocument::where('staff_id',$decodeId)->get();
         $docCats = DocumentCategory::where('status','Active')->get();
         $docTypes = DocumentType::where('status','Active')->get();
+        $institutions = Institution::all();
        
         return view('staff_management.edit-staff',['data'=>$data,'regs'=>$regs,'clas'=>$clas,'cat'=>$cat,'bra'=>$bra,'dep'=>$dep,
-        'datas'=>$datas,'dist'=>$dist,'staff_id'=>$staff_id,'bankDetails'=>$bankDetails,'staffDocs'=>$staffDocs,'docCats'=>$docCats,'docTypes'=>$docTypes
+        'datas'=>$datas,'dist'=>$dist,'staff_id'=>$staff_id,'bankDetails'=>$bankDetails,'staffDocs'=>$staffDocs,'docCats'=>$docCats,'docTypes'=>$docTypes,'institutions'=>$institutions
     ]);
     }
 
@@ -437,6 +456,7 @@ class StaffController extends Controller implements HasMiddleware
         $data->surname = $validateData['surname'];
         $data->othername=$request->othername;
         $data->gender = $validateData['gender'];
+        $data->institution_id = $validateData['institution_id'];
         $data->dob = $validateData['dob'];
         $data->nationality = $validateData['nationality'];
         $data->marital_status_id = $validateData['marital_status_id'];
