@@ -88,7 +88,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="mb-3">
                                                                     <label>Project Title</label>
-                                                                    <input type="text" name="project_title" class="form-control" placeholder="Enter Project Title" value="{{   $datas->project_title }}"/>
+                                                                    <input type="text" name="project_title" class="form-control" placeholder="Enter Project Title" value="{{$datas->project_title}}"/>
                                                                      @error('project_title') <small style="color:red"> {{ $message}}</small> @enderror
                                                                 </div>
                                                             </div>

@@ -535,6 +535,8 @@ Route::get('registration/edit-permit-registration-form-declaration/{id}',[Regist
 Route::post('registration/edit-permit-registration-form-declaration-process/{id}',[RegistrationController::class,'editDeclaration'])->name('registration.edit-permit-registration-form-declaration-process');
 Route::get('registration/DocumentAttachment',[RegistrationController::class,'getAttachedDocView'])->name('DocumentAttachment');
 Route::get('findProjectTypeyData',[RegistrationController::class,'findProjectTypeyData'])->name('findProjectTypeyData');
+
+Route::get('findProjectTypeData2',[RegistrationController::class,'findProjectTypeData2'])->name('findProjectTypeData2');
 /* End Registration Form */
 
 /* Screening */
@@ -629,6 +631,7 @@ Route::get('create-staff',[StaffController::class,'addStaff'])->name('create-sta
  Route::get('staff-upload-image/{staff_id}',[StaffController::class,'uploadStaffPhotoView'])->name('staff-upload-image');
  Route::post('create-staff-photo-process',[StaffController::class,'saveStaffPhoto'])->name('create-staff-photo-process');
  Route::post('upload-staff-supervisor-process',[StaffController::class,'updateStaffSup'])->name('upload-staff-supervisor-process');
+  Route::post('save-staff-institution',[StaffController::class,'saveStaffInstitution'])->name('save-staff-institution');
  //Route::get('staff-upload-image/',[StaffController::class,'uploadStaffView2'])->name('staff-upload-image');
  Route::get('staff-profile/{staff_id}', [StaffController::class, 'viewStaffProfile'])->name('staff-profile');
  Route::get('next-of-kin', [StaffController::class, 'viewStaffNextKin'])->name('next-of-kin');
@@ -682,6 +685,12 @@ Route::post('edit-institution-type-process/{id}',[InstitutionController::class,'
 Route::get('Institution',[InstitutionController::class,'InstitutionView'])->name('Institution');
 Route::post('add-institution-process',[InstitutionController::class,'addInstitution'])->name('add-institution-process');
 Route::get('list-Institution',[InstitutionController::class,'listInstitutionView'])->name('list-Institution');
+Route::get('edit-institution/{id}',[InstitutionController::class,'editInstitutionView'])->name('edit-institution');
+Route::post('edit-institution-process/{id}',[InstitutionController::class,'updateInstitution'])->name('edit-institution-process');
+Route::get('institution-upload-image/{id}',[InstitutionController::class,'uploadInstitutionPhotoView'])->name('institution-upload-image');
+Route::post('upload-institution-photo-process',[InstitutionController::class,'uploadPhoto'])->name('upload-institution-photo-process');
+Route::post('add-contact-person-process',[InstitutionController::class,'addContactPerson'])->name('add-contact-person-process');
+Route::get('view-institution-details/{id}',[InstitutionController::class,'viewInstitution'])->name('view-institution-details');
 /* End Institution Manager */
 
 //Get list of types//

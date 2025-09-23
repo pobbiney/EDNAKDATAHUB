@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Registration;
 
 use App\Http\Controllers\Controller;
+use App\Models\Businessclass;
+use App\Models\Businesstype;
 use App\Models\District;
 use App\Models\Drawingupload;
 use App\Models\EnvironmentalImpact;
@@ -225,6 +227,9 @@ public function openPermitApplicationView($id)
         'sector' => 'required',
         'type' => 'required',
         'category' => 'required',
+        'project_class' => 'required',
+        'project_type' => 'required',
+        'floor_number' => 'required',
     ]);
 
     
@@ -245,6 +250,9 @@ public function openPermitApplicationView($id)
     $insertApp->sector_id = $request->sector;
     $insertApp->cat_id = $request->category;
     $insertApp->type_id = $request->type;
+    $insertApp->project_class = $request->project_class;
+    $insertApp->project_type = $request->project_type;
+    $insertApp->floor_number = $request->floor_number;
     $insertApp->registration_step = "Step2";
     $insertApp->save();
 
@@ -302,12 +310,14 @@ public function getStep2Back()
           $regionsList = Region::orderBy('name','ASC')->get();
         $data = District::orderBy('name','ASC')->get();
         $sec = ProjectSector::all();
+        $projectclass = Businessclass::all();
+        $projecttype = Businesstype::all();
         $catlist = ProjectCategory::all();
         $typelist = ProjectType::all();
         
     }
 
-    return view('registration.permit-registration-form-project', compact('user','regionsList','data','sec','catlist','typelist'));
+    return view('registration.permit-registration-form-project', compact('user','regionsList','data','sec','catlist','typelist','projectclass','projecttype'));
 }
 
 public function getStep3Back()
@@ -489,9 +499,11 @@ public function openEditPermitProjectView($id){
     $sec = ProjectSector::all();
     $catlist = ProjectCategory::all();
     $typelist = ProjectType::all();
+    $projectclass = Businessclass::all();
+    $projecttype = Businesstype::all();
     
     return view('registration.edit-permit-registration-form-project',
-    ['datas'=>$datas,'id'=>$id,'regionsList'=>$regionsList,'data'=>$data,'sec'=>$sec,'catlist'=>$catlist,'typelist'=>$typelist]);
+    ['datas'=>$datas,'id'=>$id,'regionsList'=>$regionsList,'data'=>$data,'sec'=>$sec,'catlist'=>$catlist,'typelist'=>$typelist,'projectclass'=>$projectclass,'projecttype'=>$projecttype]);
 }
 
 public function editPermitProject(Request $request, $id){
@@ -511,6 +523,9 @@ public function editPermitProject(Request $request, $id){
         'type' => 'required',
         'sector' => 'required',
         'category' => 'required',
+        'project_class' => 'required',
+        'project_type' => 'required',
+        'floor_number' => 'required',
     ]);
 
     
@@ -531,6 +546,9 @@ public function editPermitProject(Request $request, $id){
     $insertApp->sector_id = $request->sector;
     $insertApp->cat_id = $request->category;
     $insertApp->type_id = $request->type;
+    $insertApp->project_class = $request->project_class;
+    $insertApp->project_type = $request->project_type;
+    $insertApp->floor_number = $request->floor_number;
   
     $insertApp->save();
 
@@ -598,12 +616,16 @@ public function editDeclaration(Request $request,$id)
 
     $insertApp = PermitRegistration::findOrFail($decodeID);
     $insertApp->applied_by = $request->applied_by;
-    
+     $insertApp->registration_step = "completed";
     $insertApp->updated_by = Auth::user()->id; 
       
     $insertApp->save();
  
-   return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
+    if ($insertApp) {
+        return redirect()->route('DocumentAttachment')->with('message_success', 'Application updated successfully.Your next stage is to upload all required documents, reports or drawings to the application as required');
+    } else {
+        return back()->with('message_error', 'Something went wrong, please try again.');
+    }
 }
 
 public function getAttachedDocView(){
@@ -616,6 +638,13 @@ public function getAttachedDocView(){
     public function findProjectTypeyData(Request $request){
   
         $data=ProjectType::select('name','id')->where('category_id',$request->id)->get();
+        return response()->json($data);//then sent this data to ajax success
+	}
+
+      /*Get All business types base on selected business classification*/
+    public function findProjectTypeData2(Request $request){
+  
+        $data=Businesstype::select('name','id')->where('busClassId',$request->id)->get();
         return response()->json($data);//then sent this data to ajax success
 	}
 

@@ -159,6 +159,47 @@ $subpageName = "search_form";
                                                             </div>
                                                         </div>
                                                         <div class="row">
+                                                            <div class="col-xl-4">
+                                                                <div class="mb-3">
+                                                                    <label  >Project Classification</label>
+                                                                        <select class="form-control changeproject" name="project_class">
+                                                                        <option value="" selected disabled {{ old('project_class', $user->project_class ?? '') == '' ? 'selected' : '' }}>--SELECT PROJECT CLASSIFICATION--</option>
+                                                                        @foreach($projectclass as $projectclass)
+                                                                        <option value="{{$projectclass->id}}" {{ old('project_class', $user->project_class ?? '') == $projectclass->id ? 'selected' : '' }}>{{$projectclass->name}}</option>
+                                                                        @endforeach
+
+                                                                        </select>
+                                                                        @error('project_class') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                <div class="mb-3">
+                                                                    <label  >Project Classification</label>
+                                                                        <select class="form-control projecttypename" name="project_type">
+                                                                        <option value="" selected disabled {{ old('project_type', $user->project_type ?? '') == '' ? 'selected' : '' }}>--SELECT PROJECT TYPE--</option>
+                                                                        @foreach($projecttype as $projecttype)
+                                                                        <option value="{{$projecttype->id}}" {{ old('project_type', $user->project_type ?? '') == $projecttype->id ? 'selected' : '' }}>{{$projecttype->name}}</option>
+                                                                        @endforeach
+
+                                                                        </select>
+                                                                        @error('project_type') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                </div>
+                                                            </div>
+                                                             <div class="col-xl-4">
+                                                                <div class="mb-3">
+                                                                    <label  >No of Floors</label>
+                                                                       <select class="form-control" name="floor_number"  >
+                                                                                @for ($y = 1; $y<= 10; $y++)
+                                                                                <option value="{{ $y}}"  {{ old('floor_number', $user->floor_number ?? '') ==  $y ? 'selected' : '' }}>{{ $y }} </option>
+                                                                                @endfor
+                                                                            </select>
+
+                                                                        </select>
+                                                                        @error('floor_number') <small style="color:red"> {{ $message}}</small> @enderror
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mb-3">
                                                                     <label>Project Description</label>
@@ -390,6 +431,51 @@ $(document).ready(function() {
                 // ✅ 5. Proper error handling
                 console.error("AJAX Error:", error);
                 $typeSelect.html('<option value="0" selected disabled>Error loading Type</option>')
+                           .prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    $(document).on('change', '.changeproject', function() {
+        var type_id = $(this).val();
+        
+        // ✅ 1. Validate input (prevent unnecessary AJAX calls)
+        if (!type_id || type_id <= 0) {
+            $(".projecttypename").html('<option value="0" selected disabled>--Choose Project Type--</option>');
+            return;
+        }
+
+        // ✅ 2. Show loading state (better UX)
+        var $typeSelect = $(".projecttypename");
+        $typeSelect.prop('disabled', true).html('<option value="">Loading...</option>');
+
+        $.ajax({
+            type: 'GET',
+            url: '{!! URL::to('findProjectTypeData2') !!}',
+            data: { 'id': type_id },
+            dataType: 'json', // ✅ 3. Explicitly expect JSON
+            success: function(data) {
+                var op = '<option value="0" selected disabled>--Choose Type--</option>';
+                
+                // ✅ 4. Check if data exists and is an array
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(type) {
+                        op += `<option value="${type.id}">${type.name}</option>`;
+                    });
+                } else {
+                    op = '<option value="0" selected disabled>No Project Type available</option>';
+                }
+                
+                $typeSelect.html(op).prop('disabled', false);
+            },
+            error: function(xhr, status, error) {
+                // ✅ 5. Proper error handling
+                console.error("AJAX Error:", error);
+                $typeSelect.html('<option value="0" selected disabled>Error loading Project Type</option>')
                            .prop('disabled', false);
             }
         });

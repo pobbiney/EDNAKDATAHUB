@@ -30,7 +30,7 @@ class RegController extends Controller
             }
         $formsale= Formsale::find(Session::get('formsale_id'));
 
-        $listApp = PermitRegistration::where('contact_number',$formsale->tell)->get();
+        $listApp = PermitRegistration::where('contact_number',$formsale->tell)->latest('id')->get();
         return view('customer.registration.MyApplication',['listApp'=>$listApp]);
 
     }
@@ -203,18 +203,21 @@ class RegController extends Controller
         $decodeID = Crypt::decrypt($id);
         $request->validate([
             'applied_by' => 'required',
-        
             
         ]);
 
         $insertApp = PermitRegistration::findOrFail($decodeID);
         $insertApp->applied_by = $request->applied_by;
-        
+         $insertApp->registration_step = "completed";
         $insertApp->updated_by = 0; 
         
         $insertApp->save();
     
-    return $insertApp? back()->with('message_success','Application  updated Successfully'): back()->with('message_error','Something went wrong, please try again.');
+        if ($insertApp) {
+            return redirect()->route('customer-attach-document')->with('message_success', 'Application updated successfully.Your next stage is to upload all required documents, reports or drawings to your application as required');
+        } else {
+            return back()->with('message_error', 'Something went wrong, please try again.');
+        }
     }
     
     public function resume($id)

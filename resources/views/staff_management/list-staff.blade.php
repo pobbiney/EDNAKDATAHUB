@@ -30,7 +30,7 @@
 
 <th>Fullname</th>
 <th>Gender</th>
-<th>Nationality</th>
+<th>Institution</th>
 <th>Employee ID</th>
 <th>Phone</th>
  
@@ -45,7 +45,7 @@
 
 <td>  {{ $reg->surname }} {{ $reg->firstname }}</td>
 <td>{{ $reg->gender }}</td>
-<td>{{ $reg->nationality }}</td>
+<td>{{ $reg->institution_name }}</td>
 <td>{{ $reg->employee_id }}</td>
 <td>{{ $reg->contact_num }}</td>
  
@@ -62,6 +62,8 @@
 <a href="{{route('staff-profile',Crypt::encrypt($reg->staff_id))}}"   type="button" class="btn btn-sm  btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-primary" title="Staff Details">
   <i class="tf-icons ti ti-eye" style="color: white"></i>
 </a> 
+<a data-bs-toggle="modal" id="displaymodals" data-bs-target="#displayModal" data-url="{{ route('staff-upload-image',$reg->staff_id)  }}" type="button" class="btn btn-sm  btn-dark" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-warning" title="Assign Instittution">
+<i class="tf-icons ti ti-home" style="color: white"></i></a>
 </td>
 </tr>
 @endforeach
@@ -81,7 +83,7 @@
               </div>
               
                 <div class="modal-body">
-                      <div class="row g-4">
+                      <div class="row g-1">
                           <div class="col mb-0">
                                 <label for="nameBasic" class="form-label"><b>Name :</b></label>
                                 <span id="firstname"></span> <span id="surname"></span>
@@ -91,17 +93,17 @@
                                 <span id="employeeid"></span> 
                           </div>
                       </div><hr/>
-                      <div class="row g-4" style="margin-top:5px ">
+                      <div class="row g-1" style="margin-top:5px ">
                           <div class="col mb-0">
-                          <label for="emailBasic" class="form-label"><b>Email</b></label>
+                          <label for="emailBasic" class="form-label"><b>Email: </b></label>
                           <span id="staffemail"></span> 
                           </div>
                           <div class="col mb-0">
-                          <label for="dobBasic" class="form-label"><b>Phone</b></label>
+                          <label for="dobBasic" class="form-label"><b>Phone:</b></label>
                           <span id="phone"></span> 
                           </div>
                       </div><hr/>
-                      <div class="row g-4" style="margin-top:5px ">
+                      <div class="row g-1" style="margin-top:5px ">
                             <div class="col mb-0">
                                 <label for="emailBasic" class="form-label"><b>ID Type</b></label>
                                 <select class="form-select" name="id_type">
@@ -119,7 +121,7 @@
                                 <small class="text-danger">@error('id_number'){{$message}}@enderror </small> 
                             </div>
                       </div>
-                      <div class="row g-4" style="margin-top:5px ">
+                      <div class="row g-1" style="margin-top:5px ">
                           <label for="emailBasic" class="form-label"><b>Photo</b></label>
                           <input type="file" name="photo" class="form-control"/>
                           
@@ -149,7 +151,7 @@
                     </div>
                     
                       <div class="modal-body">
-                            <div class="row g-4">
+                            <div class="row g-1">
                                 <div class="col mb-0">
                                       <label for="nameBasic" class="form-label"><b>Name :</b></label>
                                       <span id="firstnames"></span> <span id="surnames"></span>
@@ -159,17 +161,17 @@
                                       <span id="employeeids"></span> 
                                 </div>
                             </div><hr/>
-                            <div class="row g-4" style="margin-top:5px ">
+                            <div class="row g-1" style="margin-top:5px ">
                                 <div class="col mb-0">
-                                <label for="emailBasic" class="form-label"><b>Email</b></label>
+                                <label for="emailBasic" class="form-label"><b>Email:</b></label>
                                 <span id="staffemails"></span> 
                                 </div>
                                 <div class="col mb-0">
-                                <label for="dobBasic" class="form-label"><b>Phone</b></label>
+                                <label for="dobBasic" class="form-label"><b>Phone:</b></label>
                                 <span id="phones"></span> 
                                 </div>
                             </div><hr/>
-                            <div class="row g-4">
+                            <div class="row g-1">
                  
                               <label class="form-label" for="emailSmall">Select Staff</label>
                               <select   class="select2 form-select" data-allow-clear="true" name="supervisor_id">
@@ -181,6 +183,68 @@
                             <small class="text-danger">@error('supervisor_id'){{$message}}@enderror </small> 
                           </div>
                             <input type="hidden" name="staff_id" id="staffIDs"/>
+                      </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+              </div>
+            </form>
+
+        <div class="modal fade" id="displayModal" tabindex="-1" aria-hidden="true">
+        <form method="post" enctype="multipart/form-data" autocomplete="off" action="{{route('save-staff-institution')}}">
+          @csrf
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Assign Institution</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                      <div class="modal-body">
+                            <div class="row g-1">
+                                <div class="col mb-0">
+                                      <label for="nameBasic" class="form-label"><b>Name :</b></label>
+                                      <span id="first_name"></span> <span id="sur_name"></span>
+                                </div>
+                                <div class="col mb-0">
+                                      <label for="nameBasic" class="form-label"><b>Employee ID :</b></label>
+                                      <span id="employee_id"></span> 
+                                </div>
+                            </div><hr/>
+                            <div class="row g-1" style="margin-top:5px ">
+                                <div class="col mb-0">
+                                <label for="emailBasic" class="form-label"><b>Email:</b></label>
+                                <span id="staff_email"></span> 
+                                </div>
+                                <div class="col mb-0">
+                                <label for="dobBasic" class="form-label"><b>Phone:</b></label>
+                                <span id="phone_number"></span> 
+                                </div>
+                            </div><hr/>
+                            <div class="row g-1" style="margin-top:5px ">
+                                <div class="col mb-0">
+                                <label class="form-label"><b>Institution:</b></label>
+                                <span id="institution_name"></span> 
+                                </div>
+                                
+                            </div><hr/>
+                            <div class="row g-1">
+                 
+                              <label class="form-label" for="emailSmall">Select Institution</label>
+                              <select   class="select2 form-select" data-allow-clear="true" name="institution_id">
+                                <option value="" selected disabled>--Choose Institution--</option>
+                                @foreach($institutions as $institution)
+                                <option value="{{$institution->id}}">{{$institution->name}}</option>
+                                @endforeach
+                            </select>  
+                            <small class="text-danger">@error('institution_id'){{$message}}@enderror </small> 
+                          </div>
+                            <input type="hidden" name="staff_id" id="staff_ID"/>
                       </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
@@ -252,6 +316,25 @@
   });
   });
 </script>
+
+<script>
+    $(document).ready(function(){
+    $('body').on('click', '#displaymodals', function(){
+    var userUrl = $(this).data('url');
+    $.get(userUrl, function(data){
+    $('#displayModal').modal('show');
+    $('#staff_ID').val(data.staff_id);
+    $('#sur_name').text(data.surname);
+    $('#first_name').text(data.firstname);
+    $('#employee_id').text(data.employee_id);
+    $('#staff_email').text(data.personal_email);
+    $('#phone_number').text(data.contact_num);
+    $('#institution_name').text(data.institution_name);
+    console.log(data);
+    })
+    });
+    });
+</script> 
 
 
 <script>

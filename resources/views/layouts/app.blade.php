@@ -44,7 +44,8 @@
 	<!-- Wizard CSS -->
      <link rel="stylesheet" href="{{asset('assets/plugins/twitter-bootstrap-wizard/form-wizard.css')}}">
 
-	  
+	  <!-- Owl Carousel CSS -->
+	<link rel="stylesheet" href="{{asset('assets/plugins/owlcarousel/owl.carousel.min.css')}}">
 	<!-- Datatable CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}">
 
@@ -489,7 +490,8 @@
 	<!-- Select2 JS -->
 	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
 
-	
+		<!-- Owl JS -->
+	<script src="{{asset('assets/plugins/owlcarousel/owl.carousel.min.js')}}" type="2b6f85dd9f0db6c1cf5f03a2-text/javascript"></script>
 
 	<!-- Color Picker JS -->
 	<script src="{{asset('assets/plugins/%40simonwep/pickr/pickr.es5.min.js')}}" type="da66958c310097099013dd7e-text/javascript"></script>
