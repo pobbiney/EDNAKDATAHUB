@@ -1,6 +1,6 @@
 @php 
 $pageName = "inst"; 
-$subpageName = "add_inst";
+$subpageName = "inst-list";
 @endphp
 
 @extends('layouts.app')
