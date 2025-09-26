@@ -12,7 +12,7 @@ jobs:
     - name: Sync files to server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: admin@ednakdatahub.net
+        server: ftp.ednakdatahub.net
         username: admin@ednakdatahub.net
         password: m$mchqpyW?tiRfVy
 
