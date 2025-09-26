@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceProvider extends Model
+class AgentPlan extends Model
 {
     //
 }

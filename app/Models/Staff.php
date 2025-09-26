@@ -49,7 +49,6 @@ class Staff extends Model
 		'service_no',
 		'year',
 		'nationality',
-		'institution_id',
 		'rank_class',
 		'rank',
 		'region_id',
@@ -100,17 +99,6 @@ class Staff extends Model
 	{
 		return $this->belongsTo(Branch::class, 'branch');
 	}
-
-	public function institution(){
-		return $this->belongsTo(Institution::class, 'institution_id');
-	}
-
-	public function getInstitutionNameAttribute()
-	{
-		return $this->institution?->name ?? 'N/A';
-	}
-
-	protected $appends = ['institution_name'];
 
 
 

@@ -27,34 +27,8 @@ class DashboardController extends Controller implements HasMiddleware
 
     public function index(){
 
-        $totalFormSold = Formsale::get()->count();
-        $certificateCount = CertificateApp::get()->count();
-        $permitsCount = PermitRegistration::where('registration_step','completed')->get()->count();
-        $renewalCount = RenewApp::get()->count();
-        $approveCertCount = CertificateApp::where([['status','Approved'],['region',Auth::User()->region_id]])->get()->count();
-        //$approvePermitCount = PermitApproval::where([['decision_id',1]])->get()->count();
-        $approvePermitCount = count(DB::select('select * from permit_approvals where decision_id = ?', [1]));
-
-         $applicationFormType = Applicationform::get();
-
-         $regionList = Region::orderBy('name','ASC')->get();
-
-         $latestCertificationData = CertificateApp::where([['region',Auth::User()->region_id]])->orderBy('id','DESC')->get()->take(3);
-          $latestPermitData = PermitApp::where([['region',Auth::User()->region_id]])->orderBy('id','DESC')->get()->take(3);
-          $latestPermitData = RenewApp::orderBy('id','DESC')->get()->take(3);
-
-        return view ('dashboard',[
-            'totalFormSold' => $totalFormSold,
-            'certificateCount' => $certificateCount,
-            'permitsCount' => $permitsCount,
-            'renewalCount' => $renewalCount,
-            'approveCertCount' => $approveCertCount,
-            'approvePermitCount' => $approvePermitCount,
-            'applicationFormType' => $applicationFormType->random(3),
-            'regionList' => $regionList->random(3),
-            'latestCertificationData' => $latestCertificationData, 
-            'latestPermitData' => $latestPermitData
-        ]);
+ 
+        return view ('dashboard' );
     }
 
     public function logoutAuthenticationProcess(){

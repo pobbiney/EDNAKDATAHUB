@@ -239,7 +239,7 @@ class UserManagementController extends Controller implements HasMiddleware
 
         $getuserEmail = Staff::find($request->users);
 
-        return $getuserEmail->email;
+        return $getuserEmail->personal_email;
 
     }
 
