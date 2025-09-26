@@ -13,7 +13,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftp.ednakdatahub.net
-        username: ednakda5
-        password: Agedward93$
+        username: admin@ednakdatahub.net
+        password: A%DqpeSp^tf!$SZy
 
         
